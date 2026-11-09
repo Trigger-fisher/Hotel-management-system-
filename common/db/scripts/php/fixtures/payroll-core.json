@@ -1,0 +1,3845 @@
+{
+    "php": "8.4.24",
+    "phones": [
+        {
+            "raw": "98765 43210",
+            "selected": null,
+            "split": null,
+            "dial": "91",
+            "national": "9876543210",
+            "error": null,
+            "format": "+91 98765 43210"
+        },
+        {
+            "raw": "+91 98765 43210",
+            "selected": null,
+            "split": [
+                "91",
+                "9876543210"
+            ],
+            "dial": "91",
+            "national": "9876543210",
+            "error": null,
+            "format": "+91 98765 43210"
+        },
+        {
+            "raw": "+971 50 123 4567",
+            "selected": "91",
+            "split": [
+                "971",
+                "501234567"
+            ],
+            "dial": "971",
+            "national": "501234567",
+            "error": null,
+            "format": "+971 501234567"
+        },
+        {
+            "raw": "7400 123456",
+            "selected": "44",
+            "split": null,
+            "dial": "44",
+            "national": "7400123456",
+            "error": null,
+            "format": "+44 7400123456"
+        },
+        {
+            "raw": "0044 7400 123456",
+            "selected": null,
+            "split": [
+                "44",
+                "7400123456"
+            ],
+            "dial": "44",
+            "national": "7400123456",
+            "error": null,
+            "format": "+44 7400123456"
+        },
+        {
+            "raw": "919876543210",
+            "selected": null,
+            "split": null,
+            "dial": "91",
+            "national": "9876543210",
+            "error": null,
+            "format": "+91 98765 43210"
+        },
+        {
+            "raw": "9198765432",
+            "selected": null,
+            "split": null,
+            "dial": "91",
+            "national": "9198765432",
+            "error": null,
+            "format": "+91 91987 65432"
+        },
+        {
+            "raw": "098765-43210",
+            "selected": null,
+            "split": null,
+            "dial": "91",
+            "national": "9876543210",
+            "error": null,
+            "format": "+91 98765 43210"
+        },
+        {
+            "raw": "5876543210",
+            "selected": null,
+            "split": null,
+            "dial": "91",
+            "national": "5876543210",
+            "error": "Enter a 10-digit mobile number starting with 6, 7, 8 or 9.",
+            "format": "+91 58765 43210"
+        },
+        {
+            "raw": "12345",
+            "selected": null,
+            "split": null,
+            "dial": "91",
+            "national": "12345",
+            "error": "Enter a 10-digit mobile number starting with 6, 7, 8 or 9.",
+            "format": "+91 12345"
+        },
+        {
+            "raw": "5012345",
+            "selected": "971",
+            "split": null,
+            "dial": "971",
+            "national": "5012345",
+            "error": "Enter a valid United Arab Emirates number of 9 digits.",
+            "format": "+971 5012345"
+        },
+        {
+            "raw": "81234567",
+            "selected": "65",
+            "split": null,
+            "dial": "65",
+            "national": "81234567",
+            "error": null,
+            "format": "+65 81234567"
+        },
+        {
+            "raw": "+999123456",
+            "selected": null,
+            "split": null,
+            "dial": "91",
+            "national": "999123456",
+            "error": "Enter a 10-digit mobile number starting with 6, 7, 8 or 9.",
+            "format": "+91 999123456"
+        },
+        {
+            "raw": "+1 201 555 0123",
+            "selected": null,
+            "split": [
+                "1",
+                "2015550123"
+            ],
+            "dial": "1",
+            "national": "2015550123",
+            "error": null,
+            "format": "+1 2015550123"
+        },
+        {
+            "raw": "",
+            "selected": null,
+            "split": null,
+            "dial": "91",
+            "national": "",
+            "error": "Enter a 10-digit mobile number starting with 6, 7, 8 or 9.",
+            "format": ""
+        },
+        {
+            "raw": "   ",
+            "selected": "44",
+            "split": null,
+            "dial": "44",
+            "national": "",
+            "error": "Enter a valid United Kingdom number of 10 digits.",
+            "format": ""
+        },
+        {
+            "raw": "abc",
+            "selected": null,
+            "split": null,
+            "dial": "91",
+            "national": "",
+            "error": "Enter a 10-digit mobile number starting with 6, 7, 8 or 9.",
+            "format": ""
+        },
+        {
+            "raw": "98765 43210",
+            "selected": "999",
+            "split": null,
+            "dial": "999",
+            "national": "9876543210",
+            "error": "Choose a country code from the list.",
+            "format": "+91 98765 43210"
+        },
+        {
+            "raw": "+919876543210",
+            "selected": "44",
+            "split": [
+                "91",
+                "9876543210"
+            ],
+            "dial": "91",
+            "national": "9876543210",
+            "error": null,
+            "format": "+91 98765 43210"
+        },
+        {
+            "raw": "00971501234567",
+            "selected": null,
+            "split": [
+                "971",
+                "501234567"
+            ],
+            "dial": "971",
+            "national": "501234567",
+            "error": null,
+            "format": "+971 501234567"
+        },
+        {
+            "raw": "0501234567",
+            "selected": "971",
+            "split": null,
+            "dial": "971",
+            "national": "501234567",
+            "error": null,
+            "format": "+971 501234567"
+        },
+        {
+            "raw": "971501234567",
+            "selected": "971",
+            "split": null,
+            "dial": "971",
+            "national": "501234567",
+            "error": null,
+            "format": "+971 501234567"
+        },
+        {
+            "raw": "+7 912 345 6789",
+            "selected": null,
+            "split": [
+                "7",
+                "9123456789"
+            ],
+            "dial": "7",
+            "national": "9123456789",
+            "error": null,
+            "format": "+7 9123456789"
+        },
+        {
+            "raw": "+64 21 123 4567",
+            "selected": null,
+            "split": [
+                "64",
+                "211234567"
+            ],
+            "dial": "64",
+            "national": "211234567",
+            "error": null,
+            "format": "+64 211234567"
+        },
+        {
+            "raw": "+64 2112345",
+            "selected": null,
+            "split": [
+                "64",
+                "2112345"
+            ],
+            "dial": "64",
+            "national": "2112345",
+            "error": "Enter a valid New Zealand number of 8 to 10 digits.",
+            "format": "+64 2112345"
+        },
+        {
+            "raw": "+62 812 3456 7890 12",
+            "selected": null,
+            "split": [
+                "62",
+                "8123456789012"
+            ],
+            "dial": "62",
+            "national": "8123456789012",
+            "error": "Enter a valid Indonesia number of 9 to 12 digits.",
+            "format": "+62 8123456789012"
+        },
+        {
+            "raw": "+880 1712 345678",
+            "selected": null,
+            "split": [
+                "880",
+                "1712345678"
+            ],
+            "dial": "880",
+            "national": "1712345678",
+            "error": null,
+            "format": "+880 1712345678"
+        },
+        {
+            "raw": "+4407400123456",
+            "selected": null,
+            "split": [
+                "44",
+                "07400123456"
+            ],
+            "dial": "44",
+            "national": "07400123456",
+            "error": "Enter a valid United Kingdom number of 10 digits.",
+            "format": "+44 07400123456"
+        },
+        {
+            "raw": "+91 (987) 654-3210",
+            "selected": null,
+            "split": [
+                "91",
+                "9876543210"
+            ],
+            "dial": "91",
+            "national": "9876543210",
+            "error": null,
+            "format": "+91 98765 43210"
+        },
+        {
+            "raw": "0 98765 43210",
+            "selected": "91",
+            "split": null,
+            "dial": "91",
+            "national": "9876543210",
+            "error": null,
+            "format": "+91 98765 43210"
+        },
+        {
+            "raw": "++91 98765 43210",
+            "selected": null,
+            "split": [
+                "91",
+                "9876543210"
+            ],
+            "dial": "91",
+            "national": "9876543210",
+            "error": null,
+            "format": "+91 98765 43210"
+        },
+        {
+            "raw": "0091 98765 43210",
+            "selected": "44",
+            "split": [
+                "91",
+                "9876543210"
+            ],
+            "dial": "91",
+            "national": "9876543210",
+            "error": null,
+            "format": "+91 98765 43210"
+        },
+        {
+            "raw": "919876543210",
+            "selected": "44",
+            "split": null,
+            "dial": "44",
+            "national": "919876543210",
+            "error": "Enter a valid United Kingdom number of 10 digits.",
+            "format": "+44 919876543210"
+        },
+        {
+            "raw": "98765 43210",
+            "selected": "91",
+            "split": null,
+            "dial": "91",
+            "national": "9876543210",
+            "error": null,
+            "format": "+91 98765 43210"
+        },
+        {
+            "raw": "+91 98765 43210",
+            "selected": null,
+            "split": [
+                "91",
+                "9876543210"
+            ],
+            "dial": "91",
+            "national": "9876543210",
+            "error": null,
+            "format": "+91 98765 43210"
+        },
+        {
+            "raw": "09876543210",
+            "selected": "91",
+            "split": null,
+            "dial": "91",
+            "national": "9876543210",
+            "error": null,
+            "format": "+91 98765 43210"
+        },
+        {
+            "raw": "919876543210",
+            "selected": "91",
+            "split": null,
+            "dial": "91",
+            "national": "9876543210",
+            "error": null,
+            "format": "+91 98765 43210"
+        },
+        {
+            "raw": "987654321",
+            "selected": "91",
+            "split": null,
+            "dial": "91",
+            "national": "987654321",
+            "error": "Enter a 10-digit mobile number starting with 6, 7, 8 or 9.",
+            "format": "+91 987654321"
+        },
+        {
+            "raw": "98765432101",
+            "selected": "91",
+            "split": null,
+            "dial": "91",
+            "national": "98765432101",
+            "error": "Enter a 10-digit mobile number starting with 6, 7, 8 or 9.",
+            "format": "+91 98765432101"
+        },
+        {
+            "raw": "1876543210",
+            "selected": "91",
+            "split": null,
+            "dial": "91",
+            "national": "1876543210",
+            "error": "Enter a 10-digit mobile number starting with 6, 7, 8 or 9.",
+            "format": "+91 18765 43210"
+        },
+        {
+            "raw": "50 123 4567",
+            "selected": "971",
+            "split": null,
+            "dial": "971",
+            "national": "501234567",
+            "error": null,
+            "format": "+971 501234567"
+        },
+        {
+            "raw": "+971 50 123 4567",
+            "selected": null,
+            "split": [
+                "971",
+                "501234567"
+            ],
+            "dial": "971",
+            "national": "501234567",
+            "error": null,
+            "format": "+971 501234567"
+        },
+        {
+            "raw": "0501234567",
+            "selected": "971",
+            "split": null,
+            "dial": "971",
+            "national": "501234567",
+            "error": null,
+            "format": "+971 501234567"
+        },
+        {
+            "raw": "971501234567",
+            "selected": "971",
+            "split": null,
+            "dial": "971",
+            "national": "501234567",
+            "error": null,
+            "format": "+971 501234567"
+        },
+        {
+            "raw": "50123456",
+            "selected": "971",
+            "split": null,
+            "dial": "971",
+            "national": "50123456",
+            "error": "Enter a valid United Arab Emirates number of 9 digits.",
+            "format": "+971 50123456"
+        },
+        {
+            "raw": "5012345671",
+            "selected": "971",
+            "split": null,
+            "dial": "971",
+            "national": "5012345671",
+            "error": "Enter a valid United Arab Emirates number of 9 digits.",
+            "format": "+971 5012345671"
+        },
+        {
+            "raw": "101234567",
+            "selected": "971",
+            "split": null,
+            "dial": "971",
+            "national": "101234567",
+            "error": "That does not look like a United Arab Emirates mobile number.",
+            "format": "+971 101234567"
+        },
+        {
+            "raw": "50 123 4567",
+            "selected": "966",
+            "split": null,
+            "dial": "966",
+            "national": "501234567",
+            "error": null,
+            "format": "+966 501234567"
+        },
+        {
+            "raw": "+966 50 123 4567",
+            "selected": null,
+            "split": [
+                "966",
+                "501234567"
+            ],
+            "dial": "966",
+            "national": "501234567",
+            "error": null,
+            "format": "+966 501234567"
+        },
+        {
+            "raw": "0501234567",
+            "selected": "966",
+            "split": null,
+            "dial": "966",
+            "national": "501234567",
+            "error": null,
+            "format": "+966 501234567"
+        },
+        {
+            "raw": "966501234567",
+            "selected": "966",
+            "split": null,
+            "dial": "966",
+            "national": "501234567",
+            "error": null,
+            "format": "+966 501234567"
+        },
+        {
+            "raw": "50123456",
+            "selected": "966",
+            "split": null,
+            "dial": "966",
+            "national": "50123456",
+            "error": "Enter a valid Saudi Arabia number of 9 digits.",
+            "format": "+966 50123456"
+        },
+        {
+            "raw": "5012345671",
+            "selected": "966",
+            "split": null,
+            "dial": "966",
+            "national": "5012345671",
+            "error": "Enter a valid Saudi Arabia number of 9 digits.",
+            "format": "+966 5012345671"
+        },
+        {
+            "raw": "101234567",
+            "selected": "966",
+            "split": null,
+            "dial": "966",
+            "national": "101234567",
+            "error": "That does not look like a Saudi Arabia mobile number.",
+            "format": "+966 101234567"
+        },
+        {
+            "raw": "3123 4567",
+            "selected": "974",
+            "split": null,
+            "dial": "974",
+            "national": "31234567",
+            "error": null,
+            "format": "+974 31234567"
+        },
+        {
+            "raw": "+974 3123 4567",
+            "selected": null,
+            "split": [
+                "974",
+                "31234567"
+            ],
+            "dial": "974",
+            "national": "31234567",
+            "error": null,
+            "format": "+974 31234567"
+        },
+        {
+            "raw": "031234567",
+            "selected": "974",
+            "split": null,
+            "dial": "974",
+            "national": "31234567",
+            "error": null,
+            "format": "+974 31234567"
+        },
+        {
+            "raw": "97431234567",
+            "selected": "974",
+            "split": null,
+            "dial": "974",
+            "national": "31234567",
+            "error": null,
+            "format": "+974 31234567"
+        },
+        {
+            "raw": "3123456",
+            "selected": "974",
+            "split": null,
+            "dial": "974",
+            "national": "3123456",
+            "error": "Enter a valid Qatar number of 8 digits.",
+            "format": "+974 3123456"
+        },
+        {
+            "raw": "312345671",
+            "selected": "974",
+            "split": null,
+            "dial": "974",
+            "national": "312345671",
+            "error": "Enter a valid Qatar number of 8 digits.",
+            "format": "+974 312345671"
+        },
+        {
+            "raw": "11234567",
+            "selected": "974",
+            "split": null,
+            "dial": "974",
+            "national": "11234567",
+            "error": null,
+            "format": "+974 11234567"
+        },
+        {
+            "raw": "5000 0000",
+            "selected": "965",
+            "split": null,
+            "dial": "965",
+            "national": "50000000",
+            "error": null,
+            "format": "+965 50000000"
+        },
+        {
+            "raw": "+965 5000 0000",
+            "selected": null,
+            "split": [
+                "965",
+                "50000000"
+            ],
+            "dial": "965",
+            "national": "50000000",
+            "error": null,
+            "format": "+965 50000000"
+        },
+        {
+            "raw": "050000000",
+            "selected": "965",
+            "split": null,
+            "dial": "965",
+            "national": "50000000",
+            "error": null,
+            "format": "+965 50000000"
+        },
+        {
+            "raw": "96550000000",
+            "selected": "965",
+            "split": null,
+            "dial": "965",
+            "national": "50000000",
+            "error": null,
+            "format": "+965 50000000"
+        },
+        {
+            "raw": "5000000",
+            "selected": "965",
+            "split": null,
+            "dial": "965",
+            "national": "5000000",
+            "error": "Enter a valid Kuwait number of 8 digits.",
+            "format": "+965 5000000"
+        },
+        {
+            "raw": "500000001",
+            "selected": "965",
+            "split": null,
+            "dial": "965",
+            "national": "500000001",
+            "error": "Enter a valid Kuwait number of 8 digits.",
+            "format": "+965 500000001"
+        },
+        {
+            "raw": "10000000",
+            "selected": "965",
+            "split": null,
+            "dial": "965",
+            "national": "10000000",
+            "error": null,
+            "format": "+965 10000000"
+        },
+        {
+            "raw": "9212 3456",
+            "selected": "968",
+            "split": null,
+            "dial": "968",
+            "national": "92123456",
+            "error": null,
+            "format": "+968 92123456"
+        },
+        {
+            "raw": "+968 9212 3456",
+            "selected": null,
+            "split": [
+                "968",
+                "92123456"
+            ],
+            "dial": "968",
+            "national": "92123456",
+            "error": null,
+            "format": "+968 92123456"
+        },
+        {
+            "raw": "092123456",
+            "selected": "968",
+            "split": null,
+            "dial": "968",
+            "national": "92123456",
+            "error": null,
+            "format": "+968 92123456"
+        },
+        {
+            "raw": "96892123456",
+            "selected": "968",
+            "split": null,
+            "dial": "968",
+            "national": "92123456",
+            "error": null,
+            "format": "+968 92123456"
+        },
+        {
+            "raw": "9212345",
+            "selected": "968",
+            "split": null,
+            "dial": "968",
+            "national": "9212345",
+            "error": "Enter a valid Oman number of 8 digits.",
+            "format": "+968 9212345"
+        },
+        {
+            "raw": "921234561",
+            "selected": "968",
+            "split": null,
+            "dial": "968",
+            "national": "921234561",
+            "error": "Enter a valid Oman number of 8 digits.",
+            "format": "+968 921234561"
+        },
+        {
+            "raw": "12123456",
+            "selected": "968",
+            "split": null,
+            "dial": "968",
+            "national": "12123456",
+            "error": null,
+            "format": "+968 12123456"
+        },
+        {
+            "raw": "3600 1234",
+            "selected": "973",
+            "split": null,
+            "dial": "973",
+            "national": "36001234",
+            "error": null,
+            "format": "+973 36001234"
+        },
+        {
+            "raw": "+973 3600 1234",
+            "selected": null,
+            "split": [
+                "973",
+                "36001234"
+            ],
+            "dial": "973",
+            "national": "36001234",
+            "error": null,
+            "format": "+973 36001234"
+        },
+        {
+            "raw": "036001234",
+            "selected": "973",
+            "split": null,
+            "dial": "973",
+            "national": "36001234",
+            "error": null,
+            "format": "+973 36001234"
+        },
+        {
+            "raw": "97336001234",
+            "selected": "973",
+            "split": null,
+            "dial": "973",
+            "national": "36001234",
+            "error": null,
+            "format": "+973 36001234"
+        },
+        {
+            "raw": "3600123",
+            "selected": "973",
+            "split": null,
+            "dial": "973",
+            "national": "3600123",
+            "error": "Enter a valid Bahrain number of 8 digits.",
+            "format": "+973 3600123"
+        },
+        {
+            "raw": "360012341",
+            "selected": "973",
+            "split": null,
+            "dial": "973",
+            "national": "360012341",
+            "error": "Enter a valid Bahrain number of 8 digits.",
+            "format": "+973 360012341"
+        },
+        {
+            "raw": "16001234",
+            "selected": "973",
+            "split": null,
+            "dial": "973",
+            "national": "16001234",
+            "error": null,
+            "format": "+973 16001234"
+        },
+        {
+            "raw": "98 1234 5678",
+            "selected": "977",
+            "split": null,
+            "dial": "977",
+            "national": "9812345678",
+            "error": null,
+            "format": "+977 9812345678"
+        },
+        {
+            "raw": "+977 98 1234 5678",
+            "selected": null,
+            "split": [
+                "977",
+                "9812345678"
+            ],
+            "dial": "977",
+            "national": "9812345678",
+            "error": null,
+            "format": "+977 9812345678"
+        },
+        {
+            "raw": "09812345678",
+            "selected": "977",
+            "split": null,
+            "dial": "977",
+            "national": "9812345678",
+            "error": null,
+            "format": "+977 9812345678"
+        },
+        {
+            "raw": "9779812345678",
+            "selected": "977",
+            "split": null,
+            "dial": "977",
+            "national": "9812345678",
+            "error": null,
+            "format": "+977 9812345678"
+        },
+        {
+            "raw": "981234567",
+            "selected": "977",
+            "split": null,
+            "dial": "977",
+            "national": "981234567",
+            "error": "Enter a valid Nepal number of 10 digits.",
+            "format": "+977 981234567"
+        },
+        {
+            "raw": "98123456781",
+            "selected": "977",
+            "split": null,
+            "dial": "977",
+            "national": "98123456781",
+            "error": "Enter a valid Nepal number of 10 digits.",
+            "format": "+977 98123456781"
+        },
+        {
+            "raw": "1812345678",
+            "selected": "977",
+            "split": null,
+            "dial": "977",
+            "national": "1812345678",
+            "error": "That does not look like a Nepal mobile number.",
+            "format": "+977 1812345678"
+        },
+        {
+            "raw": "1712 345678",
+            "selected": "880",
+            "split": null,
+            "dial": "880",
+            "national": "1712345678",
+            "error": null,
+            "format": "+880 1712345678"
+        },
+        {
+            "raw": "+880 1712 345678",
+            "selected": null,
+            "split": [
+                "880",
+                "1712345678"
+            ],
+            "dial": "880",
+            "national": "1712345678",
+            "error": null,
+            "format": "+880 1712345678"
+        },
+        {
+            "raw": "01712345678",
+            "selected": "880",
+            "split": null,
+            "dial": "880",
+            "national": "1712345678",
+            "error": null,
+            "format": "+880 1712345678"
+        },
+        {
+            "raw": "8801712345678",
+            "selected": "880",
+            "split": null,
+            "dial": "880",
+            "national": "1712345678",
+            "error": null,
+            "format": "+880 1712345678"
+        },
+        {
+            "raw": "171234567",
+            "selected": "880",
+            "split": null,
+            "dial": "880",
+            "national": "171234567",
+            "error": "Enter a valid Bangladesh number of 10 digits.",
+            "format": "+880 171234567"
+        },
+        {
+            "raw": "17123456781",
+            "selected": "880",
+            "split": null,
+            "dial": "880",
+            "national": "17123456781",
+            "error": "Enter a valid Bangladesh number of 10 digits.",
+            "format": "+880 17123456781"
+        },
+        {
+            "raw": "1712345678",
+            "selected": "880",
+            "split": null,
+            "dial": "880",
+            "national": "1712345678",
+            "error": null,
+            "format": "+880 1712345678"
+        },
+        {
+            "raw": "71 234 5678",
+            "selected": "94",
+            "split": null,
+            "dial": "94",
+            "national": "712345678",
+            "error": null,
+            "format": "+94 712345678"
+        },
+        {
+            "raw": "+94 71 234 5678",
+            "selected": null,
+            "split": [
+                "94",
+                "712345678"
+            ],
+            "dial": "94",
+            "national": "712345678",
+            "error": null,
+            "format": "+94 712345678"
+        },
+        {
+            "raw": "0712345678",
+            "selected": "94",
+            "split": null,
+            "dial": "94",
+            "national": "712345678",
+            "error": null,
+            "format": "+94 712345678"
+        },
+        {
+            "raw": "94712345678",
+            "selected": "94",
+            "split": null,
+            "dial": "94",
+            "national": "712345678",
+            "error": null,
+            "format": "+94 712345678"
+        },
+        {
+            "raw": "71234567",
+            "selected": "94",
+            "split": null,
+            "dial": "94",
+            "national": "71234567",
+            "error": "Enter a valid Sri Lanka number of 9 digits.",
+            "format": "+94 71234567"
+        },
+        {
+            "raw": "7123456781",
+            "selected": "94",
+            "split": null,
+            "dial": "94",
+            "national": "7123456781",
+            "error": "Enter a valid Sri Lanka number of 9 digits.",
+            "format": "+94 7123456781"
+        },
+        {
+            "raw": "112345678",
+            "selected": "94",
+            "split": null,
+            "dial": "94",
+            "national": "112345678",
+            "error": "That does not look like a Sri Lanka mobile number.",
+            "format": "+94 112345678"
+        },
+        {
+            "raw": "301 2345678",
+            "selected": "92",
+            "split": null,
+            "dial": "92",
+            "national": "3012345678",
+            "error": null,
+            "format": "+92 3012345678"
+        },
+        {
+            "raw": "+92 301 2345678",
+            "selected": null,
+            "split": [
+                "92",
+                "3012345678"
+            ],
+            "dial": "92",
+            "national": "3012345678",
+            "error": null,
+            "format": "+92 3012345678"
+        },
+        {
+            "raw": "03012345678",
+            "selected": "92",
+            "split": null,
+            "dial": "92",
+            "national": "3012345678",
+            "error": null,
+            "format": "+92 3012345678"
+        },
+        {
+            "raw": "923012345678",
+            "selected": "92",
+            "split": null,
+            "dial": "92",
+            "national": "3012345678",
+            "error": null,
+            "format": "+92 3012345678"
+        },
+        {
+            "raw": "301234567",
+            "selected": "92",
+            "split": null,
+            "dial": "92",
+            "national": "301234567",
+            "error": "Enter a valid Pakistan number of 10 digits.",
+            "format": "+92 301234567"
+        },
+        {
+            "raw": "30123456781",
+            "selected": "92",
+            "split": null,
+            "dial": "92",
+            "national": "30123456781",
+            "error": "Enter a valid Pakistan number of 10 digits.",
+            "format": "+92 30123456781"
+        },
+        {
+            "raw": "1012345678",
+            "selected": "92",
+            "split": null,
+            "dial": "92",
+            "national": "1012345678",
+            "error": "That does not look like a Pakistan mobile number.",
+            "format": "+92 1012345678"
+        },
+        {
+            "raw": "17 123 456",
+            "selected": "975",
+            "split": null,
+            "dial": "975",
+            "national": "17123456",
+            "error": null,
+            "format": "+975 17123456"
+        },
+        {
+            "raw": "+975 17 123 456",
+            "selected": null,
+            "split": [
+                "975",
+                "17123456"
+            ],
+            "dial": "975",
+            "national": "17123456",
+            "error": null,
+            "format": "+975 17123456"
+        },
+        {
+            "raw": "017123456",
+            "selected": "975",
+            "split": null,
+            "dial": "975",
+            "national": "17123456",
+            "error": null,
+            "format": "+975 17123456"
+        },
+        {
+            "raw": "97517123456",
+            "selected": "975",
+            "split": null,
+            "dial": "975",
+            "national": "17123456",
+            "error": null,
+            "format": "+975 17123456"
+        },
+        {
+            "raw": "1712345",
+            "selected": "975",
+            "split": null,
+            "dial": "975",
+            "national": "1712345",
+            "error": "Enter a valid Bhutan number of 8 digits.",
+            "format": "+975 1712345"
+        },
+        {
+            "raw": "171234561",
+            "selected": "975",
+            "split": null,
+            "dial": "975",
+            "national": "171234561",
+            "error": "Enter a valid Bhutan number of 8 digits.",
+            "format": "+975 171234561"
+        },
+        {
+            "raw": "17123456",
+            "selected": "975",
+            "split": null,
+            "dial": "975",
+            "national": "17123456",
+            "error": null,
+            "format": "+975 17123456"
+        },
+        {
+            "raw": "771 2345",
+            "selected": "960",
+            "split": null,
+            "dial": "960",
+            "national": "7712345",
+            "error": null,
+            "format": "+960 7712345"
+        },
+        {
+            "raw": "+960 771 2345",
+            "selected": null,
+            "split": [
+                "960",
+                "7712345"
+            ],
+            "dial": "960",
+            "national": "7712345",
+            "error": null,
+            "format": "+960 7712345"
+        },
+        {
+            "raw": "07712345",
+            "selected": "960",
+            "split": null,
+            "dial": "960",
+            "national": "7712345",
+            "error": null,
+            "format": "+960 7712345"
+        },
+        {
+            "raw": "9607712345",
+            "selected": "960",
+            "split": null,
+            "dial": "960",
+            "national": "7712345",
+            "error": null,
+            "format": "+960 7712345"
+        },
+        {
+            "raw": "771234",
+            "selected": "960",
+            "split": null,
+            "dial": "960",
+            "national": "771234",
+            "error": "Enter a valid Maldives number of 7 digits.",
+            "format": "+960 771234"
+        },
+        {
+            "raw": "77123451",
+            "selected": "960",
+            "split": null,
+            "dial": "960",
+            "national": "77123451",
+            "error": "Enter a valid Maldives number of 7 digits.",
+            "format": "+960 77123451"
+        },
+        {
+            "raw": "1712345",
+            "selected": "960",
+            "split": null,
+            "dial": "960",
+            "national": "1712345",
+            "error": null,
+            "format": "+960 1712345"
+        },
+        {
+            "raw": "70 123 4567",
+            "selected": "93",
+            "split": null,
+            "dial": "93",
+            "national": "701234567",
+            "error": null,
+            "format": "+93 701234567"
+        },
+        {
+            "raw": "+93 70 123 4567",
+            "selected": null,
+            "split": [
+                "93",
+                "701234567"
+            ],
+            "dial": "93",
+            "national": "701234567",
+            "error": null,
+            "format": "+93 701234567"
+        },
+        {
+            "raw": "0701234567",
+            "selected": "93",
+            "split": null,
+            "dial": "93",
+            "national": "701234567",
+            "error": null,
+            "format": "+93 701234567"
+        },
+        {
+            "raw": "93701234567",
+            "selected": "93",
+            "split": null,
+            "dial": "93",
+            "national": "701234567",
+            "error": null,
+            "format": "+93 701234567"
+        },
+        {
+            "raw": "70123456",
+            "selected": "93",
+            "split": null,
+            "dial": "93",
+            "national": "70123456",
+            "error": "Enter a valid Afghanistan number of 9 digits.",
+            "format": "+93 70123456"
+        },
+        {
+            "raw": "7012345671",
+            "selected": "93",
+            "split": null,
+            "dial": "93",
+            "national": "7012345671",
+            "error": "Enter a valid Afghanistan number of 9 digits.",
+            "format": "+93 7012345671"
+        },
+        {
+            "raw": "101234567",
+            "selected": "93",
+            "split": null,
+            "dial": "93",
+            "national": "101234567",
+            "error": null,
+            "format": "+93 101234567"
+        },
+        {
+            "raw": "201 555 0123",
+            "selected": "1",
+            "split": null,
+            "dial": "1",
+            "national": "2015550123",
+            "error": null,
+            "format": "+1 2015550123"
+        },
+        {
+            "raw": "+1 201 555 0123",
+            "selected": null,
+            "split": [
+                "1",
+                "2015550123"
+            ],
+            "dial": "1",
+            "national": "2015550123",
+            "error": null,
+            "format": "+1 2015550123"
+        },
+        {
+            "raw": "02015550123",
+            "selected": "1",
+            "split": null,
+            "dial": "1",
+            "national": "2015550123",
+            "error": null,
+            "format": "+1 2015550123"
+        },
+        {
+            "raw": "12015550123",
+            "selected": "1",
+            "split": null,
+            "dial": "1",
+            "national": "2015550123",
+            "error": null,
+            "format": "+1 2015550123"
+        },
+        {
+            "raw": "201555012",
+            "selected": "1",
+            "split": null,
+            "dial": "1",
+            "national": "201555012",
+            "error": "Enter a valid United States / Canada number of 10 digits.",
+            "format": "+1 201555012"
+        },
+        {
+            "raw": "20155501231",
+            "selected": "1",
+            "split": null,
+            "dial": "1",
+            "national": "20155501231",
+            "error": "Enter a valid United States / Canada number of 10 digits.",
+            "format": "+1 20155501231"
+        },
+        {
+            "raw": "1015550123",
+            "selected": "1",
+            "split": null,
+            "dial": "1",
+            "national": "1015550123",
+            "error": null,
+            "format": "+1 1015550123"
+        },
+        {
+            "raw": "7400 123456",
+            "selected": "44",
+            "split": null,
+            "dial": "44",
+            "national": "7400123456",
+            "error": null,
+            "format": "+44 7400123456"
+        },
+        {
+            "raw": "+44 7400 123456",
+            "selected": null,
+            "split": [
+                "44",
+                "7400123456"
+            ],
+            "dial": "44",
+            "national": "7400123456",
+            "error": null,
+            "format": "+44 7400123456"
+        },
+        {
+            "raw": "07400123456",
+            "selected": "44",
+            "split": null,
+            "dial": "44",
+            "national": "7400123456",
+            "error": null,
+            "format": "+44 7400123456"
+        },
+        {
+            "raw": "447400123456",
+            "selected": "44",
+            "split": null,
+            "dial": "44",
+            "national": "7400123456",
+            "error": null,
+            "format": "+44 7400123456"
+        },
+        {
+            "raw": "740012345",
+            "selected": "44",
+            "split": null,
+            "dial": "44",
+            "national": "740012345",
+            "error": "Enter a valid United Kingdom number of 10 digits.",
+            "format": "+44 740012345"
+        },
+        {
+            "raw": "74001234561",
+            "selected": "44",
+            "split": null,
+            "dial": "44",
+            "national": "74001234561",
+            "error": "Enter a valid United Kingdom number of 10 digits.",
+            "format": "+44 74001234561"
+        },
+        {
+            "raw": "1400123456",
+            "selected": "44",
+            "split": null,
+            "dial": "44",
+            "national": "1400123456",
+            "error": "That does not look like a United Kingdom mobile number.",
+            "format": "+44 1400123456"
+        },
+        {
+            "raw": "85 012 3456",
+            "selected": "353",
+            "split": null,
+            "dial": "353",
+            "national": "850123456",
+            "error": null,
+            "format": "+353 850123456"
+        },
+        {
+            "raw": "+353 85 012 3456",
+            "selected": null,
+            "split": [
+                "353",
+                "850123456"
+            ],
+            "dial": "353",
+            "national": "850123456",
+            "error": null,
+            "format": "+353 850123456"
+        },
+        {
+            "raw": "0850123456",
+            "selected": "353",
+            "split": null,
+            "dial": "353",
+            "national": "850123456",
+            "error": null,
+            "format": "+353 850123456"
+        },
+        {
+            "raw": "353850123456",
+            "selected": "353",
+            "split": null,
+            "dial": "353",
+            "national": "850123456",
+            "error": null,
+            "format": "+353 850123456"
+        },
+        {
+            "raw": "85012345",
+            "selected": "353",
+            "split": null,
+            "dial": "353",
+            "national": "85012345",
+            "error": "Enter a valid Ireland number of 9 digits.",
+            "format": "+353 85012345"
+        },
+        {
+            "raw": "8501234561",
+            "selected": "353",
+            "split": null,
+            "dial": "353",
+            "national": "8501234561",
+            "error": "Enter a valid Ireland number of 9 digits.",
+            "format": "+353 8501234561"
+        },
+        {
+            "raw": "150123456",
+            "selected": "353",
+            "split": null,
+            "dial": "353",
+            "national": "150123456",
+            "error": null,
+            "format": "+353 150123456"
+        },
+        {
+            "raw": "412 345 678",
+            "selected": "61",
+            "split": null,
+            "dial": "61",
+            "national": "412345678",
+            "error": null,
+            "format": "+61 412345678"
+        },
+        {
+            "raw": "+61 412 345 678",
+            "selected": null,
+            "split": [
+                "61",
+                "412345678"
+            ],
+            "dial": "61",
+            "national": "412345678",
+            "error": null,
+            "format": "+61 412345678"
+        },
+        {
+            "raw": "0412345678",
+            "selected": "61",
+            "split": null,
+            "dial": "61",
+            "national": "412345678",
+            "error": null,
+            "format": "+61 412345678"
+        },
+        {
+            "raw": "61412345678",
+            "selected": "61",
+            "split": null,
+            "dial": "61",
+            "national": "412345678",
+            "error": null,
+            "format": "+61 412345678"
+        },
+        {
+            "raw": "41234567",
+            "selected": "61",
+            "split": null,
+            "dial": "61",
+            "national": "41234567",
+            "error": "Enter a valid Australia number of 9 digits.",
+            "format": "+61 41234567"
+        },
+        {
+            "raw": "4123456781",
+            "selected": "61",
+            "split": null,
+            "dial": "61",
+            "national": "4123456781",
+            "error": "Enter a valid Australia number of 9 digits.",
+            "format": "+61 4123456781"
+        },
+        {
+            "raw": "112345678",
+            "selected": "61",
+            "split": null,
+            "dial": "61",
+            "national": "112345678",
+            "error": "That does not look like a Australia mobile number.",
+            "format": "+61 112345678"
+        },
+        {
+            "raw": "21 123 4567",
+            "selected": "64",
+            "split": null,
+            "dial": "64",
+            "national": "211234567",
+            "error": null,
+            "format": "+64 211234567"
+        },
+        {
+            "raw": "+64 21 123 4567",
+            "selected": null,
+            "split": [
+                "64",
+                "211234567"
+            ],
+            "dial": "64",
+            "national": "211234567",
+            "error": null,
+            "format": "+64 211234567"
+        },
+        {
+            "raw": "0211234567",
+            "selected": "64",
+            "split": null,
+            "dial": "64",
+            "national": "0211234567",
+            "error": null,
+            "format": "+64 0211234567"
+        },
+        {
+            "raw": "64211234567",
+            "selected": "64",
+            "split": null,
+            "dial": "64",
+            "national": "211234567",
+            "error": null,
+            "format": "+64 211234567"
+        },
+        {
+            "raw": "21123456",
+            "selected": "64",
+            "split": null,
+            "dial": "64",
+            "national": "21123456",
+            "error": null,
+            "format": "+64 21123456"
+        },
+        {
+            "raw": "2112345671",
+            "selected": "64",
+            "split": null,
+            "dial": "64",
+            "national": "2112345671",
+            "error": null,
+            "format": "+64 2112345671"
+        },
+        {
+            "raw": "111234567",
+            "selected": "64",
+            "split": null,
+            "dial": "64",
+            "national": "111234567",
+            "error": null,
+            "format": "+64 111234567"
+        },
+        {
+            "raw": "8123 4567",
+            "selected": "65",
+            "split": null,
+            "dial": "65",
+            "national": "81234567",
+            "error": null,
+            "format": "+65 81234567"
+        },
+        {
+            "raw": "+65 8123 4567",
+            "selected": null,
+            "split": [
+                "65",
+                "81234567"
+            ],
+            "dial": "65",
+            "national": "81234567",
+            "error": null,
+            "format": "+65 81234567"
+        },
+        {
+            "raw": "081234567",
+            "selected": "65",
+            "split": null,
+            "dial": "65",
+            "national": "81234567",
+            "error": null,
+            "format": "+65 81234567"
+        },
+        {
+            "raw": "6581234567",
+            "selected": "65",
+            "split": null,
+            "dial": "65",
+            "national": "81234567",
+            "error": null,
+            "format": "+65 81234567"
+        },
+        {
+            "raw": "8123456",
+            "selected": "65",
+            "split": null,
+            "dial": "65",
+            "national": "8123456",
+            "error": "Enter a valid Singapore number of 8 digits.",
+            "format": "+65 8123456"
+        },
+        {
+            "raw": "812345671",
+            "selected": "65",
+            "split": null,
+            "dial": "65",
+            "national": "812345671",
+            "error": "Enter a valid Singapore number of 8 digits.",
+            "format": "+65 812345671"
+        },
+        {
+            "raw": "11234567",
+            "selected": "65",
+            "split": null,
+            "dial": "65",
+            "national": "11234567",
+            "error": null,
+            "format": "+65 11234567"
+        },
+        {
+            "raw": "12 345 6789",
+            "selected": "60",
+            "split": null,
+            "dial": "60",
+            "national": "123456789",
+            "error": null,
+            "format": "+60 123456789"
+        },
+        {
+            "raw": "+60 12 345 6789",
+            "selected": null,
+            "split": [
+                "60",
+                "123456789"
+            ],
+            "dial": "60",
+            "national": "123456789",
+            "error": null,
+            "format": "+60 123456789"
+        },
+        {
+            "raw": "0123456789",
+            "selected": "60",
+            "split": null,
+            "dial": "60",
+            "national": "0123456789",
+            "error": null,
+            "format": "+60 0123456789"
+        },
+        {
+            "raw": "60123456789",
+            "selected": "60",
+            "split": null,
+            "dial": "60",
+            "national": "123456789",
+            "error": null,
+            "format": "+60 123456789"
+        },
+        {
+            "raw": "12345678",
+            "selected": "60",
+            "split": null,
+            "dial": "60",
+            "national": "12345678",
+            "error": "Enter a valid Malaysia number of 9 to 10 digits.",
+            "format": "+60 12345678"
+        },
+        {
+            "raw": "1234567891",
+            "selected": "60",
+            "split": null,
+            "dial": "60",
+            "national": "1234567891",
+            "error": null,
+            "format": "+60 1234567891"
+        },
+        {
+            "raw": "123456789",
+            "selected": "60",
+            "split": null,
+            "dial": "60",
+            "national": "123456789",
+            "error": null,
+            "format": "+60 123456789"
+        },
+        {
+            "raw": "812 3456 789",
+            "selected": "62",
+            "split": null,
+            "dial": "62",
+            "national": "8123456789",
+            "error": null,
+            "format": "+62 8123456789"
+        },
+        {
+            "raw": "+62 812 3456 789",
+            "selected": null,
+            "split": [
+                "62",
+                "8123456789"
+            ],
+            "dial": "62",
+            "national": "8123456789",
+            "error": null,
+            "format": "+62 8123456789"
+        },
+        {
+            "raw": "08123456789",
+            "selected": "62",
+            "split": null,
+            "dial": "62",
+            "national": "08123456789",
+            "error": null,
+            "format": "+62 08123456789"
+        },
+        {
+            "raw": "628123456789",
+            "selected": "62",
+            "split": null,
+            "dial": "62",
+            "national": "628123456789",
+            "error": null,
+            "format": "+62 628123456789"
+        },
+        {
+            "raw": "812345678",
+            "selected": "62",
+            "split": null,
+            "dial": "62",
+            "national": "812345678",
+            "error": null,
+            "format": "+62 812345678"
+        },
+        {
+            "raw": "81234567891",
+            "selected": "62",
+            "split": null,
+            "dial": "62",
+            "national": "81234567891",
+            "error": null,
+            "format": "+62 81234567891"
+        },
+        {
+            "raw": "1123456789",
+            "selected": "62",
+            "split": null,
+            "dial": "62",
+            "national": "1123456789",
+            "error": null,
+            "format": "+62 1123456789"
+        },
+        {
+            "raw": "81 234 5678",
+            "selected": "66",
+            "split": null,
+            "dial": "66",
+            "national": "812345678",
+            "error": null,
+            "format": "+66 812345678"
+        },
+        {
+            "raw": "+66 81 234 5678",
+            "selected": null,
+            "split": [
+                "66",
+                "812345678"
+            ],
+            "dial": "66",
+            "national": "812345678",
+            "error": null,
+            "format": "+66 812345678"
+        },
+        {
+            "raw": "0812345678",
+            "selected": "66",
+            "split": null,
+            "dial": "66",
+            "national": "812345678",
+            "error": null,
+            "format": "+66 812345678"
+        },
+        {
+            "raw": "66812345678",
+            "selected": "66",
+            "split": null,
+            "dial": "66",
+            "national": "812345678",
+            "error": null,
+            "format": "+66 812345678"
+        },
+        {
+            "raw": "81234567",
+            "selected": "66",
+            "split": null,
+            "dial": "66",
+            "national": "81234567",
+            "error": "Enter a valid Thailand number of 9 digits.",
+            "format": "+66 81234567"
+        },
+        {
+            "raw": "8123456781",
+            "selected": "66",
+            "split": null,
+            "dial": "66",
+            "national": "8123456781",
+            "error": "Enter a valid Thailand number of 9 digits.",
+            "format": "+66 8123456781"
+        },
+        {
+            "raw": "112345678",
+            "selected": "66",
+            "split": null,
+            "dial": "66",
+            "national": "112345678",
+            "error": null,
+            "format": "+66 112345678"
+        },
+        {
+            "raw": "917 123 4567",
+            "selected": "63",
+            "split": null,
+            "dial": "63",
+            "national": "9171234567",
+            "error": null,
+            "format": "+63 9171234567"
+        },
+        {
+            "raw": "+63 917 123 4567",
+            "selected": null,
+            "split": [
+                "63",
+                "9171234567"
+            ],
+            "dial": "63",
+            "national": "9171234567",
+            "error": null,
+            "format": "+63 9171234567"
+        },
+        {
+            "raw": "09171234567",
+            "selected": "63",
+            "split": null,
+            "dial": "63",
+            "national": "9171234567",
+            "error": null,
+            "format": "+63 9171234567"
+        },
+        {
+            "raw": "639171234567",
+            "selected": "63",
+            "split": null,
+            "dial": "63",
+            "national": "9171234567",
+            "error": null,
+            "format": "+63 9171234567"
+        },
+        {
+            "raw": "917123456",
+            "selected": "63",
+            "split": null,
+            "dial": "63",
+            "national": "917123456",
+            "error": "Enter a valid Philippines number of 10 digits.",
+            "format": "+63 917123456"
+        },
+        {
+            "raw": "91712345671",
+            "selected": "63",
+            "split": null,
+            "dial": "63",
+            "national": "91712345671",
+            "error": "Enter a valid Philippines number of 10 digits.",
+            "format": "+63 91712345671"
+        },
+        {
+            "raw": "1171234567",
+            "selected": "63",
+            "split": null,
+            "dial": "63",
+            "national": "1171234567",
+            "error": null,
+            "format": "+63 1171234567"
+        },
+        {
+            "raw": "5123 4567",
+            "selected": "852",
+            "split": null,
+            "dial": "852",
+            "national": "51234567",
+            "error": null,
+            "format": "+852 51234567"
+        },
+        {
+            "raw": "+852 5123 4567",
+            "selected": null,
+            "split": [
+                "852",
+                "51234567"
+            ],
+            "dial": "852",
+            "national": "51234567",
+            "error": null,
+            "format": "+852 51234567"
+        },
+        {
+            "raw": "051234567",
+            "selected": "852",
+            "split": null,
+            "dial": "852",
+            "national": "51234567",
+            "error": null,
+            "format": "+852 51234567"
+        },
+        {
+            "raw": "85251234567",
+            "selected": "852",
+            "split": null,
+            "dial": "852",
+            "national": "51234567",
+            "error": null,
+            "format": "+852 51234567"
+        },
+        {
+            "raw": "5123456",
+            "selected": "852",
+            "split": null,
+            "dial": "852",
+            "national": "5123456",
+            "error": "Enter a valid Hong Kong number of 8 digits.",
+            "format": "+852 5123456"
+        },
+        {
+            "raw": "512345671",
+            "selected": "852",
+            "split": null,
+            "dial": "852",
+            "national": "512345671",
+            "error": "Enter a valid Hong Kong number of 8 digits.",
+            "format": "+852 512345671"
+        },
+        {
+            "raw": "11234567",
+            "selected": "852",
+            "split": null,
+            "dial": "852",
+            "national": "11234567",
+            "error": null,
+            "format": "+852 11234567"
+        },
+        {
+            "raw": "131 2345 6789",
+            "selected": "86",
+            "split": null,
+            "dial": "86",
+            "national": "13123456789",
+            "error": null,
+            "format": "+86 13123456789"
+        },
+        {
+            "raw": "+86 131 2345 6789",
+            "selected": null,
+            "split": [
+                "86",
+                "13123456789"
+            ],
+            "dial": "86",
+            "national": "13123456789",
+            "error": null,
+            "format": "+86 13123456789"
+        },
+        {
+            "raw": "013123456789",
+            "selected": "86",
+            "split": null,
+            "dial": "86",
+            "national": "13123456789",
+            "error": null,
+            "format": "+86 13123456789"
+        },
+        {
+            "raw": "8613123456789",
+            "selected": "86",
+            "split": null,
+            "dial": "86",
+            "national": "13123456789",
+            "error": null,
+            "format": "+86 13123456789"
+        },
+        {
+            "raw": "1312345678",
+            "selected": "86",
+            "split": null,
+            "dial": "86",
+            "national": "1312345678",
+            "error": "Enter a valid China number of 11 digits.",
+            "format": "+86 1312345678"
+        },
+        {
+            "raw": "131234567891",
+            "selected": "86",
+            "split": null,
+            "dial": "86",
+            "national": "131234567891",
+            "error": "Enter a valid China number of 11 digits.",
+            "format": "+86 131234567891"
+        },
+        {
+            "raw": "13123456789",
+            "selected": "86",
+            "split": null,
+            "dial": "86",
+            "national": "13123456789",
+            "error": null,
+            "format": "+86 13123456789"
+        },
+        {
+            "raw": "90 1234 5678",
+            "selected": "81",
+            "split": null,
+            "dial": "81",
+            "national": "9012345678",
+            "error": null,
+            "format": "+81 9012345678"
+        },
+        {
+            "raw": "+81 90 1234 5678",
+            "selected": null,
+            "split": [
+                "81",
+                "9012345678"
+            ],
+            "dial": "81",
+            "national": "9012345678",
+            "error": null,
+            "format": "+81 9012345678"
+        },
+        {
+            "raw": "09012345678",
+            "selected": "81",
+            "split": null,
+            "dial": "81",
+            "national": "9012345678",
+            "error": null,
+            "format": "+81 9012345678"
+        },
+        {
+            "raw": "819012345678",
+            "selected": "81",
+            "split": null,
+            "dial": "81",
+            "national": "9012345678",
+            "error": null,
+            "format": "+81 9012345678"
+        },
+        {
+            "raw": "901234567",
+            "selected": "81",
+            "split": null,
+            "dial": "81",
+            "national": "901234567",
+            "error": "Enter a valid Japan number of 10 digits.",
+            "format": "+81 901234567"
+        },
+        {
+            "raw": "90123456781",
+            "selected": "81",
+            "split": null,
+            "dial": "81",
+            "national": "90123456781",
+            "error": "Enter a valid Japan number of 10 digits.",
+            "format": "+81 90123456781"
+        },
+        {
+            "raw": "1012345678",
+            "selected": "81",
+            "split": null,
+            "dial": "81",
+            "national": "1012345678",
+            "error": null,
+            "format": "+81 1012345678"
+        },
+        {
+            "raw": "10 1234 5678",
+            "selected": "82",
+            "split": null,
+            "dial": "82",
+            "national": "1012345678",
+            "error": null,
+            "format": "+82 1012345678"
+        },
+        {
+            "raw": "+82 10 1234 5678",
+            "selected": null,
+            "split": [
+                "82",
+                "1012345678"
+            ],
+            "dial": "82",
+            "national": "1012345678",
+            "error": null,
+            "format": "+82 1012345678"
+        },
+        {
+            "raw": "01012345678",
+            "selected": "82",
+            "split": null,
+            "dial": "82",
+            "national": "1012345678",
+            "error": null,
+            "format": "+82 1012345678"
+        },
+        {
+            "raw": "821012345678",
+            "selected": "82",
+            "split": null,
+            "dial": "82",
+            "national": "1012345678",
+            "error": null,
+            "format": "+82 1012345678"
+        },
+        {
+            "raw": "101234567",
+            "selected": "82",
+            "split": null,
+            "dial": "82",
+            "national": "101234567",
+            "error": null,
+            "format": "+82 101234567"
+        },
+        {
+            "raw": "10123456781",
+            "selected": "82",
+            "split": null,
+            "dial": "82",
+            "national": "10123456781",
+            "error": "Enter a valid South Korea number of 9 to 10 digits.",
+            "format": "+82 10123456781"
+        },
+        {
+            "raw": "1012345678",
+            "selected": "82",
+            "split": null,
+            "dial": "82",
+            "national": "1012345678",
+            "error": null,
+            "format": "+82 1012345678"
+        },
+        {
+            "raw": "151 23456789",
+            "selected": "49",
+            "split": null,
+            "dial": "49",
+            "national": "15123456789",
+            "error": null,
+            "format": "+49 15123456789"
+        },
+        {
+            "raw": "+49 151 23456789",
+            "selected": null,
+            "split": [
+                "49",
+                "15123456789"
+            ],
+            "dial": "49",
+            "national": "15123456789",
+            "error": null,
+            "format": "+49 15123456789"
+        },
+        {
+            "raw": "015123456789",
+            "selected": "49",
+            "split": null,
+            "dial": "49",
+            "national": "15123456789",
+            "error": null,
+            "format": "+49 15123456789"
+        },
+        {
+            "raw": "4915123456789",
+            "selected": "49",
+            "split": null,
+            "dial": "49",
+            "national": "15123456789",
+            "error": null,
+            "format": "+49 15123456789"
+        },
+        {
+            "raw": "1512345678",
+            "selected": "49",
+            "split": null,
+            "dial": "49",
+            "national": "1512345678",
+            "error": null,
+            "format": "+49 1512345678"
+        },
+        {
+            "raw": "151234567891",
+            "selected": "49",
+            "split": null,
+            "dial": "49",
+            "national": "151234567891",
+            "error": "Enter a valid Germany number of 10 to 11 digits.",
+            "format": "+49 151234567891"
+        },
+        {
+            "raw": "15123456789",
+            "selected": "49",
+            "split": null,
+            "dial": "49",
+            "national": "15123456789",
+            "error": null,
+            "format": "+49 15123456789"
+        },
+        {
+            "raw": "6 12 34 56 78",
+            "selected": "33",
+            "split": null,
+            "dial": "33",
+            "national": "612345678",
+            "error": null,
+            "format": "+33 612345678"
+        },
+        {
+            "raw": "+33 6 12 34 56 78",
+            "selected": null,
+            "split": [
+                "33",
+                "612345678"
+            ],
+            "dial": "33",
+            "national": "612345678",
+            "error": null,
+            "format": "+33 612345678"
+        },
+        {
+            "raw": "0612345678",
+            "selected": "33",
+            "split": null,
+            "dial": "33",
+            "national": "612345678",
+            "error": null,
+            "format": "+33 612345678"
+        },
+        {
+            "raw": "33612345678",
+            "selected": "33",
+            "split": null,
+            "dial": "33",
+            "national": "612345678",
+            "error": null,
+            "format": "+33 612345678"
+        },
+        {
+            "raw": "61234567",
+            "selected": "33",
+            "split": null,
+            "dial": "33",
+            "national": "61234567",
+            "error": "Enter a valid France number of 9 digits.",
+            "format": "+33 61234567"
+        },
+        {
+            "raw": "6123456781",
+            "selected": "33",
+            "split": null,
+            "dial": "33",
+            "national": "6123456781",
+            "error": "Enter a valid France number of 9 digits.",
+            "format": "+33 6123456781"
+        },
+        {
+            "raw": "112345678",
+            "selected": "33",
+            "split": null,
+            "dial": "33",
+            "national": "112345678",
+            "error": null,
+            "format": "+33 112345678"
+        },
+        {
+            "raw": "312 345 6789",
+            "selected": "39",
+            "split": null,
+            "dial": "39",
+            "national": "3123456789",
+            "error": null,
+            "format": "+39 3123456789"
+        },
+        {
+            "raw": "+39 312 345 6789",
+            "selected": null,
+            "split": [
+                "39",
+                "3123456789"
+            ],
+            "dial": "39",
+            "national": "3123456789",
+            "error": null,
+            "format": "+39 3123456789"
+        },
+        {
+            "raw": "03123456789",
+            "selected": "39",
+            "split": null,
+            "dial": "39",
+            "national": "3123456789",
+            "error": null,
+            "format": "+39 3123456789"
+        },
+        {
+            "raw": "393123456789",
+            "selected": "39",
+            "split": null,
+            "dial": "39",
+            "national": "3123456789",
+            "error": null,
+            "format": "+39 3123456789"
+        },
+        {
+            "raw": "312345678",
+            "selected": "39",
+            "split": null,
+            "dial": "39",
+            "national": "312345678",
+            "error": null,
+            "format": "+39 312345678"
+        },
+        {
+            "raw": "31234567891",
+            "selected": "39",
+            "split": null,
+            "dial": "39",
+            "national": "31234567891",
+            "error": "Enter a valid Italy number of 9 to 10 digits.",
+            "format": "+39 31234567891"
+        },
+        {
+            "raw": "1123456789",
+            "selected": "39",
+            "split": null,
+            "dial": "39",
+            "national": "1123456789",
+            "error": null,
+            "format": "+39 1123456789"
+        },
+        {
+            "raw": "612 34 56 78",
+            "selected": "34",
+            "split": null,
+            "dial": "34",
+            "national": "612345678",
+            "error": null,
+            "format": "+34 612345678"
+        },
+        {
+            "raw": "+34 612 34 56 78",
+            "selected": null,
+            "split": [
+                "34",
+                "612345678"
+            ],
+            "dial": "34",
+            "national": "612345678",
+            "error": null,
+            "format": "+34 612345678"
+        },
+        {
+            "raw": "0612345678",
+            "selected": "34",
+            "split": null,
+            "dial": "34",
+            "national": "612345678",
+            "error": null,
+            "format": "+34 612345678"
+        },
+        {
+            "raw": "34612345678",
+            "selected": "34",
+            "split": null,
+            "dial": "34",
+            "national": "612345678",
+            "error": null,
+            "format": "+34 612345678"
+        },
+        {
+            "raw": "61234567",
+            "selected": "34",
+            "split": null,
+            "dial": "34",
+            "national": "61234567",
+            "error": "Enter a valid Spain number of 9 digits.",
+            "format": "+34 61234567"
+        },
+        {
+            "raw": "6123456781",
+            "selected": "34",
+            "split": null,
+            "dial": "34",
+            "national": "6123456781",
+            "error": "Enter a valid Spain number of 9 digits.",
+            "format": "+34 6123456781"
+        },
+        {
+            "raw": "112345678",
+            "selected": "34",
+            "split": null,
+            "dial": "34",
+            "national": "112345678",
+            "error": null,
+            "format": "+34 112345678"
+        },
+        {
+            "raw": "6 12345678",
+            "selected": "31",
+            "split": null,
+            "dial": "31",
+            "national": "612345678",
+            "error": null,
+            "format": "+31 612345678"
+        },
+        {
+            "raw": "+31 6 12345678",
+            "selected": null,
+            "split": [
+                "31",
+                "612345678"
+            ],
+            "dial": "31",
+            "national": "612345678",
+            "error": null,
+            "format": "+31 612345678"
+        },
+        {
+            "raw": "0612345678",
+            "selected": "31",
+            "split": null,
+            "dial": "31",
+            "national": "612345678",
+            "error": null,
+            "format": "+31 612345678"
+        },
+        {
+            "raw": "31612345678",
+            "selected": "31",
+            "split": null,
+            "dial": "31",
+            "national": "612345678",
+            "error": null,
+            "format": "+31 612345678"
+        },
+        {
+            "raw": "61234567",
+            "selected": "31",
+            "split": null,
+            "dial": "31",
+            "national": "61234567",
+            "error": "Enter a valid Netherlands number of 9 digits.",
+            "format": "+31 61234567"
+        },
+        {
+            "raw": "6123456781",
+            "selected": "31",
+            "split": null,
+            "dial": "31",
+            "national": "6123456781",
+            "error": "Enter a valid Netherlands number of 9 digits.",
+            "format": "+31 6123456781"
+        },
+        {
+            "raw": "112345678",
+            "selected": "31",
+            "split": null,
+            "dial": "31",
+            "national": "112345678",
+            "error": null,
+            "format": "+31 112345678"
+        },
+        {
+            "raw": "78 123 45 67",
+            "selected": "41",
+            "split": null,
+            "dial": "41",
+            "national": "781234567",
+            "error": null,
+            "format": "+41 781234567"
+        },
+        {
+            "raw": "+41 78 123 45 67",
+            "selected": null,
+            "split": [
+                "41",
+                "781234567"
+            ],
+            "dial": "41",
+            "national": "781234567",
+            "error": null,
+            "format": "+41 781234567"
+        },
+        {
+            "raw": "0781234567",
+            "selected": "41",
+            "split": null,
+            "dial": "41",
+            "national": "781234567",
+            "error": null,
+            "format": "+41 781234567"
+        },
+        {
+            "raw": "41781234567",
+            "selected": "41",
+            "split": null,
+            "dial": "41",
+            "national": "781234567",
+            "error": null,
+            "format": "+41 781234567"
+        },
+        {
+            "raw": "78123456",
+            "selected": "41",
+            "split": null,
+            "dial": "41",
+            "national": "78123456",
+            "error": "Enter a valid Switzerland number of 9 digits.",
+            "format": "+41 78123456"
+        },
+        {
+            "raw": "7812345671",
+            "selected": "41",
+            "split": null,
+            "dial": "41",
+            "national": "7812345671",
+            "error": "Enter a valid Switzerland number of 9 digits.",
+            "format": "+41 7812345671"
+        },
+        {
+            "raw": "181234567",
+            "selected": "41",
+            "split": null,
+            "dial": "41",
+            "national": "181234567",
+            "error": null,
+            "format": "+41 181234567"
+        },
+        {
+            "raw": "70 123 45 67",
+            "selected": "46",
+            "split": null,
+            "dial": "46",
+            "national": "701234567",
+            "error": null,
+            "format": "+46 701234567"
+        },
+        {
+            "raw": "+46 70 123 45 67",
+            "selected": null,
+            "split": [
+                "46",
+                "701234567"
+            ],
+            "dial": "46",
+            "national": "701234567",
+            "error": null,
+            "format": "+46 701234567"
+        },
+        {
+            "raw": "0701234567",
+            "selected": "46",
+            "split": null,
+            "dial": "46",
+            "national": "701234567",
+            "error": null,
+            "format": "+46 701234567"
+        },
+        {
+            "raw": "46701234567",
+            "selected": "46",
+            "split": null,
+            "dial": "46",
+            "national": "701234567",
+            "error": null,
+            "format": "+46 701234567"
+        },
+        {
+            "raw": "70123456",
+            "selected": "46",
+            "split": null,
+            "dial": "46",
+            "national": "70123456",
+            "error": "Enter a valid Sweden number of 9 digits.",
+            "format": "+46 70123456"
+        },
+        {
+            "raw": "7012345671",
+            "selected": "46",
+            "split": null,
+            "dial": "46",
+            "national": "7012345671",
+            "error": "Enter a valid Sweden number of 9 digits.",
+            "format": "+46 7012345671"
+        },
+        {
+            "raw": "101234567",
+            "selected": "46",
+            "split": null,
+            "dial": "46",
+            "national": "101234567",
+            "error": null,
+            "format": "+46 101234567"
+        },
+        {
+            "raw": "912 345 6789",
+            "selected": "7",
+            "split": null,
+            "dial": "7",
+            "national": "9123456789",
+            "error": null,
+            "format": "+7 9123456789"
+        },
+        {
+            "raw": "+7 912 345 6789",
+            "selected": null,
+            "split": [
+                "7",
+                "9123456789"
+            ],
+            "dial": "7",
+            "national": "9123456789",
+            "error": null,
+            "format": "+7 9123456789"
+        },
+        {
+            "raw": "09123456789",
+            "selected": "7",
+            "split": null,
+            "dial": "7",
+            "national": "9123456789",
+            "error": null,
+            "format": "+7 9123456789"
+        },
+        {
+            "raw": "79123456789",
+            "selected": "7",
+            "split": null,
+            "dial": "7",
+            "national": "9123456789",
+            "error": null,
+            "format": "+7 9123456789"
+        },
+        {
+            "raw": "912345678",
+            "selected": "7",
+            "split": null,
+            "dial": "7",
+            "national": "912345678",
+            "error": "Enter a valid Russia number of 10 digits.",
+            "format": "+7 912345678"
+        },
+        {
+            "raw": "91234567891",
+            "selected": "7",
+            "split": null,
+            "dial": "7",
+            "national": "91234567891",
+            "error": "Enter a valid Russia number of 10 digits.",
+            "format": "+7 91234567891"
+        },
+        {
+            "raw": "1123456789",
+            "selected": "7",
+            "split": null,
+            "dial": "7",
+            "national": "1123456789",
+            "error": null,
+            "format": "+7 1123456789"
+        },
+        {
+            "raw": "71 123 4567",
+            "selected": "27",
+            "split": null,
+            "dial": "27",
+            "national": "711234567",
+            "error": null,
+            "format": "+27 711234567"
+        },
+        {
+            "raw": "+27 71 123 4567",
+            "selected": null,
+            "split": [
+                "27",
+                "711234567"
+            ],
+            "dial": "27",
+            "national": "711234567",
+            "error": null,
+            "format": "+27 711234567"
+        },
+        {
+            "raw": "0711234567",
+            "selected": "27",
+            "split": null,
+            "dial": "27",
+            "national": "711234567",
+            "error": null,
+            "format": "+27 711234567"
+        },
+        {
+            "raw": "27711234567",
+            "selected": "27",
+            "split": null,
+            "dial": "27",
+            "national": "711234567",
+            "error": null,
+            "format": "+27 711234567"
+        },
+        {
+            "raw": "71123456",
+            "selected": "27",
+            "split": null,
+            "dial": "27",
+            "national": "71123456",
+            "error": "Enter a valid South Africa number of 9 digits.",
+            "format": "+27 71123456"
+        },
+        {
+            "raw": "7112345671",
+            "selected": "27",
+            "split": null,
+            "dial": "27",
+            "national": "7112345671",
+            "error": "Enter a valid South Africa number of 9 digits.",
+            "format": "+27 7112345671"
+        },
+        {
+            "raw": "111234567",
+            "selected": "27",
+            "split": null,
+            "dial": "27",
+            "national": "111234567",
+            "error": null,
+            "format": "+27 111234567"
+        },
+        {
+            "raw": "712 345678",
+            "selected": "254",
+            "split": null,
+            "dial": "254",
+            "national": "712345678",
+            "error": null,
+            "format": "+254 712345678"
+        },
+        {
+            "raw": "+254 712 345678",
+            "selected": null,
+            "split": [
+                "254",
+                "712345678"
+            ],
+            "dial": "254",
+            "national": "712345678",
+            "error": null,
+            "format": "+254 712345678"
+        },
+        {
+            "raw": "0712345678",
+            "selected": "254",
+            "split": null,
+            "dial": "254",
+            "national": "712345678",
+            "error": null,
+            "format": "+254 712345678"
+        },
+        {
+            "raw": "254712345678",
+            "selected": "254",
+            "split": null,
+            "dial": "254",
+            "national": "712345678",
+            "error": null,
+            "format": "+254 712345678"
+        },
+        {
+            "raw": "71234567",
+            "selected": "254",
+            "split": null,
+            "dial": "254",
+            "national": "71234567",
+            "error": "Enter a valid Kenya number of 9 digits.",
+            "format": "+254 71234567"
+        },
+        {
+            "raw": "7123456781",
+            "selected": "254",
+            "split": null,
+            "dial": "254",
+            "national": "7123456781",
+            "error": "Enter a valid Kenya number of 9 digits.",
+            "format": "+254 7123456781"
+        },
+        {
+            "raw": "112345678",
+            "selected": "254",
+            "split": null,
+            "dial": "254",
+            "national": "112345678",
+            "error": null,
+            "format": "+254 112345678"
+        },
+        {
+            "raw": "802 123 4567",
+            "selected": "234",
+            "split": null,
+            "dial": "234",
+            "national": "8021234567",
+            "error": null,
+            "format": "+234 8021234567"
+        },
+        {
+            "raw": "+234 802 123 4567",
+            "selected": null,
+            "split": [
+                "234",
+                "8021234567"
+            ],
+            "dial": "234",
+            "national": "8021234567",
+            "error": null,
+            "format": "+234 8021234567"
+        },
+        {
+            "raw": "08021234567",
+            "selected": "234",
+            "split": null,
+            "dial": "234",
+            "national": "8021234567",
+            "error": null,
+            "format": "+234 8021234567"
+        },
+        {
+            "raw": "2348021234567",
+            "selected": "234",
+            "split": null,
+            "dial": "234",
+            "national": "8021234567",
+            "error": null,
+            "format": "+234 8021234567"
+        },
+        {
+            "raw": "802123456",
+            "selected": "234",
+            "split": null,
+            "dial": "234",
+            "national": "802123456",
+            "error": "Enter a valid Nigeria number of 10 digits.",
+            "format": "+234 802123456"
+        },
+        {
+            "raw": "80212345671",
+            "selected": "234",
+            "split": null,
+            "dial": "234",
+            "national": "80212345671",
+            "error": "Enter a valid Nigeria number of 10 digits.",
+            "format": "+234 80212345671"
+        },
+        {
+            "raw": "1021234567",
+            "selected": "234",
+            "split": null,
+            "dial": "234",
+            "national": "1021234567",
+            "error": null,
+            "format": "+234 1021234567"
+        },
+        {
+            "raw": "5251 2345",
+            "selected": "230",
+            "split": null,
+            "dial": "230",
+            "national": "52512345",
+            "error": null,
+            "format": "+230 52512345"
+        },
+        {
+            "raw": "+230 5251 2345",
+            "selected": null,
+            "split": [
+                "230",
+                "52512345"
+            ],
+            "dial": "230",
+            "national": "52512345",
+            "error": null,
+            "format": "+230 52512345"
+        },
+        {
+            "raw": "052512345",
+            "selected": "230",
+            "split": null,
+            "dial": "230",
+            "national": "52512345",
+            "error": null,
+            "format": "+230 52512345"
+        },
+        {
+            "raw": "23052512345",
+            "selected": "230",
+            "split": null,
+            "dial": "230",
+            "national": "52512345",
+            "error": null,
+            "format": "+230 52512345"
+        },
+        {
+            "raw": "5251234",
+            "selected": "230",
+            "split": null,
+            "dial": "230",
+            "national": "5251234",
+            "error": "Enter a valid Mauritius number of 8 digits.",
+            "format": "+230 5251234"
+        },
+        {
+            "raw": "525123451",
+            "selected": "230",
+            "split": null,
+            "dial": "230",
+            "national": "525123451",
+            "error": "Enter a valid Mauritius number of 8 digits.",
+            "format": "+230 525123451"
+        },
+        {
+            "raw": "12512345",
+            "selected": "230",
+            "split": null,
+            "dial": "230",
+            "national": "12512345",
+            "error": null,
+            "format": "+230 12512345"
+        },
+        {
+            "raw": "11 91234 5678",
+            "selected": "55",
+            "split": null,
+            "dial": "55",
+            "national": "11912345678",
+            "error": null,
+            "format": "+55 11912345678"
+        },
+        {
+            "raw": "+55 11 91234 5678",
+            "selected": null,
+            "split": [
+                "55",
+                "11912345678"
+            ],
+            "dial": "55",
+            "national": "11912345678",
+            "error": null,
+            "format": "+55 11912345678"
+        },
+        {
+            "raw": "011912345678",
+            "selected": "55",
+            "split": null,
+            "dial": "55",
+            "national": "11912345678",
+            "error": null,
+            "format": "+55 11912345678"
+        },
+        {
+            "raw": "5511912345678",
+            "selected": "55",
+            "split": null,
+            "dial": "55",
+            "national": "11912345678",
+            "error": null,
+            "format": "+55 11912345678"
+        },
+        {
+            "raw": "1191234567",
+            "selected": "55",
+            "split": null,
+            "dial": "55",
+            "national": "1191234567",
+            "error": null,
+            "format": "+55 1191234567"
+        },
+        {
+            "raw": "119123456781",
+            "selected": "55",
+            "split": null,
+            "dial": "55",
+            "national": "119123456781",
+            "error": "Enter a valid Brazil number of 10 to 11 digits.",
+            "format": "+55 119123456781"
+        },
+        {
+            "raw": "11912345678",
+            "selected": "55",
+            "split": null,
+            "dial": "55",
+            "national": "11912345678",
+            "error": null,
+            "format": "+55 11912345678"
+        }
+    ],
+    "countries": [
+        {
+            "iso": "IN",
+            "name": "India",
+            "dial": "91",
+            "min": 10,
+            "max": 10,
+            "lead": "[6-9]",
+            "sample": "98765 43210",
+            "message": "Enter a 10-digit mobile number starting with 6, 7, 8 or 9.",
+            "pattern": "[6-9][0-9]{9,9}"
+        },
+        {
+            "iso": "AE",
+            "name": "United Arab Emirates",
+            "dial": "971",
+            "min": 9,
+            "max": 9,
+            "lead": "5",
+            "sample": "50 123 4567",
+            "message": "Enter a valid United Arab Emirates number of 9 digits.",
+            "pattern": "5[0-9]{8,8}"
+        },
+        {
+            "iso": "SA",
+            "name": "Saudi Arabia",
+            "dial": "966",
+            "min": 9,
+            "max": 9,
+            "lead": "5",
+            "sample": "50 123 4567",
+            "message": "Enter a valid Saudi Arabia number of 9 digits.",
+            "pattern": "5[0-9]{8,8}"
+        },
+        {
+            "iso": "QA",
+            "name": "Qatar",
+            "dial": "974",
+            "min": 8,
+            "max": 8,
+            "lead": null,
+            "sample": "3123 4567",
+            "message": "Enter a valid Qatar number of 8 digits.",
+            "pattern": "[0-9][0-9]{7,7}"
+        },
+        {
+            "iso": "KW",
+            "name": "Kuwait",
+            "dial": "965",
+            "min": 8,
+            "max": 8,
+            "lead": null,
+            "sample": "5000 0000",
+            "message": "Enter a valid Kuwait number of 8 digits.",
+            "pattern": "[0-9][0-9]{7,7}"
+        },
+        {
+            "iso": "OM",
+            "name": "Oman",
+            "dial": "968",
+            "min": 8,
+            "max": 8,
+            "lead": null,
+            "sample": "9212 3456",
+            "message": "Enter a valid Oman number of 8 digits.",
+            "pattern": "[0-9][0-9]{7,7}"
+        },
+        {
+            "iso": "BH",
+            "name": "Bahrain",
+            "dial": "973",
+            "min": 8,
+            "max": 8,
+            "lead": null,
+            "sample": "3600 1234",
+            "message": "Enter a valid Bahrain number of 8 digits.",
+            "pattern": "[0-9][0-9]{7,7}"
+        },
+        {
+            "iso": "NP",
+            "name": "Nepal",
+            "dial": "977",
+            "min": 10,
+            "max": 10,
+            "lead": "9",
+            "sample": "98 1234 5678",
+            "message": "Enter a valid Nepal number of 10 digits.",
+            "pattern": "9[0-9]{9,9}"
+        },
+        {
+            "iso": "BD",
+            "name": "Bangladesh",
+            "dial": "880",
+            "min": 10,
+            "max": 10,
+            "lead": "1",
+            "sample": "1712 345678",
+            "message": "Enter a valid Bangladesh number of 10 digits.",
+            "pattern": "1[0-9]{9,9}"
+        },
+        {
+            "iso": "LK",
+            "name": "Sri Lanka",
+            "dial": "94",
+            "min": 9,
+            "max": 9,
+            "lead": "7",
+            "sample": "71 234 5678",
+            "message": "Enter a valid Sri Lanka number of 9 digits.",
+            "pattern": "7[0-9]{8,8}"
+        },
+        {
+            "iso": "PK",
+            "name": "Pakistan",
+            "dial": "92",
+            "min": 10,
+            "max": 10,
+            "lead": "3",
+            "sample": "301 2345678",
+            "message": "Enter a valid Pakistan number of 10 digits.",
+            "pattern": "3[0-9]{9,9}"
+        },
+        {
+            "iso": "BT",
+            "name": "Bhutan",
+            "dial": "975",
+            "min": 8,
+            "max": 8,
+            "lead": null,
+            "sample": "17 123 456",
+            "message": "Enter a valid Bhutan number of 8 digits.",
+            "pattern": "[0-9][0-9]{7,7}"
+        },
+        {
+            "iso": "MV",
+            "name": "Maldives",
+            "dial": "960",
+            "min": 7,
+            "max": 7,
+            "lead": null,
+            "sample": "771 2345",
+            "message": "Enter a valid Maldives number of 7 digits.",
+            "pattern": "[0-9][0-9]{6,6}"
+        },
+        {
+            "iso": "AF",
+            "name": "Afghanistan",
+            "dial": "93",
+            "min": 9,
+            "max": 9,
+            "lead": null,
+            "sample": "70 123 4567",
+            "message": "Enter a valid Afghanistan number of 9 digits.",
+            "pattern": "[0-9][0-9]{8,8}"
+        },
+        {
+            "iso": "US",
+            "name": "United States / Canada",
+            "dial": "1",
+            "min": 10,
+            "max": 10,
+            "lead": null,
+            "sample": "201 555 0123",
+            "message": "Enter a valid United States / Canada number of 10 digits.",
+            "pattern": "[0-9][0-9]{9,9}"
+        },
+        {
+            "iso": "GB",
+            "name": "United Kingdom",
+            "dial": "44",
+            "min": 10,
+            "max": 10,
+            "lead": "7",
+            "sample": "7400 123456",
+            "message": "Enter a valid United Kingdom number of 10 digits.",
+            "pattern": "7[0-9]{9,9}"
+        },
+        {
+            "iso": "IE",
+            "name": "Ireland",
+            "dial": "353",
+            "min": 9,
+            "max": 9,
+            "lead": null,
+            "sample": "85 012 3456",
+            "message": "Enter a valid Ireland number of 9 digits.",
+            "pattern": "[0-9][0-9]{8,8}"
+        },
+        {
+            "iso": "AU",
+            "name": "Australia",
+            "dial": "61",
+            "min": 9,
+            "max": 9,
+            "lead": "4",
+            "sample": "412 345 678",
+            "message": "Enter a valid Australia number of 9 digits.",
+            "pattern": "4[0-9]{8,8}"
+        },
+        {
+            "iso": "NZ",
+            "name": "New Zealand",
+            "dial": "64",
+            "min": 8,
+            "max": 10,
+            "lead": null,
+            "sample": "21 123 4567",
+            "message": "Enter a valid New Zealand number of 8 to 10 digits.",
+            "pattern": "[0-9][0-9]{7,9}"
+        },
+        {
+            "iso": "SG",
+            "name": "Singapore",
+            "dial": "65",
+            "min": 8,
+            "max": 8,
+            "lead": null,
+            "sample": "8123 4567",
+            "message": "Enter a valid Singapore number of 8 digits.",
+            "pattern": "[0-9][0-9]{7,7}"
+        },
+        {
+            "iso": "MY",
+            "name": "Malaysia",
+            "dial": "60",
+            "min": 9,
+            "max": 10,
+            "lead": null,
+            "sample": "12 345 6789",
+            "message": "Enter a valid Malaysia number of 9 to 10 digits.",
+            "pattern": "[0-9][0-9]{8,9}"
+        },
+        {
+            "iso": "ID",
+            "name": "Indonesia",
+            "dial": "62",
+            "min": 9,
+            "max": 12,
+            "lead": null,
+            "sample": "812 3456 789",
+            "message": "Enter a valid Indonesia number of 9 to 12 digits.",
+            "pattern": "[0-9][0-9]{8,11}"
+        },
+        {
+            "iso": "TH",
+            "name": "Thailand",
+            "dial": "66",
+            "min": 9,
+            "max": 9,
+            "lead": null,
+            "sample": "81 234 5678",
+            "message": "Enter a valid Thailand number of 9 digits.",
+            "pattern": "[0-9][0-9]{8,8}"
+        },
+        {
+            "iso": "PH",
+            "name": "Philippines",
+            "dial": "63",
+            "min": 10,
+            "max": 10,
+            "lead": null,
+            "sample": "917 123 4567",
+            "message": "Enter a valid Philippines number of 10 digits.",
+            "pattern": "[0-9][0-9]{9,9}"
+        },
+        {
+            "iso": "HK",
+            "name": "Hong Kong",
+            "dial": "852",
+            "min": 8,
+            "max": 8,
+            "lead": null,
+            "sample": "5123 4567",
+            "message": "Enter a valid Hong Kong number of 8 digits.",
+            "pattern": "[0-9][0-9]{7,7}"
+        },
+        {
+            "iso": "CN",
+            "name": "China",
+            "dial": "86",
+            "min": 11,
+            "max": 11,
+            "lead": null,
+            "sample": "131 2345 6789",
+            "message": "Enter a valid China number of 11 digits.",
+            "pattern": "[0-9][0-9]{10,10}"
+        },
+        {
+            "iso": "JP",
+            "name": "Japan",
+            "dial": "81",
+            "min": 10,
+            "max": 10,
+            "lead": null,
+            "sample": "90 1234 5678",
+            "message": "Enter a valid Japan number of 10 digits.",
+            "pattern": "[0-9][0-9]{9,9}"
+        },
+        {
+            "iso": "KR",
+            "name": "South Korea",
+            "dial": "82",
+            "min": 9,
+            "max": 10,
+            "lead": null,
+            "sample": "10 1234 5678",
+            "message": "Enter a valid South Korea number of 9 to 10 digits.",
+            "pattern": "[0-9][0-9]{8,9}"
+        },
+        {
+            "iso": "DE",
+            "name": "Germany",
+            "dial": "49",
+            "min": 10,
+            "max": 11,
+            "lead": null,
+            "sample": "151 23456789",
+            "message": "Enter a valid Germany number of 10 to 11 digits.",
+            "pattern": "[0-9][0-9]{9,10}"
+        },
+        {
+            "iso": "FR",
+            "name": "France",
+            "dial": "33",
+            "min": 9,
+            "max": 9,
+            "lead": null,
+            "sample": "6 12 34 56 78",
+            "message": "Enter a valid France number of 9 digits.",
+            "pattern": "[0-9][0-9]{8,8}"
+        },
+        {
+            "iso": "IT",
+            "name": "Italy",
+            "dial": "39",
+            "min": 9,
+            "max": 10,
+            "lead": null,
+            "sample": "312 345 6789",
+            "message": "Enter a valid Italy number of 9 to 10 digits.",
+            "pattern": "[0-9][0-9]{8,9}"
+        },
+        {
+            "iso": "ES",
+            "name": "Spain",
+            "dial": "34",
+            "min": 9,
+            "max": 9,
+            "lead": null,
+            "sample": "612 34 56 78",
+            "message": "Enter a valid Spain number of 9 digits.",
+            "pattern": "[0-9][0-9]{8,8}"
+        },
+        {
+            "iso": "NL",
+            "name": "Netherlands",
+            "dial": "31",
+            "min": 9,
+            "max": 9,
+            "lead": null,
+            "sample": "6 12345678",
+            "message": "Enter a valid Netherlands number of 9 digits.",
+            "pattern": "[0-9][0-9]{8,8}"
+        },
+        {
+            "iso": "CH",
+            "name": "Switzerland",
+            "dial": "41",
+            "min": 9,
+            "max": 9,
+            "lead": null,
+            "sample": "78 123 45 67",
+            "message": "Enter a valid Switzerland number of 9 digits.",
+            "pattern": "[0-9][0-9]{8,8}"
+        },
+        {
+            "iso": "SE",
+            "name": "Sweden",
+            "dial": "46",
+            "min": 9,
+            "max": 9,
+            "lead": null,
+            "sample": "70 123 45 67",
+            "message": "Enter a valid Sweden number of 9 digits.",
+            "pattern": "[0-9][0-9]{8,8}"
+        },
+        {
+            "iso": "RU",
+            "name": "Russia",
+            "dial": "7",
+            "min": 10,
+            "max": 10,
+            "lead": null,
+            "sample": "912 345 6789",
+            "message": "Enter a valid Russia number of 10 digits.",
+            "pattern": "[0-9][0-9]{9,9}"
+        },
+        {
+            "iso": "ZA",
+            "name": "South Africa",
+            "dial": "27",
+            "min": 9,
+            "max": 9,
+            "lead": null,
+            "sample": "71 123 4567",
+            "message": "Enter a valid South Africa number of 9 digits.",
+            "pattern": "[0-9][0-9]{8,8}"
+        },
+        {
+            "iso": "KE",
+            "name": "Kenya",
+            "dial": "254",
+            "min": 9,
+            "max": 9,
+            "lead": null,
+            "sample": "712 345678",
+            "message": "Enter a valid Kenya number of 9 digits.",
+            "pattern": "[0-9][0-9]{8,8}"
+        },
+        {
+            "iso": "NG",
+            "name": "Nigeria",
+            "dial": "234",
+            "min": 10,
+            "max": 10,
+            "lead": null,
+            "sample": "802 123 4567",
+            "message": "Enter a valid Nigeria number of 10 digits.",
+            "pattern": "[0-9][0-9]{9,9}"
+        },
+        {
+            "iso": "MU",
+            "name": "Mauritius",
+            "dial": "230",
+            "min": 8,
+            "max": 8,
+            "lead": null,
+            "sample": "5251 2345",
+            "message": "Enter a valid Mauritius number of 8 digits.",
+            "pattern": "[0-9][0-9]{7,7}"
+        },
+        {
+            "iso": "BR",
+            "name": "Brazil",
+            "dial": "55",
+            "min": 10,
+            "max": 11,
+            "lead": null,
+            "sample": "11 91234 5678",
+            "message": "Enter a valid Brazil number of 10 to 11 digits.",
+            "pattern": "[0-9][0-9]{9,10}"
+        }
+    ],
+    "fallback": {
+        "message": "Enter a 10-digit mobile number starting with 6, 7, 8 or 9.",
+        "pattern": "[6-9][0-9]{9,9}",
+        "format": "+91 12345"
+    },
+    "saves": [
+        {
+            "attendance": {
+                "e1": {
+                    "1": "p",
+                    "2": " HD ",
+                    "3": "",
+                    "4": "a"
+                }
+            },
+            "overtime": {
+                "e1": {
+                    "3": "2.5",
+                    "4": "1"
+                }
+            },
+            "days": 30,
+            "result": {
+                "writes": [
+                    {
+                        "employee": "e1",
+                        "day": 1,
+                        "clear": false,
+                        "status": "s1",
+                        "shortcut_key": "P",
+                        "attendance_percentage": 100,
+                        "skips_food": false,
+                        "overtime_hours": 0.0
+                    },
+                    {
+                        "employee": "e1",
+                        "day": 2,
+                        "clear": false,
+                        "status": "s2",
+                        "shortcut_key": "hd",
+                        "attendance_percentage": 50,
+                        "skips_food": false,
+                        "overtime_hours": 0.0
+                    },
+                    {
+                        "employee": "e1",
+                        "day": 3,
+                        "clear": false,
+                        "status": null,
+                        "shortcut_key": null,
+                        "attendance_percentage": 0,
+                        "skips_food": false,
+                        "overtime_hours": 2.5
+                    },
+                    {
+                        "employee": "e1",
+                        "day": 4,
+                        "clear": false,
+                        "status": "s3",
+                        "shortcut_key": "A",
+                        "attendance_percentage": 0,
+                        "skips_food": true,
+                        "overtime_hours": 1.0
+                    }
+                ]
+            }
+        },
+        {
+            "attendance": {
+                "e1": {
+                    "1": "P",
+                    "2": "X",
+                    "3": "l",
+                    "4": "x",
+                    "5": "zz"
+                }
+            },
+            "overtime": [],
+            "days": 31,
+            "result": {
+                "error": "Unknown attendance status shortcut key(s): X, L, ZZ. Only keys configured in Attendance Status Master are allowed."
+            }
+        },
+        {
+            "attendance": {
+                "e1": {
+                    "0": "P",
+                    "29": "P",
+                    "30": "P",
+                    "31": "P"
+                }
+            },
+            "overtime": [],
+            "days": 29,
+            "result": {
+                "writes": [
+                    {
+                        "employee": "e1",
+                        "day": 29,
+                        "clear": false,
+                        "status": "s1",
+                        "shortcut_key": "P",
+                        "attendance_percentage": 100,
+                        "skips_food": false,
+                        "overtime_hours": 0.0
+                    }
+                ]
+            }
+        },
+        {
+            "attendance": {
+                "e1": {
+                    "1": "",
+                    "2": null
+                },
+                "e2": {
+                    "1": "A"
+                }
+            },
+            "overtime": {
+                "e1": {
+                    "1": "0",
+                    "2": "-3"
+                },
+                "e2": {
+                    "1": "0.75"
+                }
+            },
+            "days": 28,
+            "result": {
+                "writes": [
+                    {
+                        "employee": "e1",
+                        "day": 1,
+                        "clear": true
+                    },
+                    {
+                        "employee": "e1",
+                        "day": 2,
+                        "clear": true
+                    },
+                    {
+                        "employee": "e2",
+                        "day": 1,
+                        "clear": false,
+                        "status": "s3",
+                        "shortcut_key": "A",
+                        "attendance_percentage": 0,
+                        "skips_food": true,
+                        "overtime_hours": 0.75
+                    }
+                ]
+            }
+        },
+        {
+            "attendance": {
+                "e1": {
+                    "5": "Hd"
+                }
+            },
+            "overtime": {
+                "e1": {
+                    "5": "abc"
+                }
+            },
+            "days": 31,
+            "result": {
+                "writes": [
+                    {
+                        "employee": "e1",
+                        "day": 5,
+                        "clear": false,
+                        "status": "s2",
+                        "shortcut_key": "hd",
+                        "attendance_percentage": 50,
+                        "skips_food": false,
+                        "overtime_hours": 0.0
+                    }
+                ]
+            }
+        }
+    ],
+    "progress": [
+        {
+            "filled": 0,
+            "expected": 0,
+            "percent": 0
+        },
+        {
+            "filled": 0,
+            "expected": 10,
+            "percent": 0
+        },
+        {
+            "filled": 1,
+            "expected": 3,
+            "percent": 33
+        },
+        {
+            "filled": 5,
+            "expected": 8,
+            "percent": 63
+        },
+        {
+            "filled": 1,
+            "expected": 200,
+            "percent": 1
+        },
+        {
+            "filled": 3,
+            "expected": 200,
+            "percent": 2
+        },
+        {
+            "filled": 199,
+            "expected": 200,
+            "percent": 100
+        },
+        {
+            "filled": 250,
+            "expected": 200,
+            "percent": 100
+        },
+        {
+            "filled": 45,
+            "expected": 90,
+            "percent": 50
+        },
+        {
+            "filled": 7,
+            "expected": 14,
+            "percent": 50
+        },
+        {
+            "filled": 1,
+            "expected": 8,
+            "percent": 13
+        },
+        {
+            "filled": 3,
+            "expected": 8,
+            "percent": 38
+        },
+        {
+            "filled": 5,
+            "expected": 40,
+            "percent": 13
+        }
+    ],
+    "months": [
+        {
+            "year": 2026,
+            "month": 2,
+            "today": "2026-02-27",
+            "daysInMonth": 28,
+            "isComplete": false,
+            "daysExpected": 27
+        },
+        {
+            "year": 2026,
+            "month": 2,
+            "today": "2026-02-28",
+            "daysInMonth": 28,
+            "isComplete": true,
+            "daysExpected": 28
+        },
+        {
+            "year": 2024,
+            "month": 2,
+            "today": "2024-02-28",
+            "daysInMonth": 29,
+            "isComplete": false,
+            "daysExpected": 28
+        },
+        {
+            "year": 2024,
+            "month": 2,
+            "today": "2024-02-29",
+            "daysInMonth": 29,
+            "isComplete": true,
+            "daysExpected": 29
+        },
+        {
+            "year": 2026,
+            "month": 9,
+            "today": "2026-09-29",
+            "daysInMonth": 30,
+            "isComplete": false,
+            "daysExpected": 29
+        },
+        {
+            "year": 2026,
+            "month": 9,
+            "today": "2026-09-30",
+            "daysInMonth": 30,
+            "isComplete": true,
+            "daysExpected": 30
+        },
+        {
+            "year": 2026,
+            "month": 9,
+            "today": "2026-10-01",
+            "daysInMonth": 30,
+            "isComplete": true,
+            "daysExpected": 30
+        },
+        {
+            "year": 2026,
+            "month": 10,
+            "today": "2026-10-05",
+            "daysInMonth": 31,
+            "isComplete": false,
+            "daysExpected": 5
+        },
+        {
+            "year": 2026,
+            "month": 12,
+            "today": "2026-12-31",
+            "daysInMonth": 31,
+            "isComplete": true,
+            "daysExpected": 31
+        },
+        {
+            "year": 2025,
+            "month": 12,
+            "today": "2026-01-01",
+            "daysInMonth": 31,
+            "isComplete": true,
+            "daysExpected": 31
+        },
+        {
+            "year": 2027,
+            "month": 1,
+            "today": "2026-10-05",
+            "daysInMonth": 31,
+            "isComplete": false,
+            "daysExpected": 31
+        }
+    ]
+}

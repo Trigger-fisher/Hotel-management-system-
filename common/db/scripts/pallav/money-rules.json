@@ -1,0 +1,554 @@
+[
+ {
+  "table": "crm_leads",
+  "column": "value_paise",
+  "rule": ">=0",
+  "source": "CrmController.php:78 value min:0"
+ },
+ {
+  "table": "expense_items",
+  "column": "price_paise",
+  "rule": ">=0",
+  "source": "ExpenseCatalogController.php:108 price min:0"
+ },
+ {
+  "table": "hotel_cash_deposits",
+  "column": "amount_paise",
+  "rule": ">0",
+  "source": "RevenueController.php:145 amount min:0.01"
+ },
+ {
+  "table": "food_cash_deposits",
+  "column": "amount_paise",
+  "rule": ">0",
+  "source": "RevenueController.php:145 amount min:0.01"
+ },
+ {
+  "table": "hotel_cash_withdrawals",
+  "column": "amount_paise",
+  "rule": ">0",
+  "source": "ExpenseController.php:276 amount min:0.01"
+ },
+ {
+  "table": "food_cash_withdrawals",
+  "column": "amount_paise",
+  "rule": ">0",
+  "source": "ExpenseController.php:276 amount min:0.01"
+ },
+ {
+  "table": "hotel_misc_expenses",
+  "column": "amount_paise",
+  "rule": ">0",
+  "source": "ExpenseController.php:276 amount min:0.01"
+ },
+ {
+  "table": "food_misc_expenses",
+  "column": "amount_paise",
+  "rule": ">0",
+  "source": "ExpenseController.php:276 amount min:0.01"
+ },
+ {
+  "table": "expense_lines",
+  "column": "price_paise",
+  "rule": ">=0",
+  "source": "ExpenseController.php:296 custom amount min:0.01; listed price from the catalog (min:0); total = quantity x price"
+ },
+ {
+  "table": "expense_lines",
+  "column": "total_paise",
+  "rule": ">=0",
+  "source": "ExpenseController.php:296 custom amount min:0.01; listed price from the catalog (min:0); total = quantity x price"
+ },
+ {
+  "table": "shift_handovers",
+  "column": "d500_total_paise",
+  "rule": ">=0",
+  "source": "counted cash: notes counted x denomination (ShiftHandoverController::store); never entered as a negative"
+ },
+ {
+  "table": "shift_handovers",
+  "column": "d200_total_paise",
+  "rule": ">=0",
+  "source": "counted cash: notes counted x denomination (ShiftHandoverController::store); never entered as a negative"
+ },
+ {
+  "table": "shift_handovers",
+  "column": "d100_total_paise",
+  "rule": ">=0",
+  "source": "counted cash: notes counted x denomination (ShiftHandoverController::store); never entered as a negative"
+ },
+ {
+  "table": "shift_handovers",
+  "column": "d50_total_paise",
+  "rule": ">=0",
+  "source": "counted cash: notes counted x denomination (ShiftHandoverController::store); never entered as a negative"
+ },
+ {
+  "table": "shift_handovers",
+  "column": "d20_total_paise",
+  "rule": ">=0",
+  "source": "counted cash: notes counted x denomination (ShiftHandoverController::store); never entered as a negative"
+ },
+ {
+  "table": "shift_handovers",
+  "column": "d10_total_paise",
+  "rule": ">=0",
+  "source": "counted cash: notes counted x denomination (ShiftHandoverController::store); never entered as a negative"
+ },
+ {
+  "table": "shift_handovers",
+  "column": "d5_total_paise",
+  "rule": ">=0",
+  "source": "counted cash: notes counted x denomination (ShiftHandoverController::store); never entered as a negative"
+ },
+ {
+  "table": "shift_handovers",
+  "column": "coins_total_paise",
+  "rule": ">=0",
+  "source": "counted cash: notes counted x denomination (ShiftHandoverController::store); never entered as a negative"
+ },
+ {
+  "table": "shift_handovers",
+  "column": "total_paise",
+  "rule": ">=0",
+  "source": "counted cash: notes counted x denomination (ShiftHandoverController::store); never entered as a negative"
+ },
+ {
+  "table": "staff_advances",
+  "column": "amount_paise",
+  "rule": ">0",
+  "source": "ExpenseController.php:276 amount min:0.01"
+ },
+ {
+  "table": "bill_master_advances",
+  "column": "hotel_amount_paise",
+  "rule": ">=0",
+  "source": "BillMasterController.php:141,200 min:0"
+ },
+ {
+  "table": "bill_master_advances",
+  "column": "food_amount_paise",
+  "rule": ">=0",
+  "source": "BillMasterController.php:142,201 min:0"
+ },
+ {
+  "table": "bill_master_advances",
+  "column": "hotel_balance_paise",
+  "rule": ">=0",
+  "source": "BillMasterController.php:259-264 a refund cannot exceed the balance; :438-439 max(0, ...)"
+ },
+ {
+  "table": "bill_master_advances",
+  "column": "food_balance_paise",
+  "rule": ">=0",
+  "source": "BillMasterController.php:259-264 a refund cannot exceed the balance; :438-439 max(0, ...)"
+ },
+ {
+  "table": "bill_master_advances",
+  "column": "total_paise",
+  "rule": ">=0",
+  "source": "BillMasterController.php:259-264 a refund cannot exceed the balance; :438-439 max(0, ...)"
+ },
+ {
+  "table": "bill_master_advances",
+  "column": "hotel_refund_amount_paise",
+  "rule": ">=0",
+  "source": "BillMasterController.php:246 min:0"
+ },
+ {
+  "table": "bill_master_advances",
+  "column": "food_refund_amount_paise",
+  "rule": ">=0",
+  "source": "BillMasterController.php:247 min:0"
+ },
+ {
+  "table": "bill_master_bills",
+  "column": "debit_hotel_amount_paise",
+  "rule": "signed",
+  "source": "BillMasterController.php:335-359,519-520 'numeric' with no min: a bill line or debit payment may be a negative adjustment"
+ },
+ {
+  "table": "bill_master_bills",
+  "column": "debit_hotel_amount_1_paise",
+  "rule": "signed",
+  "source": "BillMasterController.php:335-359,519-520 'numeric' with no min: a bill line or debit payment may be a negative adjustment"
+ },
+ {
+  "table": "bill_master_bills",
+  "column": "debit_hotel_amount_2_paise",
+  "rule": "signed",
+  "source": "BillMasterController.php:335-359,519-520 'numeric' with no min: a bill line or debit payment may be a negative adjustment"
+ },
+ {
+  "table": "bill_master_bills",
+  "column": "debit_hotel_amount_3_paise",
+  "rule": "signed",
+  "source": "BillMasterController.php:335-359,519-520 'numeric' with no min: a bill line or debit payment may be a negative adjustment"
+ },
+ {
+  "table": "bill_master_bills",
+  "column": "debit_hotel_amount_4_paise",
+  "rule": "signed",
+  "source": "BillMasterController.php:335-359,519-520 'numeric' with no min: a bill line or debit payment may be a negative adjustment"
+ },
+ {
+  "table": "bill_master_bills",
+  "column": "debit_food_amount_paise",
+  "rule": "signed",
+  "source": "BillMasterController.php:335-359,519-520 'numeric' with no min: a bill line or debit payment may be a negative adjustment"
+ },
+ {
+  "table": "bill_master_bills",
+  "column": "debit_food_amount_1_paise",
+  "rule": "signed",
+  "source": "BillMasterController.php:335-359,519-520 'numeric' with no min: a bill line or debit payment may be a negative adjustment"
+ },
+ {
+  "table": "bill_master_bills",
+  "column": "debit_food_amount_2_paise",
+  "rule": "signed",
+  "source": "BillMasterController.php:335-359,519-520 'numeric' with no min: a bill line or debit payment may be a negative adjustment"
+ },
+ {
+  "table": "bill_master_bills",
+  "column": "debit_food_amount_3_paise",
+  "rule": "signed",
+  "source": "BillMasterController.php:335-359,519-520 'numeric' with no min: a bill line or debit payment may be a negative adjustment"
+ },
+ {
+  "table": "bill_master_bills",
+  "column": "debit_food_amount_4_paise",
+  "rule": "signed",
+  "source": "BillMasterController.php:335-359,519-520 'numeric' with no min: a bill line or debit payment may be a negative adjustment"
+ },
+ {
+  "table": "bill_master_bills",
+  "column": "hotel_amount_paise",
+  "rule": "signed",
+  "source": "BillMasterController.php:335-359,519-520 'numeric' with no min: a bill line or debit payment may be a negative adjustment"
+ },
+ {
+  "table": "bill_master_bills",
+  "column": "hotel_plan_amount_paise",
+  "rule": "signed",
+  "source": "BillMasterController.php:335-359,519-520 'numeric' with no min: a bill line or debit payment may be a negative adjustment"
+ },
+ {
+  "table": "bill_master_bills",
+  "column": "hotel_laundry_amount_paise",
+  "rule": "signed",
+  "source": "BillMasterController.php:335-359,519-520 'numeric' with no min: a bill line or debit payment may be a negative adjustment"
+ },
+ {
+  "table": "bill_master_bills",
+  "column": "hotel_gst_paise",
+  "rule": "signed",
+  "source": "BillMasterController.php:335-359,519-520 'numeric' with no min: a bill line or debit payment may be a negative adjustment"
+ },
+ {
+  "table": "bill_master_bills",
+  "column": "food_plan_amount_paise",
+  "rule": "signed",
+  "source": "BillMasterController.php:335-359,519-520 'numeric' with no min: a bill line or debit payment may be a negative adjustment"
+ },
+ {
+  "table": "bill_master_bills",
+  "column": "food_laundry_amount_paise",
+  "rule": "signed",
+  "source": "BillMasterController.php:335-359,519-520 'numeric' with no min: a bill line or debit payment may be a negative adjustment"
+ },
+ {
+  "table": "bill_master_bills",
+  "column": "food_amount_paise",
+  "rule": "signed",
+  "source": "BillMasterController.php:335-359,519-520 'numeric' with no min: a bill line or debit payment may be a negative adjustment"
+ },
+ {
+  "table": "bill_master_bills",
+  "column": "food_gst_paise",
+  "rule": "signed",
+  "source": "BillMasterController.php:335-359,519-520 'numeric' with no min: a bill line or debit payment may be a negative adjustment"
+ },
+ {
+  "table": "bill_master_bills",
+  "column": "total_hotel_amount_paise",
+  "rule": "signed",
+  "source": "BillMasterController.php:379 the sum of the lines, and a line may be a negative adjustment"
+ },
+ {
+  "table": "bill_master_bills",
+  "column": "total_food_amount_paise",
+  "rule": "signed",
+  "source": "BillMasterController.php:379 the sum of the lines, and a line may be a negative adjustment"
+ },
+ {
+  "table": "bill_master_bills",
+  "column": "balance_hotel_amount_paise",
+  "rule": ">=0",
+  "source": "BillMasterController.php:538 max(0, remaining)"
+ },
+ {
+  "table": "bill_master_bills",
+  "column": "balance_food_amount_paise",
+  "rule": ">=0",
+  "source": "BillMasterController.php:539 max(0, remaining)"
+ },
+ {
+  "table": "bill_master_bills",
+  "column": "advance_hotel_amount_paise",
+  "rule": ">=0",
+  "source": "BillMasterController.php:433 min(advance balance, total)"
+ },
+ {
+  "table": "bill_master_bills",
+  "column": "advance_food_amount_paise",
+  "rule": ">=0",
+  "source": "BillMasterController.php:434 min(advance balance, total)"
+ },
+ {
+  "table": "bill_master_bills",
+  "column": "advance_delete_hotel_amount_paise",
+  "rule": ">=0",
+  "source": "BillMasterController.php:485 a copy of the advance amount applied"
+ },
+ {
+  "table": "bill_master_bills",
+  "column": "advance_delete_food_amount_paise",
+  "rule": ">=0",
+  "source": "BillMasterController.php:486 a copy of the advance amount applied"
+ },
+ {
+  "table": "bill_master_bills",
+  "column": "hotel_extra_bed_amount_paise",
+  "rule": "signed",
+  "source": "BillMasterController.php:335-359,519-520 'numeric' with no min: a bill line or debit payment may be a negative adjustment"
+ },
+ {
+  "table": "bill_master_bills",
+  "column": "hotel_other_amount_paise",
+  "rule": "signed",
+  "source": "BillMasterController.php:335-359,519-520 'numeric' with no min: a bill line or debit payment may be a negative adjustment"
+ },
+ {
+  "table": "bill_master_bills",
+  "column": "plan_food_amount_paise",
+  "rule": ">=0",
+  "source": "MealPlanRate::price: rate_per_person (min:0) x persons x nights"
+ },
+ {
+  "table": "site_rate_plans",
+  "column": "price_double_paise",
+  "rule": ">=0",
+  "source": "Website/RateController.php:116 and CalendarController.php:107,284 price >= 0"
+ },
+ {
+  "table": "site_rate_plans",
+  "column": "price_single_paise",
+  "rule": ">=0",
+  "source": "Website/RateController.php:116 and CalendarController.php:107,284 price >= 0"
+ },
+ {
+  "table": "site_rate_plans",
+  "column": "extra_person_price_paise",
+  "rule": ">=0",
+  "source": "Website/RateController.php:116 and CalendarController.php:107,284 price >= 0"
+ },
+ {
+  "table": "site_plan_date_rates",
+  "column": "price_double_paise",
+  "rule": ">=0",
+  "source": "Website/CalendarController.php:107,284 price >= 0"
+ },
+ {
+  "table": "site_plan_date_rates",
+  "column": "price_single_paise",
+  "rule": ">=0",
+  "source": "Website/CalendarController.php:107,284 price >= 0"
+ },
+ {
+  "table": "pms_reservations",
+  "column": "rate_paise",
+  "rule": ">=0",
+  "source": "Pms/ReservationController.php:185 rate min:0"
+ },
+ {
+  "table": "pms_stays",
+  "column": "rate_paise",
+  "rule": ">=0",
+  "source": "Pms/StayController.php:89 rate min:0"
+ },
+ {
+  "table": "pms_charges",
+  "column": "unit_price_paise",
+  "rule": ">=0",
+  "source": "Pms/StayController.php:154 unit_price min:0"
+ },
+ {
+  "table": "pms_charges",
+  "column": "amount_paise",
+  "rule": ">=0",
+  "source": "Pms/StayController.php:153-159 quantity (min:0.01) x unit_price (min:0)"
+ },
+ {
+  "table": "employees",
+  "column": "salary_paise",
+  "rule": ">=0",
+  "source": "Payroll/EmployeeController.php:63 salary min:0"
+ },
+ {
+  "table": "deductions",
+  "column": "amount_paise",
+  "rule": ">=0",
+  "source": "Payroll/DeductionController.php:36 amount min:0"
+ },
+ {
+  "table": "employee_deductions",
+  "column": "amount_paise",
+  "rule": ">=0",
+  "source": "Payroll/EmployeeController.php:121 amount min:0"
+ },
+ {
+  "table": "food_charge_rates",
+  "column": "monthly_amount_paise",
+  "rule": ">=0",
+  "source": "Payroll/FoodPriceController.php:72 monthly_amount min:0"
+ },
+ {
+  "table": "meal_plan_rates",
+  "column": "rate_per_person_paise",
+  "rule": ">=0",
+  "source": "MealPlanRateController.php:42 rate_per_person min:0"
+ },
+ {
+  "table": "salary_processings",
+  "column": "monthly_salary_paise",
+  "rule": ">=0",
+  "source": "SalaryProcessor.php:194-279 computed from non-negative inputs (salary min:0, hours min:0)"
+ },
+ {
+  "table": "salary_processings",
+  "column": "daily_salary_paise",
+  "rule": ">=0",
+  "source": "SalaryProcessor.php:194-279 computed from non-negative inputs (salary min:0, hours min:0)"
+ },
+ {
+  "table": "salary_processings",
+  "column": "attendance_salary_paise",
+  "rule": ">=0",
+  "source": "SalaryProcessor.php:194-279 computed from non-negative inputs (salary min:0, hours min:0)"
+ },
+ {
+  "table": "salary_processings",
+  "column": "hourly_rate_paise",
+  "rule": ">=0",
+  "source": "SalaryProcessor.php:194-279 computed from non-negative inputs (salary min:0, hours min:0)"
+ },
+ {
+  "table": "salary_processings",
+  "column": "overtime_amount_paise",
+  "rule": ">=0",
+  "source": "SalaryProcessor.php:194-279 computed from non-negative inputs (salary min:0, hours min:0)"
+ },
+ {
+  "table": "salary_processings",
+  "column": "bonus_amount_paise",
+  "rule": ">=0",
+  "source": "SalaryProcessor.php:194-279 computed from non-negative inputs (salary min:0, hours min:0)"
+ },
+ {
+  "table": "salary_processings",
+  "column": "incentive_amount_paise",
+  "rule": ">=0",
+  "source": "SalaryProcessor.php:194-279 computed from non-negative inputs (salary min:0, hours min:0)"
+ },
+ {
+  "table": "salary_processings",
+  "column": "deduction_amount_paise",
+  "rule": ">=0",
+  "source": "SalaryProcessor.php:194-279 computed from non-negative inputs (salary min:0, hours min:0)"
+ },
+ {
+  "table": "salary_processings",
+  "column": "advance_deduction_paise",
+  "rule": ">=0",
+  "source": "SalaryProcessor.php:194-279 computed from non-negative inputs (salary min:0, hours min:0)"
+ },
+ {
+  "table": "salary_processings",
+  "column": "pending_advance_amount_paise",
+  "rule": ">=0",
+  "source": "SalaryProcessor.php:194-279 computed from non-negative inputs (salary min:0, hours min:0)"
+ },
+ {
+  "table": "salary_processings",
+  "column": "net_salary_paise",
+  "rule": "signed",
+  "source": "SalaryProcessor.php:279 net can fall below zero when deductions exceed earnings; SalaryProcessing::outstanding() clamps with max(0, ...)"
+ },
+ {
+  "table": "salary_processings",
+  "column": "paid_amount_paise",
+  "rule": ">=0",
+  "source": "Payroll/SalaryPaymentController.php:65 paid_amount min:0"
+ },
+ {
+  "table": "salary_processing_lines",
+  "column": "amount_paise",
+  "rule": ">=0",
+  "source": "SalaryProcessor.php:406-407 deducted <= outstanding, pending = outstanding - deducted"
+ },
+ {
+  "table": "salary_processing_lines",
+  "column": "pending_amount_paise",
+  "rule": ">=0",
+  "source": "SalaryProcessor.php:406-407 deducted <= outstanding, pending = outstanding - deducted"
+ },
+ {
+  "table": "payroll_advances",
+  "column": "amount_paise",
+  "rule": ">0",
+  "source": "Payroll/PayrollAdvanceController.php:70 gt:0"
+ },
+ {
+  "table": "payroll_advances",
+  "column": "deduction_amount_paise",
+  "rule": ">=0",
+  "source": "Payroll/PayrollAdvanceController.php:75 min:0"
+ },
+ {
+  "table": "payroll_advances",
+  "column": "recovered_amount_paise",
+  "rule": ">=0",
+  "source": "computed by SalaryProcessor: instalments recovered, never above the advance"
+ },
+ {
+  "table": "bonus_incentives",
+  "column": "amount_paise",
+  "rule": ">0",
+  "source": "Payroll/BonusIncentiveController.php:75 gt:0"
+ },
+ {
+  "table": "razorpay_payments",
+  "column": "amount_paise",
+  "rule": ">=0",
+  "source": "RazorpayWebhookController.php:99-103 amounts come from Razorpay (paise / 100), never negative"
+ },
+ {
+  "table": "razorpay_payments",
+  "column": "amount_refunded_paise",
+  "rule": ">=0",
+  "source": "RazorpayWebhookController.php:99-103 amounts come from Razorpay (paise / 100), never negative"
+ },
+ {
+  "table": "razorpay_payments",
+  "column": "fee_paise",
+  "rule": ">=0",
+  "source": "RazorpayWebhookController.php:99-103 amounts come from Razorpay (paise / 100), never negative"
+ },
+ {
+  "table": "razorpay_payments",
+  "column": "tax_paise",
+  "rule": ">=0",
+  "source": "RazorpayWebhookController.php:99-103 amounts come from Razorpay (paise / 100), never negative"
+ }
+]

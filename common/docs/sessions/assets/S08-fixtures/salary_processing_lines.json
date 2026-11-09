@@ -1,0 +1,67 @@
+[
+    {
+        "id": 1,
+        "salary_processing_id": 1,
+        "category": "Advance",
+        "label": "Personal emergency advance",
+        "deduction_type": "Monthly",
+        "amount": 1000,
+        "pending_amount": 2000,
+        "source_type": "advance",
+        "source_id": 1,
+        "created_at": "2026-10-05 18:52:24",
+        "updated_at": "2026-10-05 18:52:24"
+    },
+    {
+        "id": 2,
+        "salary_processing_id": 2,
+        "category": "Deduction",
+        "label": "Uniform",
+        "deduction_type": "One Time",
+        "amount": 300,
+        "pending_amount": 0,
+        "source_type": "employee_deduction",
+        "source_id": 2,
+        "created_at": "2026-10-05 18:52:24",
+        "updated_at": "2026-10-05 18:52:24"
+    },
+    {
+        "id": 3,
+        "salary_processing_id": 3,
+        "category": "Bonus",
+        "label": "Festival bonus",
+        "deduction_type": null,
+        "amount": 1500,
+        "pending_amount": 0,
+        "source_type": "bonus_incentive",
+        "source_id": 1,
+        "created_at": "2026-10-05 18:52:24",
+        "updated_at": "2026-10-05 18:52:24"
+    },
+    {
+        "id": 4,
+        "salary_processing_id": 4,
+        "category": "Incentive",
+        "label": "Occupancy target achieved",
+        "deduction_type": null,
+        "amount": 2000,
+        "pending_amount": 0,
+        "source_type": "bonus_incentive",
+        "source_id": 2,
+        "created_at": "2026-10-05 18:52:24",
+        "updated_at": "2026-10-05 18:52:24"
+    },
+    {
+        "id": 5,
+        "salary_processing_id": 5,
+        "category": "Deduction",
+        "label": "Food",
+        "deduction_type": "Monthly",
+        "amount": 750,
+        "pending_amount": 0,
+        "source_type": "employee_deduction",
+        "source_id": 1,
+        "created_at": "2026-10-05 18:52:24",
+        "updated_at": "2026-10-05 18:52:24"
+    }
+]

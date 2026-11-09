@@ -1,0 +1,159 @@
+# HMS other-features behind one nginx. WRITTEN, NEVER RUN (no Docker on the PC where it was written).
+# The official nginx image fills ${HMS_DOMAIN} from the environment at start (only defined names are replaced; nginx's own
+# variables are left alone). One certificate named "hms-services" covers the five host names (see scripts/first-certs.sh).
+#
+# Host names (DNS A records to the VPS):
+#   compressor.${HMS_DOMAIN}  scanner.${HMS_DOMAIN}  pdf.${HMS_DOMAIN}  reader.${HMS_DOMAIN}  gate.${HMS_DOMAIN}
+# The intake worker has no host name and no port: it pulls jobs from the database.
+
+# Docker's internal DNS; services are looked up per request so nginx starts even while a service is still building.
+resolver 127.0.0.11 valid=10s ipv6=off;
+
+# Logs without query strings (a signed link could carry a token there) and without request bodies.
+log_format hms '$remote_addr [$time_local] "$request_method $uri" $status $body_bytes_sent $request_time "$host"';
+access_log /var/log/nginx/access.log hms;
+
+server_tokens off;
+limit_req_zone $binary_remote_addr zone=perip:10m rate=10r/s;
+
+# Port 80: certbot renewals and a redirect to HTTPS; a local health path for the container healthcheck.
+server {
+    listen 80 default_server;
+    server_name _;
+
+    location /.well-known/acme-challenge/ { root /var/www/certbot; }
+    location = /nginx-health { access_log off; allow 127.0.0.1; deny all; return 200 "ok\n"; }
+    location / { return 301 https://$host$request_uri; }
+}
+
+# Anything on 443 that is not one of the five names: close the connection.
+server {
+    listen 443 ssl default_server;
+    server_name _;
+    ssl_certificate     /etc/letsencrypt/live/hms-services/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/hms-services/privkey.pem;
+    return 444;
+}
+
+# Shared TLS settings
+ssl_protocols TLSv1.2 TLSv1.3;
+ssl_prefer_server_ciphers off;
+ssl_session_cache shared:SSL:10m;
+ssl_session_timeout 1d;
+ssl_session_tickets off;
+
+server {
+    listen 443 ssl;
+    http2 on;
+    server_name compressor.${HMS_DOMAIN};
+    ssl_certificate     /etc/letsencrypt/live/hms-services/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/hms-services/privkey.pem;
+    add_header Strict-Transport-Security "max-age=31536000" always;
+    limit_req zone=perip burst=20 nodelay;
+
+    location / {
+        set $upstream http://compressor:8080;
+        client_max_body_size 110m;      # a little above COMPRESSOR_MAX_UPLOAD_MB
+        proxy_pass $upstream;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Forwarded-For $remote_addr;
+        proxy_request_buffering on;
+        proxy_connect_timeout 5s;
+        proxy_send_timeout 120s;
+        proxy_read_timeout 330s;        # job limit (300 s) plus headroom
+    }
+}
+
+server {
+    listen 443 ssl;
+    http2 on;
+    server_name scanner.${HMS_DOMAIN};
+    ssl_certificate     /etc/letsencrypt/live/hms-services/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/hms-services/privkey.pem;
+    add_header Strict-Transport-Security "max-age=31536000" always;
+    limit_req zone=perip burst=20 nodelay;
+
+    location / {
+        set $upstream http://antivirus:8081;
+        client_max_body_size 110m;      # a little above SCANNER_MAX_UPLOAD_MB
+        proxy_pass $upstream;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Forwarded-For $remote_addr;
+        proxy_request_buffering on;
+        proxy_connect_timeout 5s;
+        proxy_send_timeout 120s;
+        proxy_read_timeout 330s;
+    }
+}
+
+server {
+    listen 443 ssl;
+    http2 on;
+    server_name pdf.${HMS_DOMAIN};
+    ssl_certificate     /etc/letsencrypt/live/hms-services/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/hms-services/privkey.pem;
+    add_header Strict-Transport-Security "max-age=31536000" always;
+    limit_req zone=perip burst=20 nodelay;
+
+    location / {
+        set $upstream http://pdf-to-image:8082;
+        client_max_body_size 110m;      # a little above CONVERTER_MAX_UPLOAD_MB
+        proxy_pass $upstream;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Forwarded-For $remote_addr;
+        proxy_request_buffering on;
+        proxy_buffering off;            # page images stream out as they are rendered
+        proxy_connect_timeout 5s;
+        proxy_send_timeout 120s;
+        proxy_read_timeout 330s;
+    }
+}
+
+server {
+    listen 443 ssl;
+    http2 on;
+    server_name reader.${HMS_DOMAIN};
+    ssl_certificate     /etc/letsencrypt/live/hms-services/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/hms-services/privkey.pem;
+    add_header Strict-Transport-Security "max-age=31536000" always;
+    limit_req zone=perip burst=20 nodelay;
+
+    location / {
+        set $upstream http://reader:8083;
+        client_max_body_size 110m;      # read-pair takes two files
+        proxy_pass $upstream;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Forwarded-For $remote_addr;
+        proxy_request_buffering on;
+        proxy_connect_timeout 5s;
+        proxy_send_timeout 120s;
+        proxy_read_timeout 700s;        # read-pair can take two jobs' time
+    }
+}
+
+server {
+    listen 443 ssl;
+    http2 on;
+    server_name gate.${HMS_DOMAIN};
+    ssl_certificate     /etc/letsencrypt/live/hms-services/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/hms-services/privkey.pem;
+    add_header Strict-Transport-Security "max-age=31536000" always;
+    limit_req zone=perip burst=20 nodelay;
+
+    location / {
+        set $upstream http://quality-gate:8084;
+        client_max_body_size 60m;       # a little above GATE_MAX_UPLOAD_MB
+        proxy_pass $upstream;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Forwarded-For $remote_addr;
+        proxy_request_buffering on;
+        proxy_connect_timeout 5s;
+        proxy_send_timeout 120s;
+        proxy_read_timeout 150s;        # job limit (120 s) plus headroom
+    }
+}

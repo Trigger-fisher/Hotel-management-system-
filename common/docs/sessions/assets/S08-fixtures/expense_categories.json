@@ -1,0 +1,130 @@
+[
+    {
+        "id": 1,
+        "business": "hotel",
+        "name": "Kitchen",
+        "sort_order": 1,
+        "created_at": "2026-10-05 18:52:09",
+        "updated_at": "2026-10-05 18:52:09"
+    },
+    {
+        "id": 2,
+        "business": "hotel",
+        "name": "Housekeeping",
+        "sort_order": 2,
+        "created_at": "2026-10-05 18:52:09",
+        "updated_at": "2026-10-05 18:52:09"
+    },
+    {
+        "id": 3,
+        "business": "hotel",
+        "name": "Maintenance",
+        "sort_order": 3,
+        "created_at": "2026-10-05 18:52:09",
+        "updated_at": "2026-10-05 18:52:09"
+    },
+    {
+        "id": 4,
+        "business": "hotel",
+        "name": "Utilities",
+        "sort_order": 4,
+        "created_at": "2026-10-05 18:52:09",
+        "updated_at": "2026-10-05 18:52:09"
+    },
+    {
+        "id": 5,
+        "business": "hotel",
+        "name": "Marketing",
+        "sort_order": 5,
+        "created_at": "2026-10-05 18:52:09",
+        "updated_at": "2026-10-05 18:52:09"
+    },
+    {
+        "id": 6,
+        "business": "hotel",
+        "name": "Transport",
+        "sort_order": 6,
+        "created_at": "2026-10-05 18:52:09",
+        "updated_at": "2026-10-05 18:52:09"
+    },
+    {
+        "id": 7,
+        "business": "hotel",
+        "name": "Office",
+        "sort_order": 7,
+        "created_at": "2026-10-05 18:52:09",
+        "updated_at": "2026-10-05 18:52:09"
+    },
+    {
+        "id": 8,
+        "business": "hotel",
+        "name": "Other",
+        "sort_order": 8,
+        "created_at": "2026-10-05 18:52:09",
+        "updated_at": "2026-10-05 18:52:09"
+    },
+    {
+        "id": 9,
+        "business": "food",
+        "name": "Kitchen",
+        "sort_order": 1,
+        "created_at": "2026-10-05 18:52:09",
+        "updated_at": "2026-10-05 18:52:09"
+    },
+    {
+        "id": 10,
+        "business": "food",
+        "name": "Housekeeping",
+        "sort_order": 2,
+        "created_at": "2026-10-05 18:52:09",
+        "updated_at": "2026-10-05 18:52:09"
+    },
+    {
+        "id": 11,
+        "business": "food",
+        "name": "Maintenance",
+        "sort_order": 3,
+        "created_at": "2026-10-05 18:52:09",
+        "updated_at": "2026-10-05 18:52:09"
+    },
+    {
+        "id": 12,
+        "business": "food",
+        "name": "Utilities",
+        "sort_order": 4,
+        "created_at": "2026-10-05 18:52:09",
+        "updated_at": "2026-10-05 18:52:09"
+    },
+    {
+        "id": 13,
+        "business": "food",
+        "name": "Marketing",
+        "sort_order": 5,
+        "created_at": "2026-10-05 18:52:09",
+        "updated_at": "2026-10-05 18:52:09"
+    },
+    {
+        "id": 14,
+        "business": "food",
+        "name": "Transport",
+        "sort_order": 6,
+        "created_at": "2026-10-05 18:52:09",
+        "updated_at": "2026-10-05 18:52:09"
+    },
+    {
+        "id": 15,
+        "business": "food",
+        "name": "Office",
+        "sort_order": 7,
+        "created_at": "2026-10-05 18:52:09",
+        "updated_at": "2026-10-05 18:52:09"
+    },
+    {
+        "id": 16,
+        "business": "food",
+        "name": "Other",
+        "sort_order": 8,
+        "created_at": "2026-10-05 18:52:09",
+        "updated_at": "2026-10-05 18:52:09"
+    }
+]

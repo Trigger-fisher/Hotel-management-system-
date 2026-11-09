@@ -1,0 +1,121 @@
+/* the hotel drop-down at the top of Account: phones only (a desktop chooses in the side menu) */
+.gg-account-hotel { display: none; }
+@media (max-width: 768px) { .gg-account-hotel { display: block; } .gg-account-hotel .hotel-switch { width: 100%; } }
+/* ==========================================================================================================================================
+   Guest portal: ACCOUNT (decision 71). Owned by the Account page (groups/guest/Profile.tsx); loaded on every guest page after guest-glass.css (pageCss.ts).
+   Layout rules are unscoped and under .gg-account (never fixed to the screen); the look sits under :root body.hms-guest, so the hotel's portal preview and
+   every other dashboard keep theirs. Shared pieces (gg-card, gg-listrow, gg-sheet, gg-chip, gg-sk) are styled in guest-glass.css.
+   A settings page: the guest on top (avatar in an ink ring), grouped rows that open sheets, Sign out last. Phone: one column, iOS-style grouped lists.
+   Desktop (992px and up): two columns, details on the left, security, help and Sign out on the right, up to 1200px.
+   ========================================================================================================================================== */
+
+/* ---- Layout (unscoped) ---- */
+.gg-account { max-width: 1200px; }
+.gg-account-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; align-items: start; }
+.gg-account-col { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+@media (min-width: 992px) {
+    .gg-account-grid { grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 20px; }
+}
+
+/* the guest on top */
+.gg-acct-head { display: flex; align-items: center; gap: 16px; padding: 20px; }
+.gg-avatar { position: relative; flex: none; display: grid; place-items: center; width: 76px; height: 76px; padding: 0; border: 0; border-radius: 50%; background: var(--pt-p50, transparent); color: inherit; cursor: pointer; }
+.gg-avatar img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
+.gg-avatar-txt { font-size: 26px; font-weight: 700; letter-spacing: -.02em; line-height: 1; }
+.gg-avatar-cam { position: absolute; right: -2px; bottom: -2px; display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; font-size: 13px; }
+.gg-acct-who { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.gg-acct-name { font-size: 22px; font-weight: 700; letter-spacing: -.02em; line-height: 1.2; overflow-wrap: anywhere; }
+.gg-acct-line { font-size: 14px; line-height: 1.4; color: var(--pt-muted); overflow-wrap: anywhere; }
+
+/* grouped rows: a small heading over each card, as a phone's settings */
+.gg-acct-group { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.gg-acct-group > .gg-section-title { margin: 0 6px; text-transform: none; }
+.gg-acct-card { padding: 6px 10px; }
+.gg-acct-card > .gg-list { margin: 0; }
+.gg-acct-card .gg-listrow { min-height: 56px; }
+.gg-acct-card .gg-listrow .pt-row-sub { line-height: 1.35; }
+.gg-acct-note { margin: 0 6px; font-size: 12.5px; line-height: 1.45; color: var(--pt-muted); }
+
+/* the sign-in code switch at the row's end (a 51 x 31 phone switch, a 44px target with its row) */
+.gg-switchrow .gg-row-end { flex-direction: row; align-items: center; }
+.gg-switchrow .pt-row-title label { margin: 0; font: inherit; color: inherit; cursor: pointer; }
+.gg-switch.form-check { display: flex; align-items: center; min-height: 44px; margin: 0; padding: 0; }
+.gg-switch .form-check-input { float: none; width: 51px; height: 31px; margin: 0; cursor: pointer; }
+
+/* recent sign-ins: folded; the chevron turns when open */
+.gg-signins { padding: 0 0 6px; }
+.gg-signins-totals { margin: 2px 10px 6px 62px; font-size: 12.5px; color: var(--pt-muted); }
+.gg-signins-list { margin: 0; padding: 0; list-style: none; }
+.gg-signins-list .gg-listrow { min-height: 52px; padding-left: 20px; }
+.gg-signins .gg-skeleton .gg-card { padding: 4px 0; background: transparent; box-shadow: none; }
+.gg-signins .gg-skeleton .gg-card::before { display: none; }
+.gg-signins .pt-row-sub[aria-live] { font-size: 12.5px; }
+
+/* Sign out: the last row, alone, centred */
+.gg-acct-signout .gg-listrow { justify-content: center; }
+.gg-acct-signout .gg-listrow .pt-row-main { flex: 0 1 auto; }
+.gg-acct-signout .gg-listrow .pt-row-title { font-weight: 700; }
+
+/* the sheets' forms */
+.gg-acct-form label { display: block; margin: 0 0 6px 4px; font-size: 13px; font-weight: 600; }
+.gg-acct-form .pt-input { width: 100%; }
+.gg-acct-field + .gg-acct-field { margin-top: 14px; }
+.gg-acct-sheet-lead { margin: 0 0 14px; font-size: 14px; line-height: 1.45; color: var(--pt-muted); }
+.gg-photo-editor { display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 8px 0 4px; text-align: center; }
+
+@media (max-width: 768px) {
+    .gg-acct-head { padding: 16px; gap: 14px; }
+    .gg-avatar { width: 68px; height: 68px; }
+    .gg-avatar-txt { font-size: 23px; }
+    .gg-acct-name { font-size: 20px; }
+    .gg-acct-card { padding: 4px 6px; }
+    .gg-signins-totals { margin-left: 56px; }
+    .gg-signins-list .gg-listrow { padding-left: 12px; }
+}
+
+/* ---- The look (guest portal only) ---- */
+/* the avatar: an ink ring with a fine inner rim; the camera badge is an ink disc cut out of the page colour */
+:root body.hms-guest .gg-avatar { background: rgba(var(--gg-ink-rgb), .06); color: var(--gg-ink); box-shadow: 0 0 0 3px var(--gg-solid), 0 0 0 5px var(--gg-ink), var(--gg-drop); transition: scale 80ms var(--gg-ease), box-shadow 200ms var(--gg-ease); }
+:root body.hms-guest .gg-avatar-cam { background: var(--gg-ink); color: var(--gg-on-ink); box-shadow: 0 0 0 3px var(--gg-solid); }
+:root body.hms-guest .gg-avatar:active { scale: .95; }
+:root body.hms-guest .gg-avatar:focus-visible { outline: 2px solid var(--gg-focus) !important; outline-offset: 6px; }
+:root body.hms-guest .gg-acct-name { color: var(--gg-ink); }
+:root body.hms-guest :is(.gg-acct-line, .gg-acct-note, .gg-acct-sheet-lead, .gg-signins-totals) { color: var(--gg-muted); }
+:root body.hms-guest .gg-acct-group > .gg-section-title { color: var(--gg-muted); }
+
+/* hairlines between every row of a group (read-only rows too), inset past the icon as a phone draws them */
+:root body.hms-guest .gg-acct-card .gg-list > :is(.gg-listrow, .gg-signins) + :is(.gg-listrow, .gg-signins) { border-top: 0; box-shadow: inset 0 1px 0 var(--gg-line); border-radius: 0; }
+:root body.hms-guest .gg-acct-card .gg-list > .gg-listrow.gg-tap + .gg-listrow.gg-tap:active { border-radius: 16px; }
+:root body.hms-guest .gg-signins-list > li + li .gg-listrow { box-shadow: inset 0 1px 0 var(--gg-line); border-radius: 0; }
+:root body.hms-guest .gg-acct-card .pt-row-ico { background: rgba(var(--gg-ink-rgb), .05); color: var(--gg-ink); box-shadow: inset 0 0 0 1px var(--gg-line); }
+
+/* the switch: an ink track when on, a quiet glass track when off */
+/* the knob is drawn here (Bootstrap's is an SVG in one fixed colour, lost on a white track at night): muted when off, the on-ink colour when on */
+:root body.hms-guest .gg-switch .form-check-input {
+    border: 0; background-color: rgba(var(--gg-ink-rgb), .12); box-shadow: inset 0 0 0 1px var(--gg-ctl);
+    background-image: radial-gradient(circle closest-side, rgba(var(--gg-ink-rgb), .62) 0 calc(100% - 4px), transparent calc(100% - 3.5px));
+    background-size: 31px 31px; background-repeat: no-repeat; background-position: left center;
+    transition: background-color 200ms var(--gg-ease), background-position 200ms var(--gg-ease);
+}
+:root body.hms-guest .gg-switch .form-check-input:checked {
+    background-color: var(--gg-ink); box-shadow: none; background-position: right center;
+    background-image: radial-gradient(circle closest-side, var(--gg-on-ink) 0 calc(100% - 4px), transparent calc(100% - 3.5px));
+}
+:root body.hms-guest .gg-switch .form-check-input:focus-visible { outline: 2px solid var(--gg-focus); outline-offset: 3px; }
+:root body.hms-guest .gg-switch .form-check-input:disabled { opacity: .5; }
+
+/* Sign out: ink, not red (red is for problems only) */
+:root body.hms-guest .gg-acct-signout .pt-row-ico { background: transparent; box-shadow: none; }
+:root body.hms-guest .gg-acct-signout .pt-row-title { color: var(--gg-ink); }
+
+/* the sign-ins open with a short fade */
+:root body.hms-guest .gg-signins:not([hidden]) { animation: gg-fade 180ms ease-out; }
+
+/* desktop only: rows answer to hover; a phone relies on the press */
+@media (hover: hover) {
+    :root body.hms-guest .gg-avatar:hover { box-shadow: 0 0 0 3px var(--gg-solid), 0 0 0 5px var(--gg-ink), var(--gg-float); }
+}
+
+@media print {
+    :root body.hms-guest :is(.gg-avatar-cam, .gg-acct-signout, .gg-switch) { display: none !important; }
+}

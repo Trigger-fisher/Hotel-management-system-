@@ -1,0 +1,10982 @@
+{
+ "users": {
+  "id": {
+   "type": "id",
+   "args": [],
+   "mods": []
+  },
+  "name": {
+   "type": "string",
+   "args": [],
+   "mods": []
+  },
+  "email": {
+   "type": "string",
+   "args": [],
+   "mods": [
+    "nullable",
+    "change"
+   ]
+  },
+  "email_verified_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ]
+  },
+  "password": {
+   "type": "string",
+   "args": [],
+   "mods": []
+  },
+  "remember_token": {
+   "type": "string",
+   "args": [
+    "100"
+   ],
+   "mods": [
+    "nullable"
+   ]
+  },
+  "created_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ]
+  },
+  "updated_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ]
+  },
+  "role": {
+   "type": "enum",
+   "args": [
+    "['SuperAdmin', 'Admin', 'Editor', 'Viewer']"
+   ],
+   "mods": [
+    "default='Viewer'",
+    "after='email'"
+   ]
+  },
+  "is_active": {
+   "type": "boolean",
+   "args": [],
+   "mods": [
+    "default=true",
+    "after='role'"
+   ]
+  },
+  "username": {
+   "type": "string",
+   "args": [
+    "50"
+   ],
+   "mods": [
+    "nullable",
+    "after='name'"
+   ]
+  },
+  "phone": {
+   "type": "string",
+   "args": [
+    "20"
+   ],
+   "mods": [
+    "nullable",
+    "after='email'"
+   ]
+  },
+  "last_login_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ]
+  },
+  "last_login_ip": {
+   "type": "string",
+   "args": [
+    "45"
+   ],
+   "mods": [
+    "nullable"
+   ]
+  },
+  "failed_login_attempts": {
+   "type": "unsignedTinyInteger",
+   "args": [],
+   "mods": [
+    "default=0"
+   ]
+  },
+  "locked_until": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ]
+  },
+  "must_change_password": {
+   "type": "boolean",
+   "args": [],
+   "mods": [
+    "default=false"
+   ]
+  },
+  "password_changed_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ]
+  },
+  "created_by": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "nullable",
+    "constrained='users'",
+    "nullOnDelete"
+   ]
+  },
+  "__idx": {
+   "type": "idx",
+   "args": [
+    "unique:'username'"
+   ],
+   "mods": []
+  },
+  "deleted_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ]
+  },
+  "deleted_by": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "nullable"
+   ]
+  },
+  "otp_hash": {
+   "type": "string",
+   "args": [],
+   "mods": [
+    "nullable",
+    "after='locked_until'"
+   ]
+  },
+  "otp_purpose": {
+   "type": "string",
+   "args": [
+    "20"
+   ],
+   "mods": [
+    "nullable",
+    "after='otp_hash'"
+   ]
+  },
+  "otp_expires_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable",
+    "after='otp_purpose'"
+   ]
+  },
+  "otp_attempts": {
+   "type": "unsignedTinyInteger",
+   "args": [],
+   "mods": [
+    "default=0",
+    "after='otp_expires_at'"
+   ]
+  },
+  "otp_sent_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable",
+    "after='otp_attempts'"
+   ]
+  },
+  "otp_sends": {
+   "type": "unsignedTinyInteger",
+   "args": [],
+   "mods": [
+    "default=0",
+    "after='otp_sent_at'"
+   ]
+  },
+  "lock_level": {
+   "type": "unsignedTinyInteger",
+   "args": [],
+   "mods": [
+    "default=0",
+    "after='otp_sends'"
+   ]
+  },
+  "current_session_id": {
+   "type": "string",
+   "args": [
+    "100"
+   ],
+   "mods": [
+    "nullable",
+    "after='lock_level'"
+   ]
+  },
+  "session_started_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable",
+    "after='current_session_id'"
+   ]
+  },
+  "two_factor_enabled": {
+   "type": "boolean",
+   "args": [],
+   "mods": [
+    "default=false",
+    "change"
+   ]
+  },
+  "blocked_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable",
+    "after='locked_until'"
+   ]
+  },
+  "blocked_reason": {
+   "type": "string",
+   "args": [
+    "120"
+   ],
+   "mods": [
+    "nullable",
+    "after='blocked_at'"
+   ]
+  },
+  "otp_cooldown_until": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable",
+    "after='otp_sends'"
+   ]
+  },
+  "otp_cooldown_level": {
+   "type": "unsignedTinyInteger",
+   "args": [],
+   "mods": [
+    "default=0",
+    "after='otp_cooldown_until'"
+   ]
+  },
+  "role_id": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "nullable",
+    "after='role'",
+    "constrained='roles'",
+    "nullOnDelete"
+   ]
+  }
+ },
+ "password_reset_tokens": {
+  "email": {
+   "type": "string",
+   "args": [],
+   "mods": [
+    "primary"
+   ]
+  },
+  "token": {
+   "type": "string",
+   "args": [],
+   "mods": []
+  },
+  "created_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ]
+  }
+ },
+ "sessions": {
+  "id": {
+   "type": "string",
+   "args": [],
+   "mods": [
+    "primary"
+   ]
+  },
+  "user_id": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "nullable",
+    "index"
+   ]
+  },
+  "ip_address": {
+   "type": "string",
+   "args": [
+    "45"
+   ],
+   "mods": [
+    "nullable"
+   ]
+  },
+  "user_agent": {
+   "type": "text",
+   "args": [],
+   "mods": [
+    "nullable"
+   ]
+  },
+  "payload": {
+   "type": "longText",
+   "args": [],
+   "mods": []
+  },
+  "last_activity": {
+   "type": "integer",
+   "args": [],
+   "mods": [
+    "index"
+   ]
+  }
+ },
+ "cache": {
+  "key": {
+   "type": "string",
+   "args": [],
+   "mods": [
+    "primary"
+   ]
+  },
+  "value": {
+   "type": "mediumText",
+   "args": [],
+   "mods": []
+  },
+  "expiration": {
+   "type": "integer",
+   "args": [],
+   "mods": []
+  }
+ },
+ "cache_locks": {
+  "key": {
+   "type": "string",
+   "args": [],
+   "mods": [
+    "primary"
+   ]
+  },
+  "owner": {
+   "type": "string",
+   "args": [],
+   "mods": []
+  },
+  "expiration": {
+   "type": "integer",
+   "args": [],
+   "mods": []
+  }
+ },
+ "jobs": {
+  "id": {
+   "type": "id",
+   "args": [],
+   "mods": []
+  },
+  "queue": {
+   "type": "string",
+   "args": [],
+   "mods": [
+    "index"
+   ]
+  },
+  "payload": {
+   "type": "longText",
+   "args": [],
+   "mods": []
+  },
+  "attempts": {
+   "type": "unsignedTinyInteger",
+   "args": [],
+   "mods": []
+  },
+  "reserved_at": {
+   "type": "unsignedInteger",
+   "args": [],
+   "mods": [
+    "nullable"
+   ]
+  },
+  "available_at": {
+   "type": "unsignedInteger",
+   "args": [],
+   "mods": []
+  },
+  "created_at": {
+   "type": "unsignedInteger",
+   "args": [],
+   "mods": []
+  }
+ },
+ "job_batches": {
+  "id": {
+   "type": "string",
+   "args": [],
+   "mods": [
+    "primary"
+   ]
+  },
+  "name": {
+   "type": "string",
+   "args": [],
+   "mods": []
+  },
+  "total_jobs": {
+   "type": "integer",
+   "args": [],
+   "mods": []
+  },
+  "pending_jobs": {
+   "type": "integer",
+   "args": [],
+   "mods": []
+  },
+  "failed_jobs": {
+   "type": "integer",
+   "args": [],
+   "mods": []
+  },
+  "failed_job_ids": {
+   "type": "longText",
+   "args": [],
+   "mods": []
+  },
+  "options": {
+   "type": "mediumText",
+   "args": [],
+   "mods": [
+    "nullable"
+   ]
+  },
+  "cancelled_at": {
+   "type": "integer",
+   "args": [],
+   "mods": [
+    "nullable"
+   ]
+  },
+  "created_at": {
+   "type": "integer",
+   "args": [],
+   "mods": []
+  },
+  "finished_at": {
+   "type": "integer",
+   "args": [],
+   "mods": [
+    "nullable"
+   ]
+  }
+ },
+ "failed_jobs": {
+  "id": {
+   "type": "id",
+   "args": [],
+   "mods": []
+  },
+  "uuid": {
+   "type": "string",
+   "args": [],
+   "mods": [
+    "unique"
+   ]
+  },
+  "connection": {
+   "type": "text",
+   "args": [],
+   "mods": []
+  },
+  "queue": {
+   "type": "text",
+   "args": [],
+   "mods": []
+  },
+  "payload": {
+   "type": "longText",
+   "args": [],
+   "mods": []
+  },
+  "exception": {
+   "type": "longText",
+   "args": [],
+   "mods": []
+  },
+  "failed_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "useCurrent"
+   ]
+  }
+ },
+ "payroll_companies": {
+  "id": {
+   "type": "id",
+   "args": [],
+   "mods": [],
+   "name": "id"
+  },
+  "name": {
+   "type": "string",
+   "args": [
+    "150"
+   ],
+   "mods": [],
+   "name": "name"
+  },
+  "code": {
+   "type": "string",
+   "args": [
+    "50"
+   ],
+   "mods": [
+    "unique"
+   ],
+   "name": "code"
+  },
+  "logo_path": {
+   "type": "string",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "logo_path"
+  },
+  "owner_name": {
+   "type": "string",
+   "args": [
+    "150"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "owner_name"
+  },
+  "mobile_number": {
+   "type": "string",
+   "args": [
+    "15"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "mobile_number"
+  },
+  "email": {
+   "type": "string",
+   "args": [
+    "254"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "email"
+  },
+  "address": {
+   "type": "string",
+   "args": [
+    "255"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "address"
+  },
+  "city": {
+   "type": "string",
+   "args": [
+    "100"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "city"
+  },
+  "state": {
+   "type": "string",
+   "args": [
+    "100"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "state"
+  },
+  "pincode": {
+   "type": "string",
+   "args": [
+    "20"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "pincode"
+  },
+  "pan_number": {
+   "type": "string",
+   "args": [
+    "20"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "pan_number"
+  },
+  "tan_number": {
+   "type": "string",
+   "args": [
+    "20"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "tan_number"
+  },
+  "pf_registration_number": {
+   "type": "string",
+   "args": [
+    "50"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "pf_registration_number"
+  },
+  "esic_registration_number": {
+   "type": "string",
+   "args": [
+    "50"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "esic_registration_number"
+  },
+  "professional_tax_registration_number": {
+   "type": "string",
+   "args": [
+    "50"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "professional_tax_registration_number"
+  },
+  "authorized_person_name": {
+   "type": "string",
+   "args": [
+    "150"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "authorized_person_name"
+  },
+  "authorized_designation": {
+   "type": "string",
+   "args": [
+    "100"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "authorized_designation"
+  },
+  "authorized_mobile": {
+   "type": "string",
+   "args": [
+    "15"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "authorized_mobile"
+  },
+  "authorized_email": {
+   "type": "string",
+   "args": [
+    "254"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "authorized_email"
+  },
+  "signature_image_path": {
+   "type": "string",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "signature_image_path"
+  },
+  "bank_name": {
+   "type": "string",
+   "args": [
+    "150"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "bank_name"
+  },
+  "account_number": {
+   "type": "text",
+   "args": [],
+   "mods": [
+    "nullable",
+    "ENCRYPTED"
+   ],
+   "name": "account_number"
+  },
+  "ifsc_code": {
+   "type": "text",
+   "args": [],
+   "mods": [
+    "nullable",
+    "ENCRYPTED"
+   ],
+   "name": "ifsc_code"
+  },
+  "branch_name": {
+   "type": "string",
+   "args": [
+    "150"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "branch_name"
+  },
+  "is_active": {
+   "type": "boolean",
+   "args": [],
+   "mods": [
+    "default=true"
+   ],
+   "name": "is_active"
+  },
+  "created_by": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "nullable",
+    "constrained='users'",
+    "nullOnDelete"
+   ],
+   "name": "created_by"
+  },
+  "created_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "created_at"
+  },
+  "updated_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "updated_at"
+  }
+ },
+ "id_proof_types": {
+  "id": {
+   "type": "id",
+   "args": [],
+   "mods": [],
+   "name": "id"
+  },
+  "name": {
+   "type": "string",
+   "args": [
+    "100"
+   ],
+   "mods": [
+    "unique"
+   ],
+   "name": "name"
+  },
+  "is_active": {
+   "type": "boolean",
+   "args": [],
+   "mods": [
+    "default=true"
+   ],
+   "name": "is_active"
+  },
+  "created_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "created_at"
+  },
+  "updated_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "updated_at"
+  }
+ },
+ "employees": {
+  "id": {
+   "type": "id",
+   "args": [],
+   "mods": [],
+   "name": "id"
+  },
+  "payroll_company_id": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "constrained='payroll_companies'",
+    "cascadeOnDelete"
+   ],
+   "name": "payroll_company_id"
+  },
+  "employee_code": {
+   "type": "string",
+   "args": [
+    "50"
+   ],
+   "mods": [],
+   "name": "employee_code"
+  },
+  "name": {
+   "type": "string",
+   "args": [
+    "150"
+   ],
+   "mods": [],
+   "name": "name"
+  },
+  "photo_path": {
+   "type": "string",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "photo_path"
+  },
+  "designation": {
+   "type": "string",
+   "args": [
+    "100"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "designation"
+  },
+  "department": {
+   "type": "string",
+   "args": [
+    "100"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "department"
+  },
+  "responsibilities": {
+   "type": "text",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "responsibilities"
+  },
+  "joining_date": {
+   "type": "date",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "joining_date"
+  },
+  "salary": {
+   "type": "decimal",
+   "args": [
+    "12",
+    "2"
+   ],
+   "mods": [
+    "default=0"
+   ],
+   "name": "salary"
+  },
+  "daily_working_hours": {
+   "type": "decimal",
+   "args": [
+    "5",
+    "2"
+   ],
+   "mods": [
+    "default=8"
+   ],
+   "name": "daily_working_hours"
+  },
+  "contact_number": {
+   "type": "string",
+   "args": [
+    "15"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "contact_number"
+  },
+  "address": {
+   "type": "string",
+   "args": [
+    "255"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "address"
+  },
+  "payment_mode": {
+   "type": "string",
+   "args": [
+    "40"
+   ],
+   "mods": [
+    "default='Cash'",
+    "change"
+   ],
+   "name": "payment_mode"
+  },
+  "bank_name": {
+   "type": "string",
+   "args": [
+    "150"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "bank_name"
+  },
+  "account_holder_name": {
+   "type": "string",
+   "args": [
+    "150"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "account_holder_name"
+  },
+  "account_number": {
+   "type": "text",
+   "args": [],
+   "mods": [
+    "nullable",
+    "ENCRYPTED"
+   ],
+   "name": "account_number"
+  },
+  "ifsc_code": {
+   "type": "text",
+   "args": [],
+   "mods": [
+    "nullable",
+    "ENCRYPTED"
+   ],
+   "name": "ifsc_code"
+  },
+  "branch_name": {
+   "type": "string",
+   "args": [
+    "150"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "branch_name"
+  },
+  "id_proof_type_id": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "nullable",
+    "constrained='id_proof_types'",
+    "nullOnDelete"
+   ],
+   "name": "id_proof_type_id"
+  },
+  "id_proof_number": {
+   "type": "text",
+   "args": [],
+   "mods": [
+    "nullable",
+    "ENCRYPTED"
+   ],
+   "name": "id_proof_number"
+  },
+  "id_proof_image_path": {
+   "type": "string",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "id_proof_image_path"
+  },
+  "is_active": {
+   "type": "boolean",
+   "args": [],
+   "mods": [
+    "default=true"
+   ],
+   "name": "is_active"
+  },
+  "created_by": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "nullable",
+    "constrained='users'",
+    "nullOnDelete"
+   ],
+   "name": "created_by"
+  },
+  "created_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "created_at"
+  },
+  "updated_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "updated_at"
+  },
+  "__idx": {
+   "type": "idx",
+   "args": [
+    "unique:['payroll_company_id', 'employee_code']"
+   ],
+   "mods": []
+  },
+  "email": {
+   "type": "string",
+   "args": [
+    "254"
+   ],
+   "mods": [
+    "nullable",
+    "after='contact_number'"
+   ],
+   "name": "email"
+  },
+  "date_of_birth": {
+   "type": "date",
+   "args": [],
+   "mods": [
+    "nullable",
+    "after='email'"
+   ],
+   "name": "date_of_birth"
+  },
+  "gender": {
+   "type": "string",
+   "args": [
+    "20"
+   ],
+   "mods": [
+    "nullable",
+    "after='date_of_birth'"
+   ],
+   "name": "gender"
+  },
+  "nationality": {
+   "type": "string",
+   "args": [
+    "100"
+   ],
+   "mods": [
+    "nullable",
+    "after='gender'"
+   ],
+   "name": "nationality"
+  },
+  "country_and_pincode": {
+   "type": "string",
+   "args": [
+    "100"
+   ],
+   "mods": [
+    "nullable",
+    "after='nationality'"
+   ],
+   "name": "country_and_pincode"
+  },
+  "qualification": {
+   "type": "string",
+   "args": [
+    "150"
+   ],
+   "mods": [
+    "nullable",
+    "after='country_and_pincode'"
+   ],
+   "name": "qualification"
+  },
+  "qualification_institution": {
+   "type": "string",
+   "args": [
+    "150"
+   ],
+   "mods": [
+    "nullable",
+    "after='qualification'"
+   ],
+   "name": "qualification_institution"
+  },
+  "skills": {
+   "type": "text",
+   "args": [],
+   "mods": [
+    "nullable",
+    "after='qualification_institution'"
+   ],
+   "name": "skills"
+  },
+  "resume_path": {
+   "type": "string",
+   "args": [],
+   "mods": [
+    "nullable",
+    "after='id_proof_image_path'"
+   ],
+   "name": "resume_path"
+  },
+  "id_proof_back_image_path": {
+   "type": "string",
+   "args": [],
+   "mods": [
+    "nullable",
+    "after='resume_path'"
+   ],
+   "name": "id_proof_back_image_path"
+  },
+  "emergency_contact_name": {
+   "type": "string",
+   "args": [
+    "150"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "emergency_contact_name"
+  },
+  "emergency_contact_relation": {
+   "type": "string",
+   "args": [
+    "60"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "emergency_contact_relation"
+  },
+  "emergency_contact_number": {
+   "type": "text",
+   "args": [],
+   "mods": [
+    "nullable",
+    "ENCRYPTED"
+   ],
+   "name": "emergency_contact_number"
+  },
+  "contact_country": {
+   "type": "string",
+   "args": [
+    "4"
+   ],
+   "mods": [
+    "default='91'"
+   ],
+   "name": "contact_country"
+  },
+  "emergency_contact_country": {
+   "type": "string",
+   "args": [
+    "4"
+   ],
+   "mods": [
+    "default='91'"
+   ],
+   "name": "emergency_contact_country"
+  },
+  "id_proof_type": {
+   "type": "string",
+   "args": [
+    "100"
+   ],
+   "mods": [
+    "nullable",
+    "after='id_proof_type_id'"
+   ],
+   "name": "id_proof_type"
+  },
+  "shift": {
+   "type": "string",
+   "args": [
+    "20"
+   ],
+   "mods": [
+    "nullable",
+    "after='department'"
+   ],
+   "name": "shift"
+  },
+  "deleted_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable",
+    "index"
+   ],
+   "name": "deleted_at"
+  },
+  "deleted_by": {
+   "type": "unsignedBigInteger",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "deleted_by"
+  }
+ },
+ "activity_logs": {
+  "id": {
+   "type": "id",
+   "args": [],
+   "mods": [],
+   "name": "id"
+  },
+  "user_id": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "constrained='users'",
+    "cascadeOnDelete"
+   ],
+   "name": "user_id"
+  },
+  "is_active": {
+   "type": "boolean",
+   "args": [],
+   "mods": [
+    "default=true"
+   ],
+   "name": "is_active"
+  },
+  "forgot_password_token": {
+   "type": "string",
+   "args": [
+    "100"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "forgot_password_token"
+  },
+  "token_used": {
+   "type": "boolean",
+   "args": [],
+   "mods": [
+    "default=false"
+   ],
+   "name": "token_used"
+  },
+  "email_sent_time": {
+   "type": "dateTime",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "email_sent_time"
+  },
+  "activity_type": {
+   "type": "enum",
+   "args": [
+    "['Login', 'Logout']"
+   ],
+   "mods": [],
+   "name": "activity_type"
+  },
+  "activity_time": {
+   "type": "dateTime",
+   "args": [],
+   "mods": [
+    "useCurrent"
+   ],
+   "name": "activity_time"
+  },
+  "login_date": {
+   "type": "date",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "login_date"
+  },
+  "logout_date": {
+   "type": "date",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "logout_date"
+  },
+  "login_time": {
+   "type": "time",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "login_time"
+  },
+  "logout_time": {
+   "type": "time",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "logout_time"
+  },
+  "minutes_logged_in": {
+   "type": "string",
+   "args": [
+    "5"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "minutes_logged_in"
+  },
+  "password_change_time": {
+   "type": "dateTime",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "password_change_time"
+  },
+  "password_change_duration": {
+   "type": "unsignedInteger",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "password_change_duration"
+  },
+  "created_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "created_at"
+  },
+  "updated_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "updated_at"
+  },
+  "ip_address": {
+   "type": "string",
+   "args": [
+    "45"
+   ],
+   "mods": [
+    "nullable",
+    "after='activity_time'"
+   ],
+   "name": "ip_address"
+  },
+  "user_agent": {
+   "type": "text",
+   "args": [],
+   "mods": [
+    "nullable",
+    "after='ip_address'"
+   ],
+   "name": "user_agent"
+  },
+  "location": {
+   "type": "string",
+   "args": [
+    "120"
+   ],
+   "mods": [
+    "nullable",
+    "after='ip_address'"
+   ],
+   "name": "location"
+  }
+ },
+ "company_profiles": {
+  "md_one_name": {
+   "type": "string",
+   "args": [
+    "100"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "md_one_name"
+  },
+  "md_one_email": {
+   "type": "string",
+   "args": [
+    "254"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "md_one_email"
+  },
+  "md_one_mobile": {
+   "type": "string",
+   "args": [
+    "15"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "md_one_mobile"
+  },
+  "md_second_name": {
+   "type": "string",
+   "args": [
+    "100"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "md_second_name"
+  },
+  "md_second_email": {
+   "type": "string",
+   "args": [
+    "254"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "md_second_email"
+  },
+  "md_second_mobile": {
+   "type": "string",
+   "args": [
+    "15"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "md_second_mobile"
+  },
+  "hr_head_name": {
+   "type": "string",
+   "args": [
+    "100"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "hr_head_name"
+  },
+  "hr_head_email": {
+   "type": "string",
+   "args": [
+    "254"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "hr_head_email"
+  },
+  "hr_head_mobile": {
+   "type": "string",
+   "args": [
+    "15"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "hr_head_mobile"
+  },
+  "assistant_hr_name": {
+   "type": "string",
+   "args": [
+    "100"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "assistant_hr_name"
+  },
+  "assistant_hr_email": {
+   "type": "string",
+   "args": [
+    "254"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "assistant_hr_email"
+  },
+  "assistant_hr_mobile": {
+   "type": "string",
+   "args": [
+    "15"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "assistant_hr_mobile"
+  },
+  "accountant_head_name": {
+   "type": "string",
+   "args": [
+    "100"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "accountant_head_name"
+  },
+  "accountant_head_email": {
+   "type": "string",
+   "args": [
+    "254"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "accountant_head_email"
+  },
+  "accountant_head_mobile": {
+   "type": "string",
+   "args": [
+    "15"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "accountant_head_mobile"
+  },
+  "accountant_assistant_one_name": {
+   "type": "string",
+   "args": [
+    "100"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "accountant_assistant_one_name"
+  },
+  "accountant_assistant_one_email": {
+   "type": "string",
+   "args": [
+    "254"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "accountant_assistant_one_email"
+  },
+  "accountant_assistant_one_mobile": {
+   "type": "string",
+   "args": [
+    "15"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "accountant_assistant_one_mobile"
+  },
+  "accountant_assistant_two_name": {
+   "type": "string",
+   "args": [
+    "100"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "accountant_assistant_two_name"
+  },
+  "accountant_assistant_two_email": {
+   "type": "string",
+   "args": [
+    "254"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "accountant_assistant_two_email"
+  },
+  "accountant_assistant_two_mobile": {
+   "type": "string",
+   "args": [
+    "15"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "accountant_assistant_two_mobile"
+  },
+  "id": {
+   "type": "id",
+   "args": [],
+   "mods": [],
+   "name": "id"
+  },
+  "name": {
+   "type": "string",
+   "args": [
+    "100"
+   ],
+   "mods": [
+    "unique"
+   ],
+   "name": "name"
+  },
+  "address": {
+   "type": "string",
+   "args": [
+    "100"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "address"
+  },
+  "country": {
+   "type": "string",
+   "args": [
+    "100"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "country"
+  },
+  "nationality": {
+   "type": "string",
+   "args": [
+    "100"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "nationality"
+  },
+  "email": {
+   "type": "string",
+   "args": [
+    "254"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "email"
+  },
+  "pincode": {
+   "type": "string",
+   "args": [
+    "20"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "pincode"
+  },
+  "mobile_number": {
+   "type": "string",
+   "args": [
+    "15"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "mobile_number"
+  },
+  "phone_number": {
+   "type": "string",
+   "args": [
+    "15"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "phone_number"
+  },
+  "discount_percentage": {
+   "type": "decimal",
+   "args": [
+    "5",
+    "2"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "discount_percentage"
+  },
+  "gst_percentage": {
+   "type": "decimal",
+   "args": [
+    "5",
+    "2"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "gst_percentage"
+  },
+  "tcs_percentage": {
+   "type": "decimal",
+   "args": [
+    "5",
+    "2"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "tcs_percentage"
+  },
+  "tds_percentage": {
+   "type": "decimal",
+   "args": [
+    "5",
+    "2"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "tds_percentage"
+  },
+  "instruction": {
+   "type": "text",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "instruction"
+  },
+  "gst_number": {
+   "type": "string",
+   "args": [
+    "50"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "gst_number"
+  },
+  "created_by": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "nullable",
+    "constrained='users'",
+    "nullOnDelete"
+   ],
+   "name": "created_by"
+  },
+  "modified_by": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "nullable",
+    "constrained='users'",
+    "nullOnDelete"
+   ],
+   "name": "modified_by"
+  },
+  "created_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "created_at"
+  },
+  "updated_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "updated_at"
+  },
+  "contacts": {
+   "type": "json",
+   "args": [],
+   "mods": [
+    "nullable",
+    "after='gst_number'"
+   ],
+   "name": "contacts"
+  },
+  "deleted_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable",
+    "index"
+   ],
+   "name": "deleted_at"
+  },
+  "deleted_by": {
+   "type": "unsignedBigInteger",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "deleted_by"
+  }
+ },
+ "food_cash_deposits": {
+  "id": {
+   "type": "id",
+   "args": [],
+   "mods": [],
+   "name": "id"
+  },
+  "date": {
+   "type": "date",
+   "args": [],
+   "mods": [],
+   "name": "date"
+  },
+  "time": {
+   "type": "time",
+   "args": [],
+   "mods": [],
+   "name": "time"
+  },
+  "user_id": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "constrained='users'",
+    "cascadeOnDelete"
+   ],
+   "name": "user_id"
+  },
+  "full_name": {
+   "type": "string",
+   "args": [
+    "20"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "full_name"
+  },
+  "depositor": {
+   "type": "string",
+   "args": [
+    "100"
+   ],
+   "mods": [],
+   "name": "depositor"
+  },
+  "amount": {
+   "type": "decimal",
+   "args": [
+    "12",
+    "2"
+   ],
+   "mods": [],
+   "name": "amount"
+  },
+  "amount_in_words": {
+   "type": "string",
+   "args": [
+    "250"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "amount_in_words"
+  },
+  "created_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "created_at"
+  },
+  "updated_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "updated_at"
+  },
+  "entry_no": {
+   "type": "unsignedInteger",
+   "args": [],
+   "mods": [
+    "nullable",
+    "index"
+   ],
+   "name": "entry_no"
+  },
+  "revenue_source": {
+   "type": "string",
+   "args": [
+    "60"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "revenue_source"
+  },
+  "reason": {
+   "type": "string",
+   "args": [
+    "500"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "reason"
+  },
+  "deleted_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable",
+    "index"
+   ],
+   "name": "deleted_at"
+  },
+  "deleted_by": {
+   "type": "unsignedBigInteger",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "deleted_by"
+  }
+ },
+ "hotel_cash_deposits": {
+  "id": {
+   "type": "id",
+   "args": [],
+   "mods": [],
+   "name": "id"
+  },
+  "date": {
+   "type": "date",
+   "args": [],
+   "mods": [],
+   "name": "date"
+  },
+  "time": {
+   "type": "time",
+   "args": [],
+   "mods": [],
+   "name": "time"
+  },
+  "user_id": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "constrained='users'",
+    "cascadeOnDelete"
+   ],
+   "name": "user_id"
+  },
+  "full_name": {
+   "type": "string",
+   "args": [
+    "20"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "full_name"
+  },
+  "depositor": {
+   "type": "string",
+   "args": [
+    "100"
+   ],
+   "mods": [],
+   "name": "depositor"
+  },
+  "amount": {
+   "type": "decimal",
+   "args": [
+    "12",
+    "2"
+   ],
+   "mods": [],
+   "name": "amount"
+  },
+  "amount_in_words": {
+   "type": "string",
+   "args": [
+    "250"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "amount_in_words"
+  },
+  "created_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "created_at"
+  },
+  "updated_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "updated_at"
+  },
+  "entry_no": {
+   "type": "unsignedInteger",
+   "args": [],
+   "mods": [
+    "nullable",
+    "index"
+   ],
+   "name": "entry_no"
+  },
+  "revenue_source": {
+   "type": "string",
+   "args": [
+    "60"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "revenue_source"
+  },
+  "reason": {
+   "type": "string",
+   "args": [
+    "500"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "reason"
+  },
+  "deleted_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable",
+    "index"
+   ],
+   "name": "deleted_at"
+  },
+  "deleted_by": {
+   "type": "unsignedBigInteger",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "deleted_by"
+  }
+ },
+ "hotel_cash_withdrawals": {
+  "id": {
+   "type": "id",
+   "args": [],
+   "mods": [],
+   "name": "id"
+  },
+  "date": {
+   "type": "date",
+   "args": [],
+   "mods": [],
+   "name": "date"
+  },
+  "time": {
+   "type": "time",
+   "args": [],
+   "mods": [],
+   "name": "time"
+  },
+  "user_id": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "constrained='users'",
+    "cascadeOnDelete"
+   ],
+   "name": "user_id"
+  },
+  "full_name": {
+   "type": "string",
+   "args": [
+    "20"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "full_name"
+  },
+  "withdrawer": {
+   "type": "string",
+   "args": [
+    "100"
+   ],
+   "mods": [],
+   "name": "withdrawer"
+  },
+  "amount": {
+   "type": "decimal",
+   "args": [
+    "12",
+    "2"
+   ],
+   "mods": [],
+   "name": "amount"
+  },
+  "amount_in_words": {
+   "type": "string",
+   "args": [
+    "250"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "amount_in_words"
+  },
+  "created_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "created_at"
+  },
+  "updated_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "updated_at"
+  },
+  "entry_no": {
+   "type": "unsignedInteger",
+   "args": [],
+   "mods": [
+    "nullable",
+    "index"
+   ],
+   "name": "entry_no"
+  },
+  "instruction": {
+   "type": "text",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "instruction"
+  },
+  "deleted_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable",
+    "index"
+   ],
+   "name": "deleted_at"
+  },
+  "deleted_by": {
+   "type": "unsignedBigInteger",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "deleted_by"
+  }
+ },
+ "food_cash_withdrawals": {
+  "id": {
+   "type": "id",
+   "args": [],
+   "mods": [],
+   "name": "id"
+  },
+  "date": {
+   "type": "date",
+   "args": [],
+   "mods": [],
+   "name": "date"
+  },
+  "time": {
+   "type": "time",
+   "args": [],
+   "mods": [],
+   "name": "time"
+  },
+  "user_id": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "constrained='users'",
+    "cascadeOnDelete"
+   ],
+   "name": "user_id"
+  },
+  "full_name": {
+   "type": "string",
+   "args": [
+    "20"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "full_name"
+  },
+  "withdrawer": {
+   "type": "string",
+   "args": [
+    "100"
+   ],
+   "mods": [],
+   "name": "withdrawer"
+  },
+  "amount": {
+   "type": "decimal",
+   "args": [
+    "12",
+    "2"
+   ],
+   "mods": [],
+   "name": "amount"
+  },
+  "amount_in_words": {
+   "type": "string",
+   "args": [
+    "250"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "amount_in_words"
+  },
+  "created_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "created_at"
+  },
+  "updated_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "updated_at"
+  },
+  "entry_no": {
+   "type": "unsignedInteger",
+   "args": [],
+   "mods": [
+    "nullable",
+    "index"
+   ],
+   "name": "entry_no"
+  },
+  "instruction": {
+   "type": "text",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "instruction"
+  },
+  "deleted_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable",
+    "index"
+   ],
+   "name": "deleted_at"
+  },
+  "deleted_by": {
+   "type": "unsignedBigInteger",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "deleted_by"
+  }
+ },
+ "hotel_misc_expenses": {
+  "id": {
+   "type": "id",
+   "args": [],
+   "mods": [],
+   "name": "id"
+  },
+  "date": {
+   "type": "date",
+   "args": [],
+   "mods": [],
+   "name": "date"
+  },
+  "time": {
+   "type": "time",
+   "args": [],
+   "mods": [],
+   "name": "time"
+  },
+  "user_id": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "constrained='users'",
+    "cascadeOnDelete"
+   ],
+   "name": "user_id"
+  },
+  "full_name": {
+   "type": "string",
+   "args": [
+    "20"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "full_name"
+  },
+  "expense_name": {
+   "type": "string",
+   "args": [
+    "100"
+   ],
+   "mods": [],
+   "name": "expense_name"
+  },
+  "amount": {
+   "type": "decimal",
+   "args": [
+    "12",
+    "2"
+   ],
+   "mods": [],
+   "name": "amount"
+  },
+  "instruction": {
+   "type": "string",
+   "args": [
+    "500"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "instruction"
+  },
+  "amount_in_words": {
+   "type": "string",
+   "args": [
+    "250"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "amount_in_words"
+  },
+  "created_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "created_at"
+  },
+  "updated_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "updated_at"
+  },
+  "entry_no": {
+   "type": "unsignedInteger",
+   "args": [],
+   "mods": [
+    "nullable",
+    "index"
+   ],
+   "name": "entry_no"
+  },
+  "expense_head": {
+   "type": "string",
+   "args": [
+    "60"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "expense_head"
+  },
+  "deleted_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable",
+    "index"
+   ],
+   "name": "deleted_at"
+  },
+  "deleted_by": {
+   "type": "unsignedBigInteger",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "deleted_by"
+  }
+ },
+ "food_misc_expenses": {
+  "id": {
+   "type": "id",
+   "args": [],
+   "mods": [],
+   "name": "id"
+  },
+  "date": {
+   "type": "date",
+   "args": [],
+   "mods": [],
+   "name": "date"
+  },
+  "time": {
+   "type": "time",
+   "args": [],
+   "mods": [],
+   "name": "time"
+  },
+  "user_id": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "constrained='users'",
+    "cascadeOnDelete"
+   ],
+   "name": "user_id"
+  },
+  "full_name": {
+   "type": "string",
+   "args": [
+    "20"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "full_name"
+  },
+  "expense_name": {
+   "type": "string",
+   "args": [
+    "100"
+   ],
+   "mods": [],
+   "name": "expense_name"
+  },
+  "amount": {
+   "type": "decimal",
+   "args": [
+    "12",
+    "2"
+   ],
+   "mods": [],
+   "name": "amount"
+  },
+  "instruction": {
+   "type": "string",
+   "args": [
+    "500"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "instruction"
+  },
+  "amount_in_words": {
+   "type": "string",
+   "args": [
+    "250"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "amount_in_words"
+  },
+  "created_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "created_at"
+  },
+  "updated_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "updated_at"
+  },
+  "entry_no": {
+   "type": "unsignedInteger",
+   "args": [],
+   "mods": [
+    "nullable",
+    "index"
+   ],
+   "name": "entry_no"
+  },
+  "expense_head": {
+   "type": "string",
+   "args": [
+    "60"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "expense_head"
+  },
+  "deleted_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable",
+    "index"
+   ],
+   "name": "deleted_at"
+  },
+  "deleted_by": {
+   "type": "unsignedBigInteger",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "deleted_by"
+  }
+ },
+ "staff_advances": {
+  "id": {
+   "type": "id",
+   "args": [],
+   "mods": [],
+   "name": "id"
+  },
+  "date": {
+   "type": "date",
+   "args": [],
+   "mods": [],
+   "name": "date"
+  },
+  "time": {
+   "type": "time",
+   "args": [],
+   "mods": [],
+   "name": "time"
+  },
+  "user_id": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "constrained='users'",
+    "cascadeOnDelete"
+   ],
+   "name": "user_id"
+  },
+  "full_name": {
+   "type": "string",
+   "args": [
+    "20"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "full_name"
+  },
+  "year_month": {
+   "type": "string",
+   "args": [
+    "7"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "year_month"
+  },
+  "employee_id": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "nullable",
+    "constrained='employees'",
+    "nullOnDelete"
+   ],
+   "name": "employee_id"
+  },
+  "amount": {
+   "type": "decimal",
+   "args": [
+    "10",
+    "2"
+   ],
+   "mods": [],
+   "name": "amount"
+  },
+  "instruction": {
+   "type": "text",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "instruction"
+  },
+  "amount_in_words": {
+   "type": "string",
+   "args": [
+    "250"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "amount_in_words"
+  },
+  "created_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "created_at"
+  },
+  "updated_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "updated_at"
+  },
+  "business": {
+   "type": "string",
+   "args": [
+    "10"
+   ],
+   "mods": [
+    "default='hotel'",
+    "after='employee_id'",
+    "index"
+   ],
+   "name": "business"
+  },
+  "business_unit_id": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "nullable",
+    "constrained='business_units'",
+    "nullOnDelete"
+   ],
+   "name": "business_unit_id"
+  },
+  "entry_no": {
+   "type": "unsignedInteger",
+   "args": [],
+   "mods": [
+    "nullable",
+    "index"
+   ],
+   "name": "entry_no"
+  }
+ },
+ "shift_handovers": {
+  "d500_total": {
+   "type": "decimal",
+   "args": [
+    "10",
+    "2"
+   ],
+   "mods": [
+    "default=0"
+   ],
+   "name": "d500_total"
+  },
+  "d500_count": {
+   "type": "string",
+   "args": [
+    "10"
+   ],
+   "mods": [
+    "default='0'"
+   ],
+   "name": "d500_count"
+  },
+  "d200_total": {
+   "type": "decimal",
+   "args": [
+    "10",
+    "2"
+   ],
+   "mods": [
+    "default=0"
+   ],
+   "name": "d200_total"
+  },
+  "d200_count": {
+   "type": "string",
+   "args": [
+    "10"
+   ],
+   "mods": [
+    "default='0'"
+   ],
+   "name": "d200_count"
+  },
+  "d100_total": {
+   "type": "decimal",
+   "args": [
+    "10",
+    "2"
+   ],
+   "mods": [
+    "default=0"
+   ],
+   "name": "d100_total"
+  },
+  "d100_count": {
+   "type": "string",
+   "args": [
+    "10"
+   ],
+   "mods": [
+    "default='0'"
+   ],
+   "name": "d100_count"
+  },
+  "d50_total": {
+   "type": "decimal",
+   "args": [
+    "10",
+    "2"
+   ],
+   "mods": [
+    "default=0"
+   ],
+   "name": "d50_total"
+  },
+  "d50_count": {
+   "type": "string",
+   "args": [
+    "10"
+   ],
+   "mods": [
+    "default='0'"
+   ],
+   "name": "d50_count"
+  },
+  "d20_total": {
+   "type": "decimal",
+   "args": [
+    "10",
+    "2"
+   ],
+   "mods": [
+    "default=0"
+   ],
+   "name": "d20_total"
+  },
+  "d20_count": {
+   "type": "string",
+   "args": [
+    "10"
+   ],
+   "mods": [
+    "default='0'"
+   ],
+   "name": "d20_count"
+  },
+  "d10_total": {
+   "type": "decimal",
+   "args": [
+    "10",
+    "2"
+   ],
+   "mods": [
+    "default=0"
+   ],
+   "name": "d10_total"
+  },
+  "d10_count": {
+   "type": "string",
+   "args": [
+    "10"
+   ],
+   "mods": [
+    "default='0'"
+   ],
+   "name": "d10_count"
+  },
+  "d5_total": {
+   "type": "decimal",
+   "args": [
+    "10",
+    "2"
+   ],
+   "mods": [
+    "default=0"
+   ],
+   "name": "d5_total"
+  },
+  "d5_count": {
+   "type": "string",
+   "args": [
+    "10"
+   ],
+   "mods": [
+    "default='0'"
+   ],
+   "name": "d5_count"
+  },
+  "coins_total": {
+   "type": "decimal",
+   "args": [
+    "10",
+    "2"
+   ],
+   "mods": [
+    "default=0"
+   ],
+   "name": "coins_total"
+  },
+  "coins_count": {
+   "type": "string",
+   "args": [
+    "10"
+   ],
+   "mods": [
+    "default='0'"
+   ],
+   "name": "coins_count"
+  },
+  "id": {
+   "type": "id",
+   "args": [],
+   "mods": [],
+   "name": "id"
+  },
+  "date": {
+   "type": "date",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "date"
+  },
+  "time": {
+   "type": "time",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "time"
+  },
+  "user_id": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "constrained='users'",
+    "cascadeOnDelete"
+   ],
+   "name": "user_id"
+  },
+  "full_name": {
+   "type": "string",
+   "args": [
+    "20"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "full_name"
+  },
+  "shift": {
+   "type": "string",
+   "args": [
+    "20"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "shift"
+  },
+  "total": {
+   "type": "decimal",
+   "args": [
+    "10",
+    "2"
+   ],
+   "mods": [
+    "default=0"
+   ],
+   "name": "total"
+  },
+  "total_in_words": {
+   "type": "string",
+   "args": [
+    "250"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "total_in_words"
+  },
+  "created_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "created_at"
+  },
+  "updated_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "updated_at"
+  },
+  "notes": {
+   "type": "json",
+   "args": [],
+   "mods": [
+    "nullable",
+    "after='shift'"
+   ],
+   "name": "notes"
+  },
+  "instructions": {
+   "type": "json",
+   "args": [],
+   "mods": [
+    "nullable",
+    "after='notes'"
+   ],
+   "name": "instructions"
+  },
+  "employee_id": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "nullable",
+    "after='full_name'",
+    "constrained='employees'",
+    "nullOnDelete"
+   ],
+   "name": "employee_id"
+  },
+  "__idx": {
+   "type": "idx",
+   "args": [
+    "unique:'entry_no', self::NAME"
+   ],
+   "mods": []
+  },
+  "handover_to_name": {
+   "type": "string",
+   "args": [
+    "150"
+   ],
+   "mods": [
+    "nullable",
+    "after='employee_id'"
+   ],
+   "name": "handover_to_name"
+  },
+  "business_unit_id": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "nullable",
+    "constrained='business_units'",
+    "nullOnDelete"
+   ],
+   "name": "business_unit_id"
+  },
+  "entry_no": {
+   "type": "unsignedInteger",
+   "args": [],
+   "mods": [
+    "nullable",
+    "index"
+   ],
+   "name": "entry_no"
+  },
+  "deleted_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable",
+    "index"
+   ],
+   "name": "deleted_at"
+  },
+  "deleted_by": {
+   "type": "unsignedBigInteger",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "deleted_by"
+  }
+ },
+ "bill_master_advances": {
+  "id": {
+   "type": "id",
+   "args": [],
+   "mods": [],
+   "name": "id"
+  },
+  "receipt_number": {
+   "type": "string",
+   "args": [
+    "100"
+   ],
+   "mods": [
+    "unique",
+    "nullable"
+   ],
+   "name": "receipt_number"
+  },
+  "guest_name": {
+   "type": "string",
+   "args": [
+    "255"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "guest_name"
+  },
+  "mobile_number": {
+   "type": "string",
+   "args": [
+    "15"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "mobile_number"
+  },
+  "company_id": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "nullable",
+    "constrained='company_profiles'",
+    "cascadeOnDelete"
+   ],
+   "name": "company_id"
+  },
+  "payment_date": {
+   "type": "date",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "payment_date"
+  },
+  "hotel_amount": {
+   "type": "decimal",
+   "args": [
+    "20",
+    "2"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "hotel_amount"
+  },
+  "food_amount": {
+   "type": "decimal",
+   "args": [
+    "20",
+    "2"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "food_amount"
+  },
+  "hotel_mode": {
+   "type": "string",
+   "args": [
+    "20"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "hotel_mode"
+  },
+  "food_mode": {
+   "type": "string",
+   "args": [
+    "20"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "food_mode"
+  },
+  "reference_name": {
+   "type": "string",
+   "args": [
+    "255"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "reference_name"
+  },
+  "reference_mobile_number": {
+   "type": "string",
+   "args": [
+    "15"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "reference_mobile_number"
+  },
+  "instruction": {
+   "type": "string",
+   "args": [
+    "255"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "instruction"
+  },
+  "hotel_balance": {
+   "type": "decimal",
+   "args": [
+    "50",
+    "2"
+   ],
+   "mods": [
+    "default=0"
+   ],
+   "name": "hotel_balance"
+  },
+  "food_balance": {
+   "type": "decimal",
+   "args": [
+    "50",
+    "2"
+   ],
+   "mods": [
+    "default=0"
+   ],
+   "name": "food_balance"
+  },
+  "total": {
+   "type": "decimal",
+   "args": [
+    "50",
+    "2"
+   ],
+   "mods": [
+    "default=0"
+   ],
+   "name": "total"
+  },
+  "hotel_refund_amount": {
+   "type": "decimal",
+   "args": [
+    "20",
+    "2"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "hotel_refund_amount"
+  },
+  "food_refund_amount": {
+   "type": "decimal",
+   "args": [
+    "20",
+    "2"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "food_refund_amount"
+  },
+  "hotel_refund_mode": {
+   "type": "string",
+   "args": [
+    "20"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "hotel_refund_mode"
+  },
+  "food_refund_mode": {
+   "type": "string",
+   "args": [
+    "20"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "food_refund_mode"
+  },
+  "refund_payment_date": {
+   "type": "date",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "refund_payment_date"
+  },
+  "refund_guest_name": {
+   "type": "string",
+   "args": [
+    "255"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "refund_guest_name"
+  },
+  "refund_mobile_number": {
+   "type": "string",
+   "args": [
+    "15"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "refund_mobile_number"
+  },
+  "refund_instruction": {
+   "type": "string",
+   "args": [
+    "255"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "refund_instruction"
+  },
+  "created_by": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "nullable",
+    "constrained='users'",
+    "nullOnDelete"
+   ],
+   "name": "created_by"
+  },
+  "created_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "created_at"
+  },
+  "updated_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "updated_at"
+  },
+  "room_number": {
+   "type": "string",
+   "args": [
+    "20"
+   ],
+   "mods": [
+    "nullable",
+    "after='mobile_number'"
+   ],
+   "name": "room_number"
+  },
+  "reservation_id": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "nullable",
+    "after='company_id'",
+    "constrained='pms_reservations'",
+    "nullOnDelete"
+   ],
+   "name": "reservation_id"
+  },
+  "entry_no": {
+   "type": "unsignedInteger",
+   "args": [],
+   "mods": [
+    "nullable",
+    "index"
+   ],
+   "name": "entry_no"
+  },
+  "deleted_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable",
+    "index"
+   ],
+   "name": "deleted_at"
+  },
+  "deleted_by": {
+   "type": "unsignedBigInteger",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "deleted_by"
+  }
+ },
+ "bill_master_bills": {
+  "debit_bill_date{$suffix}": {
+   "type": "date",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "debit_bill_date{$suffix}"
+  },
+  "debit_hotel_mode{$suffix}": {
+   "type": "string",
+   "args": [
+    "20"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "debit_hotel_mode{$suffix}"
+  },
+  "debit_food_mode{$suffix}": {
+   "type": "string",
+   "args": [
+    "20"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "debit_food_mode{$suffix}"
+  },
+  "debit_hotel_amount{$suffix}": {
+   "type": "decimal",
+   "args": [
+    "10",
+    "2"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "debit_hotel_amount{$suffix}"
+  },
+  "debit_food_amount{$suffix}": {
+   "type": "decimal",
+   "args": [
+    "10",
+    "2"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "debit_food_amount{$suffix}"
+  },
+  "id": {
+   "type": "id",
+   "args": [],
+   "mods": [],
+   "name": "id"
+  },
+  "advance_id": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "nullable",
+    "constrained='bill_master_advances'",
+    "nullOnDelete"
+   ],
+   "name": "advance_id"
+  },
+  "advance_receipt_number": {
+   "type": "string",
+   "args": [
+    "100"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "advance_receipt_number"
+  },
+  "advance_guest_name": {
+   "type": "string",
+   "args": [
+    "100"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "advance_guest_name"
+  },
+  "advance_hotel_amount_snapshot": {
+   "type": "string",
+   "args": [
+    "100"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "advance_hotel_amount_snapshot"
+  },
+  "advance_date_snapshot": {
+   "type": "string",
+   "args": [
+    "100"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "advance_date_snapshot"
+  },
+  "advance_food_amount_snapshot": {
+   "type": "string",
+   "args": [
+    "100"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "advance_food_amount_snapshot"
+  },
+  "advance_company_snapshot": {
+   "type": "string",
+   "args": [
+    "100"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "advance_company_snapshot"
+  },
+  "bill_number": {
+   "type": "string",
+   "args": [
+    "100"
+   ],
+   "mods": [
+    "unique",
+    "nullable"
+   ],
+   "name": "bill_number"
+  },
+  "company_id": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "nullable",
+    "constrained='company_profiles'",
+    "cascadeOnDelete"
+   ],
+   "name": "company_id"
+  },
+  "bill_date": {
+   "type": "date",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "bill_date"
+  },
+  "guest_name": {
+   "type": "string",
+   "args": [
+    "255"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "guest_name"
+  },
+  "mobile_number": {
+   "type": "string",
+   "args": [
+    "15"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "mobile_number"
+  },
+  "hotel_plan": {
+   "type": "string",
+   "args": [
+    "100"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "hotel_plan"
+  },
+  "hotel_amount": {
+   "type": "decimal",
+   "args": [
+    "10",
+    "2"
+   ],
+   "mods": [
+    "default=0"
+   ],
+   "name": "hotel_amount"
+  },
+  "hotel_plan_amount": {
+   "type": "decimal",
+   "args": [
+    "10",
+    "2"
+   ],
+   "mods": [
+    "default=0"
+   ],
+   "name": "hotel_plan_amount"
+  },
+  "hotel_laundry_amount": {
+   "type": "decimal",
+   "args": [
+    "10",
+    "2"
+   ],
+   "mods": [
+    "default=0"
+   ],
+   "name": "hotel_laundry_amount"
+  },
+  "hotel_gst": {
+   "type": "decimal",
+   "args": [
+    "10",
+    "2"
+   ],
+   "mods": [
+    "default=0"
+   ],
+   "name": "hotel_gst"
+  },
+  "hotel_mode_of_payment": {
+   "type": "string",
+   "args": [
+    "100"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "hotel_mode_of_payment"
+  },
+  "food_plan_amount": {
+   "type": "decimal",
+   "args": [
+    "10",
+    "2"
+   ],
+   "mods": [
+    "default=0"
+   ],
+   "name": "food_plan_amount"
+  },
+  "food_laundry_amount": {
+   "type": "decimal",
+   "args": [
+    "10",
+    "2"
+   ],
+   "mods": [
+    "default=0"
+   ],
+   "name": "food_laundry_amount"
+  },
+  "food_amount": {
+   "type": "decimal",
+   "args": [
+    "10",
+    "2"
+   ],
+   "mods": [
+    "default=0"
+   ],
+   "name": "food_amount"
+  },
+  "food_gst": {
+   "type": "decimal",
+   "args": [
+    "10",
+    "2"
+   ],
+   "mods": [
+    "default=0"
+   ],
+   "name": "food_gst"
+  },
+  "food_mode_of_payment": {
+   "type": "string",
+   "args": [
+    "100"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "food_mode_of_payment"
+  },
+  "total_hotel_amount": {
+   "type": "decimal",
+   "args": [
+    "10",
+    "2"
+   ],
+   "mods": [
+    "default=0"
+   ],
+   "name": "total_hotel_amount"
+  },
+  "total_food_amount": {
+   "type": "decimal",
+   "args": [
+    "10",
+    "2"
+   ],
+   "mods": [
+    "default=0"
+   ],
+   "name": "total_food_amount"
+  },
+  "reference_name": {
+   "type": "string",
+   "args": [
+    "100"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "reference_name"
+  },
+  "reference_mobile_number": {
+   "type": "string",
+   "args": [
+    "15"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "reference_mobile_number"
+  },
+  "instruction": {
+   "type": "text",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "instruction"
+  },
+  "invoice_pdf_path": {
+   "type": "string",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "invoice_pdf_path"
+  },
+  "balance_hotel_amount": {
+   "type": "decimal",
+   "args": [
+    "10",
+    "2"
+   ],
+   "mods": [
+    "default=0"
+   ],
+   "name": "balance_hotel_amount"
+  },
+  "balance_food_amount": {
+   "type": "decimal",
+   "args": [
+    "10",
+    "2"
+   ],
+   "mods": [
+    "default=0"
+   ],
+   "name": "balance_food_amount"
+  },
+  "advance_hotel_amount": {
+   "type": "decimal",
+   "args": [
+    "10",
+    "2"
+   ],
+   "mods": [
+    "default=0"
+   ],
+   "name": "advance_hotel_amount"
+  },
+  "advance_food_amount": {
+   "type": "decimal",
+   "args": [
+    "10",
+    "2"
+   ],
+   "mods": [
+    "default=0"
+   ],
+   "name": "advance_food_amount"
+  },
+  "advance_delete_hotel_amount": {
+   "type": "decimal",
+   "args": [
+    "10",
+    "2"
+   ],
+   "mods": [
+    "default=0"
+   ],
+   "name": "advance_delete_hotel_amount"
+  },
+  "advance_delete_food_amount": {
+   "type": "decimal",
+   "args": [
+    "10",
+    "2"
+   ],
+   "mods": [
+    "default=0"
+   ],
+   "name": "advance_delete_food_amount"
+  },
+  "formatted_advance_receipt_number": {
+   "type": "string",
+   "args": [
+    "255"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "formatted_advance_receipt_number"
+  },
+  "debit_hotel_advance": {
+   "type": "string",
+   "args": [
+    "100"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "debit_hotel_advance"
+  },
+  "debit_food_advance": {
+   "type": "string",
+   "args": [
+    "100"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "debit_food_advance"
+  },
+  "debit_reference_name": {
+   "type": "string",
+   "args": [
+    "100"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "debit_reference_name"
+  },
+  "debit_reference_mobile_number": {
+   "type": "string",
+   "args": [
+    "15"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "debit_reference_mobile_number"
+  },
+  "debit_instruction": {
+   "type": "text",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "debit_instruction"
+  },
+  "created_by": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "nullable",
+    "constrained='users'",
+    "nullOnDelete"
+   ],
+   "name": "created_by"
+  },
+  "created_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "created_at"
+  },
+  "updated_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "updated_at"
+  },
+  "room_number": {
+   "type": "string",
+   "args": [
+    "20"
+   ],
+   "mods": [
+    "nullable",
+    "after='mobile_number'"
+   ],
+   "name": "room_number"
+  },
+  "gr_number": {
+   "type": "string",
+   "args": [
+    "50"
+   ],
+   "mods": [
+    "nullable",
+    "after='bill_number'"
+   ],
+   "name": "gr_number"
+  },
+  "guest_address": {
+   "type": "string",
+   "args": [
+    "255"
+   ],
+   "mods": [
+    "nullable",
+    "after='mobile_number'"
+   ],
+   "name": "guest_address"
+  },
+  "guest_gstin": {
+   "type": "string",
+   "args": [
+    "20"
+   ],
+   "mods": [
+    "nullable",
+    "after='guest_address'"
+   ],
+   "name": "guest_gstin"
+  },
+  "persons": {
+   "type": "unsignedSmallInteger",
+   "args": [],
+   "mods": [
+    "nullable",
+    "after='room_number'"
+   ],
+   "name": "persons"
+  },
+  "arrival_at": {
+   "type": "dateTime",
+   "args": [],
+   "mods": [
+    "nullable",
+    "after='persons'"
+   ],
+   "name": "arrival_at"
+  },
+  "departure_at": {
+   "type": "dateTime",
+   "args": [],
+   "mods": [
+    "nullable",
+    "after='arrival_at'"
+   ],
+   "name": "departure_at"
+  },
+  "hotel_extra_bed_amount": {
+   "type": "decimal",
+   "args": [
+    "10",
+    "2"
+   ],
+   "mods": [
+    "default=0",
+    "after='hotel_plan_amount'"
+   ],
+   "name": "hotel_extra_bed_amount"
+  },
+  "hotel_other_amount": {
+   "type": "decimal",
+   "args": [
+    "10",
+    "2"
+   ],
+   "mods": [
+    "default=0",
+    "after='hotel_laundry_amount'"
+   ],
+   "name": "hotel_other_amount"
+  },
+  "food_invoice_pdf_path": {
+   "type": "string",
+   "args": [],
+   "mods": [
+    "nullable",
+    "after='invoice_pdf_path'"
+   ],
+   "name": "food_invoice_pdf_path"
+  },
+  "stay_segments": {
+   "type": "json",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "stay_segments"
+  },
+  "plan_food_amount": {
+   "type": "decimal",
+   "args": [
+    "10",
+    "2"
+   ],
+   "mods": [
+    "default=0"
+   ],
+   "name": "plan_food_amount"
+  },
+  "entry_no": {
+   "type": "unsignedInteger",
+   "args": [],
+   "mods": [
+    "nullable",
+    "index"
+   ],
+   "name": "entry_no"
+  },
+  "deleted_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable",
+    "index"
+   ],
+   "name": "deleted_at"
+  },
+  "deleted_by": {
+   "type": "unsignedBigInteger",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "deleted_by"
+  }
+ },
+ "attendance_statuses": {
+  "id": {
+   "type": "id",
+   "args": [],
+   "mods": [],
+   "name": "id"
+  },
+  "payroll_company_id": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "constrained='payroll_companies'",
+    "cascadeOnDelete"
+   ],
+   "name": "payroll_company_id"
+  },
+  "name": {
+   "type": "string",
+   "args": [
+    "100"
+   ],
+   "mods": [],
+   "name": "name"
+  },
+  "shortcut_key": {
+   "type": "string",
+   "args": [
+    "10"
+   ],
+   "mods": [],
+   "name": "shortcut_key"
+  },
+  "color": {
+   "type": "string",
+   "args": [
+    "20"
+   ],
+   "mods": [],
+   "name": "color"
+  },
+  "attendance_percentage": {
+   "type": "unsignedTinyInteger",
+   "args": [],
+   "mods": [],
+   "name": "attendance_percentage"
+  },
+  "status_type": {
+   "type": "enum",
+   "args": [
+    "['Paid', 'Unpaid']"
+   ],
+   "mods": [
+    "default='Paid'"
+   ],
+   "name": "status_type"
+  },
+  "is_active": {
+   "type": "boolean",
+   "args": [],
+   "mods": [
+    "default=true"
+   ],
+   "name": "is_active"
+  },
+  "created_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "created_at"
+  },
+  "updated_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "updated_at"
+  },
+  "__idx": {
+   "type": "idx",
+   "args": [
+    "unique:['payroll_company_id', 'shortcut_key']",
+    "unique:['payroll_company_id', 'color']"
+   ],
+   "mods": []
+  },
+  "skips_food": {
+   "type": "boolean",
+   "args": [],
+   "mods": [
+    "default=false"
+   ],
+   "name": "skips_food"
+  }
+ },
+ "deductions": {
+  "id": {
+   "type": "id",
+   "args": [],
+   "mods": [],
+   "name": "id"
+  },
+  "payroll_company_id": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "constrained='payroll_companies'",
+    "cascadeOnDelete"
+   ],
+   "name": "payroll_company_id"
+  },
+  "name": {
+   "type": "string",
+   "args": [
+    "100"
+   ],
+   "mods": [],
+   "name": "name"
+  },
+  "amount": {
+   "type": "decimal",
+   "args": [
+    "12",
+    "2"
+   ],
+   "mods": [
+    "default=0"
+   ],
+   "name": "amount"
+  },
+  "is_active": {
+   "type": "boolean",
+   "args": [],
+   "mods": [
+    "default=true"
+   ],
+   "name": "is_active"
+  },
+  "created_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "created_at"
+  },
+  "updated_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "updated_at"
+  },
+  "__idx": {
+   "type": "idx",
+   "args": [
+    "unique:['payroll_company_id', 'name']"
+   ],
+   "mods": []
+  }
+ },
+ "employee_deductions": {
+  "id": {
+   "type": "id",
+   "args": [],
+   "mods": [],
+   "name": "id"
+  },
+  "employee_id": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "constrained='employees'",
+    "cascadeOnDelete"
+   ],
+   "name": "employee_id"
+  },
+  "deduction_id": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "constrained='deductions'",
+    "cascadeOnDelete"
+   ],
+   "name": "deduction_id"
+  },
+  "deduction_type": {
+   "type": "enum",
+   "args": [
+    "['One Time', 'Monthly']"
+   ],
+   "mods": [
+    "default='Monthly'"
+   ],
+   "name": "deduction_type"
+  },
+  "amount": {
+   "type": "decimal",
+   "args": [
+    "12",
+    "2"
+   ],
+   "mods": [
+    "default=0"
+   ],
+   "name": "amount"
+  },
+  "is_settled": {
+   "type": "boolean",
+   "args": [],
+   "mods": [
+    "default=false"
+   ],
+   "name": "is_settled"
+  },
+  "created_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "created_at"
+  },
+  "updated_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "updated_at"
+  }
+ },
+ "joining_letters": {
+  "id": {
+   "type": "id",
+   "args": [],
+   "mods": [],
+   "name": "id"
+  },
+  "payroll_company_id": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "unique",
+    "constrained='payroll_companies'",
+    "cascadeOnDelete"
+   ],
+   "name": "payroll_company_id"
+  },
+  "subject": {
+   "type": "string",
+   "args": [
+    "255"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "subject"
+  },
+  "introduction_content": {
+   "type": "text",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "introduction_content"
+  },
+  "roles_responsibilities": {
+   "type": "text",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "roles_responsibilities"
+  },
+  "terms_conditions": {
+   "type": "text",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "terms_conditions"
+  },
+  "closing_message": {
+   "type": "text",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "closing_message"
+  },
+  "use_company_signatory": {
+   "type": "boolean",
+   "args": [],
+   "mods": [
+    "default=true"
+   ],
+   "name": "use_company_signatory"
+  },
+  "authorized_name": {
+   "type": "string",
+   "args": [
+    "150"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "authorized_name"
+  },
+  "authorized_designation": {
+   "type": "string",
+   "args": [
+    "100"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "authorized_designation"
+  },
+  "signature_image_path": {
+   "type": "string",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "signature_image_path"
+  },
+  "authorized_closing_text": {
+   "type": "text",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "authorized_closing_text"
+  },
+  "acceptance_heading": {
+   "type": "string",
+   "args": [
+    "255"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "acceptance_heading"
+  },
+  "acceptance_content": {
+   "type": "text",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "acceptance_content"
+  },
+  "acceptance_closing_text": {
+   "type": "text",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "acceptance_closing_text"
+  },
+  "is_active": {
+   "type": "boolean",
+   "args": [],
+   "mods": [
+    "default=true"
+   ],
+   "name": "is_active"
+  },
+  "created_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "created_at"
+  },
+  "updated_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "updated_at"
+  }
+ },
+ "attendance_months": {
+  "id": {
+   "type": "id",
+   "args": [],
+   "mods": [],
+   "name": "id"
+  },
+  "payroll_company_id": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "constrained='payroll_companies'",
+    "cascadeOnDelete"
+   ],
+   "name": "payroll_company_id"
+  },
+  "year": {
+   "type": "unsignedSmallInteger",
+   "args": [],
+   "mods": [],
+   "name": "year"
+  },
+  "month": {
+   "type": "unsignedTinyInteger",
+   "args": [],
+   "mods": [],
+   "name": "month"
+  },
+  "is_locked": {
+   "type": "boolean",
+   "args": [],
+   "mods": [
+    "default=false"
+   ],
+   "name": "is_locked"
+  },
+  "locked_at": {
+   "type": "dateTime",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "locked_at"
+  },
+  "salary_generated_at": {
+   "type": "dateTime",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "salary_generated_at"
+  },
+  "salary_generated_by": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "nullable",
+    "constrained='users'",
+    "nullOnDelete"
+   ],
+   "name": "salary_generated_by"
+  },
+  "generation_count": {
+   "type": "unsignedInteger",
+   "args": [],
+   "mods": [
+    "default=0"
+   ],
+   "name": "generation_count"
+  },
+  "unlocked_by": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "nullable",
+    "constrained='users'",
+    "nullOnDelete"
+   ],
+   "name": "unlocked_by"
+  },
+  "unlocked_at": {
+   "type": "dateTime",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "unlocked_at"
+  },
+  "unlock_session_id": {
+   "type": "string",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "unlock_session_id"
+  },
+  "created_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "created_at"
+  },
+  "updated_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "updated_at"
+  },
+  "__idx": {
+   "type": "idx",
+   "args": [
+    "unique:['payroll_company_id', 'year', 'month']"
+   ],
+   "mods": []
+  }
+ },
+ "attendance_entries": {
+  "id": {
+   "type": "id",
+   "args": [],
+   "mods": [],
+   "name": "id"
+  },
+  "attendance_month_id": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "constrained='attendance_months'",
+    "cascadeOnDelete"
+   ],
+   "name": "attendance_month_id"
+  },
+  "employee_id": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "constrained='employees'",
+    "cascadeOnDelete"
+   ],
+   "name": "employee_id"
+  },
+  "day": {
+   "type": "unsignedTinyInteger",
+   "args": [],
+   "mods": [],
+   "name": "day"
+  },
+  "attendance_status_id": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "nullable",
+    "constrained='attendance_statuses'",
+    "nullOnDelete"
+   ],
+   "name": "attendance_status_id"
+  },
+  "shortcut_key": {
+   "type": "string",
+   "args": [
+    "10"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "shortcut_key"
+  },
+  "attendance_percentage": {
+   "type": "unsignedTinyInteger",
+   "args": [],
+   "mods": [
+    "default=0"
+   ],
+   "name": "attendance_percentage"
+  },
+  "overtime_hours": {
+   "type": "decimal",
+   "args": [
+    "6",
+    "2"
+   ],
+   "mods": [
+    "default=0"
+   ],
+   "name": "overtime_hours"
+  },
+  "created_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "created_at"
+  },
+  "updated_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "updated_at"
+  },
+  "__idx": {
+   "type": "idx",
+   "args": [
+    "unique:['attendance_month_id', 'employee_id', 'day']"
+   ],
+   "mods": []
+  },
+  "skips_food": {
+   "type": "boolean",
+   "args": [],
+   "mods": [
+    "default=false"
+   ],
+   "name": "skips_food"
+  }
+ },
+ "payroll_advances": {
+  "id": {
+   "type": "id",
+   "args": [],
+   "mods": [],
+   "name": "id"
+  },
+  "payroll_company_id": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "constrained='payroll_companies'",
+    "cascadeOnDelete"
+   ],
+   "name": "payroll_company_id"
+  },
+  "employee_id": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "constrained='employees'",
+    "cascadeOnDelete"
+   ],
+   "name": "employee_id"
+  },
+  "advance_date": {
+   "type": "dateTime",
+   "args": [],
+   "mods": [],
+   "name": "advance_date"
+  },
+  "amount": {
+   "type": "decimal",
+   "args": [
+    "12",
+    "2"
+   ],
+   "mods": [],
+   "name": "amount"
+  },
+  "deduction_type": {
+   "type": "enum",
+   "args": [
+    "['One Time', 'Monthly']"
+   ],
+   "mods": [
+    "default='One Time'"
+   ],
+   "name": "deduction_type"
+  },
+  "deduction_amount": {
+   "type": "decimal",
+   "args": [
+    "12",
+    "2"
+   ],
+   "mods": [
+    "default=0"
+   ],
+   "name": "deduction_amount"
+  },
+  "remarks": {
+   "type": "text",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "remarks"
+  },
+  "recovered_amount": {
+   "type": "decimal",
+   "args": [
+    "12",
+    "2"
+   ],
+   "mods": [
+    "default=0"
+   ],
+   "name": "recovered_amount"
+  },
+  "is_settled": {
+   "type": "boolean",
+   "args": [],
+   "mods": [
+    "default=false"
+   ],
+   "name": "is_settled"
+  },
+  "is_carry_forward": {
+   "type": "boolean",
+   "args": [],
+   "mods": [
+    "default=false"
+   ],
+   "name": "is_carry_forward"
+  },
+  "parent_advance_id": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "nullable",
+    "constrained='payroll_advances'",
+    "nullOnDelete"
+   ],
+   "name": "parent_advance_id"
+  },
+  "created_by": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "nullable",
+    "constrained='users'",
+    "nullOnDelete"
+   ],
+   "name": "created_by"
+  },
+  "created_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "created_at"
+  },
+  "updated_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "updated_at"
+  },
+  "source_salary_processing_id": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "nullable",
+    "after='parent_advance_id'",
+    "constrained='salary_processings'",
+    "nullOnDelete"
+   ],
+   "name": "source_salary_processing_id"
+  },
+  "entry_no": {
+   "type": "unsignedInteger",
+   "args": [],
+   "mods": [
+    "nullable",
+    "index"
+   ],
+   "name": "entry_no"
+  },
+  "deleted_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable",
+    "index"
+   ],
+   "name": "deleted_at"
+  },
+  "deleted_by": {
+   "type": "unsignedBigInteger",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "deleted_by"
+  }
+ },
+ "bonus_incentives": {
+  "id": {
+   "type": "id",
+   "args": [],
+   "mods": [],
+   "name": "id"
+  },
+  "payroll_company_id": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "constrained='payroll_companies'",
+    "cascadeOnDelete"
+   ],
+   "name": "payroll_company_id"
+  },
+  "employee_id": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "constrained='employees'",
+    "cascadeOnDelete"
+   ],
+   "name": "employee_id"
+  },
+  "entry_date": {
+   "type": "dateTime",
+   "args": [],
+   "mods": [],
+   "name": "entry_date"
+  },
+  "type": {
+   "type": "enum",
+   "args": [
+    "['Bonus', 'Incentive']"
+   ],
+   "mods": [
+    "default='Bonus'"
+   ],
+   "name": "type"
+  },
+  "amount": {
+   "type": "decimal",
+   "args": [
+    "12",
+    "2"
+   ],
+   "mods": [],
+   "name": "amount"
+  },
+  "remarks": {
+   "type": "text",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "remarks"
+  },
+  "created_by": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "nullable",
+    "constrained='users'",
+    "nullOnDelete"
+   ],
+   "name": "created_by"
+  },
+  "created_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "created_at"
+  },
+  "updated_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "updated_at"
+  },
+  "entry_no": {
+   "type": "unsignedInteger",
+   "args": [],
+   "mods": [
+    "nullable",
+    "index"
+   ],
+   "name": "entry_no"
+  },
+  "deleted_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable",
+    "index"
+   ],
+   "name": "deleted_at"
+  },
+  "deleted_by": {
+   "type": "unsignedBigInteger",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "deleted_by"
+  }
+ },
+ "salary_processings": {
+  "id": {
+   "type": "id",
+   "args": [],
+   "mods": [],
+   "name": "id"
+  },
+  "payroll_company_id": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "constrained='payroll_companies'",
+    "cascadeOnDelete",
+    "PLAIN_REF_no_fk"
+   ],
+   "name": "payroll_company_id"
+  },
+  "employee_id": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "constrained='employees'",
+    "cascadeOnDelete",
+    "PLAIN_REF_no_fk"
+   ],
+   "name": "employee_id"
+  },
+  "year": {
+   "type": "unsignedSmallInteger",
+   "args": [],
+   "mods": [],
+   "name": "year"
+  },
+  "month": {
+   "type": "unsignedTinyInteger",
+   "args": [],
+   "mods": [],
+   "name": "month"
+  },
+  "company_name": {
+   "type": "string",
+   "args": [
+    "150"
+   ],
+   "mods": [],
+   "name": "company_name"
+  },
+  "employee_code": {
+   "type": "string",
+   "args": [
+    "50"
+   ],
+   "mods": [],
+   "name": "employee_code"
+  },
+  "employee_name": {
+   "type": "string",
+   "args": [
+    "150"
+   ],
+   "mods": [],
+   "name": "employee_name"
+  },
+  "designation": {
+   "type": "string",
+   "args": [
+    "100"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "designation"
+  },
+  "department": {
+   "type": "string",
+   "args": [
+    "100"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "department"
+  },
+  "payment_mode": {
+   "type": "string",
+   "args": [
+    "40"
+   ],
+   "mods": [
+    "nullable",
+    "change"
+   ],
+   "name": "payment_mode"
+  },
+  "monthly_salary": {
+   "type": "decimal",
+   "args": [
+    "12",
+    "2"
+   ],
+   "mods": [
+    "default=0"
+   ],
+   "name": "monthly_salary"
+  },
+  "daily_working_hours": {
+   "type": "decimal",
+   "args": [
+    "5",
+    "2"
+   ],
+   "mods": [
+    "default=8"
+   ],
+   "name": "daily_working_hours"
+  },
+  "total_days_in_month": {
+   "type": "unsignedTinyInteger",
+   "args": [],
+   "mods": [
+    "default=0"
+   ],
+   "name": "total_days_in_month"
+  },
+  "daily_salary": {
+   "type": "decimal",
+   "args": [
+    "12",
+    "2"
+   ],
+   "mods": [
+    "default=0"
+   ],
+   "name": "daily_salary"
+  },
+  "days_0": {
+   "type": "decimal",
+   "args": [
+    "6",
+    "2"
+   ],
+   "mods": [
+    "default=0"
+   ],
+   "name": "days_0"
+  },
+  "days_25": {
+   "type": "decimal",
+   "args": [
+    "6",
+    "2"
+   ],
+   "mods": [
+    "default=0"
+   ],
+   "name": "days_25"
+  },
+  "days_50": {
+   "type": "decimal",
+   "args": [
+    "6",
+    "2"
+   ],
+   "mods": [
+    "default=0"
+   ],
+   "name": "days_50"
+  },
+  "days_75": {
+   "type": "decimal",
+   "args": [
+    "6",
+    "2"
+   ],
+   "mods": [
+    "default=0"
+   ],
+   "name": "days_75"
+  },
+  "days_100": {
+   "type": "decimal",
+   "args": [
+    "6",
+    "2"
+   ],
+   "mods": [
+    "default=0"
+   ],
+   "name": "days_100"
+  },
+  "total_payable_days": {
+   "type": "decimal",
+   "args": [
+    "6",
+    "2"
+   ],
+   "mods": [
+    "default=0"
+   ],
+   "name": "total_payable_days"
+  },
+  "attendance_salary": {
+   "type": "decimal",
+   "args": [
+    "12",
+    "2"
+   ],
+   "mods": [
+    "default=0"
+   ],
+   "name": "attendance_salary"
+  },
+  "overtime_hours": {
+   "type": "decimal",
+   "args": [
+    "8",
+    "2"
+   ],
+   "mods": [
+    "default=0"
+   ],
+   "name": "overtime_hours"
+  },
+  "hourly_rate": {
+   "type": "decimal",
+   "args": [
+    "12",
+    "2"
+   ],
+   "mods": [
+    "default=0"
+   ],
+   "name": "hourly_rate"
+  },
+  "overtime_amount": {
+   "type": "decimal",
+   "args": [
+    "12",
+    "2"
+   ],
+   "mods": [
+    "default=0"
+   ],
+   "name": "overtime_amount"
+  },
+  "bonus_amount": {
+   "type": "decimal",
+   "args": [
+    "12",
+    "2"
+   ],
+   "mods": [
+    "default=0"
+   ],
+   "name": "bonus_amount"
+  },
+  "incentive_amount": {
+   "type": "decimal",
+   "args": [
+    "12",
+    "2"
+   ],
+   "mods": [
+    "default=0"
+   ],
+   "name": "incentive_amount"
+  },
+  "deduction_amount": {
+   "type": "decimal",
+   "args": [
+    "12",
+    "2"
+   ],
+   "mods": [
+    "default=0"
+   ],
+   "name": "deduction_amount"
+  },
+  "advance_deduction": {
+   "type": "decimal",
+   "args": [
+    "12",
+    "2"
+   ],
+   "mods": [
+    "default=0"
+   ],
+   "name": "advance_deduction"
+  },
+  "pending_advance_amount": {
+   "type": "decimal",
+   "args": [
+    "12",
+    "2"
+   ],
+   "mods": [
+    "default=0"
+   ],
+   "name": "pending_advance_amount"
+  },
+  "net_salary": {
+   "type": "decimal",
+   "args": [
+    "12",
+    "2"
+   ],
+   "mods": [
+    "default=0"
+   ],
+   "name": "net_salary"
+  },
+  "payment_status": {
+   "type": "string",
+   "args": [
+    "20"
+   ],
+   "mods": [
+    "default='Pending'",
+    "change"
+   ],
+   "name": "payment_status"
+  },
+  "generation_count": {
+   "type": "unsignedInteger",
+   "args": [],
+   "mods": [
+    "default=1"
+   ],
+   "name": "generation_count"
+  },
+  "processed_by": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "nullable",
+    "constrained='users'",
+    "nullOnDelete"
+   ],
+   "name": "processed_by"
+  },
+  "processed_at": {
+   "type": "dateTime",
+   "args": [],
+   "mods": [],
+   "name": "processed_at"
+  },
+  "created_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "created_at"
+  },
+  "updated_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "updated_at"
+  },
+  "__idx": {
+   "type": "idx",
+   "args": [
+    "unique:['payroll_company_id', 'employee_id', 'year', 'month'], 'salary_slip_period_unique'"
+   ],
+   "mods": []
+  },
+  "paid_amount": {
+   "type": "decimal",
+   "args": [
+    "12",
+    "2"
+   ],
+   "mods": [
+    "default=0"
+   ],
+   "name": "paid_amount"
+  },
+  "paid_at": {
+   "type": "date",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "paid_at"
+  },
+  "payment_reference": {
+   "type": "string",
+   "args": [
+    "100"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "payment_reference"
+  },
+  "payment_remarks": {
+   "type": "text",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "payment_remarks"
+  },
+  "payment_updated_by": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "nullable",
+    "constrained='users'",
+    "nullOnDelete"
+   ],
+   "name": "payment_updated_by"
+  },
+  "payment_updated_at": {
+   "type": "dateTime",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "payment_updated_at"
+  },
+  "bank_name": {
+   "type": "string",
+   "args": [
+    "120"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "bank_name"
+  },
+  "account_holder_name": {
+   "type": "string",
+   "args": [
+    "120"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "account_holder_name"
+  },
+  "account_number": {
+   "type": "text",
+   "args": [],
+   "mods": [
+    "nullable",
+    "ENCRYPTED"
+   ],
+   "name": "account_number"
+  },
+  "ifsc_code": {
+   "type": "text",
+   "args": [],
+   "mods": [
+    "nullable",
+    "ENCRYPTED"
+   ],
+   "name": "ifsc_code"
+  },
+  "branch_name": {
+   "type": "string",
+   "args": [
+    "120"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "branch_name"
+  }
+ },
+ "salary_processing_lines": {
+  "id": {
+   "type": "id",
+   "args": [],
+   "mods": [],
+   "name": "id"
+  },
+  "salary_processing_id": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "constrained='salary_processings'",
+    "cascadeOnDelete"
+   ],
+   "name": "salary_processing_id"
+  },
+  "category": {
+   "type": "enum",
+   "args": [
+    "['Deduction', 'Advance', 'Bonus', 'Incentive']"
+   ],
+   "mods": [],
+   "name": "category"
+  },
+  "label": {
+   "type": "string",
+   "args": [
+    "150"
+   ],
+   "mods": [],
+   "name": "label"
+  },
+  "deduction_type": {
+   "type": "string",
+   "args": [
+    "20"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "deduction_type"
+  },
+  "amount": {
+   "type": "decimal",
+   "args": [
+    "12",
+    "2"
+   ],
+   "mods": [
+    "default=0"
+   ],
+   "name": "amount"
+  },
+  "pending_amount": {
+   "type": "decimal",
+   "args": [
+    "12",
+    "2"
+   ],
+   "mods": [
+    "default=0"
+   ],
+   "name": "pending_amount"
+  },
+  "source_type": {
+   "type": "string",
+   "args": [
+    "50"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "source_type"
+  },
+  "source_id": {
+   "type": "unsignedBigInteger",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "source_id"
+  },
+  "created_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "created_at"
+  },
+  "updated_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "updated_at"
+  }
+ },
+ "salary_update_histories": {
+  "id": {
+   "type": "id",
+   "args": [],
+   "mods": [],
+   "name": "id"
+  },
+  "employee_id": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "constrained='employees'",
+    "cascadeOnDelete",
+    "PLAIN_REF_no_fk"
+   ],
+   "name": "employee_id"
+  },
+  "batch_id": {
+   "type": "uuid",
+   "args": [],
+   "mods": [],
+   "name": "batch_id"
+  },
+  "effective_date": {
+   "type": "date",
+   "args": [],
+   "mods": [],
+   "name": "effective_date"
+  },
+  "field_name": {
+   "type": "string",
+   "args": [
+    "100"
+   ],
+   "mods": [],
+   "name": "field_name"
+  },
+  "previous_value": {
+   "type": "text",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "previous_value"
+  },
+  "new_value": {
+   "type": "text",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "new_value"
+  },
+  "changed_by": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "nullable",
+    "constrained='users'",
+    "nullOnDelete"
+   ],
+   "name": "changed_by"
+  },
+  "created_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "created_at"
+  },
+  "updated_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "updated_at"
+  }
+ },
+ "employee_separations": {
+  "id": {
+   "type": "id",
+   "args": [],
+   "mods": [],
+   "name": "id"
+  },
+  "payroll_company_id": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "constrained='payroll_companies'",
+    "cascadeOnDelete"
+   ],
+   "name": "payroll_company_id"
+  },
+  "employee_id": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "constrained='employees'",
+    "cascadeOnDelete"
+   ],
+   "name": "employee_id"
+  },
+  "separation_type": {
+   "type": "string",
+   "args": [
+    "60"
+   ],
+   "mods": [
+    "default='Resignation'",
+    "change"
+   ],
+   "name": "separation_type"
+  },
+  "resignation_date": {
+   "type": "date",
+   "args": [],
+   "mods": [],
+   "name": "resignation_date"
+  },
+  "last_working_date": {
+   "type": "date",
+   "args": [],
+   "mods": [],
+   "name": "last_working_date"
+  },
+  "reason": {
+   "type": "text",
+   "args": [],
+   "mods": [],
+   "name": "reason"
+  },
+  "remarks": {
+   "type": "text",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "remarks"
+  },
+  "document_path": {
+   "type": "string",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "document_path"
+  },
+  "status": {
+   "type": "enum",
+   "args": [
+    "['Pending', 'Accepted', 'Relieved']"
+   ],
+   "mods": [
+    "default='Pending'"
+   ],
+   "name": "status"
+  },
+  "rejoined_at": {
+   "type": "date",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "rejoined_at"
+  },
+  "created_by": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "nullable",
+    "constrained='users'",
+    "nullOnDelete"
+   ],
+   "name": "created_by"
+  },
+  "created_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "created_at"
+  },
+  "updated_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "updated_at"
+  },
+  "entry_no": {
+   "type": "unsignedInteger",
+   "args": [],
+   "mods": [
+    "nullable",
+    "index"
+   ],
+   "name": "entry_no"
+  },
+  "deleted_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable",
+    "index"
+   ],
+   "name": "deleted_at"
+  },
+  "deleted_by": {
+   "type": "unsignedBigInteger",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "deleted_by"
+  }
+ },
+ "experience_letters": {
+  "id": {
+   "type": "id",
+   "args": [],
+   "mods": [],
+   "name": "id"
+  },
+  "payroll_company_id": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "unique",
+    "constrained='payroll_companies'",
+    "cascadeOnDelete"
+   ],
+   "name": "payroll_company_id"
+  },
+  "subject": {
+   "type": "string",
+   "args": [
+    "255"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "subject"
+  },
+  "body_content": {
+   "type": "text",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "body_content"
+  },
+  "conduct_remarks": {
+   "type": "text",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "conduct_remarks"
+  },
+  "closing_message": {
+   "type": "text",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "closing_message"
+  },
+  "use_company_signatory": {
+   "type": "boolean",
+   "args": [],
+   "mods": [
+    "default=true"
+   ],
+   "name": "use_company_signatory"
+  },
+  "authorized_name": {
+   "type": "string",
+   "args": [
+    "150"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "authorized_name"
+  },
+  "authorized_designation": {
+   "type": "string",
+   "args": [
+    "100"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "authorized_designation"
+  },
+  "signature_image_path": {
+   "type": "string",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "signature_image_path"
+  },
+  "authorized_closing_text": {
+   "type": "text",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "authorized_closing_text"
+  },
+  "is_active": {
+   "type": "boolean",
+   "args": [],
+   "mods": [
+    "default=true"
+   ],
+   "name": "is_active"
+  },
+  "created_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "created_at"
+  },
+  "updated_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "updated_at"
+  }
+ },
+ "user_audit_logs": {
+  "id": {
+   "type": "id",
+   "args": [],
+   "mods": [],
+   "name": "id"
+  },
+  "actor_id": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "nullable",
+    "constrained='users'",
+    "nullOnDelete"
+   ],
+   "name": "actor_id"
+  },
+  "target_user_id": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "nullable",
+    "constrained='users'",
+    "nullOnDelete"
+   ],
+   "name": "target_user_id"
+  },
+  "target_username": {
+   "type": "string",
+   "args": [
+    "50"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "target_username"
+  },
+  "action": {
+   "type": "string",
+   "args": [
+    "50"
+   ],
+   "mods": [],
+   "name": "action"
+  },
+  "details": {
+   "type": "json",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "details"
+  },
+  "ip_address": {
+   "type": "string",
+   "args": [
+    "45"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "ip_address"
+  },
+  "created_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "useCurrent"
+   ],
+   "name": "created_at"
+  }
+ },
+ "business_units": {
+  "id": {
+   "type": "id",
+   "args": [],
+   "mods": [],
+   "name": "id"
+  },
+  "name": {
+   "type": "string",
+   "args": [],
+   "mods": [],
+   "name": "name"
+  },
+  "slug": {
+   "type": "string",
+   "args": [],
+   "mods": [
+    "unique"
+   ],
+   "name": "slug"
+  },
+  "code": {
+   "type": "string",
+   "args": [
+    "10"
+   ],
+   "mods": [
+    "unique"
+   ],
+   "name": "code"
+  },
+  "accent": {
+   "type": "string",
+   "args": [
+    "7"
+   ],
+   "mods": [
+    "default='#7C3AED'"
+   ],
+   "name": "accent"
+  },
+  "icon": {
+   "type": "string",
+   "args": [
+    "40"
+   ],
+   "mods": [
+    "default='bi-buildings'"
+   ],
+   "name": "icon"
+  },
+  "is_active": {
+   "type": "boolean",
+   "args": [],
+   "mods": [
+    "default=true"
+   ],
+   "name": "is_active"
+  },
+  "sort_order": {
+   "type": "unsignedSmallInteger",
+   "args": [],
+   "mods": [
+    "default=0"
+   ],
+   "name": "sort_order"
+  },
+  "created_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "created_at"
+  },
+  "updated_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "updated_at"
+  }
+ },
+ "option_sets": {
+  "id": {
+   "type": "id",
+   "args": [],
+   "mods": [],
+   "name": "id"
+  },
+  "key": {
+   "type": "string",
+   "args": [],
+   "mods": [
+    "unique"
+   ],
+   "name": "key"
+  },
+  "name": {
+   "type": "string",
+   "args": [],
+   "mods": [],
+   "name": "name"
+  },
+  "description": {
+   "type": "string",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "description"
+  },
+  "icon": {
+   "type": "string",
+   "args": [
+    "40"
+   ],
+   "mods": [
+    "default='bi-list-ul'"
+   ],
+   "name": "icon"
+  },
+  "input": {
+   "type": "string",
+   "args": [
+    "20"
+   ],
+   "mods": [
+    "default='select'"
+   ],
+   "name": "input"
+  },
+  "is_system": {
+   "type": "boolean",
+   "args": [],
+   "mods": [
+    "default=false"
+   ],
+   "name": "is_system"
+  },
+  "sort_order": {
+   "type": "unsignedSmallInteger",
+   "args": [],
+   "mods": [
+    "default=0"
+   ],
+   "name": "sort_order"
+  },
+  "created_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "created_at"
+  },
+  "updated_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "updated_at"
+  }
+ },
+ "option_items": {
+  "id": {
+   "type": "id",
+   "args": [],
+   "mods": [],
+   "name": "id"
+  },
+  "option_set_id": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "constrained",
+    "cascadeOnDelete"
+   ],
+   "name": "option_set_id"
+  },
+  "label": {
+   "type": "string",
+   "args": [],
+   "mods": [],
+   "name": "label"
+  },
+  "value": {
+   "type": "string",
+   "args": [],
+   "mods": [],
+   "name": "value"
+  },
+  "color": {
+   "type": "string",
+   "args": [
+    "7"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "color"
+  },
+  "is_active": {
+   "type": "boolean",
+   "args": [],
+   "mods": [
+    "default=true"
+   ],
+   "name": "is_active"
+  },
+  "is_default": {
+   "type": "boolean",
+   "args": [],
+   "mods": [
+    "default=false"
+   ],
+   "name": "is_default"
+  },
+  "sort_order": {
+   "type": "unsignedSmallInteger",
+   "args": [],
+   "mods": [
+    "default=0"
+   ],
+   "name": "sort_order"
+  },
+  "created_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "created_at"
+  },
+  "updated_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "updated_at"
+  },
+  "__idx": {
+   "type": "idx",
+   "args": [
+    "unique:['option_set_id', 'value']"
+   ],
+   "mods": []
+  }
+ },
+ "payroll_master_items": {
+  "id": {
+   "type": "id",
+   "args": [],
+   "mods": [],
+   "name": "id"
+  },
+  "payroll_company_id": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "nullable",
+    "constrained='payroll_companies'",
+    "cascadeOnDelete"
+   ],
+   "name": "payroll_company_id"
+  },
+  "list": {
+   "type": "string",
+   "args": [
+    "40"
+   ],
+   "mods": [],
+   "name": "list"
+  },
+  "label": {
+   "type": "string",
+   "args": [
+    "120"
+   ],
+   "mods": [],
+   "name": "label"
+  },
+  "value": {
+   "type": "string",
+   "args": [
+    "190"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "value"
+  },
+  "is_active": {
+   "type": "boolean",
+   "args": [],
+   "mods": [
+    "default=true"
+   ],
+   "name": "is_active"
+  },
+  "sort_order": {
+   "type": "unsignedInteger",
+   "args": [],
+   "mods": [
+    "default=0"
+   ],
+   "name": "sort_order"
+  },
+  "created_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "created_at"
+  },
+  "updated_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "updated_at"
+  },
+  "__idx": {
+   "type": "idx",
+   "args": [
+    "index:['list', 'payroll_company_id']"
+   ],
+   "mods": []
+  }
+ },
+ "payroll_logs": {
+  "id": {
+   "type": "id",
+   "args": [],
+   "mods": [],
+   "name": "id"
+  },
+  "payroll_company_id": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "nullable",
+    "constrained='payroll_companies'",
+    "nullOnDelete"
+   ],
+   "name": "payroll_company_id"
+  },
+  "company_name": {
+   "type": "string",
+   "args": [
+    "150"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "company_name"
+  },
+  "user_id": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "nullable",
+    "constrained='users'",
+    "nullOnDelete"
+   ],
+   "name": "user_id"
+  },
+  "user_name": {
+   "type": "string",
+   "args": [
+    "150"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "user_name"
+  },
+  "action": {
+   "type": "string",
+   "args": [
+    "30"
+   ],
+   "mods": [],
+   "name": "action"
+  },
+  "status": {
+   "type": "string",
+   "args": [
+    "10"
+   ],
+   "mods": [
+    "default='success'"
+   ],
+   "name": "status"
+  },
+  "entity": {
+   "type": "string",
+   "args": [
+    "60"
+   ],
+   "mods": [],
+   "name": "entity"
+  },
+  "subject_id": {
+   "type": "unsignedBigInteger",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "subject_id"
+  },
+  "subject_label": {
+   "type": "string",
+   "args": [
+    "255"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "subject_label"
+  },
+  "summary": {
+   "type": "string",
+   "args": [
+    "500"
+   ],
+   "mods": [],
+   "name": "summary"
+  },
+  "details": {
+   "type": "json",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "details"
+  },
+  "ip_address": {
+   "type": "string",
+   "args": [
+    "45"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "ip_address"
+  },
+  "created_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "useCurrent"
+   ],
+   "name": "created_at"
+  },
+  "__idx": {
+   "type": "idx",
+   "args": [
+    "index:['payroll_company_id', 'created_at']",
+    "index:['entity', 'action']"
+   ],
+   "mods": []
+  }
+ },
+ "food_charge_rates": {
+  "id": {
+   "type": "id",
+   "args": [],
+   "mods": [],
+   "name": "id"
+  },
+  "payroll_company_id": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "constrained='payroll_companies'",
+    "cascadeOnDelete"
+   ],
+   "name": "payroll_company_id"
+  },
+  "monthly_amount": {
+   "type": "decimal",
+   "args": [
+    "10",
+    "2"
+   ],
+   "mods": [],
+   "name": "monthly_amount"
+  },
+  "effective_from": {
+   "type": "date",
+   "args": [],
+   "mods": [],
+   "name": "effective_from"
+  },
+  "created_by": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "nullable",
+    "constrained='users'",
+    "nullOnDelete"
+   ],
+   "name": "created_by"
+  },
+  "created_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "created_at"
+  },
+  "updated_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "updated_at"
+  },
+  "__idx": {
+   "type": "idx",
+   "args": [
+    "index:['payroll_company_id', 'effective_from']"
+   ],
+   "mods": []
+  }
+ },
+ "roles": {
+  "id": {
+   "type": "id",
+   "args": [],
+   "mods": []
+  },
+  "key": {
+   "type": "string",
+   "args": [],
+   "mods": [
+    "unique"
+   ]
+  },
+  "name": {
+   "type": "string",
+   "args": [],
+   "mods": []
+  },
+  "description": {
+   "type": "string",
+   "args": [
+    "500"
+   ],
+   "mods": [
+    "nullable"
+   ]
+  },
+  "icon": {
+   "type": "string",
+   "args": [
+    "40"
+   ],
+   "mods": [
+    "default='bi-person'"
+   ]
+  },
+  "accent": {
+   "type": "string",
+   "args": [
+    "7"
+   ],
+   "mods": [
+    "default='#7C3AED'"
+   ]
+  },
+  "level": {
+   "type": "unsignedSmallInteger",
+   "args": [],
+   "mods": []
+  },
+  "inherits": {
+   "type": "boolean",
+   "args": [],
+   "mods": [
+    "default=true"
+   ]
+  },
+  "is_system": {
+   "type": "boolean",
+   "args": [],
+   "mods": [
+    "default=false"
+   ]
+  },
+  "created_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ]
+  },
+  "updated_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ]
+  }
+ },
+ "role_permissions": {
+  "id": {
+   "type": "id",
+   "args": [],
+   "mods": []
+  },
+  "role_id": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "constrained",
+    "cascadeOnDelete"
+   ]
+  },
+  "permission": {
+   "type": "string",
+   "args": [],
+   "mods": []
+  },
+  "__idx": {
+   "type": "idx",
+   "args": [
+    "unique:['role_id', 'permission']"
+   ],
+   "mods": []
+  }
+ },
+ "user_permissions": {
+  "id": {
+   "type": "id",
+   "args": [],
+   "mods": []
+  },
+  "user_id": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "constrained",
+    "cascadeOnDelete"
+   ]
+  },
+  "permission": {
+   "type": "string",
+   "args": [],
+   "mods": []
+  },
+  "granted": {
+   "type": "boolean",
+   "args": [],
+   "mods": []
+  },
+  "reason": {
+   "type": "string",
+   "args": [
+    "255"
+   ],
+   "mods": [
+    "nullable"
+   ]
+  },
+  "granted_by": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "nullable",
+    "constrained='users'",
+    "nullOnDelete"
+   ]
+  },
+  "created_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ]
+  },
+  "updated_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ]
+  },
+  "__idx": {
+   "type": "idx",
+   "args": [
+    "unique:['user_id', 'permission']"
+   ],
+   "mods": []
+  }
+ },
+ "expense_categories": {
+  "id": {
+   "type": "id",
+   "args": [],
+   "mods": [],
+   "name": "id"
+  },
+  "business": {
+   "type": "string",
+   "args": [
+    "10"
+   ],
+   "mods": [],
+   "name": "business"
+  },
+  "name": {
+   "type": "string",
+   "args": [
+    "80"
+   ],
+   "mods": [],
+   "name": "name"
+  },
+  "sort_order": {
+   "type": "unsignedSmallInteger",
+   "args": [],
+   "mods": [
+    "default=0"
+   ],
+   "name": "sort_order"
+  },
+  "created_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "created_at"
+  },
+  "updated_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "updated_at"
+  },
+  "__idx": {
+   "type": "idx",
+   "args": [
+    "unique:['business', 'name']"
+   ],
+   "mods": []
+  }
+ },
+ "expense_items": {
+  "id": {
+   "type": "id",
+   "args": [],
+   "mods": [],
+   "name": "id"
+  },
+  "expense_category_id": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "constrained='expense_categories'",
+    "cascadeOnDelete"
+   ],
+   "name": "expense_category_id"
+  },
+  "name": {
+   "type": "string",
+   "args": [
+    "80"
+   ],
+   "mods": [],
+   "name": "name"
+  },
+  "price": {
+   "type": "decimal",
+   "args": [
+    "12",
+    "2"
+   ],
+   "mods": [
+    "default=0"
+   ],
+   "name": "price"
+  },
+  "sort_order": {
+   "type": "unsignedSmallInteger",
+   "args": [],
+   "mods": [
+    "default=0"
+   ],
+   "name": "sort_order"
+  },
+  "created_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "created_at"
+  },
+  "updated_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "updated_at"
+  },
+  "__idx": {
+   "type": "idx",
+   "args": [
+    "unique:['expense_category_id', 'name']"
+   ],
+   "mods": []
+  }
+ },
+ "expense_lines": {
+  "id": {
+   "type": "id",
+   "args": [],
+   "mods": [],
+   "name": "id"
+  },
+  "business": {
+   "type": "string",
+   "args": [
+    "10"
+   ],
+   "mods": [],
+   "name": "business"
+  },
+  "expense_id": {
+   "type": "unsignedBigInteger",
+   "args": [],
+   "mods": [],
+   "name": "expense_id"
+  },
+  "category_id": {
+   "type": "unsignedBigInteger",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "category_id"
+  },
+  "item_id": {
+   "type": "unsignedBigInteger",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "item_id"
+  },
+  "category": {
+   "type": "string",
+   "args": [
+    "80"
+   ],
+   "mods": [],
+   "name": "category"
+  },
+  "item": {
+   "type": "string",
+   "args": [
+    "80"
+   ],
+   "mods": [],
+   "name": "item"
+  },
+  "quantity": {
+   "type": "decimal",
+   "args": [
+    "12",
+    "3"
+   ],
+   "mods": [],
+   "name": "quantity"
+  },
+  "price": {
+   "type": "decimal",
+   "args": [
+    "12",
+    "2"
+   ],
+   "mods": [],
+   "name": "price"
+  },
+  "total": {
+   "type": "decimal",
+   "args": [
+    "12",
+    "2"
+   ],
+   "mods": [],
+   "name": "total"
+  },
+  "created_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "created_at"
+  },
+  "updated_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "updated_at"
+  },
+  "__idx": {
+   "type": "idx",
+   "args": [
+    "index:['business', 'expense_id']"
+   ],
+   "mods": []
+  },
+  "pricing": {
+   "type": "string",
+   "args": [
+    "10"
+   ],
+   "mods": [
+    "default='listed'",
+    "after='item'"
+   ],
+   "name": "pricing"
+  }
+ },
+ "employee_meal_periods": {
+  "id": {
+   "type": "id",
+   "args": [],
+   "mods": [],
+   "name": "id"
+  },
+  "payroll_company_id": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "constrained='payroll_companies'",
+    "cascadeOnDelete"
+   ],
+   "name": "payroll_company_id"
+  },
+  "employee_id": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "constrained='employees'",
+    "cascadeOnDelete"
+   ],
+   "name": "employee_id"
+  },
+  "starts_on": {
+   "type": "date",
+   "args": [],
+   "mods": [],
+   "name": "starts_on"
+  },
+  "ends_on": {
+   "type": "date",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "ends_on"
+  },
+  "created_by": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "nullable",
+    "constrained='users'",
+    "nullOnDelete"
+   ],
+   "name": "created_by"
+  },
+  "created_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "created_at"
+  },
+  "updated_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "updated_at"
+  },
+  "__idx": {
+   "type": "idx",
+   "args": [
+    "index:['employee_id', 'starts_on']",
+    "index:['payroll_company_id', 'starts_on']"
+   ],
+   "mods": []
+  },
+  "deleted_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable",
+    "index"
+   ],
+   "name": "deleted_at"
+  },
+  "deleted_by": {
+   "type": "unsignedBigInteger",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "deleted_by"
+  }
+ },
+ "system_logs": {
+  "id": {
+   "type": "id",
+   "args": [],
+   "mods": [],
+   "name": "id"
+  },
+  "module": {
+   "type": "string",
+   "args": [
+    "40"
+   ],
+   "mods": [],
+   "name": "module"
+  },
+  "user_id": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "nullable",
+    "constrained='users'",
+    "nullOnDelete"
+   ],
+   "name": "user_id"
+  },
+  "user_name": {
+   "type": "string",
+   "args": [
+    "150"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "user_name"
+  },
+  "action": {
+   "type": "string",
+   "args": [
+    "30"
+   ],
+   "mods": [],
+   "name": "action"
+  },
+  "status": {
+   "type": "string",
+   "args": [
+    "10"
+   ],
+   "mods": [
+    "default='success'"
+   ],
+   "name": "status"
+  },
+  "entity": {
+   "type": "string",
+   "args": [
+    "60"
+   ],
+   "mods": [],
+   "name": "entity"
+  },
+  "subject_id": {
+   "type": "unsignedBigInteger",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "subject_id"
+  },
+  "subject_label": {
+   "type": "string",
+   "args": [
+    "255"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "subject_label"
+  },
+  "summary": {
+   "type": "string",
+   "args": [
+    "500"
+   ],
+   "mods": [],
+   "name": "summary"
+  },
+  "details": {
+   "type": "json",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "details"
+  },
+  "ip_address": {
+   "type": "string",
+   "args": [
+    "45"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "ip_address"
+  },
+  "created_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "useCurrent"
+   ],
+   "name": "created_at"
+  },
+  "__idx": {
+   "type": "idx",
+   "args": [
+    "index:['module', 'created_at']",
+    "index:['entity', 'action']",
+    "index:'created_at'"
+   ],
+   "mods": []
+  }
+ },
+ "meal_plan_rates": {
+  "id": {
+   "type": "id",
+   "args": [],
+   "mods": [],
+   "name": "id"
+  },
+  "plan": {
+   "type": "string",
+   "args": [
+    "100"
+   ],
+   "mods": [],
+   "name": "plan"
+  },
+  "rate_per_person": {
+   "type": "decimal",
+   "args": [
+    "10",
+    "2"
+   ],
+   "mods": [],
+   "name": "rate_per_person"
+  },
+  "effective_from": {
+   "type": "date",
+   "args": [],
+   "mods": [],
+   "name": "effective_from"
+  },
+  "note": {
+   "type": "string",
+   "args": [
+    "255"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "note"
+  },
+  "created_by": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "nullable",
+    "constrained='users'",
+    "nullOnDelete"
+   ],
+   "name": "created_by"
+  },
+  "created_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "created_at"
+  },
+  "updated_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "updated_at"
+  },
+  "__idx": {
+   "type": "idx",
+   "args": [
+    "unique:['plan', 'effective_from']"
+   ],
+   "mods": []
+  }
+ },
+ "accounting_years": {
+  "id": {
+   "type": "id",
+   "args": [],
+   "mods": [],
+   "name": "id"
+  },
+  "label": {
+   "type": "string",
+   "args": [
+    "20"
+   ],
+   "mods": [
+    "unique"
+   ],
+   "name": "label"
+  },
+  "starts_on": {
+   "type": "date",
+   "args": [],
+   "mods": [
+    "unique"
+   ],
+   "name": "starts_on"
+  },
+  "ends_on": {
+   "type": "date",
+   "args": [],
+   "mods": [],
+   "name": "ends_on"
+  },
+  "closed_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "closed_at"
+  },
+  "started_by": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "nullable",
+    "constrained='users'",
+    "nullOnDelete"
+   ],
+   "name": "started_by"
+  },
+  "closed_by": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "nullable",
+    "constrained='users'",
+    "nullOnDelete"
+   ],
+   "name": "closed_by"
+  },
+  "created_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "created_at"
+  },
+  "updated_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "updated_at"
+  }
+ },
+ "staff_emails": {
+  "id": {
+   "type": "id",
+   "args": [],
+   "mods": [],
+   "name": "id"
+  },
+  "payroll_company_id": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "constrained='payroll_companies'",
+    "cascadeOnDelete"
+   ],
+   "name": "payroll_company_id"
+  },
+  "employee_id": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "nullable",
+    "constrained='employees'",
+    "nullOnDelete"
+   ],
+   "name": "employee_id"
+  },
+  "employee_name": {
+   "type": "string",
+   "args": [
+    "150"
+   ],
+   "mods": [],
+   "name": "employee_name"
+  },
+  "employee_code": {
+   "type": "string",
+   "args": [
+    "50"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "employee_code"
+  },
+  "designation": {
+   "type": "string",
+   "args": [
+    "100"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "designation"
+  },
+  "recipient_id": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "nullable",
+    "constrained='payroll_master_items'",
+    "nullOnDelete"
+   ],
+   "name": "recipient_id"
+  },
+  "recipient_name": {
+   "type": "string",
+   "args": [
+    "150"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "recipient_name"
+  },
+  "recipient_email": {
+   "type": "string",
+   "args": [
+    "190"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "recipient_email"
+  },
+  "subject": {
+   "type": "string",
+   "args": [
+    "255"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "subject"
+  },
+  "attachment": {
+   "type": "string",
+   "args": [
+    "150"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "attachment"
+  },
+  "attachment_bytes": {
+   "type": "unsignedInteger",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "attachment_bytes"
+  },
+  "status": {
+   "type": "string",
+   "args": [
+    "10"
+   ],
+   "mods": [
+    "default='sending'"
+   ],
+   "name": "status"
+  },
+  "message": {
+   "type": "string",
+   "args": [
+    "500"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "message"
+  },
+  "error": {
+   "type": "text",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "error"
+  },
+  "duration_ms": {
+   "type": "unsignedInteger",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "duration_ms"
+  },
+  "sent_by": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "nullable",
+    "constrained='users'",
+    "nullOnDelete"
+   ],
+   "name": "sent_by"
+  },
+  "sent_by_name": {
+   "type": "string",
+   "args": [
+    "150"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "sent_by_name"
+  },
+  "ip_address": {
+   "type": "string",
+   "args": [
+    "45"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "ip_address"
+  },
+  "finished_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "finished_at"
+  },
+  "created_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "created_at"
+  },
+  "updated_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "updated_at"
+  },
+  "__idx": {
+   "type": "idx",
+   "args": [
+    "index:['payroll_company_id', 'created_at']",
+    "index:['payroll_company_id', 'status']"
+   ],
+   "mods": []
+  }
+ },
+ "force_logs": {
+  "id": {
+   "type": "id",
+   "args": [],
+   "mods": [],
+   "name": "id"
+  },
+  "user_id": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "nullable",
+    "constrained='users'",
+    "nullOnDelete"
+   ],
+   "name": "user_id"
+  },
+  "user_name": {
+   "type": "string",
+   "args": [
+    "150"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "user_name"
+  },
+  "action": {
+   "type": "string",
+   "args": [
+    "20"
+   ],
+   "mods": [],
+   "name": "action"
+  },
+  "module": {
+   "type": "string",
+   "args": [
+    "40"
+   ],
+   "mods": [
+    "default='system'"
+   ],
+   "name": "module"
+  },
+  "summary": {
+   "type": "string",
+   "args": [
+    "500"
+   ],
+   "mods": [],
+   "name": "summary"
+  },
+  "details": {
+   "type": "json",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "details"
+  },
+  "route": {
+   "type": "string",
+   "args": [
+    "120"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "route"
+  },
+  "path": {
+   "type": "string",
+   "args": [
+    "255"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "path"
+  },
+  "method": {
+   "type": "string",
+   "args": [
+    "10"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "method"
+  },
+  "ip_address": {
+   "type": "string",
+   "args": [
+    "45"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "ip_address"
+  },
+  "created_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "useCurrent"
+   ],
+   "name": "created_at"
+  },
+  "__idx": {
+   "type": "idx",
+   "args": [
+    "index:'created_at'",
+    "index:['module', 'created_at']",
+    "index:['action', 'created_at']"
+   ],
+   "mods": []
+  }
+ },
+ "app_settings": {
+  "id": {
+   "type": "id",
+   "args": [],
+   "mods": [],
+   "name": "id"
+  },
+  "key": {
+   "type": "string",
+   "args": [
+    "100"
+   ],
+   "mods": [
+    "unique"
+   ],
+   "name": "key"
+  },
+  "value": {
+   "type": "text",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "value"
+  },
+  "is_secret": {
+   "type": "boolean",
+   "args": [],
+   "mods": [
+    "default=false"
+   ],
+   "name": "is_secret"
+  },
+  "created_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "created_at"
+  },
+  "updated_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "updated_at"
+  }
+ },
+ "customers": {
+  "id": {
+   "type": "id",
+   "args": [],
+   "mods": [],
+   "name": "id"
+  },
+  "name": {
+   "type": "string",
+   "args": [
+    "100"
+   ],
+   "mods": [],
+   "name": "name"
+  },
+  "mobile": {
+   "type": "string",
+   "args": [
+    "15"
+   ],
+   "mods": [
+    "unique"
+   ],
+   "name": "mobile"
+  },
+  "email": {
+   "type": "string",
+   "args": [
+    "254"
+   ],
+   "mods": [
+    "nullable",
+    "index"
+   ],
+   "name": "email"
+  },
+  "address": {
+   "type": "string",
+   "args": [
+    "255"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "address"
+  },
+  "city": {
+   "type": "string",
+   "args": [
+    "100"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "city"
+  },
+  "id_proof_type": {
+   "type": "string",
+   "args": [
+    "60"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "id_proof_type"
+  },
+  "id_proof_number": {
+   "type": "text",
+   "args": [],
+   "mods": [
+    "nullable",
+    "ENCRYPTED"
+   ],
+   "name": "id_proof_number"
+  },
+  "notes": {
+   "type": "text",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "notes"
+  },
+  "password": {
+   "type": "string",
+   "args": [],
+   "mods": [],
+   "name": "password"
+  },
+  "must_change_password": {
+   "type": "boolean",
+   "args": [],
+   "mods": [
+    "default=false"
+   ],
+   "name": "must_change_password"
+  },
+  "is_active": {
+   "type": "boolean",
+   "args": [],
+   "mods": [
+    "default=true"
+   ],
+   "name": "is_active"
+  },
+  "source": {
+   "type": "string",
+   "args": [
+    "10"
+   ],
+   "mods": [
+    "default='admin'"
+   ],
+   "name": "source"
+  },
+  "last_login_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "last_login_at"
+  },
+  "created_by": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "nullable",
+    "constrained='users'",
+    "nullOnDelete"
+   ],
+   "name": "created_by"
+  },
+  "modified_by": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "nullable",
+    "constrained='users'",
+    "nullOnDelete"
+   ],
+   "name": "modified_by"
+  },
+  "created_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "created_at"
+  },
+  "updated_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "updated_at"
+  }
+ },
+ "razorpay_events": {
+  "id": {
+   "type": "id",
+   "args": [],
+   "mods": [],
+   "name": "id"
+  },
+  "business": {
+   "type": "string",
+   "args": [
+    "10"
+   ],
+   "mods": [
+    "index"
+   ],
+   "name": "business"
+  },
+  "event_id": {
+   "type": "string",
+   "args": [
+    "100"
+   ],
+   "mods": [
+    "nullable",
+    "unique"
+   ],
+   "name": "event_id"
+  },
+  "event": {
+   "type": "string",
+   "args": [
+    "60"
+   ],
+   "mods": [
+    "nullable",
+    "index"
+   ],
+   "name": "event"
+  },
+  "signature_ok": {
+   "type": "boolean",
+   "args": [],
+   "mods": [
+    "default=false"
+   ],
+   "name": "signature_ok"
+  },
+  "payload": {
+   "type": "json",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "payload"
+  },
+  "ip_address": {
+   "type": "string",
+   "args": [
+    "45"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "ip_address"
+  },
+  "received_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "useCurrent"
+   ],
+   "name": "received_at"
+  },
+  "created_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "created_at"
+  },
+  "updated_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "updated_at"
+  }
+ },
+ "razorpay_payments": {
+  "id": {
+   "type": "id",
+   "args": [],
+   "mods": [],
+   "name": "id"
+  },
+  "business": {
+   "type": "string",
+   "args": [
+    "10"
+   ],
+   "mods": [
+    "index"
+   ],
+   "name": "business"
+  },
+  "payment_id": {
+   "type": "string",
+   "args": [
+    "40"
+   ],
+   "mods": [],
+   "name": "payment_id"
+  },
+  "order_id": {
+   "type": "string",
+   "args": [
+    "40"
+   ],
+   "mods": [
+    "nullable",
+    "index"
+   ],
+   "name": "order_id"
+  },
+  "status": {
+   "type": "string",
+   "args": [
+    "20"
+   ],
+   "mods": [
+    "nullable",
+    "index"
+   ],
+   "name": "status"
+  },
+  "last_event": {
+   "type": "string",
+   "args": [
+    "60"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "last_event"
+  },
+  "method": {
+   "type": "string",
+   "args": [
+    "30"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "method"
+  },
+  "amount": {
+   "type": "decimal",
+   "args": [
+    "12",
+    "2"
+   ],
+   "mods": [
+    "default=0"
+   ],
+   "name": "amount"
+  },
+  "amount_refunded": {
+   "type": "decimal",
+   "args": [
+    "12",
+    "2"
+   ],
+   "mods": [
+    "default=0"
+   ],
+   "name": "amount_refunded"
+  },
+  "currency": {
+   "type": "string",
+   "args": [
+    "5"
+   ],
+   "mods": [
+    "default='INR'"
+   ],
+   "name": "currency"
+  },
+  "fee": {
+   "type": "decimal",
+   "args": [
+    "10",
+    "2"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "fee"
+  },
+  "tax": {
+   "type": "decimal",
+   "args": [
+    "10",
+    "2"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "tax"
+  },
+  "email": {
+   "type": "string",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "email"
+  },
+  "contact": {
+   "type": "string",
+   "args": [
+    "30"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "contact"
+  },
+  "description": {
+   "type": "string",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "description"
+  },
+  "error_code": {
+   "type": "string",
+   "args": [
+    "60"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "error_code"
+  },
+  "error_description": {
+   "type": "string",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "error_description"
+  },
+  "notes": {
+   "type": "json",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "notes"
+  },
+  "payload": {
+   "type": "json",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "payload"
+  },
+  "paid_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable",
+    "index"
+   ],
+   "name": "paid_at"
+  },
+  "created_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "created_at"
+  },
+  "updated_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "updated_at"
+  },
+  "__idx": {
+   "type": "idx",
+   "args": [
+    "unique:['business', 'payment_id']"
+   ],
+   "mods": []
+  }
+ },
+ "crm_leads": {
+  "id": {
+   "type": "id",
+   "args": [],
+   "mods": [],
+   "name": "id"
+  },
+  "name": {
+   "type": "string",
+   "args": [
+    "100"
+   ],
+   "mods": [],
+   "name": "name"
+  },
+  "mobile": {
+   "type": "string",
+   "args": [
+    "20"
+   ],
+   "mods": [
+    "nullable",
+    "index"
+   ],
+   "name": "mobile"
+  },
+  "email": {
+   "type": "string",
+   "args": [
+    "254"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "email"
+  },
+  "source": {
+   "type": "string",
+   "args": [
+    "60"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "source"
+  },
+  "stage": {
+   "type": "string",
+   "args": [
+    "12"
+   ],
+   "mods": [
+    "default='new'",
+    "index"
+   ],
+   "name": "stage"
+  },
+  "interest": {
+   "type": "string",
+   "args": [
+    "255"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "interest"
+  },
+  "check_in": {
+   "type": "date",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "check_in"
+  },
+  "check_out": {
+   "type": "date",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "check_out"
+  },
+  "guests": {
+   "type": "unsignedSmallInteger",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "guests"
+  },
+  "value": {
+   "type": "decimal",
+   "args": [
+    "12",
+    "2"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "value"
+  },
+  "next_follow_up": {
+   "type": "date",
+   "args": [],
+   "mods": [
+    "nullable",
+    "index"
+   ],
+   "name": "next_follow_up"
+  },
+  "lost_reason": {
+   "type": "string",
+   "args": [
+    "255"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "lost_reason"
+  },
+  "notes": {
+   "type": "text",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "notes"
+  },
+  "assigned_to": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "nullable",
+    "constrained='users'",
+    "nullOnDelete"
+   ],
+   "name": "assigned_to"
+  },
+  "customer_id": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "nullable",
+    "constrained='customers'",
+    "nullOnDelete"
+   ],
+   "name": "customer_id"
+  },
+  "created_by": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "nullable",
+    "constrained='users'",
+    "nullOnDelete"
+   ],
+   "name": "created_by"
+  },
+  "created_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "created_at"
+  },
+  "updated_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "updated_at"
+  }
+ },
+ "crm_activities": {
+  "id": {
+   "type": "id",
+   "args": [],
+   "mods": [],
+   "name": "id"
+  },
+  "lead_id": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "constrained='crm_leads'",
+    "cascadeOnDelete"
+   ],
+   "name": "lead_id"
+  },
+  "user_id": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "nullable",
+    "constrained='users'",
+    "nullOnDelete"
+   ],
+   "name": "user_id"
+  },
+  "type": {
+   "type": "string",
+   "args": [
+    "12"
+   ],
+   "mods": [],
+   "name": "type"
+  },
+  "body": {
+   "type": "text",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "body"
+  },
+  "created_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "created_at"
+  },
+  "updated_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "updated_at"
+  }
+ },
+ "site_settings": {
+  "id": {
+   "type": "id",
+   "args": [],
+   "mods": [],
+   "name": "id"
+  },
+  "opened_year": {
+   "type": "unsignedSmallInteger",
+   "args": [],
+   "mods": [
+    "default=2002"
+   ],
+   "name": "opened_year"
+  },
+  "gm_phone": {
+   "type": "string",
+   "args": [
+    "20"
+   ],
+   "mods": [
+    "default='+919825735404'"
+   ],
+   "name": "gm_phone"
+  },
+  "reception_phone": {
+   "type": "string",
+   "args": [
+    "20"
+   ],
+   "mods": [
+    "default='+917043535404'"
+   ],
+   "name": "reception_phone"
+  },
+  "whatsapp": {
+   "type": "string",
+   "args": [
+    "20"
+   ],
+   "mods": [
+    "default='919825735404'"
+   ],
+   "name": "whatsapp"
+  },
+  "reception_whatsapp": {
+   "type": "string",
+   "args": [
+    "20"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "reception_whatsapp"
+  },
+  "email": {
+   "type": "string",
+   "args": [
+    "150"
+   ],
+   "mods": [
+    "default='hotelpallavrajkot@gmail.com'"
+   ],
+   "name": "email"
+  },
+  "address": {
+   "type": "string",
+   "args": [
+    "255"
+   ],
+   "mods": [
+    "default=''"
+   ],
+   "name": "address"
+  },
+  "checkin_time": {
+   "type": "string",
+   "args": [
+    "20"
+   ],
+   "mods": [
+    "default='12:00 PM'"
+   ],
+   "name": "checkin_time"
+  },
+  "checkout_time": {
+   "type": "string",
+   "args": [
+    "20"
+   ],
+   "mods": [
+    "default='11:00 AM'"
+   ],
+   "name": "checkout_time"
+  },
+  "meta_title": {
+   "type": "string",
+   "args": [
+    "255"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "meta_title"
+  },
+  "meta_description": {
+   "type": "text",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "meta_description"
+  },
+  "meta_keywords": {
+   "type": "string",
+   "args": [
+    "255"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "meta_keywords"
+  },
+  "logo_path": {
+   "type": "string",
+   "args": [
+    "255"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "logo_path"
+  },
+  "favicon_path": {
+   "type": "string",
+   "args": [
+    "255"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "favicon_path"
+  },
+  "gbp_link": {
+   "type": "string",
+   "args": [
+    "255"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "gbp_link"
+  },
+  "facebook_link": {
+   "type": "string",
+   "args": [
+    "255"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "facebook_link"
+  },
+  "instagram_link": {
+   "type": "string",
+   "args": [
+    "255"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "instagram_link"
+  },
+  "map_lat": {
+   "type": "decimal",
+   "args": [
+    "10",
+    "7"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "map_lat"
+  },
+  "map_lng": {
+   "type": "decimal",
+   "args": [
+    "10",
+    "7"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "map_lng"
+  },
+  "google_maps_api_key": {
+   "type": "text",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "google_maps_api_key"
+  },
+  "google_place_id": {
+   "type": "string",
+   "args": [
+    "150"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "google_place_id"
+  },
+  "google_min_review_rating": {
+   "type": "unsignedTinyInteger",
+   "args": [],
+   "mods": [
+    "default=3"
+   ],
+   "name": "google_min_review_rating"
+  },
+  "gbp_oauth_client_id": {
+   "type": "text",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "gbp_oauth_client_id"
+  },
+  "gbp_oauth_client_secret": {
+   "type": "text",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "gbp_oauth_client_secret"
+  },
+  "gbp_oauth_refresh_token": {
+   "type": "text",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "gbp_oauth_refresh_token"
+  },
+  "gbp_oauth_access_token": {
+   "type": "text",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "gbp_oauth_access_token"
+  },
+  "gbp_oauth_token_expires": {
+   "type": "dateTime",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "gbp_oauth_token_expires"
+  },
+  "gbp_account_id": {
+   "type": "string",
+   "args": [
+    "150"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "gbp_account_id"
+  },
+  "gbp_location_id": {
+   "type": "string",
+   "args": [
+    "150"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "gbp_location_id"
+  },
+  "smtp_host": {
+   "type": "string",
+   "args": [
+    "150"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "smtp_host"
+  },
+  "smtp_port": {
+   "type": "unsignedSmallInteger",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "smtp_port"
+  },
+  "smtp_username": {
+   "type": "text",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "smtp_username"
+  },
+  "smtp_password": {
+   "type": "text",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "smtp_password"
+  },
+  "smtp_from_email": {
+   "type": "string",
+   "args": [
+    "150"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "smtp_from_email"
+  },
+  "smtp_from_name": {
+   "type": "string",
+   "args": [
+    "100"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "smtp_from_name"
+  },
+  "notify_recipients": {
+   "type": "json",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "notify_recipients"
+  },
+  "created_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "created_at"
+  },
+  "updated_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "updated_at"
+  }
+ },
+ "site_page_content": {
+  "id": {
+   "type": "id",
+   "args": [],
+   "mods": [],
+   "name": "id"
+  },
+  "hero_eyebrow": {
+   "type": "string",
+   "args": [
+    "100"
+   ],
+   "mods": [
+    "default='Of Warm Hospitality'"
+   ],
+   "name": "hero_eyebrow"
+  },
+  "hero_title_line1": {
+   "type": "string",
+   "args": [
+    "100"
+   ],
+   "mods": [
+    "default='Where every stay'"
+   ],
+   "name": "hero_title_line1"
+  },
+  "hero_title_emphasis": {
+   "type": "string",
+   "args": [
+    "100"
+   ],
+   "mods": [
+    "default='feels like coming home'"
+   ],
+   "name": "hero_title_emphasis"
+  },
+  "hero_lead": {
+   "type": "text",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "hero_lead"
+  },
+  "quick_check_title": {
+   "type": "string",
+   "args": [
+    "100"
+   ],
+   "mods": [
+    "default='Check availability'"
+   ],
+   "name": "quick_check_title"
+  },
+  "qc_msg_pick_dates": {
+   "type": "string",
+   "args": [
+    "200"
+   ],
+   "mods": [
+    "default='Please pick both check-in and check-out dates first.'"
+   ],
+   "name": "qc_msg_pick_dates"
+  },
+  "qc_msg_available": {
+   "type": "string",
+   "args": [
+    "200"
+   ],
+   "mods": [
+    "default='Good news - we have rooms for your dates!'"
+   ],
+   "name": "qc_msg_available"
+  },
+  "qc_msg_unavailable": {
+   "type": "string",
+   "args": [
+    "300"
+   ],
+   "mods": [
+    "default='Those exact rooms look full, but call us - dates shift often and we may still fit you in.'"
+   ],
+   "name": "qc_msg_unavailable"
+  },
+  "qc_msg_error": {
+   "type": "string",
+   "args": [
+    "200"
+   ],
+   "mods": [
+    "default='Could not check right now - please call us instead.'"
+   ],
+   "name": "qc_msg_error"
+  },
+  "fm_msg_name": {
+   "type": "string",
+   "args": [
+    "150"
+   ],
+   "mods": [
+    "default='Please enter your name.'"
+   ],
+   "name": "fm_msg_name"
+  },
+  "fm_msg_phone": {
+   "type": "string",
+   "args": [
+    "150"
+   ],
+   "mods": [
+    "default='Please enter a valid 10-digit mobile number.'"
+   ],
+   "name": "fm_msg_phone"
+  },
+  "fm_msg_email": {
+   "type": "string",
+   "args": [
+    "150"
+   ],
+   "mods": [
+    "default='That email address does not look right. Leave it blank if you prefer.'"
+   ],
+   "name": "fm_msg_email"
+  },
+  "fm_msg_checkin": {
+   "type": "string",
+   "args": [
+    "150"
+   ],
+   "mods": [
+    "default='Please pick a check-in date.'"
+   ],
+   "name": "fm_msg_checkin"
+  },
+  "fm_msg_checkout": {
+   "type": "string",
+   "args": [
+    "150"
+   ],
+   "mods": [
+    "default='Please pick a check-out date.'"
+   ],
+   "name": "fm_msg_checkout"
+  },
+  "fm_msg_room": {
+   "type": "string",
+   "args": [
+    "150"
+   ],
+   "mods": [
+    "default='Please pick a room, or enter \"not sure yet\".'"
+   ],
+   "name": "fm_msg_room"
+  },
+  "fm_msg_adults": {
+   "type": "string",
+   "args": [
+    "150"
+   ],
+   "mods": [
+    "default='Please enter the number of adults.'"
+   ],
+   "name": "fm_msg_adults"
+  },
+  "fm_msg_children": {
+   "type": "string",
+   "args": [
+    "150"
+   ],
+   "mods": [
+    "default='Please enter the number of children (0 if none"
+   ],
+   "name": "fm_msg_children"
+  },
+  "fm_msg_message": {
+   "type": "string",
+   "args": [
+    "150"
+   ],
+   "mods": [
+    "default='Please tell us anything we should know (or write \"none\""
+   ],
+   "name": "fm_msg_message"
+  },
+  "fm_msg_terms": {
+   "type": "string",
+   "args": [
+    "150"
+   ],
+   "mods": [
+    "default='Please accept the Terms & Conditions to continue.'"
+   ],
+   "name": "fm_msg_terms"
+  },
+  "fm_msg_success": {
+   "type": "string",
+   "args": [
+    "250"
+   ],
+   "mods": [
+    "default='Thank you! Your enquiry reference is {{reference}}. We will call you shortly to confirm.'"
+   ],
+   "name": "fm_msg_success"
+  },
+  "about_kicker": {
+   "type": "string",
+   "args": [
+    "50"
+   ],
+   "mods": [
+    "default='Our Story'"
+   ],
+   "name": "about_kicker"
+  },
+  "about_heading": {
+   "type": "string",
+   "args": [
+    "150"
+   ],
+   "mods": [
+    "default='A family hotel that never stopped caring'"
+   ],
+   "name": "about_heading"
+  },
+  "about_p1": {
+   "type": "text",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "about_p1"
+  },
+  "about_p2": {
+   "type": "text",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "about_p2"
+  },
+  "about_p3": {
+   "type": "text",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "about_p3"
+  },
+  "enquire_heading": {
+   "type": "string",
+   "args": [
+    "150"
+   ],
+   "mods": [
+    "default='Send us your dates. We will do the rest.'"
+   ],
+   "name": "enquire_heading"
+  },
+  "enquire_lead": {
+   "type": "text",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "enquire_lead"
+  },
+  "enquire_points": {
+   "type": "json",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "enquire_points"
+  },
+  "booking_terms_text": {
+   "type": "text",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "booking_terms_text"
+  },
+  "policies_footer_note": {
+   "type": "text",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "policies_footer_note"
+  },
+  "footer_tagline": {
+   "type": "text",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "footer_tagline"
+  },
+  "created_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "created_at"
+  },
+  "updated_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "updated_at"
+  }
+ },
+ "site_rooms": {
+  "id": {
+   "type": "id",
+   "args": [],
+   "mods": [],
+   "name": "id"
+  },
+  "slug": {
+   "type": "string",
+   "args": [
+    "100"
+   ],
+   "mods": [
+    "unique"
+   ],
+   "name": "slug"
+  },
+  "name": {
+   "type": "string",
+   "args": [
+    "100"
+   ],
+   "mods": [],
+   "name": "name"
+  },
+  "size": {
+   "type": "string",
+   "args": [
+    "50"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "size"
+  },
+  "bed_type": {
+   "type": "string",
+   "args": [
+    "50"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "bed_type"
+  },
+  "max_guests": {
+   "type": "unsignedTinyInteger",
+   "args": [],
+   "mods": [
+    "default=2"
+   ],
+   "name": "max_guests"
+  },
+  "show_price": {
+   "type": "boolean",
+   "args": [],
+   "mods": [
+    "default=false"
+   ],
+   "name": "show_price"
+  },
+  "total_count": {
+   "type": "unsignedTinyInteger",
+   "args": [],
+   "mods": [
+    "default=1"
+   ],
+   "name": "total_count"
+  },
+  "available": {
+   "type": "boolean",
+   "args": [],
+   "mods": [
+    "default=true"
+   ],
+   "name": "available"
+  },
+  "note": {
+   "type": "string",
+   "args": [
+    "255"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "note"
+  },
+  "badge_label": {
+   "type": "string",
+   "args": [
+    "40"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "badge_label"
+  },
+  "photos": {
+   "type": "json",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "photos"
+  },
+  "sort_order": {
+   "type": "unsignedSmallInteger",
+   "args": [],
+   "mods": [
+    "default=0"
+   ],
+   "name": "sort_order"
+  },
+  "created_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "created_at"
+  },
+  "updated_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "updated_at"
+  }
+ },
+ "site_rate_plans": {
+  "id": {
+   "type": "id",
+   "args": [],
+   "mods": [],
+   "name": "id"
+  },
+  "room_id": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "constrained='site_rooms'",
+    "cascadeOnDelete"
+   ],
+   "name": "room_id"
+  },
+  "name": {
+   "type": "string",
+   "args": [
+    "60"
+   ],
+   "mods": [],
+   "name": "name"
+  },
+  "code": {
+   "type": "string",
+   "args": [
+    "10"
+   ],
+   "mods": [
+    "default='EP'"
+   ],
+   "name": "code"
+  },
+  "price_double": {
+   "type": "unsignedInteger",
+   "args": [],
+   "mods": [
+    "default=0"
+   ],
+   "name": "price_double"
+  },
+  "price_single": {
+   "type": "unsignedInteger",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "price_single"
+  },
+  "occupancy_prices": {
+   "type": "json",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "occupancy_prices"
+  },
+  "extra_person_price": {
+   "type": "unsignedInteger",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "extra_person_price"
+  },
+  "sort_order": {
+   "type": "unsignedTinyInteger",
+   "args": [],
+   "mods": [
+    "default=0"
+   ],
+   "name": "sort_order"
+  },
+  "is_default": {
+   "type": "boolean",
+   "args": [],
+   "mods": [
+    "default=false"
+   ],
+   "name": "is_default"
+  },
+  "active": {
+   "type": "boolean",
+   "args": [],
+   "mods": [
+    "default=true"
+   ],
+   "name": "active"
+  },
+  "created_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "created_at"
+  },
+  "updated_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "updated_at"
+  }
+ },
+ "site_plan_date_rates": {
+  "id": {
+   "type": "id",
+   "args": [],
+   "mods": [],
+   "name": "id"
+  },
+  "rate_plan_id": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "constrained='site_rate_plans'",
+    "cascadeOnDelete"
+   ],
+   "name": "rate_plan_id"
+  },
+  "date": {
+   "type": "date",
+   "args": [],
+   "mods": [],
+   "name": "date"
+  },
+  "price_double": {
+   "type": "unsignedInteger",
+   "args": [],
+   "mods": [],
+   "name": "price_double"
+  },
+  "price_single": {
+   "type": "unsignedInteger",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "price_single"
+  },
+  "created_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "created_at"
+  },
+  "updated_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "updated_at"
+  },
+  "__idx": {
+   "type": "idx",
+   "args": [
+    "unique:['rate_plan_id', 'date']"
+   ],
+   "mods": []
+  }
+ },
+ "site_room_date_inventory": {
+  "id": {
+   "type": "id",
+   "args": [],
+   "mods": [],
+   "name": "id"
+  },
+  "room_id": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "constrained='site_rooms'",
+    "cascadeOnDelete"
+   ],
+   "name": "room_id"
+  },
+  "date": {
+   "type": "date",
+   "args": [],
+   "mods": [],
+   "name": "date"
+  },
+  "rooms_left": {
+   "type": "unsignedTinyInteger",
+   "args": [],
+   "mods": [],
+   "name": "rooms_left"
+  },
+  "blocked": {
+   "type": "boolean",
+   "args": [],
+   "mods": [
+    "default=false"
+   ],
+   "name": "blocked"
+  },
+  "created_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "created_at"
+  },
+  "updated_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "updated_at"
+  },
+  "__idx": {
+   "type": "idx",
+   "args": [
+    "unique:['room_id', 'date']"
+   ],
+   "mods": []
+  }
+ },
+ "site_reference_counters": {
+  "fiscal_year": {
+   "type": "unsignedSmallInteger",
+   "args": [],
+   "mods": [
+    "primary"
+   ],
+   "name": "fiscal_year"
+  },
+  "counter": {
+   "type": "unsignedInteger",
+   "args": [],
+   "mods": [
+    "default=0"
+   ],
+   "name": "counter"
+  }
+ },
+ "site_enquiries": {
+  "id": {
+   "type": "id",
+   "args": [],
+   "mods": [],
+   "name": "id"
+  },
+  "reference": {
+   "type": "string",
+   "args": [
+    "20"
+   ],
+   "mods": [
+    "unique"
+   ],
+   "name": "reference"
+  },
+  "name": {
+   "type": "string",
+   "args": [
+    "100"
+   ],
+   "mods": [],
+   "name": "name"
+  },
+  "phone": {
+   "type": "string",
+   "args": [
+    "20"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "phone"
+  },
+  "email": {
+   "type": "string",
+   "args": [
+    "150"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "email"
+  },
+  "message": {
+   "type": "text",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "message"
+  },
+  "room_id": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "nullable",
+    "constrained='site_rooms'",
+    "nullOnDelete"
+   ],
+   "name": "room_id"
+  },
+  "check_in": {
+   "type": "date",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "check_in"
+  },
+  "check_out": {
+   "type": "date",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "check_out"
+  },
+  "guests": {
+   "type": "unsignedTinyInteger",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "guests"
+  },
+  "children": {
+   "type": "unsignedTinyInteger",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "children"
+  },
+  "status": {
+   "type": "string",
+   "args": [
+    "12"
+   ],
+   "mods": [
+    "default='new'"
+   ],
+   "name": "status"
+  },
+  "decision_note": {
+   "type": "string",
+   "args": [
+    "255"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "decision_note"
+  },
+  "decided_by": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "nullable",
+    "constrained='users'",
+    "nullOnDelete"
+   ],
+   "name": "decided_by"
+  },
+  "decided_by_name": {
+   "type": "string",
+   "args": [
+    "150"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "decided_by_name"
+  },
+  "decided_at": {
+   "type": "dateTime",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "decided_at"
+  },
+  "ip_address": {
+   "type": "string",
+   "args": [
+    "45"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "ip_address"
+  },
+  "created_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "created_at"
+  },
+  "updated_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "updated_at"
+  },
+  "__idx": {
+   "type": "idx",
+   "args": [
+    "index:['status', 'created_at']",
+    "index:['room_id', 'status', 'check_in']"
+   ],
+   "mods": []
+  }
+ },
+ "site_gallery_photos": {
+  "id": {
+   "type": "id",
+   "args": [],
+   "mods": [],
+   "name": "id"
+  },
+  "path": {
+   "type": "string",
+   "args": [
+    "255"
+   ],
+   "mods": [],
+   "name": "path"
+  },
+  "caption": {
+   "type": "string",
+   "args": [
+    "150"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "caption"
+  },
+  "alt_text": {
+   "type": "string",
+   "args": [
+    "255"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "alt_text"
+  },
+  "sort_order": {
+   "type": "unsignedSmallInteger",
+   "args": [],
+   "mods": [
+    "default=0"
+   ],
+   "name": "sort_order"
+  },
+  "created_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "created_at"
+  },
+  "updated_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "updated_at"
+  }
+ },
+ "site_services": {
+  "id": {
+   "type": "id",
+   "args": [],
+   "mods": [],
+   "name": "id"
+  },
+  "title": {
+   "type": "string",
+   "args": [
+    "80"
+   ],
+   "mods": [],
+   "name": "title"
+  },
+  "description": {
+   "type": "string",
+   "args": [
+    "255"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "description"
+  },
+  "icon": {
+   "type": "string",
+   "args": [
+    "30"
+   ],
+   "mods": [
+    "default='front-desk'"
+   ],
+   "name": "icon"
+  },
+  "icon_path": {
+   "type": "string",
+   "args": [
+    "255"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "icon_path"
+  },
+  "sort_order": {
+   "type": "unsignedSmallInteger",
+   "args": [],
+   "mods": [
+    "default=0"
+   ],
+   "name": "sort_order"
+  },
+  "created_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "created_at"
+  },
+  "updated_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "updated_at"
+  }
+ },
+ "site_policy_cards": {
+  "id": {
+   "type": "id",
+   "args": [],
+   "mods": [],
+   "name": "id"
+  },
+  "title": {
+   "type": "string",
+   "args": [
+    "60"
+   ],
+   "mods": [],
+   "name": "title"
+  },
+  "policy_lines": {
+   "type": "json",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "policy_lines"
+  },
+  "icon_path": {
+   "type": "string",
+   "args": [
+    "255"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "icon_path"
+  },
+  "sort_order": {
+   "type": "unsignedSmallInteger",
+   "args": [],
+   "mods": [
+    "default=0"
+   ],
+   "name": "sort_order"
+  },
+  "created_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "created_at"
+  },
+  "updated_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "updated_at"
+  }
+ },
+ "site_nearby_places": {
+  "id": {
+   "type": "id",
+   "args": [],
+   "mods": [],
+   "name": "id"
+  },
+  "title": {
+   "type": "string",
+   "args": [
+    "80"
+   ],
+   "mods": [],
+   "name": "title"
+  },
+  "distance_label": {
+   "type": "string",
+   "args": [
+    "40"
+   ],
+   "mods": [],
+   "name": "distance_label"
+  },
+  "map_query": {
+   "type": "string",
+   "args": [
+    "255"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "map_query"
+  },
+  "map_url": {
+   "type": "string",
+   "args": [
+    "500"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "map_url"
+  },
+  "origin_lat": {
+   "type": "decimal",
+   "args": [
+    "10",
+    "7"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "origin_lat"
+  },
+  "origin_lng": {
+   "type": "decimal",
+   "args": [
+    "10",
+    "7"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "origin_lng"
+  },
+  "sort_order": {
+   "type": "unsignedSmallInteger",
+   "args": [],
+   "mods": [
+    "default=0"
+   ],
+   "name": "sort_order"
+  },
+  "created_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "created_at"
+  },
+  "updated_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "updated_at"
+  }
+ },
+ "pms_rooms": {
+  "id": {
+   "type": "id",
+   "args": [],
+   "mods": [],
+   "name": "id"
+  },
+  "number": {
+   "type": "string",
+   "args": [
+    "20"
+   ],
+   "mods": [
+    "unique"
+   ],
+   "name": "number"
+  },
+  "floor": {
+   "type": "string",
+   "args": [
+    "20"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "floor"
+  },
+  "room_type_id": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "nullable",
+    "constrained='site_rooms'",
+    "nullOnDelete"
+   ],
+   "name": "room_type_id"
+  },
+  "hk_status": {
+   "type": "string",
+   "args": [
+    "12"
+   ],
+   "mods": [
+    "default='clean'"
+   ],
+   "name": "hk_status"
+  },
+  "out_of_order": {
+   "type": "boolean",
+   "args": [],
+   "mods": [
+    "default=false"
+   ],
+   "name": "out_of_order"
+  },
+  "out_of_order_reason": {
+   "type": "string",
+   "args": [
+    "255"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "out_of_order_reason"
+  },
+  "notes": {
+   "type": "string",
+   "args": [
+    "255"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "notes"
+  },
+  "sort_order": {
+   "type": "unsignedSmallInteger",
+   "args": [],
+   "mods": [
+    "default=0"
+   ],
+   "name": "sort_order"
+  },
+  "created_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "created_at"
+  },
+  "updated_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "updated_at"
+  }
+ },
+ "pms_reservations": {
+  "id": {
+   "type": "id",
+   "args": [],
+   "mods": [],
+   "name": "id"
+  },
+  "reference": {
+   "type": "string",
+   "args": [
+    "30"
+   ],
+   "mods": [
+    "unique",
+    "nullable"
+   ],
+   "name": "reference"
+  },
+  "guest_name": {
+   "type": "string",
+   "args": [
+    "150"
+   ],
+   "mods": [],
+   "name": "guest_name"
+  },
+  "mobile": {
+   "type": "string",
+   "args": [
+    "20"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "mobile"
+  },
+  "email": {
+   "type": "string",
+   "args": [
+    "150"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "email"
+  },
+  "company_id": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "nullable",
+    "constrained='company_profiles'",
+    "nullOnDelete"
+   ],
+   "name": "company_id"
+  },
+  "room_type_id": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "nullable",
+    "constrained='site_rooms'",
+    "nullOnDelete"
+   ],
+   "name": "room_type_id"
+  },
+  "rooms": {
+   "type": "unsignedTinyInteger",
+   "args": [],
+   "mods": [
+    "default=1"
+   ],
+   "name": "rooms"
+  },
+  "plan": {
+   "type": "string",
+   "args": [
+    "60"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "plan"
+  },
+  "rate": {
+   "type": "decimal",
+   "args": [
+    "10",
+    "2"
+   ],
+   "mods": [
+    "default=0"
+   ],
+   "name": "rate"
+  },
+  "adults": {
+   "type": "unsignedTinyInteger",
+   "args": [],
+   "mods": [
+    "default=1"
+   ],
+   "name": "adults"
+  },
+  "children": {
+   "type": "unsignedTinyInteger",
+   "args": [],
+   "mods": [
+    "default=0"
+   ],
+   "name": "children"
+  },
+  "check_in": {
+   "type": "date",
+   "args": [],
+   "mods": [],
+   "name": "check_in"
+  },
+  "check_out": {
+   "type": "date",
+   "args": [],
+   "mods": [],
+   "name": "check_out"
+  },
+  "source": {
+   "type": "string",
+   "args": [
+    "20"
+   ],
+   "mods": [
+    "default='phone'"
+   ],
+   "name": "source"
+  },
+  "status": {
+   "type": "string",
+   "args": [
+    "15"
+   ],
+   "mods": [
+    "default='confirmed'"
+   ],
+   "name": "status"
+  },
+  "site_enquiry_id": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "nullable",
+    "unique",
+    "constrained='site_enquiries'",
+    "nullOnDelete"
+   ],
+   "name": "site_enquiry_id"
+  },
+  "notes": {
+   "type": "text",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "notes"
+  },
+  "cancel_reason": {
+   "type": "string",
+   "args": [
+    "255"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "cancel_reason"
+  },
+  "created_by": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "nullable",
+    "constrained='users'",
+    "nullOnDelete"
+   ],
+   "name": "created_by"
+  },
+  "created_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "created_at"
+  },
+  "updated_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "updated_at"
+  },
+  "__idx": {
+   "type": "idx",
+   "args": [
+    "index:['status', 'check_in']",
+    "index:['room_type_id', 'status', 'check_in']"
+   ],
+   "mods": []
+  }
+ },
+ "pms_stays": {
+  "id": {
+   "type": "id",
+   "args": [],
+   "mods": [],
+   "name": "id"
+  },
+  "reservation_id": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "nullable",
+    "constrained='pms_reservations'",
+    "nullOnDelete"
+   ],
+   "name": "reservation_id"
+  },
+  "room_id": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "constrained='pms_rooms'"
+   ],
+   "name": "room_id"
+  },
+  "gr_number": {
+   "type": "string",
+   "args": [
+    "50"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "gr_number"
+  },
+  "guest_name": {
+   "type": "string",
+   "args": [
+    "150"
+   ],
+   "mods": [],
+   "name": "guest_name"
+  },
+  "mobile": {
+   "type": "string",
+   "args": [
+    "20"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "mobile"
+  },
+  "email": {
+   "type": "string",
+   "args": [
+    "150"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "email"
+  },
+  "address": {
+   "type": "string",
+   "args": [
+    "255"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "address"
+  },
+  "city": {
+   "type": "string",
+   "args": [
+    "100"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "city"
+  },
+  "nationality": {
+   "type": "string",
+   "args": [
+    "60"
+   ],
+   "mods": [
+    "nullable",
+    "default='Indian'"
+   ],
+   "name": "nationality"
+  },
+  "id_proof_type": {
+   "type": "string",
+   "args": [
+    "60"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "id_proof_type"
+  },
+  "id_proof_number": {
+   "type": "string",
+   "args": [
+    "60"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "id_proof_number"
+  },
+  "id_proof_path": {
+   "type": "string",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "id_proof_path"
+  },
+  "company_id": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "nullable",
+    "constrained='company_profiles'",
+    "nullOnDelete"
+   ],
+   "name": "company_id"
+  },
+  "guest_gstin": {
+   "type": "string",
+   "args": [
+    "20"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "guest_gstin"
+  },
+  "adults": {
+   "type": "unsignedTinyInteger",
+   "args": [],
+   "mods": [
+    "default=1"
+   ],
+   "name": "adults"
+  },
+  "children": {
+   "type": "unsignedTinyInteger",
+   "args": [],
+   "mods": [
+    "default=0"
+   ],
+   "name": "children"
+  },
+  "plan": {
+   "type": "string",
+   "args": [
+    "60"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "plan"
+  },
+  "rate": {
+   "type": "decimal",
+   "args": [
+    "10",
+    "2"
+   ],
+   "mods": [
+    "default=0"
+   ],
+   "name": "rate"
+  },
+  "check_in_at": {
+   "type": "dateTime",
+   "args": [],
+   "mods": [],
+   "name": "check_in_at"
+  },
+  "expected_check_out": {
+   "type": "date",
+   "args": [],
+   "mods": [],
+   "name": "expected_check_out"
+  },
+  "check_out_at": {
+   "type": "dateTime",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "check_out_at"
+  },
+  "status": {
+   "type": "string",
+   "args": [
+    "15"
+   ],
+   "mods": [
+    "default='in_house'"
+   ],
+   "name": "status"
+  },
+  "bill_id": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "nullable",
+    "constrained='bill_master_bills'",
+    "nullOnDelete"
+   ],
+   "name": "bill_id"
+  },
+  "notes": {
+   "type": "text",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "notes"
+  },
+  "created_by": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "nullable",
+    "constrained='users'",
+    "nullOnDelete"
+   ],
+   "name": "created_by"
+  },
+  "created_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "created_at"
+  },
+  "updated_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "updated_at"
+  },
+  "__idx": {
+   "type": "idx",
+   "args": [
+    "index:['status', 'expected_check_out']"
+   ],
+   "mods": []
+  }
+ },
+ "pms_charges": {
+  "id": {
+   "type": "id",
+   "args": [],
+   "mods": [],
+   "name": "id"
+  },
+  "stay_id": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "constrained='pms_stays'",
+    "cascadeOnDelete"
+   ],
+   "name": "stay_id"
+  },
+  "charge_date": {
+   "type": "date",
+   "args": [],
+   "mods": [],
+   "name": "charge_date"
+  },
+  "category": {
+   "type": "string",
+   "args": [
+    "20"
+   ],
+   "mods": [],
+   "name": "category"
+  },
+  "side": {
+   "type": "string",
+   "args": [
+    "5"
+   ],
+   "mods": [
+    "default='hotel'"
+   ],
+   "name": "side"
+  },
+  "description": {
+   "type": "string",
+   "args": [
+    "255"
+   ],
+   "mods": [],
+   "name": "description"
+  },
+  "quantity": {
+   "type": "decimal",
+   "args": [
+    "8",
+    "2"
+   ],
+   "mods": [
+    "default=1"
+   ],
+   "name": "quantity"
+  },
+  "unit_price": {
+   "type": "decimal",
+   "args": [
+    "10",
+    "2"
+   ],
+   "mods": [
+    "default=0"
+   ],
+   "name": "unit_price"
+  },
+  "amount": {
+   "type": "decimal",
+   "args": [
+    "10",
+    "2"
+   ],
+   "mods": [
+    "default=0"
+   ],
+   "name": "amount"
+  },
+  "source_type": {
+   "type": "string",
+   "args": [
+    "40"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "source_type"
+  },
+  "source_id": {
+   "type": "unsignedBigInteger",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "source_id"
+  },
+  "created_by": {
+   "type": "foreignId",
+   "args": [],
+   "mods": [
+    "nullable",
+    "constrained='users'",
+    "nullOnDelete"
+   ],
+   "name": "created_by"
+  },
+  "created_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "created_at"
+  },
+  "updated_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "updated_at"
+  },
+  "__idx": {
+   "type": "idx",
+   "args": [
+    "index:['source_type', 'source_id']"
+   ],
+   "mods": []
+  }
+ },
+ "feature_stats": {
+  "id": {
+   "type": "id",
+   "args": [],
+   "mods": [],
+   "name": "id"
+  },
+  "feature": {
+   "type": "string",
+   "args": [
+    "60"
+   ],
+   "mods": [],
+   "name": "feature"
+  },
+  "day": {
+   "type": "date",
+   "args": [],
+   "mods": [],
+   "name": "day"
+  },
+  "hits": {
+   "type": "unsignedInteger",
+   "args": [],
+   "mods": [
+    "default=0"
+   ],
+   "name": "hits"
+  },
+  "errors": {
+   "type": "unsignedInteger",
+   "args": [],
+   "mods": [
+    "default=0"
+   ],
+   "name": "errors"
+  },
+  "client_errors": {
+   "type": "unsignedInteger",
+   "args": [],
+   "mods": [
+    "default=0"
+   ],
+   "name": "client_errors"
+  },
+  "slow": {
+   "type": "unsignedInteger",
+   "args": [],
+   "mods": [
+    "default=0"
+   ],
+   "name": "slow"
+  },
+  "total_ms": {
+   "type": "unsignedBigInteger",
+   "args": [],
+   "mods": [
+    "default=0"
+   ],
+   "name": "total_ms"
+  },
+  "max_ms": {
+   "type": "unsignedInteger",
+   "args": [],
+   "mods": [
+    "default=0"
+   ],
+   "name": "max_ms"
+  },
+  "last_hit_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "last_hit_at"
+  },
+  "last_user": {
+   "type": "string",
+   "args": [
+    "150"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "last_user"
+  },
+  "__idx": {
+   "type": "idx",
+   "args": [
+    "unique:['feature', 'day']",
+    "index:'day'"
+   ],
+   "mods": []
+  }
+ },
+ "feature_users": {
+  "feature": {
+   "type": "string",
+   "args": [
+    "60"
+   ],
+   "mods": [],
+   "name": "feature"
+  },
+  "day": {
+   "type": "date",
+   "args": [],
+   "mods": [],
+   "name": "day"
+  },
+  "user_id": {
+   "type": "unsignedBigInteger",
+   "args": [],
+   "mods": [],
+   "name": "user_id"
+  },
+  "__idx": {
+   "type": "idx",
+   "args": [
+    "unique:['feature', 'day', 'user_id']"
+   ],
+   "mods": []
+  }
+ },
+ "feature_tables": {
+  "id": {
+   "type": "id",
+   "args": [],
+   "mods": [],
+   "name": "id"
+  },
+  "feature": {
+   "type": "string",
+   "args": [
+    "60"
+   ],
+   "mods": [],
+   "name": "feature"
+  },
+  "table_name": {
+   "type": "string",
+   "args": [
+    "80"
+   ],
+   "mods": [],
+   "name": "table_name"
+  },
+  "hits": {
+   "type": "unsignedBigInteger",
+   "args": [],
+   "mods": [
+    "default=0"
+   ],
+   "name": "hits"
+  },
+  "last_seen_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "last_seen_at"
+  },
+  "__idx": {
+   "type": "idx",
+   "args": [
+    "unique:['feature', 'table_name']"
+   ],
+   "mods": []
+  }
+ },
+ "feature_flows": {
+  "id": {
+   "type": "id",
+   "args": [],
+   "mods": [],
+   "name": "id"
+  },
+  "from_feature": {
+   "type": "string",
+   "args": [
+    "60"
+   ],
+   "mods": [],
+   "name": "from_feature"
+  },
+  "to_feature": {
+   "type": "string",
+   "args": [
+    "60"
+   ],
+   "mods": [],
+   "name": "to_feature"
+  },
+  "hits": {
+   "type": "unsignedBigInteger",
+   "args": [],
+   "mods": [
+    "default=0"
+   ],
+   "name": "hits"
+  },
+  "last_seen_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "last_seen_at"
+  },
+  "__idx": {
+   "type": "idx",
+   "args": [
+    "unique:['from_feature', 'to_feature']"
+   ],
+   "mods": []
+  }
+ },
+ "feature_errors": {
+  "id": {
+   "type": "id",
+   "args": [],
+   "mods": [],
+   "name": "id"
+  },
+  "feature": {
+   "type": "string",
+   "args": [
+    "60"
+   ],
+   "mods": [
+    "default='unknown'"
+   ],
+   "name": "feature"
+  },
+  "fingerprint": {
+   "type": "string",
+   "args": [
+    "40"
+   ],
+   "mods": [
+    "unique"
+   ],
+   "name": "fingerprint"
+  },
+  "exception": {
+   "type": "string",
+   "args": [
+    "190"
+   ],
+   "mods": [],
+   "name": "exception"
+  },
+  "message": {
+   "type": "string",
+   "args": [
+    "1000"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "message"
+  },
+  "file": {
+   "type": "string",
+   "args": [
+    "400"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "file"
+  },
+  "line": {
+   "type": "unsignedInteger",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "line"
+  },
+  "trace": {
+   "type": "text",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "trace"
+  },
+  "method": {
+   "type": "string",
+   "args": [
+    "10"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "method"
+  },
+  "path": {
+   "type": "string",
+   "args": [
+    "255"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "path"
+  },
+  "user_name": {
+   "type": "string",
+   "args": [
+    "150"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "user_name"
+  },
+  "ip_address": {
+   "type": "string",
+   "args": [
+    "45"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "ip_address"
+  },
+  "occurrences": {
+   "type": "unsignedInteger",
+   "args": [],
+   "mods": [
+    "default=1"
+   ],
+   "name": "occurrences"
+  },
+  "first_seen_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "first_seen_at"
+  },
+  "last_seen_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "last_seen_at"
+  },
+  "resolved_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "resolved_at"
+  },
+  "resolved_by": {
+   "type": "string",
+   "args": [
+    "150"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "resolved_by"
+  },
+  "__idx": {
+   "type": "idx",
+   "args": [
+    "index:['feature', 'last_seen_at']",
+    "index:'resolved_at'"
+   ],
+   "mods": []
+  }
+ },
+ "health_checks": {
+  "id": {
+   "type": "id",
+   "args": [],
+   "mods": [],
+   "name": "id"
+  },
+  "name": {
+   "type": "string",
+   "args": [
+    "40"
+   ],
+   "mods": [],
+   "name": "name"
+  },
+  "status": {
+   "type": "string",
+   "args": [
+    "10"
+   ],
+   "mods": [],
+   "name": "status"
+  },
+  "message": {
+   "type": "string",
+   "args": [
+    "400"
+   ],
+   "mods": [
+    "nullable"
+   ],
+   "name": "message"
+  },
+  "latency_ms": {
+   "type": "unsignedInteger",
+   "args": [],
+   "mods": [
+    "nullable"
+   ],
+   "name": "latency_ms"
+  },
+  "checked_at": {
+   "type": "timestamp",
+   "args": [],
+   "mods": [
+    "useCurrent"
+   ],
+   "name": "checked_at"
+  },
+  "__idx": {
+   "type": "idx",
+   "args": [
+    "index:['name', 'checked_at']"
+   ],
+   "mods": []
+  }
+ }
+}

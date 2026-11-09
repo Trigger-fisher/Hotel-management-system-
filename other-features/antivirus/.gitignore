@@ -1,0 +1,25 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.env
+node_modules/
+.tools-venv/
+clamav-local/
+# Never in git: model files, run outputs, review data, real pictures (copied rule, 2026-11-04)
+models/
+*.pth
+*.pt
+*.onnx
+*.safetensors
+report.csv
+report.html
+labels.jsonl
+results.xlsx
+*.xlsx
+/images/
+/data/
+/samples-local/
+*.jpg
+*.jpeg
+*.heic

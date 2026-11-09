@@ -1,0 +1,40 @@
+// draft translation, to be checked by a native speaker
+// The gu phrase book of the staff screens: the parts are joined here and loaded only when the language is chosen (web-app/src/lib/i18n/language.ts).
+import type { PhraseBook } from '../phrases';
+import p00 from './gu/p00';
+import p01 from './gu/p01';
+import p02 from './gu/p02';
+import p03 from './gu/p03';
+import p04 from './gu/p04';
+import p05 from './gu/p05';
+import p06 from './gu/p06';
+import p07 from './gu/p07';
+import p08 from './gu/p08';
+import p09 from './gu/p09';
+import m00 from './gu/m00';
+import m01 from './gu/m01';
+import m02 from './gu/m02';
+import m03 from './gu/m03';
+import m04 from './gu/m04';
+import m05 from './gu/m05';
+import m06 from './gu/m06';
+import m07 from './gu/m07';
+import m08 from './gu/m08';
+import m09 from './gu/m09';
+import p10 from './gu/p10';
+import p11 from './gu/p11';
+import p12 from './gu/p12';
+import p13 from './gu/p13';
+import p14 from './gu/p14';
+import p15 from './gu/p15';
+import p16 from './gu/p16';
+import p17 from './gu/p17';
+import p18 from './gu/p18';
+import p19 from './gu/p19';
+import p20 from './gu/p20';
+import p21 from './gu/p21';
+import p22 from './gu/p22';
+import p23 from './gu/p23';
+
+const book: PhraseBook = { ...m00, ...m01, ...m02, ...m03, ...m04, ...m05, ...m06, ...m07, ...m08, ...m09, ...p00, ...p01, ...p02, ...p03, ...p04, ...p05, ...p06, ...p07, ...p08, ...p09, ...p10, ...p11, ...p12, ...p13, ...p14, ...p15, ...p16, ...p17, ...p18, ...p19, ...p20, ...p21, ...p22, ...p23 };
+export default book;

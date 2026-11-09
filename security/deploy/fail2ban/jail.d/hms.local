@@ -1,0 +1,24 @@
+# Put in /etc/fail2ban/jail.d/hms.local, then: fail2ban-client reload. Check: fail2ban-client status hms-auth
+[DEFAULT]
+ignoreip = 127.0.0.1/8 ::1
+
+# Many staff of one hotel share one address, so this is deliberately loose: the app itself locks ONE account after 5 wrong passwords. This catches one address trying many accounts.
+[hms-auth]
+enabled  = true
+filter   = hms-auth
+logpath  = /var/log/nginx/access.log
+backend  = auto
+maxretry = 20
+findtime = 10m
+bantime  = 30m
+action   = cloudflare-block
+
+[hms-scan]
+enabled  = true
+filter   = hms-scan
+logpath  = /var/log/nginx/access.log
+backend  = auto
+maxretry = 5
+findtime = 10m
+bantime  = 24h
+action   = cloudflare-block

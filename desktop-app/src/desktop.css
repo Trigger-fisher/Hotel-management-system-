@@ -1,0 +1,41 @@
+/* What only the desktop window adds. The web app's screens keep their own stylesheets; these rules only make room for the title bar. */
+
+/* next/font on the web; the same files, from the web app's public folder. */
+@font-face { font-family: inter; src: url("/pallav/fonts/inter-latin-wght-normal.woff2") format("woff2"); font-weight: 100 900; font-display: swap; }
+@font-face { font-family: playfair; src: url("/pallav/fonts/playfair-600.woff2") format("woff2"); font-weight: 600; font-display: swap; }
+@font-face { font-family: playfair; src: url("/pallav/fonts/playfair-700.woff2") format("woff2"); font-weight: 700; font-display: swap; }
+:root { --font-inter: "inter"; --font-playfair: "playfair"; --desk-bar: 40px; }
+
+html[data-desktop] body { padding-top: var(--desk-bar); }
+
+/* Everything the web app pins to the top of the window moves below the bar. */
+html[data-desktop] .sidebar { top: var(--desk-bar) !important; height: calc(100vh - var(--desk-bar)) !important; }
+html[data-desktop] .subnav { top: calc(var(--desk-bar) + 10px) !important; height: calc(100vh - var(--desk-bar) - 20px) !important; }
+html[data-desktop] .topbar { top: calc(var(--desk-bar) + 10px) !important; }
+html[data-desktop] .modal,
+html[data-desktop] .modal-backdrop { top: var(--desk-bar) !important; height: calc(100% - var(--desk-bar)) !important; }
+html[data-desktop] .pay-form-modal .modal-content { max-height: calc(100vh - var(--desk-bar) - 56px) !important; }
+html[data-desktop] .hms-auth-page { top: var(--desk-bar) !important; }
+html[data-desktop] .hms-auth-layout { min-height: calc(100dvh - var(--desk-bar)) !important; }
+html[data-desktop] .hms-sk-app { min-height: calc(100vh - var(--desk-bar)) !important; }
+
+.desk-bar {
+  position: fixed; inset: 0 0 auto 0; z-index: 2147483000; height: var(--desk-bar);
+  display: flex; align-items: center; gap: 6px; padding-left: 12px;
+  background: #111113; color: #ececef; font: 500 12.5px var(--font-inter), system-ui, sans-serif;
+  user-select: none; -webkit-user-select: none;
+}
+.desk-bar-mark { width: 22px; height: 22px; flex: none; pointer-events: none; }
+.desk-bar-name { font-weight: 700; white-space: nowrap; pointer-events: none; }
+.desk-bar-drag { flex: 1; align-self: stretch; min-width: 8px; }
+.desk-bar-conn { display: inline-flex; align-items: center; gap: 7px; padding: 0 10px; white-space: nowrap; }
+.desk-bar-dot { position: relative; width: 8px; height: 8px; border-radius: 50%; background: #4ade80; flex: none; transition: background-color .2s; }
+.desk-bar-dot.off { background: #fbbf24; }
+.desk-bar-dot.off::after { content: ""; position: absolute; inset: -4px; border-radius: 50%; border: 1px solid #fbbf24; animation: desk-ping 1.8s ease-out infinite; }
+@keyframes desk-ping { from { transform: scale(.6); opacity: .9; } to { transform: scale(1.6); opacity: 0; } }
+.desk-win { width: 46px; height: var(--desk-bar); display: flex; align-items: center; justify-content: center; background: transparent; border: 0; color: #d0d0d6; cursor: pointer; transition: background-color .14s; }
+.desk-win:hover { background: rgba(255, 255, 255, .14); color: #fff; }
+.desk-win.close:hover { background: #c42b1c; }
+.desk-win:focus-visible { outline: 2px solid #fff; outline-offset: -2px; }
+.desk-win svg { width: 11px; height: 11px; fill: none; stroke: currentColor; stroke-width: 1.2; }
+@media (prefers-reduced-motion: reduce) { .desk-bar-dot.off::after { animation: none; opacity: 0; } }

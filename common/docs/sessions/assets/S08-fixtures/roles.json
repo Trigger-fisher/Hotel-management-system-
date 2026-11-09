@@ -1,0 +1,54 @@
+[
+    {
+        "id": 1,
+        "key": "Viewer",
+        "name": "Viewer",
+        "description": "Reads every screen and report, and changes nothing.",
+        "icon": "bi-eye",
+        "accent": "#64748B",
+        "level": 1,
+        "inherits": 1,
+        "is_system": 1,
+        "created_at": "2026-10-05 18:52:08",
+        "updated_at": "2026-10-05 18:52:08"
+    },
+    {
+        "id": 2,
+        "key": "Editor",
+        "name": "Editor",
+        "description": "Records the day's work and corrects it. Cannot delete or manage accounts.",
+        "icon": "bi-pencil-square",
+        "accent": "#0F766E",
+        "level": 2,
+        "inherits": 1,
+        "is_system": 1,
+        "created_at": "2026-10-05 18:52:08",
+        "updated_at": "2026-10-05 18:52:08"
+    },
+    {
+        "id": 3,
+        "key": "Admin",
+        "name": "Admin",
+        "description": "Runs the day to day. Deletes records, manages Editors and Viewers.",
+        "icon": "bi-person-gear",
+        "accent": "#B45309",
+        "level": 3,
+        "inherits": 1,
+        "is_system": 1,
+        "created_at": "2026-10-05 18:52:08",
+        "updated_at": "2026-10-05 18:52:08"
+    },
+    {
+        "id": 4,
+        "key": "SuperAdmin",
+        "name": "SuperAdmin",
+        "description": "Owns the system. The only role that can change roles, Master Data and force mode.",
+        "icon": "bi-shield-fill-check",
+        "accent": "#6D28D9",
+        "level": 4,
+        "inherits": 1,
+        "is_system": 1,
+        "created_at": "2026-10-05 18:52:08",
+        "updated_at": "2026-10-05 18:52:08"
+    }
+]

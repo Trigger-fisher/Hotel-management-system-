@@ -1,0 +1,14 @@
+/* Email and WhatsApp pages (WhatsApp keeps its --wa-* look). New rules for this area go here, never into hms-overrides.css. */
+
+/* a reply that did not go: under the mail, the reason with Try again and Remove */
+.mb-retry { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: -4px 0 16px; padding: 8px 12px; border: 1px solid var(--bad); border-radius: 8px; background: var(--surface); color: var(--bad); font-size: 13px; }
+.mb-retry > span { flex: 1 1 200px; min-width: 0; }
+.mb-retry .btn { flex: 0 0 auto; }
+
+/* a WhatsApp message that did not go: Try again and Remove inside its bubble */
+.wa-retry { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 4px; margin-top: 4px; }
+.wa-retry .btn { color: inherit; }
+
+@media (max-width: 768px) {
+  .mb-retry .btn, .wa-retry .btn { min-height: 44px; }
+}

@@ -1,0 +1,1059 @@
+{
+    "source": "Pallav app/Http/Controllers/BillMasterController.php, app/Models/BillMasterAdvance.php; PHP 8.4.24",
+    "advanceAmounts": [
+        {
+            "input": {
+                "hotel_amount": null,
+                "food_amount": null,
+                "hotel_mode": "UPI",
+                "food_mode": "Cash"
+            },
+            "ok": false,
+            "hotelPaise": 0,
+            "foodPaise": 0,
+            "hotelBalancePaise": 0,
+            "foodBalancePaise": 0,
+            "totalPaise": 0,
+            "hotelMode": null,
+            "foodMode": null
+        },
+        {
+            "input": {
+                "hotel_amount": null,
+                "food_amount": null,
+                "hotel_mode": null,
+                "food_mode": null
+            },
+            "ok": false,
+            "hotelPaise": 0,
+            "foodPaise": 0,
+            "hotelBalancePaise": 0,
+            "foodBalancePaise": 0,
+            "totalPaise": 0,
+            "hotelMode": null,
+            "foodMode": null
+        },
+        {
+            "input": {
+                "hotel_amount": "",
+                "food_amount": "",
+                "hotel_mode": "UPI",
+                "food_mode": "Cash"
+            },
+            "ok": false,
+            "hotelPaise": 0,
+            "foodPaise": 0,
+            "hotelBalancePaise": 0,
+            "foodBalancePaise": 0,
+            "totalPaise": 0,
+            "hotelMode": null,
+            "foodMode": null
+        },
+        {
+            "input": {
+                "hotel_amount": "",
+                "food_amount": "",
+                "hotel_mode": null,
+                "food_mode": null
+            },
+            "ok": false,
+            "hotelPaise": 0,
+            "foodPaise": 0,
+            "hotelBalancePaise": 0,
+            "foodBalancePaise": 0,
+            "totalPaise": 0,
+            "hotelMode": null,
+            "foodMode": null
+        },
+        {
+            "input": {
+                "hotel_amount": "0",
+                "food_amount": "0",
+                "hotel_mode": "UPI",
+                "food_mode": "Cash"
+            },
+            "ok": false,
+            "hotelPaise": 0,
+            "foodPaise": 0,
+            "hotelBalancePaise": 0,
+            "foodBalancePaise": 0,
+            "totalPaise": 0,
+            "hotelMode": null,
+            "foodMode": null
+        },
+        {
+            "input": {
+                "hotel_amount": "0",
+                "food_amount": "0",
+                "hotel_mode": null,
+                "food_mode": null
+            },
+            "ok": false,
+            "hotelPaise": 0,
+            "foodPaise": 0,
+            "hotelBalancePaise": 0,
+            "foodBalancePaise": 0,
+            "totalPaise": 0,
+            "hotelMode": null,
+            "foodMode": null
+        },
+        {
+            "input": {
+                "hotel_amount": "0.00",
+                "food_amount": null,
+                "hotel_mode": "UPI",
+                "food_mode": "Cash"
+            },
+            "ok": false,
+            "hotelPaise": 0,
+            "foodPaise": 0,
+            "hotelBalancePaise": 0,
+            "foodBalancePaise": 0,
+            "totalPaise": 0,
+            "hotelMode": null,
+            "foodMode": null
+        },
+        {
+            "input": {
+                "hotel_amount": "0.00",
+                "food_amount": null,
+                "hotel_mode": null,
+                "food_mode": null
+            },
+            "ok": false,
+            "hotelPaise": 0,
+            "foodPaise": 0,
+            "hotelBalancePaise": 0,
+            "foodBalancePaise": 0,
+            "totalPaise": 0,
+            "hotelMode": null,
+            "foodMode": null
+        },
+        {
+            "input": {
+                "hotel_amount": "1000",
+                "food_amount": null,
+                "hotel_mode": "UPI",
+                "food_mode": "Cash"
+            },
+            "ok": true,
+            "hotelPaise": 100000,
+            "foodPaise": 0,
+            "hotelBalancePaise": 100000,
+            "foodBalancePaise": 0,
+            "totalPaise": 100000,
+            "hotelMode": "UPI",
+            "foodMode": null
+        },
+        {
+            "input": {
+                "hotel_amount": "1000",
+                "food_amount": null,
+                "hotel_mode": null,
+                "food_mode": null
+            },
+            "ok": true,
+            "hotelPaise": 100000,
+            "foodPaise": 0,
+            "hotelBalancePaise": 100000,
+            "foodBalancePaise": 0,
+            "totalPaise": 100000,
+            "hotelMode": null,
+            "foodMode": null
+        },
+        {
+            "input": {
+                "hotel_amount": null,
+                "food_amount": "500",
+                "hotel_mode": "UPI",
+                "food_mode": "Cash"
+            },
+            "ok": true,
+            "hotelPaise": 0,
+            "foodPaise": 50000,
+            "hotelBalancePaise": 0,
+            "foodBalancePaise": 50000,
+            "totalPaise": 50000,
+            "hotelMode": null,
+            "foodMode": "Cash"
+        },
+        {
+            "input": {
+                "hotel_amount": null,
+                "food_amount": "500",
+                "hotel_mode": null,
+                "food_mode": null
+            },
+            "ok": true,
+            "hotelPaise": 0,
+            "foodPaise": 50000,
+            "hotelBalancePaise": 0,
+            "foodBalancePaise": 50000,
+            "totalPaise": 50000,
+            "hotelMode": null,
+            "foodMode": null
+        },
+        {
+            "input": {
+                "hotel_amount": "1000",
+                "food_amount": "500",
+                "hotel_mode": "UPI",
+                "food_mode": "Cash"
+            },
+            "ok": true,
+            "hotelPaise": 100000,
+            "foodPaise": 50000,
+            "hotelBalancePaise": 100000,
+            "foodBalancePaise": 50000,
+            "totalPaise": 150000,
+            "hotelMode": "UPI",
+            "foodMode": "Cash"
+        },
+        {
+            "input": {
+                "hotel_amount": "1000",
+                "food_amount": "500",
+                "hotel_mode": null,
+                "food_mode": null
+            },
+            "ok": true,
+            "hotelPaise": 100000,
+            "foodPaise": 50000,
+            "hotelBalancePaise": 100000,
+            "foodBalancePaise": 50000,
+            "totalPaise": 150000,
+            "hotelMode": null,
+            "foodMode": null
+        },
+        {
+            "input": {
+                "hotel_amount": "1000.50",
+                "food_amount": "0.50",
+                "hotel_mode": "UPI",
+                "food_mode": "Cash"
+            },
+            "ok": true,
+            "hotelPaise": 100050,
+            "foodPaise": 50,
+            "hotelBalancePaise": 100050,
+            "foodBalancePaise": 50,
+            "totalPaise": 100100,
+            "hotelMode": "UPI",
+            "foodMode": "Cash"
+        },
+        {
+            "input": {
+                "hotel_amount": "1000.50",
+                "food_amount": "0.50",
+                "hotel_mode": null,
+                "food_mode": null
+            },
+            "ok": true,
+            "hotelPaise": 100050,
+            "foodPaise": 50,
+            "hotelBalancePaise": 100050,
+            "foodBalancePaise": 50,
+            "totalPaise": 100100,
+            "hotelMode": null,
+            "foodMode": null
+        },
+        {
+            "input": {
+                "hotel_amount": "0.01",
+                "food_amount": null,
+                "hotel_mode": "UPI",
+                "food_mode": "Cash"
+            },
+            "ok": true,
+            "hotelPaise": 1,
+            "foodPaise": 0,
+            "hotelBalancePaise": 1,
+            "foodBalancePaise": 0,
+            "totalPaise": 1,
+            "hotelMode": "UPI",
+            "foodMode": null
+        },
+        {
+            "input": {
+                "hotel_amount": "0.01",
+                "food_amount": null,
+                "hotel_mode": null,
+                "food_mode": null
+            },
+            "ok": true,
+            "hotelPaise": 1,
+            "foodPaise": 0,
+            "hotelBalancePaise": 1,
+            "foodBalancePaise": 0,
+            "totalPaise": 1,
+            "hotelMode": null,
+            "foodMode": null
+        },
+        {
+            "input": {
+                "hotel_amount": "0.005",
+                "food_amount": null,
+                "hotel_mode": "UPI",
+                "food_mode": "Cash"
+            },
+            "ok": true,
+            "hotelPaise": 1,
+            "foodPaise": 0,
+            "hotelBalancePaise": 1,
+            "foodBalancePaise": 0,
+            "totalPaise": 1,
+            "hotelMode": "UPI",
+            "foodMode": null
+        },
+        {
+            "input": {
+                "hotel_amount": "0.005",
+                "food_amount": null,
+                "hotel_mode": null,
+                "food_mode": null
+            },
+            "ok": true,
+            "hotelPaise": 1,
+            "foodPaise": 0,
+            "hotelBalancePaise": 1,
+            "foodBalancePaise": 0,
+            "totalPaise": 1,
+            "hotelMode": null,
+            "foodMode": null
+        },
+        {
+            "input": {
+                "hotel_amount": "0.004",
+                "food_amount": null,
+                "hotel_mode": "UPI",
+                "food_mode": "Cash"
+            },
+            "ok": false,
+            "hotelPaise": 0,
+            "foodPaise": 0,
+            "hotelBalancePaise": 0,
+            "foodBalancePaise": 0,
+            "totalPaise": 0,
+            "hotelMode": null,
+            "foodMode": null
+        },
+        {
+            "input": {
+                "hotel_amount": "0.004",
+                "food_amount": null,
+                "hotel_mode": null,
+                "food_mode": null
+            },
+            "ok": false,
+            "hotelPaise": 0,
+            "foodPaise": 0,
+            "hotelBalancePaise": 0,
+            "foodBalancePaise": 0,
+            "totalPaise": 0,
+            "hotelMode": null,
+            "foodMode": null
+        },
+        {
+            "input": {
+                "hotel_amount": "1234.565",
+                "food_amount": "0.015",
+                "hotel_mode": "UPI",
+                "food_mode": "Cash"
+            },
+            "ok": true,
+            "hotelPaise": 123457,
+            "foodPaise": 2,
+            "hotelBalancePaise": 123457,
+            "foodBalancePaise": 2,
+            "totalPaise": 123459,
+            "hotelMode": "UPI",
+            "foodMode": "Cash"
+        },
+        {
+            "input": {
+                "hotel_amount": "1234.565",
+                "food_amount": "0.015",
+                "hotel_mode": null,
+                "food_mode": null
+            },
+            "ok": true,
+            "hotelPaise": 123457,
+            "foodPaise": 2,
+            "hotelBalancePaise": 123457,
+            "foodBalancePaise": 2,
+            "totalPaise": 123459,
+            "hotelMode": null,
+            "foodMode": null
+        },
+        {
+            "input": {
+                "hotel_amount": "99999999.99",
+                "food_amount": "0.01",
+                "hotel_mode": "UPI",
+                "food_mode": "Cash"
+            },
+            "ok": true,
+            "hotelPaise": 9999999999,
+            "foodPaise": 1,
+            "hotelBalancePaise": 9999999999,
+            "foodBalancePaise": 1,
+            "totalPaise": 10000000000,
+            "hotelMode": "UPI",
+            "foodMode": "Cash"
+        },
+        {
+            "input": {
+                "hotel_amount": "99999999.99",
+                "food_amount": "0.01",
+                "hotel_mode": null,
+                "food_mode": null
+            },
+            "ok": true,
+            "hotelPaise": 9999999999,
+            "foodPaise": 1,
+            "hotelBalancePaise": 9999999999,
+            "foodBalancePaise": 1,
+            "totalPaise": 10000000000,
+            "hotelMode": null,
+            "foodMode": null
+        },
+        {
+            "input": {
+                "hotel_amount": "0.1",
+                "food_amount": "0.2",
+                "hotel_mode": "UPI",
+                "food_mode": "Cash"
+            },
+            "ok": true,
+            "hotelPaise": 10,
+            "foodPaise": 20,
+            "hotelBalancePaise": 10,
+            "foodBalancePaise": 20,
+            "totalPaise": 30,
+            "hotelMode": "UPI",
+            "foodMode": "Cash"
+        },
+        {
+            "input": {
+                "hotel_amount": "0.1",
+                "food_amount": "0.2",
+                "hotel_mode": null,
+                "food_mode": null
+            },
+            "ok": true,
+            "hotelPaise": 10,
+            "foodPaise": 20,
+            "hotelBalancePaise": 10,
+            "foodBalancePaise": 20,
+            "totalPaise": 30,
+            "hotelMode": null,
+            "foodMode": null
+        },
+        {
+            "input": {
+                "hotel_amount": "-0",
+                "food_amount": "0",
+                "hotel_mode": "UPI",
+                "food_mode": "Cash"
+            },
+            "ok": false,
+            "hotelPaise": 0,
+            "foodPaise": 0,
+            "hotelBalancePaise": 0,
+            "foodBalancePaise": 0,
+            "totalPaise": 0,
+            "hotelMode": null,
+            "foodMode": null
+        },
+        {
+            "input": {
+                "hotel_amount": "-0",
+                "food_amount": "0",
+                "hotel_mode": null,
+                "food_mode": null
+            },
+            "ok": false,
+            "hotelPaise": 0,
+            "foodPaise": 0,
+            "hotelBalancePaise": 0,
+            "foodBalancePaise": 0,
+            "totalPaise": 0,
+            "hotelMode": null,
+            "foodMode": null
+        },
+        {
+            "input": {
+                "hotel_amount": "00012.30",
+                "food_amount": null,
+                "hotel_mode": "UPI",
+                "food_mode": "Cash"
+            },
+            "ok": true,
+            "hotelPaise": 1230,
+            "foodPaise": 0,
+            "hotelBalancePaise": 1230,
+            "foodBalancePaise": 0,
+            "totalPaise": 1230,
+            "hotelMode": "UPI",
+            "foodMode": null
+        },
+        {
+            "input": {
+                "hotel_amount": "00012.30",
+                "food_amount": null,
+                "hotel_mode": null,
+                "food_mode": null
+            },
+            "ok": true,
+            "hotelPaise": 1230,
+            "foodPaise": 0,
+            "hotelBalancePaise": 1230,
+            "foodBalancePaise": 0,
+            "totalPaise": 1230,
+            "hotelMode": null,
+            "foodMode": null
+        },
+        {
+            "input": {
+                "hotel_amount": "1e3",
+                "food_amount": null,
+                "hotel_mode": "UPI",
+                "food_mode": "Cash"
+            },
+            "ok": true,
+            "hotelPaise": 100000,
+            "foodPaise": 0,
+            "hotelBalancePaise": 100000,
+            "foodBalancePaise": 0,
+            "totalPaise": 100000,
+            "hotelMode": "UPI",
+            "foodMode": null
+        },
+        {
+            "input": {
+                "hotel_amount": "1e3",
+                "food_amount": null,
+                "hotel_mode": null,
+                "food_mode": null
+            },
+            "ok": true,
+            "hotelPaise": 100000,
+            "foodPaise": 0,
+            "hotelBalancePaise": 100000,
+            "foodBalancePaise": 0,
+            "totalPaise": 100000,
+            "hotelMode": null,
+            "foodMode": null
+        },
+        {
+            "input": {
+                "hotel_amount": "2500",
+                "food_amount": "0",
+                "hotel_mode": "UPI",
+                "food_mode": "Cash"
+            },
+            "ok": true,
+            "hotelPaise": 250000,
+            "foodPaise": 0,
+            "hotelBalancePaise": 250000,
+            "foodBalancePaise": 0,
+            "totalPaise": 250000,
+            "hotelMode": "UPI",
+            "foodMode": null
+        },
+        {
+            "input": {
+                "hotel_amount": "2500",
+                "food_amount": "0",
+                "hotel_mode": null,
+                "food_mode": null
+            },
+            "ok": true,
+            "hotelPaise": 250000,
+            "foodPaise": 0,
+            "hotelBalancePaise": 250000,
+            "foodBalancePaise": 0,
+            "totalPaise": 250000,
+            "hotelMode": null,
+            "foodMode": null
+        },
+        {
+            "input": {
+                "hotel_amount": "0",
+                "food_amount": "750.25",
+                "hotel_mode": "UPI",
+                "food_mode": "Cash"
+            },
+            "ok": true,
+            "hotelPaise": 0,
+            "foodPaise": 75025,
+            "hotelBalancePaise": 0,
+            "foodBalancePaise": 75025,
+            "totalPaise": 75025,
+            "hotelMode": null,
+            "foodMode": "Cash"
+        },
+        {
+            "input": {
+                "hotel_amount": "0",
+                "food_amount": "750.25",
+                "hotel_mode": null,
+                "food_mode": null
+            },
+            "ok": true,
+            "hotelPaise": 0,
+            "foodPaise": 75025,
+            "hotelBalancePaise": 0,
+            "foodBalancePaise": 75025,
+            "totalPaise": 75025,
+            "hotelMode": null,
+            "foodMode": null
+        }
+    ],
+    "states": [
+        {
+            "hotelPaise": 100000,
+            "hotelBalancePaise": 100000,
+            "foodPaise": 0,
+            "foodBalancePaise": 0,
+            "refunded": false,
+            "isUnused": true,
+            "isRefunded": false
+        },
+        {
+            "hotelPaise": 100000,
+            "hotelBalancePaise": 99999,
+            "foodPaise": 0,
+            "foodBalancePaise": 0,
+            "refunded": false,
+            "isUnused": false,
+            "isRefunded": false
+        },
+        {
+            "hotelPaise": 100000,
+            "hotelBalancePaise": 100000,
+            "foodPaise": 50000,
+            "foodBalancePaise": 0,
+            "refunded": false,
+            "isUnused": false,
+            "isRefunded": false
+        },
+        {
+            "hotelPaise": 0,
+            "hotelBalancePaise": 0,
+            "foodPaise": 50000,
+            "foodBalancePaise": 50000,
+            "refunded": false,
+            "isUnused": true,
+            "isRefunded": false
+        },
+        {
+            "hotelPaise": 100000,
+            "hotelBalancePaise": 0,
+            "foodPaise": 0,
+            "foodBalancePaise": 0,
+            "refunded": false,
+            "isUnused": false,
+            "isRefunded": false
+        },
+        {
+            "hotelPaise": 100000,
+            "hotelBalancePaise": 100000,
+            "foodPaise": 0,
+            "foodBalancePaise": 0,
+            "refunded": true,
+            "isUnused": true,
+            "isRefunded": true
+        },
+        {
+            "hotelPaise": 100000,
+            "hotelBalancePaise": 40000,
+            "foodPaise": 0,
+            "foodBalancePaise": 0,
+            "refunded": true,
+            "isUnused": false,
+            "isRefunded": true
+        },
+        {
+            "hotelPaise": 100050,
+            "hotelBalancePaise": 100050,
+            "foodPaise": 0,
+            "foodBalancePaise": 0,
+            "refunded": false,
+            "isUnused": true,
+            "isRefunded": false
+        },
+        {
+            "hotelPaise": 10,
+            "hotelBalancePaise": 10,
+            "foodPaise": 20,
+            "foodBalancePaise": 20,
+            "refunded": false,
+            "isUnused": true,
+            "isRefunded": false
+        }
+    ],
+    "refunds": [
+        {
+            "hotelBalancePaise": 100000,
+            "foodBalancePaise": 0,
+            "hotelRefundPaise": 40000,
+            "foodRefundPaise": null,
+            "refused": false,
+            "after": {
+                "hotelBalancePaise": 60000,
+                "foodBalancePaise": 0,
+                "totalPaise": 40000
+            }
+        },
+        {
+            "hotelBalancePaise": 100000,
+            "foodBalancePaise": 0,
+            "hotelRefundPaise": 100000,
+            "foodRefundPaise": null,
+            "refused": false,
+            "after": {
+                "hotelBalancePaise": 0,
+                "foodBalancePaise": 0,
+                "totalPaise": 100000
+            }
+        },
+        {
+            "hotelBalancePaise": 100000,
+            "foodBalancePaise": 0,
+            "hotelRefundPaise": 100001,
+            "foodRefundPaise": null,
+            "refused": true,
+            "after": null
+        },
+        {
+            "hotelBalancePaise": 100000,
+            "foodBalancePaise": 50000,
+            "hotelRefundPaise": 0,
+            "foodRefundPaise": 0,
+            "refused": false,
+            "after": {
+                "hotelBalancePaise": 100000,
+                "foodBalancePaise": 50000,
+                "totalPaise": 0
+            }
+        },
+        {
+            "hotelBalancePaise": 100000,
+            "foodBalancePaise": 50000,
+            "hotelRefundPaise": null,
+            "foodRefundPaise": null,
+            "refused": false,
+            "after": {
+                "hotelBalancePaise": 100000,
+                "foodBalancePaise": 50000,
+                "totalPaise": 0
+            }
+        },
+        {
+            "hotelBalancePaise": 30,
+            "foodBalancePaise": 0,
+            "hotelRefundPaise": 10,
+            "foodRefundPaise": null,
+            "refused": false,
+            "after": {
+                "hotelBalancePaise": 20,
+                "foodBalancePaise": 0,
+                "totalPaise": 10
+            }
+        },
+        {
+            "hotelBalancePaise": 30,
+            "foodBalancePaise": 0,
+            "hotelRefundPaise": 20,
+            "foodRefundPaise": null,
+            "refused": false,
+            "after": {
+                "hotelBalancePaise": 10,
+                "foodBalancePaise": 0,
+                "totalPaise": 20
+            }
+        },
+        {
+            "hotelBalancePaise": 100010,
+            "foodBalancePaise": 0,
+            "hotelRefundPaise": 30,
+            "foodRefundPaise": null,
+            "refused": false,
+            "after": {
+                "hotelBalancePaise": 99980,
+                "foodBalancePaise": 0,
+                "totalPaise": 30
+            }
+        },
+        {
+            "hotelBalancePaise": 50000,
+            "foodBalancePaise": 25050,
+            "hotelRefundPaise": 50000,
+            "foodRefundPaise": 25050,
+            "refused": false,
+            "after": {
+                "hotelBalancePaise": 0,
+                "foodBalancePaise": 0,
+                "totalPaise": 75050
+            }
+        },
+        {
+            "hotelBalancePaise": 50000,
+            "foodBalancePaise": 25050,
+            "hotelRefundPaise": 0,
+            "foodRefundPaise": 25051,
+            "refused": true,
+            "after": null
+        },
+        {
+            "hotelBalancePaise": 9999999999,
+            "foodBalancePaise": 0,
+            "hotelRefundPaise": 1,
+            "foodRefundPaise": null,
+            "refused": false,
+            "after": {
+                "hotelBalancePaise": 9999999998,
+                "foodBalancePaise": 0,
+                "totalPaise": 1
+            }
+        },
+        {
+            "hotelBalancePaise": 0,
+            "foodBalancePaise": 70000,
+            "hotelRefundPaise": null,
+            "foodRefundPaise": 70000,
+            "refused": false,
+            "after": {
+                "hotelBalancePaise": 0,
+                "foodBalancePaise": 0,
+                "totalPaise": 70000
+            }
+        }
+    ],
+    "reversals": [
+        {
+            "hotelBalancePaise": 60000,
+            "foodBalancePaise": 0,
+            "hotelRefundPaise": 40000,
+            "foodRefundPaise": null,
+            "after": {
+                "hotelBalancePaise": 100000,
+                "foodBalancePaise": 0,
+                "totalPaise": 100000
+            }
+        },
+        {
+            "hotelBalancePaise": 0,
+            "foodBalancePaise": 0,
+            "hotelRefundPaise": 100000,
+            "foodRefundPaise": 50000,
+            "after": {
+                "hotelBalancePaise": 100000,
+                "foodBalancePaise": 50000,
+                "totalPaise": 150000
+            }
+        },
+        {
+            "hotelBalancePaise": 20,
+            "foodBalancePaise": 0,
+            "hotelRefundPaise": 10,
+            "foodRefundPaise": null,
+            "after": {
+                "hotelBalancePaise": 30,
+                "foodBalancePaise": 0,
+                "totalPaise": 30
+            }
+        },
+        {
+            "hotelBalancePaise": 25025,
+            "foodBalancePaise": 10000,
+            "hotelRefundPaise": null,
+            "foodRefundPaise": null,
+            "after": {
+                "hotelBalancePaise": 25025,
+                "foodBalancePaise": 10000,
+                "totalPaise": 35025
+            }
+        }
+    ],
+    "receiptYears": [
+        {
+            "instant": "2026-12-31T18:29:59Z",
+            "typed": "814",
+            "receipt": "2026 / 814"
+        },
+        {
+            "instant": "2026-12-31T18:29:59Z",
+            "typed": "1",
+            "receipt": "2026 / 1"
+        },
+        {
+            "instant": "2026-12-31T18:29:59Z",
+            "typed": " 0042 ",
+            "receipt": "2026 / 0042"
+        },
+        {
+            "instant": "2026-12-31T18:29:59Z",
+            "typed": "A/7",
+            "receipt": "2026 / A/7"
+        },
+        {
+            "instant": "2026-12-31T18:30:00Z",
+            "typed": "814",
+            "receipt": "2027 / 814"
+        },
+        {
+            "instant": "2026-12-31T18:30:00Z",
+            "typed": "1",
+            "receipt": "2027 / 1"
+        },
+        {
+            "instant": "2026-12-31T18:30:00Z",
+            "typed": " 0042 ",
+            "receipt": "2027 / 0042"
+        },
+        {
+            "instant": "2026-12-31T18:30:00Z",
+            "typed": "A/7",
+            "receipt": "2027 / A/7"
+        },
+        {
+            "instant": "2027-01-01T00:00:00Z",
+            "typed": "814",
+            "receipt": "2027 / 814"
+        },
+        {
+            "instant": "2027-01-01T00:00:00Z",
+            "typed": "1",
+            "receipt": "2027 / 1"
+        },
+        {
+            "instant": "2027-01-01T00:00:00Z",
+            "typed": " 0042 ",
+            "receipt": "2027 / 0042"
+        },
+        {
+            "instant": "2027-01-01T00:00:00Z",
+            "typed": "A/7",
+            "receipt": "2027 / A/7"
+        },
+        {
+            "instant": "2026-06-15T10:00:00Z",
+            "typed": "814",
+            "receipt": "2026 / 814"
+        },
+        {
+            "instant": "2026-06-15T10:00:00Z",
+            "typed": "1",
+            "receipt": "2026 / 1"
+        },
+        {
+            "instant": "2026-06-15T10:00:00Z",
+            "typed": " 0042 ",
+            "receipt": "2026 / 0042"
+        },
+        {
+            "instant": "2026-06-15T10:00:00Z",
+            "typed": "A/7",
+            "receipt": "2026 / A/7"
+        },
+        {
+            "instant": "2027-12-31T18:30:00Z",
+            "typed": "814",
+            "receipt": "2028 / 814"
+        },
+        {
+            "instant": "2027-12-31T18:30:00Z",
+            "typed": "1",
+            "receipt": "2028 / 1"
+        },
+        {
+            "instant": "2027-12-31T18:30:00Z",
+            "typed": " 0042 ",
+            "receipt": "2028 / 0042"
+        },
+        {
+            "instant": "2027-12-31T18:30:00Z",
+            "typed": "A/7",
+            "receipt": "2028 / A/7"
+        }
+    ],
+    "readable": {
+        "Receipt number": "x",
+        "Guest name": "x",
+        "Mobile number": "x",
+        "Room number": "x",
+        "Company id": "x",
+        "Payment date": "x",
+        "Hotel amount": "x",
+        "Food amount": "x",
+        "Hotel mode": "x",
+        "Food mode": "x",
+        "Reference name": "x",
+        "Reference mobile number": "x",
+        "Instruction": "x",
+        "Hotel balance": "x",
+        "Food balance": "x",
+        "Total": "x",
+        "Hotel refund amount": "x",
+        "Food refund amount": "x",
+        "Hotel refund mode": "x",
+        "Food refund mode": "x",
+        "Refund payment date": "x",
+        "Refund guest name": "x",
+        "Refund mobile number": "x",
+        "Refund instruction": "x",
+        "Entry no": "x",
+        "Deleted by": "x",
+        "Updated by": "x",
+        "Reservation id": "x"
+    },
+    "label": "2026 / 814 (Ravi Mehta)",
+    "whole": {
+        "Receipt number": "2026 / 814",
+        "Guest name": "Ravi Mehta",
+        "Payment date": "05-10-2026",
+        "Hotel amount": "1000.00",
+        "Food amount": "0.00",
+        "Hotel mode": "UPI",
+        "Total": "1000.00",
+        "Entry no": 7
+    },
+    "heldKeepEmpty": {
+        "guest_name": "Ravi Mehta",
+        "mobile_number": "",
+        "payment_date": "05-10-2026",
+        "refund_payment_date": null
+    },
+    "entryNumbers": [
+        {
+            "n": 1,
+            "text": "0001"
+        },
+        {
+            "n": 9,
+            "text": "0009"
+        },
+        {
+            "n": 10,
+            "text": "0010"
+        },
+        {
+            "n": 999,
+            "text": "0999"
+        },
+        {
+            "n": 1000,
+            "text": "1000"
+        },
+        {
+            "n": 9999,
+            "text": "9999"
+        },
+        {
+            "n": 10000,
+            "text": "10000"
+        }
+    ]
+}

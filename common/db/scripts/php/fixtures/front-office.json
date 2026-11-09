@@ -1,0 +1,450 @@
+{
+    "source": "Pallav Support/Pms/FrontDesk.php (real), Stay.php, StayController.php, Support/Pms/Billing.php, Reservation.php, BoardController.php (verbatim); PHP 8.4.24",
+    "nights": [
+        {
+            "from": "2026-10-05",
+            "to": "2026-10-08",
+            "count": 3,
+            "first": "2026-10-05",
+            "last": "2026-10-07"
+        },
+        {
+            "from": "2026-10-05",
+            "to": "2026-10-05",
+            "count": 0,
+            "first": null,
+            "last": null
+        },
+        {
+            "from": "2026-10-08",
+            "to": "2026-10-05",
+            "count": 0,
+            "first": null,
+            "last": null
+        },
+        {
+            "from": "2026-02-27",
+            "to": "2026-03-02",
+            "count": 3,
+            "first": "2026-02-27",
+            "last": "2026-03-01"
+        },
+        {
+            "from": "2028-02-28",
+            "to": "2028-03-01",
+            "count": 2,
+            "first": "2028-02-28",
+            "last": "2028-02-29"
+        },
+        {
+            "from": "2026-12-30",
+            "to": "2027-01-02",
+            "count": 3,
+            "first": "2026-12-30",
+            "last": "2027-01-01"
+        },
+        {
+            "from": "2026-01-01",
+            "to": "2027-06-01",
+            "count": 366,
+            "first": "2026-01-01",
+            "last": "2027-01-01"
+        }
+    ],
+    "roomCharges": [
+        {
+            "checkInAt": "2026-10-05 14:30:00",
+            "until": "2026-10-08 11:00:00",
+            "rate": "2500",
+            "nights": 3,
+            "roomPaise": 750000
+        },
+        {
+            "checkInAt": "2026-10-05 14:30:00",
+            "until": "2026-10-05 20:00:00",
+            "rate": "2500",
+            "nights": 1,
+            "roomPaise": 250000
+        },
+        {
+            "checkInAt": "2026-10-05 01:10:00",
+            "until": "2026-10-06 10:00:00",
+            "rate": "1999.99",
+            "nights": 1,
+            "roomPaise": 199999
+        },
+        {
+            "checkInAt": "2026-10-05 23:59:00",
+            "until": "2026-10-06 00:01:00",
+            "rate": "3333.33",
+            "nights": 1,
+            "roomPaise": 333333
+        },
+        {
+            "checkInAt": "2026-10-01 12:00:00",
+            "until": "2026-10-31 12:00:00",
+            "rate": "1234.567",
+            "nights": 30,
+            "roomPaise": 3703701
+        },
+        {
+            "checkInAt": "2026-03-31 18:00:00",
+            "until": "2026-04-02 09:00:00",
+            "rate": "0",
+            "nights": 2,
+            "roomPaise": 0
+        },
+        {
+            "checkInAt": "2026-10-05 12:00:00",
+            "until": "2026-10-12 12:00:00",
+            "rate": "0.01",
+            "nights": 7,
+            "roomPaise": 7
+        }
+    ],
+    "charges": [
+        {
+            "quantity": "1",
+            "unitPricePaise": 25000,
+            "amountPaise": 25000
+        },
+        {
+            "quantity": "2",
+            "unitPricePaise": 12550,
+            "amountPaise": 25100
+        },
+        {
+            "quantity": "1.5",
+            "unitPricePaise": 33333,
+            "amountPaise": 50000
+        },
+        {
+            "quantity": "0.01",
+            "unitPricePaise": 999999900,
+            "amountPaise": 9999999
+        },
+        {
+            "quantity": "3.33",
+            "unitPricePaise": 333,
+            "amountPaise": 1109
+        },
+        {
+            "quantity": "9999",
+            "unitPricePaise": 1,
+            "amountPaise": 9999
+        },
+        {
+            "quantity": "0.5",
+            "unitPricePaise": 5,
+            "amountPaise": 3
+        },
+        {
+            "quantity": "2.25",
+            "unitPricePaise": 35,
+            "amountPaise": 79
+        },
+        {
+            "quantity": "1.15",
+            "unitPricePaise": 115,
+            "amountPaise": 132
+        }
+    ],
+    "checkout": [
+        {
+            "roomPaise": 750000,
+            "extraBedPaise": 0,
+            "laundryPaise": 15050,
+            "otherPaise": 0,
+            "foodPaise": 120000,
+            "hotelGstPercent": "5",
+            "foodGstPercent": "5",
+            "hotelGstPaise": 38253,
+            "foodGstPaise": 6000,
+            "hotelTotalPaise": 803303,
+            "foodTotalPaise": 126000
+        },
+        {
+            "roomPaise": 750000,
+            "extraBedPaise": 50000,
+            "laundryPaise": 15050,
+            "otherPaise": 7500,
+            "foodPaise": 120000,
+            "hotelGstPercent": "12",
+            "foodGstPercent": "18",
+            "hotelGstPaise": 98706,
+            "foodGstPaise": 21600,
+            "hotelTotalPaise": 921256,
+            "foodTotalPaise": 141600
+        },
+        {
+            "roomPaise": 249999,
+            "extraBedPaise": 0,
+            "laundryPaise": 0,
+            "otherPaise": 0,
+            "foodPaise": 0,
+            "hotelGstPercent": "5",
+            "foodGstPercent": "5",
+            "hotelGstPaise": 12500,
+            "foodGstPaise": 0,
+            "hotelTotalPaise": 262499,
+            "foodTotalPaise": 0
+        },
+        {
+            "roomPaise": 0,
+            "extraBedPaise": 0,
+            "laundryPaise": 0,
+            "otherPaise": 0,
+            "foodPaise": 33333,
+            "hotelGstPercent": "0",
+            "foodGstPercent": "5",
+            "hotelGstPaise": 0,
+            "foodGstPaise": 1667,
+            "hotelTotalPaise": 0,
+            "foodTotalPaise": 35000
+        },
+        {
+            "roomPaise": 1000000,
+            "extraBedPaise": 0,
+            "laundryPaise": 0,
+            "otherPaise": 0,
+            "foodPaise": 0,
+            "hotelGstPercent": "28",
+            "foodGstPercent": "0",
+            "hotelGstPaise": 280000,
+            "foodGstPaise": 0,
+            "hotelTotalPaise": 1280000,
+            "foodTotalPaise": 0
+        },
+        {
+            "roomPaise": 123456,
+            "extraBedPaise": 7890,
+            "laundryPaise": 1,
+            "otherPaise": 0,
+            "foodPaise": 9999,
+            "hotelGstPercent": "2.5",
+            "foodGstPercent": "7.5",
+            "hotelGstPaise": 3284,
+            "foodGstPaise": 750,
+            "hotelTotalPaise": 134631,
+            "foodTotalPaise": 10749
+        },
+        {
+            "roomPaise": 333333,
+            "extraBedPaise": 0,
+            "laundryPaise": 0,
+            "otherPaise": 0,
+            "foodPaise": 66667,
+            "hotelGstPercent": "18",
+            "foodGstPercent": "18",
+            "hotelGstPaise": 60000,
+            "foodGstPaise": 12000,
+            "hotelTotalPaise": 393333,
+            "foodTotalPaise": 78667
+        },
+        {
+            "roomPaise": 10,
+            "extraBedPaise": 20,
+            "laundryPaise": 0,
+            "otherPaise": 0,
+            "foodPaise": 30,
+            "hotelGstPercent": "5",
+            "foodGstPercent": "5",
+            "hotelGstPaise": 2,
+            "foodGstPaise": 2,
+            "hotelTotalPaise": 32,
+            "foodTotalPaise": 32
+        }
+    ],
+    "mobiles": [
+        {
+            "in": "+91 98765 43210",
+            "out": "+919876543210"
+        },
+        {
+            "in": "098765-43210",
+            "out": "09876543210"
+        },
+        {
+            "in": "(0281) 245 6789 ext 12",
+            "out": "0281245678912"
+        },
+        {
+            "in": "call me",
+            "out": ""
+        },
+        {
+            "in": "",
+            "out": null
+        },
+        {
+            "in": "+1 (555) 010-9999 x123456",
+            "out": "+15550109999123"
+        },
+        {
+            "in": "९८७६५४३२१०",
+            "out": ""
+        }
+    ],
+    "addresses": [
+        {
+            "address": "150 Ring Road",
+            "city": "Rajkot",
+            "out": "150 Ring Road, Rajkot"
+        },
+        {
+            "address": "150 Ring Road",
+            "city": null,
+            "out": "150 Ring Road"
+        },
+        {
+            "address": null,
+            "city": "Rajkot",
+            "out": "Rajkot"
+        },
+        {
+            "address": null,
+            "city": null,
+            "out": null
+        },
+        {
+            "address": "",
+            "city": "Rajkot",
+            "out": "Rajkot"
+        },
+        {
+            "address": "0",
+            "city": "Rajkot",
+            "out": "Rajkot"
+        }
+    ],
+    "references": [
+        {
+            "at": "2026-10-05 10:00:00",
+            "n": 1,
+            "reference": "RES-26-00001"
+        },
+        {
+            "at": "2026-10-05 10:00:00",
+            "n": 42,
+            "reference": "RES-26-00042"
+        },
+        {
+            "at": "2027-01-01 00:00:00",
+            "n": 99999,
+            "reference": "RES-27-99999"
+        },
+        {
+            "at": "2026-12-31 23:59:59",
+            "n": 100000,
+            "reference": "RES-26-100000"
+        }
+    ],
+    "enquiryRates": [
+        {
+            "guests": 2,
+            "children": 0,
+            "doublePaise": 400000,
+            "singlePaise": 320000,
+            "ratePaise": 400000,
+            "adults": 2
+        },
+        {
+            "guests": 1,
+            "children": 0,
+            "doublePaise": 400000,
+            "singlePaise": 320000,
+            "ratePaise": 320000,
+            "adults": 1
+        },
+        {
+            "guests": 1,
+            "children": 0,
+            "doublePaise": 400000,
+            "singlePaise": null,
+            "ratePaise": 400000,
+            "adults": 1
+        },
+        {
+            "guests": 3,
+            "children": 2,
+            "doublePaise": 400000,
+            "singlePaise": 320000,
+            "ratePaise": 320000,
+            "adults": 1
+        },
+        {
+            "guests": 2,
+            "children": 1,
+            "doublePaise": 400000,
+            "singlePaise": 320000,
+            "ratePaise": 320000,
+            "adults": 1
+        },
+        {
+            "guests": 0,
+            "children": 0,
+            "doublePaise": 400000,
+            "singlePaise": 320000,
+            "ratePaise": 320000,
+            "adults": 1
+        },
+        {
+            "guests": null,
+            "children": null,
+            "doublePaise": 400000,
+            "singlePaise": 320000,
+            "ratePaise": 320000,
+            "adults": 1
+        },
+        {
+            "guests": 2,
+            "children": 3,
+            "doublePaise": 400000,
+            "singlePaise": 320000,
+            "ratePaise": 320000,
+            "adults": 1
+        }
+    ],
+    "occupancy": [
+        {
+            "occupied": 0,
+            "inService": 0,
+            "percent": 0
+        },
+        {
+            "occupied": 1,
+            "inService": 3,
+            "percent": 33
+        },
+        {
+            "occupied": 2,
+            "inService": 3,
+            "percent": 67
+        },
+        {
+            "occupied": 1,
+            "inService": 8,
+            "percent": 13
+        },
+        {
+            "occupied": 5,
+            "inService": 8,
+            "percent": 63
+        },
+        {
+            "occupied": 7,
+            "inService": 8,
+            "percent": 88
+        },
+        {
+            "occupied": 12,
+            "inService": 40,
+            "percent": 30
+        },
+        {
+            "occupied": 1,
+            "inService": 200,
+            "percent": 1
+        }
+    ]
+}

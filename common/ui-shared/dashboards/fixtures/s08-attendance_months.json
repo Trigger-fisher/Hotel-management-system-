@@ -1,0 +1,18 @@
+[
+    {
+        "id": 1,
+        "payroll_company_id": 1,
+        "year": 2026,
+        "month": 9,
+        "is_locked": 1,
+        "locked_at": "2026-10-05 18:52:24",
+        "salary_generated_at": "2026-10-05 18:52:24",
+        "salary_generated_by": 1,
+        "generation_count": 1,
+        "unlocked_by": null,
+        "unlocked_at": null,
+        "unlock_session_id": null,
+        "created_at": "2026-10-05 18:52:22",
+        "updated_at": "2026-10-05 18:52:24"
+    }
+]

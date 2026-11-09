@@ -1,0 +1,9 @@
+**/node_modules
+**/.next
+**/.env*
+**/*.log
+web-app/tests
+common/db/dumps
+common/db/.env.local
+common/db/.dev-login.txt
+.git

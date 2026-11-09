@@ -1,0 +1,717 @@
+/* ===========================================================================
+   Hotel Pallav - sidebars
+
+   Both panels are floating cards now, lifted off the page edge.
+
+   Main rail: a deep graphite card with a slowly drifting glow, a glass brand
+   mark that breathes, a live date and time chip, and a profile card at the
+   foot beside the collapse control.
+
+   Payroll panel: a white card whose head is a graphite hero carrying the
+   company card in glass.
+
+   In both, each item lights up on its own the moment it is hovered, the
+   current page keeps a steady highlight, presses ripple, and the whole thing plays a staggered entrance once per
+   browser session.
+
+   Loaded after every other sheet, so it wins over the older nav rules.
+   =========================================================================== */
+
+:root {
+    --sb-ease: cubic-bezier(.16, 1, .3, 1);
+    --sb-spring: cubic-bezier(.34, 1.56, .64, 1);
+    --sb-gutter: 10px;
+    --sb-radius: 22px;
+
+    /* The theme's own graphite, flat */
+    --nav-surface: #3A3A42;
+    --sb-blob-1: #6B7080;
+    --sb-blob-2: #2B2B31;
+    --sb-blob-3: #B4B4BC;
+    --sb-blob-opacity: .30;
+    --sb-card-shadow: 0 22px 44px -22px rgba(17, 17, 20, .65), 0 2px 6px rgba(17, 17, 20, .12);
+    --sb-card-edge: inset 0 0 0 1px rgba(255, 255, 255, .08);
+
+    --sb-glass: rgba(255, 255, 255, .08);
+    --sb-glass-hover: rgba(255, 255, 255, .15);
+    --sb-glass-edge: rgba(255, 255, 255, .12);
+    --sb-tile: rgba(255, 255, 255, .08);
+    --sb-tile-hover: rgba(255, 255, 255, .18);
+    --sb-wash: rgba(255, 255, 255, .11);
+    --sb-wash-active: rgba(255, 255, 255, .18);
+    --sb-marker: #fff;
+    --sb-marker-glow: rgba(228, 228, 231, .9);
+    --sb-active-tile: #fff;
+    --sb-active-icon: #3A3A42;
+
+    --sb-rail-wash: var(--p50);
+}
+
+:root[data-theme="dark"] {
+    --nav-surface: #151024;
+    --sb-blob-1: #8E8E98;
+    --sb-blob-2: #3A3A42;
+    --sb-blob-3: #6B7080;
+    --sb-blob-opacity: .22;
+    --sb-card-shadow: 0 22px 44px -22px rgba(0, 0, 0, .9), 0 2px 6px rgba(0, 0, 0, .4);
+    --sb-card-edge: inset 0 0 0 1px rgba(180, 180, 188, .14);
+
+    --sb-glass: rgba(180, 180, 188, .07);
+    --sb-glass-hover: rgba(180, 180, 188, .15);
+    --sb-glass-edge: rgba(180, 180, 188, .16);
+    --sb-tile: rgba(180, 180, 188, .09);
+    --sb-tile-hover: rgba(180, 180, 188, .20);
+    --sb-wash: rgba(180, 180, 188, .10);
+    --sb-wash-active: rgba(180, 180, 188, .18);
+    --sb-marker: #D0D0D6;
+    --sb-marker-glow: rgba(180, 180, 188, .85);
+    --sb-active-tile: #111114;
+    --sb-active-icon: #fff;
+
+    --sb-rail-wash: var(--p100);
+}
+
+/* ============================================================== keyframes */
+
+@keyframes sb-drift {
+    0%   { transform: translate(0, 0) scale(1); }
+    50%  { transform: translate(34px, 46px) scale(1.18); }
+    100% { transform: translate(-22px, 90px) scale(.94); }
+}
+@keyframes sb-sheen {
+    0%   { opacity: 0; transform: skewX(-18deg) translateX(0); }
+    20%  { opacity: 1; }
+    100% { opacity: 0; transform: skewX(-18deg) translateX(420%); }
+}
+@keyframes sb-breathe {
+    0%, 100% { box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .30), 0 6px 16px rgba(20, 4, 50, .35), 0 0 0 0 rgba(180, 180, 188, 0); }
+    50%      { box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .40), 0 6px 16px rgba(20, 4, 50, .35), 0 0 0 5px rgba(180, 180, 188, .16); }
+}
+@keyframes sb-pop {
+    0%   { transform: scale(1) rotate(0); }
+    35%  { transform: scale(1.18) rotate(-9deg); }
+    65%  { transform: scale(.96) rotate(4deg); }
+    100% { transform: scale(1.08) rotate(0); }
+}
+@keyframes sb-marker-in {
+    from { transform: translateY(-50%) scaleY(0); opacity: 0; }
+    to   { transform: translateY(-50%) scaleY(1); opacity: 1; }
+}
+@keyframes sb-ripple {
+    from { transform: scale(0); opacity: .45; }
+    to   { transform: scale(1); opacity: 0; }
+}
+@keyframes sb-blink {
+    0%, 45%   { opacity: 1; }
+    55%, 100% { opacity: .2; }
+}
+@keyframes sb-ping {
+    0%   { transform: scale(1); opacity: .65; }
+    80%, 100% { transform: scale(2.6); opacity: 0; }
+}
+@keyframes sb-card-in {
+    from { opacity: 0; transform: translateX(-22px) scale(.98); }
+    to   { opacity: 1; transform: none; }
+}
+@keyframes sb-item-in {
+    from { opacity: 0; transform: translateX(-14px); filter: blur(3px); }
+    to   { opacity: 1; transform: none; filter: none; }
+}
+@keyframes sb-count-in {
+    0%   { transform: scale(0); }
+    70%  { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+/* ============================================================ the main rail */
+
+/* The cards are one flat colour: the drifting glows are switched off */
+.sb-bg span, .sb-head-bg span { display: none; }
+
+/* The fixed box stays the same size; the card is drawn inside it */
+.sidebar {
+    background: var(--cream) !important;
+    padding: 18px 12px 18px 22px !important;
+    border-right: none !important;
+    box-shadow: none !important;
+}
+.sidebar::after { display: none !important; }
+.sidebar > *:not(.sb-bg) { position: relative; z-index: 1; }
+
+.sb-bg {
+    position: absolute; z-index: 0; pointer-events: none;
+    top: var(--sb-gutter); bottom: var(--sb-gutter); left: var(--sb-gutter); right: 0;
+    border-radius: var(--sb-radius); overflow: hidden;
+    background: var(--nav-surface);
+    box-shadow: var(--sb-card-shadow), var(--sb-card-edge);
+    transition: box-shadow 300ms var(--sb-ease);
+}
+.sb-bg::before {
+    /* a soft gloss across the top of the card */
+    content: ""; position: absolute; inset: 0;
+    display: none;
+}
+.sb-bg span,
+.sb-head-bg span {
+    position: absolute; border-radius: 50%; filter: blur(36px);
+    opacity: var(--sb-blob-opacity); will-change: transform;
+    animation: sb-drift 18s ease-in-out infinite alternate;
+}
+.sb-bg span:nth-child(1) { width: 190px; height: 190px; top: -60px; left: -70px; background: var(--sb-blob-1); }
+.sb-bg span:nth-child(2) { width: 170px; height: 170px; bottom: 60px; right: -80px; background: var(--sb-blob-2); animation-duration: 23s; animation-delay: -7s; }
+.sb-bg span:nth-child(3) { width: 140px; height: 140px; top: 42%; left: 18%; background: var(--sb-blob-3); opacity: calc(var(--sb-blob-opacity) * .55); animation-duration: 27s; animation-delay: -13s; }
+
+body.sidebar-peeking .sidebar { box-shadow: none !important; padding-left: 22px !important; padding-right: 12px !important; }
+body.sidebar-peeking .sb-bg { box-shadow: 0 30px 70px -20px rgba(27, 18, 53, .55), var(--sb-card-edge); }
+:root[data-theme="dark"] body.sidebar-peeking .sb-bg { box-shadow: 0 30px 70px -20px rgba(0, 0, 0, .9), var(--sb-card-edge); }
+
+/* Brand */
+.sidebar .logo {
+    padding: 4px 4px 14px !important; margin-bottom: 12px !important; gap: 11px !important;
+}
+/* The brand is the way home: a link to the dashboard that still looks like the brand */
+.sidebar a.logo { text-decoration: none; border-radius: 12px; cursor: pointer; }
+.sidebar a.logo:hover .logo-mark { transform: scale(1.05); }
+.sidebar a.logo:focus-visible { outline: 2px solid rgba(255, 255, 255, .7); outline-offset: 2px; }
+.sidebar .logo::after {
+    content: ""; position: absolute; left: 4px; right: 4px; bottom: 0; height: 1px;
+    background: var(--sb-glass-edge);
+}
+/* The older ".logo span" rule is meant for the subtitle but also catches the
+   monogram and the name, so both are reset here */
+.sidebar .logo .logo-mark {
+    position: relative; overflow: hidden;
+    width: 40px !important; height: 40px !important; border-radius: 13px !important;
+    font-family: 'Playfair Display', Georgia, serif; font-size: 16.5px !important; font-weight: 700;
+    color: #fff !important; text-transform: none; letter-spacing: .02em; margin-top: 0;
+    background: rgba(255, 255, 255, .16) !important;
+    animation: sb-breathe 4.5s ease-in-out infinite;
+    transition: transform 420ms var(--sb-spring);
+}
+:root[data-theme="dark"] .sidebar .logo .logo-mark { background: #2B2B31 !important; }
+.sidebar .logo .logo-mark::after {
+    content: ""; position: absolute; top: -20%; bottom: -20%; left: -60%; width: 40%;
+    background: linear-gradient(100deg, transparent, rgba(255, 255, 255, .6), transparent);
+    transform: skewX(-18deg); opacity: 0;
+}
+.sidebar .logo:hover .logo-mark::after { animation: sb-sheen 900ms var(--sb-ease); }
+.sidebar .logo .logo-text {
+    font-family: 'Playfair Display', Georgia, serif; font-size: 18.5px !important; font-weight: 700 !important;
+    letter-spacing: .005em !important; text-transform: none !important; margin-top: 0 !important;
+    color: var(--nav-ink) !important; display: block;
+}
+.sidebar .logo .logo-text > span {
+    font-family: 'Inter', system-ui, sans-serif; font-size: 9px !important;
+    font-weight: 700 !important; letter-spacing: .2em !important; margin-top: 4px !important;
+    color: rgba(255, 255, 255, .55) !important;
+}
+:root[data-theme="dark"] .sidebar .logo .logo-text > span { color: var(--nav-ink-faint) !important; }
+
+.sb-colon { font-style: normal; display: inline-block; margin: 0 1px; animation: sb-blink 2s ease-in-out infinite; }
+
+/* Headings trail a hairline */
+.sidebar-section {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 9.5px !important; font-weight: 800 !important; letter-spacing: .15em !important;
+    margin: 16px 10px 7px !important;
+}
+.sidebar-section::after {
+    content: ""; flex: 1; height: 1px;
+    background: var(--sb-glass-edge);
+}
+
+/* The list, with a fade at the foot while there is more below */
+.sidebar-nav { position: relative; padding: 2px 0 6px !important; }
+body.rail-scrollable:not(.rail-at-end) .sidebar-nav {
+    -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 40px), transparent);
+            mask-image: linear-gradient(to bottom, #000 calc(100% - 40px), transparent);
+}
+
+/* Items */
+.sidebar-nav a {
+    position: relative; z-index: 1; overflow: hidden;
+    gap: 11px !important; padding: 6px 10px 6px 7px !important; margin-bottom: 2px !important;
+    border-radius: 13px !important; font-size: 13.5px !important; font-weight: 600 !important;
+    background: transparent !important; box-shadow: none !important;
+    transition: color 220ms var(--sb-ease), transform 140ms var(--sb-ease) !important;
+}
+/* The rail opens itself on hover, so the old collapsed name-tags are not needed */
+.sidebar-nav a::after { display: none !important; }
+.sidebar-nav a > i {
+    width: 32px !important; height: 32px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 15.5px !important; background: var(--sb-tile);
+    transition: background-color 240ms var(--sb-ease), color 240ms var(--sb-ease), box-shadow 240ms var(--sb-ease);
+}
+.sidebar-nav a > span { display: inline-block; transition: transform 360ms var(--sb-ease); }
+
+.sidebar-nav a:hover { color: var(--nav-ink) !important; }
+.sidebar-nav a:hover > i { background: var(--sb-tile-hover); }
+.sidebar-nav a:hover > span { transform: translateX(3px); }
+.sidebar-nav a:active { transform: scale(.97) !important; }
+.sidebar-nav a:focus-visible { outline: none; box-shadow: 0 0 0 2px rgba(228, 228, 231, .55) !important; }
+
+.sidebar-nav a.active { color: var(--nav-ink) !important; font-weight: 700 !important; }
+.sidebar-nav a.active > i {
+    background: var(--sb-active-tile); color: var(--sb-active-icon) !important;
+    box-shadow: 0 5px 16px rgba(10, 0, 40, .38);
+}
+.sidebar-nav a.active::before {
+    left: 0 !important; width: 3px !important; height: 20px !important;
+    border-radius: 0 3px 3px 0 !important; background: var(--sb-marker) !important;
+    box-shadow: 0 0 10px var(--sb-marker-glow), 0 0 2px var(--sb-marker-glow);
+    animation: sb-marker-in 560ms 200ms var(--sb-ease) both;
+}
+
+/* Foot: profile card and the collapse control side by side */
+.sb-foot {
+    display: flex; align-items: center; gap: 8px;
+    margin-top: 8px; padding-top: 12px;
+}
+.sb-foot::before {
+    content: ""; position: absolute; left: 4px; right: 4px; top: 0; height: 1px;
+    background: var(--sb-glass-edge);
+}
+.sb-user {
+    position: relative; overflow: hidden; flex: 1; min-width: 0;
+    display: flex; align-items: center; gap: 10px;
+    padding: 6px 10px 6px 6px; border-radius: 14px;
+    background: var(--sb-glass); border: 1px solid var(--sb-glass-edge);
+    color: var(--nav-ink);
+    transition: background-color 220ms var(--sb-ease), transform 260ms var(--sb-ease), border-color 220ms var(--sb-ease);
+}
+.sb-user:hover { background: var(--sb-glass-hover); color: var(--nav-ink); }
+.sb-user:active { transform: scale(.97); }
+.sb-user.active { background: var(--sb-glass-hover); border-color: rgba(255, 255, 255, .28); }
+.sb-user-av {
+    position: relative; overflow: visible !important; flex: none;
+    width: 34px !important; height: 34px !important; font-size: 11px !important;
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, .22);
+    transition: transform 420ms var(--sb-spring);
+}
+.sb-online {
+    position: absolute; right: -2px; bottom: -2px; width: 11px; height: 11px;
+    border-radius: 50%; background: #34D399; border: 2px solid #3A1284;
+}
+:root[data-theme="dark"] .sb-online { border-color: #161029; }
+.sb-online::after {
+    content: ""; position: absolute; inset: -2px; border-radius: 50%;
+    background: #34D399; animation: sb-ping 2.4s var(--sb-ease) infinite;
+}
+.sb-user-text { display: flex; flex-direction: column; min-width: 0; line-height: 1.2; }
+.sb-user-name {
+    font-size: 12.5px; font-weight: 700; color: var(--nav-ink);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.sb-user-role {
+    font-size: 9.5px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--nav-ink-faint); margin-top: 2px;
+}
+
+.nav-collapse {
+    position: relative; overflow: hidden; flex: none;
+    width: 38px !important; height: 38px; margin: 0 !important; padding: 0 !important;
+    justify-content: center !important; border-radius: 12px;
+    background: var(--sb-glass) !important; border: 1px solid var(--sb-glass-edge) !important;
+    color: var(--nav-ink-dim);
+    transition: background-color 220ms var(--sb-ease), color 220ms var(--sb-ease) !important;
+}
+.nav-collapse:hover { background: var(--sb-glass-hover) !important; color: var(--nav-ink); }
+.nav-collapse span {
+    /* kept for screen readers, pms.js rewrites it */
+    position: absolute !important; width: 1px !important; height: 1px !important;
+    overflow: hidden !important; clip: rect(0 0 0 0) !important; white-space: nowrap;
+}
+.nav-collapse i { width: auto !important; font-size: 15px !important; }
+body:not(.sidebar-collapsed) .nav-collapse:hover i { transform: translateX(-3px); }
+body.sidebar-collapsed .nav-collapse:hover i { transform: rotate(180deg) translateX(-3px); }
+
+/* Ripple */
+.sb-ripple {
+    position: absolute; z-index: 0; border-radius: 50%; pointer-events: none;
+    background: rgba(255, 255, 255, .28);
+    animation: sb-ripple 650ms var(--sb-ease) forwards;
+}
+.rail-item .sb-ripple { background: rgba(17, 17, 20, .18); }
+
+/* ---------------------------------------------------- collapsed main rail */
+
+body.sidebar-collapsed:not(.sidebar-peeking) .sidebar { padding-left: 16px !important; padding-right: 6px !important; }
+body.sidebar-collapsed:not(.sidebar-peeking) .sidebar .logo { justify-content: center !important; gap: 0 !important; padding: 4px 0 14px !important; }
+body.sidebar-collapsed:not(.sidebar-peeking) .sidebar-nav a { padding: 6px 0 !important; gap: 0 !important; justify-content: center !important; }
+body.sidebar-collapsed:not(.sidebar-peeking) .sidebar-nav a > span { transform: none; }
+body.sidebar-collapsed:not(.sidebar-peeking) .sidebar-section {
+    opacity: 1 !important; width: auto !important; height: 1px !important;
+    font-size: 0 !important; margin: 12px 10px 8px !important; border: none !important;
+    background: var(--sb-glass-edge);
+}
+body.sidebar-collapsed:not(.sidebar-peeking) .sidebar-section::after { display: none; }
+body.sidebar-collapsed:not(.sidebar-peeking) .sb-foot { flex-direction: column; }
+body.sidebar-collapsed:not(.sidebar-peeking) .sb-user { flex: none; padding: 0; background: none; border-color: transparent; }
+body.sidebar-collapsed:not(.sidebar-peeking) .sb-user-text { display: none; }
+
+@media (max-width: 1080px) {
+    body:not(.sidebar-peeking) .sidebar { padding-left: 16px !important; padding-right: 6px !important; }
+    body:not(.sidebar-peeking) .sidebar .logo { justify-content: center !important; gap: 0 !important; padding: 4px 0 14px !important; }
+    body:not(.sidebar-peeking) .sidebar-nav a { padding: 6px 0 !important; gap: 0 !important; justify-content: center !important; }
+    body:not(.sidebar-peeking) .sidebar-section {
+        opacity: 1 !important; width: auto !important; height: 1px !important;
+        font-size: 0 !important; margin: 12px 10px 8px !important; border: none !important;
+        background: var(--sb-glass-edge);
+    }
+    body:not(.sidebar-peeking) .sidebar-section::after { display: none; }
+    body:not(.sidebar-peeking) .sb-foot { flex-direction: column; }
+    body:not(.sidebar-peeking) .sb-user { flex: none; padding: 0; background: none; border-color: transparent; }
+    body:not(.sidebar-peeking) .sb-user-text { display: none; }
+}
+
+/* The older peek rule zeroes the brand's padding, which pulls the divider up
+   against the subtitle; the open rail keeps its own spacing */
+body.sidebar-peeking .sidebar .logo { padding: 4px 4px 14px !important; gap: 11px !important; }
+body.sidebar-peeking .sidebar-section { font-size: 9.5px !important; background: none; }
+body.sidebar-peeking .sidebar-section::after { display: block; }
+
+/* ======================================================= the payroll panel */
+
+.subnav,
+:root[data-theme="dark"] .subnav {
+    background: var(--cream) !important;
+    border-right: none !important; box-shadow: none !important;
+}
+.subnav::before {
+    content: ""; position: absolute; z-index: -1; pointer-events: none;
+    inset: var(--sb-gutter);
+    border-radius: var(--sb-radius);
+    background: var(--surface, #fff); border: 1px solid var(--line);
+    box-shadow: 0 18px 40px -24px rgba(17, 17, 20, .35), 0 1px 3px rgba(17, 17, 20, .06);
+    transition: box-shadow 300ms var(--sb-ease);
+}
+:root[data-theme="dark"] .subnav::before { box-shadow: 0 18px 40px -24px rgba(0, 0, 0, .9); }
+body.subnav-hidden.subnav-peeking .subnav { box-shadow: none !important; }
+body.subnav-peeking .subnav::before { box-shadow: 0 30px 70px -20px rgba(27, 18, 53, .45); }
+
+/* Graphite hero head. It stacks above the menu body, so the company menu that
+   drops out of it is never painted under the menu items. */
+.subnav-head {
+    position: relative; isolation: isolate; z-index: 5;
+    margin: 18px 18px 0 !important; padding: 14px 14px 16px !important;
+    border-radius: 18px; border-bottom: none !important; color: #fff;
+}
+.sb-head-bg {
+    position: absolute; inset: 0; z-index: -1; border-radius: inherit; overflow: hidden;
+    background: var(--nav-surface);
+    box-shadow: 0 16px 30px -18px rgba(17, 17, 20, .7), var(--sb-card-edge);
+}
+.sb-head-bg::before {
+    content: ""; position: absolute; inset: 0;
+    display: none;
+}
+.sb-head-bg span:nth-child(1) { width: 150px; height: 150px; top: -70px; right: -40px; background: var(--sb-blob-1); animation-duration: 16s; }
+.sb-head-bg span:nth-child(2) { width: 130px; height: 130px; bottom: -80px; left: -40px; background: var(--sb-blob-3); animation-duration: 21s; animation-delay: -8s; }
+
+.subnav-title { gap: 9px !important; font-size: 11px !important; letter-spacing: .16em !important; color: #fff !important; }
+.subnav-title i {
+    width: 26px; height: 26px; border-radius: 8px; flex: none;
+    display: inline-flex; align-items: center; justify-content: center;
+    background: rgba(255, 255, 255, .18); color: #fff !important; font-size: 12px !important;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .22);
+}
+.subnav-head .panel-toggle,
+:root[data-theme="dark"] .subnav-head .panel-toggle {
+    background: rgba(255, 255, 255, .14) !important; border: 1px solid rgba(255, 255, 255, .24) !important;
+    color: #fff !important;
+}
+.subnav-head .panel-toggle:hover,
+:root[data-theme="dark"] .subnav-head .panel-toggle:hover { background: rgba(255, 255, 255, .26) !important; }
+/* The arrow points the way the panel will move: left to tuck it away while
+   it is pinned open, right to pin it open again while it is hidden (and only
+   showing because the pointer is over it). It turns as the state changes. */
+.subnav-head .panel-toggle i { transition: transform var(--nav-dur) var(--nav-ease); }
+.subnav-head .panel-toggle:hover i { transform: translateX(-3px); }
+body.subnav-hidden .subnav-head .panel-toggle i { transform: rotate(180deg); }
+body.subnav-hidden .subnav-head .panel-toggle:hover i { transform: rotate(180deg) translateX(-3px); }
+
+/* Company card in glass */
+.subnav-head .company-switch .company-switch-btn,
+:root[data-theme="dark"] .subnav-head .company-switch .company-switch-btn {
+    position: relative; overflow: hidden;
+    background: rgba(255, 255, 255, .12) !important;
+    border: 1px solid rgba(255, 255, 255, .24) !important;
+    box-shadow: none !important;
+    -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+    transition: background-color 220ms var(--sb-ease), transform 260ms var(--sb-ease), border-color 220ms var(--sb-ease) !important;
+}
+.subnav-head .company-switch .company-switch-btn:hover,
+:root[data-theme="dark"] .subnav-head .company-switch .company-switch-btn:hover {
+    background: rgba(255, 255, 255, .2) !important; border-color: rgba(255, 255, 255, .4) !important;
+}
+.subnav-head .company-switch .company-switch-btn:active { transform: scale(.98); }
+.subnav-head .company-switch .cs-mark {
+    position: relative; overflow: hidden;
+    background: #fff !important; color: #3A3A42 !important;
+    box-shadow: 0 6px 16px rgba(10, 0, 40, .35) !important;
+    transition: transform 420ms var(--sb-spring);
+}
+.subnav-head .company-switch .cs-mark::after {
+    content: ""; position: absolute; top: -20%; bottom: -20%; left: -60%; width: 40%;
+    background: linear-gradient(100deg, transparent, rgba(17, 17, 20, .35), transparent);
+    transform: skewX(-18deg); opacity: 0;
+}
+.subnav-head .company-switch-btn:hover .cs-mark::after { animation: sb-sheen 900ms var(--sb-ease); }
+.subnav-head .company-switch-btn { gap: 10px !important; padding: 11px 10px 11px 11px !important; }
+.subnav-head .company-switch .cs-mark { width: 38px !important; height: 38px !important; border-radius: 12px !important; }
+.subnav-head .company-switch .cs-text { min-width: 0; }
+.subnav-head .company-switch .cs-hint {
+    display: block; color: rgba(255, 255, 255, .7) !important; letter-spacing: .05em !important; font-size: 8.5px !important;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.subnav-head .company-switch .cs-name { color: #fff !important; }
+.subnav-head .company-switch .cs-caret {
+    background: rgba(255, 255, 255, .18) !important; color: #fff !important; box-shadow: none !important;
+    transition: transform 260ms var(--sb-ease), background-color 220ms var(--sb-ease) !important;
+}
+.subnav-head .company-switch-btn:hover .cs-caret { transform: translateY(1px); background: rgba(255, 255, 255, .28) !important; }
+.subnav-head .company-menu { color: var(--ink); white-space: normal; }
+/* The head keeps its own text on one line; the menu's rows may wrap */
+.subnav-head .company-menu .cm-listing { align-items: center; }
+.subnav-head .company-menu .cm-listing-sub { line-height: 1.35; }
+.subnav-head .company-switch.open .cs-caret { background: #fff !important; color: #3A3A42 !important; }
+
+/* Menu body sits inside the card */
+.subnav-body {
+    position: relative;
+    margin: 0 var(--sb-gutter) var(--sb-gutter);
+    padding: 16px 8px 14px !important;
+}
+.subnav-body .rail-group + .rail-group,
+.rail-group + .rail-group { border-top: none !important; margin-top: 10px !important; padding-top: 4px !important; }
+.rail-label {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 9.5px !important; font-weight: 800 !important; letter-spacing: .15em !important;
+    text-transform: uppercase; color: var(--muted) !important;
+    padding: 0 10px 8px !important;
+}
+.rail-label::after {
+    content: ""; flex: 1; height: 1px;
+    background: var(--line);
+}
+
+
+.rail-item,
+.rail-item:hover,
+.rail-item.active,
+:root[data-theme="dark"] .rail-item,
+:root[data-theme="dark"] .rail-item:hover,
+:root[data-theme="dark"] .rail-item.active {
+    background: transparent !important; box-shadow: none !important;
+}
+.rail-item {
+    position: relative; z-index: 1; overflow: hidden;
+    padding: 6px 10px 6px 7px !important; gap: 11px !important;
+    border-radius: 13px !important; margin-bottom: 2px !important;
+    font-size: 13.5px !important; font-weight: 600 !important; color: var(--ink2) !important;
+    transition: color 220ms var(--sb-ease), transform 140ms var(--sb-ease) !important;
+}
+.rail-item > span:not(.rail-count) { display: inline-block; min-width: 0; transition: transform 360ms var(--sb-ease); }
+.rail-item > i {
+    background: var(--p50) !important; color: var(--p600) !important;
+    transition: background 240ms var(--sb-ease), color 240ms var(--sb-ease), box-shadow 240ms var(--sb-ease) !important;
+}
+.rail-item:hover { color: var(--p800) !important; }
+.rail-item:hover > i {
+    background: var(--surface, #fff) !important; color: var(--p700) !important;
+    box-shadow: 0 5px 14px rgba(17, 17, 20, .22);
+}
+.rail-item:hover > span:not(.rail-count) { transform: translateX(3px); }
+.rail-item:active { transform: scale(.97) !important; }
+.rail-item:focus-visible { box-shadow: var(--sh-focus) !important; }
+
+.rail-item.active { color: var(--p800) !important; font-weight: 700 !important; }
+.rail-item.active::before {
+    content: ""; position: absolute; left: 0; top: 50%; transform: translateY(-50%);
+    width: 3px; height: 20px; border-radius: 0 3px 3px 0;
+    background: var(--p600);
+    box-shadow: 0 0 10px rgba(17, 17, 20, .55);
+    animation: sb-marker-in 560ms 200ms var(--sb-ease) both;
+}
+.rail-item.active > i {
+    background: var(--p600) !important; color: #fff !important;
+    box-shadow: 0 5px 14px rgba(17, 17, 20, .38) !important;
+}
+
+.rail-item .rail-count,
+.rail-item.active .rail-count {
+    background: var(--p600) !important; color: #fff !important;
+    box-shadow: 0 3px 8px rgba(17, 17, 20, .28);
+    animation: sb-count-in 520ms 350ms var(--sb-spring) both;
+    transition: transform 280ms var(--sb-spring);
+}
+
+:root[data-theme="dark"] .rail-item { color: var(--ink2) !important; }
+:root[data-theme="dark"] .rail-item > i { background: var(--p100) !important; color: var(--p700) !important; }
+:root[data-theme="dark"] .rail-item:hover { color: var(--p900) !important; }
+:root[data-theme="dark"] .rail-item:hover > i { background: var(--p200) !important; color: var(--p800) !important; box-shadow: none; }
+:root[data-theme="dark"] .rail-item.active { color: var(--p900) !important; }
+:root[data-theme="dark"] .rail-item.active::before { background: var(--p600); box-shadow: 0 0 10px rgba(180, 180, 188, .6); }
+:root[data-theme="dark"] .rail-item.active > i,
+:root[data-theme="dark"] .rail-item .rail-count { background: #111114 !important; color: #fff !important; }
+
+.rail-note { margin: 4px 2px 10px !important; }
+
+/* The slim tab that reopens a hidden panel */
+.subnav-peek {
+    background: #3A3A42 !important;
+    color: #fff !important; border: none !important; border-radius: 12px !important;
+    box-shadow: 0 10px 24px -8px rgba(17, 17, 20, .55) !important;
+}
+.subnav-peek:hover { background: #2B2B31 !important; }
+.subnav-peek i { transition: transform 260ms var(--sb-ease); }
+.subnav-peek:hover i { transform: translateY(3px); }
+:root[data-theme="dark"] .subnav-peek { background: #232327 !important; color: var(--p800) !important; }
+
+/* ==================================================== the page makes room
+
+   Opening either panel, pinned or on hover, pushes the page over rather than
+   covering it, so nothing is ever hidden behind a panel. Every combination
+   is worked out from two numbers: how wide the rail is and how wide the
+   payroll panel is at this moment. */
+
+body {
+    --sb-l: var(--sidebar-w);
+    --sb-s: var(--subnav-w);
+}
+body.no-subnav,
+body.subnav-hidden { --sb-s: 0px; }
+/* A closed panel keeps a strip for its tab, so the tab never covers the
+   panel or the page beside it */
+body.has-subnav.subnav-hidden { --sb-s: var(--peek-w); }
+body.subnav-hidden.subnav-peeking { --sb-s: var(--subnav-w); }
+body.sidebar-collapsed { --sb-l: var(--sidebar-w-collapsed); }
+@media (max-width: 1080px) {
+    body { --sb-l: var(--sidebar-w-collapsed); }
+}
+body.sidebar-peeking { --sb-l: var(--sidebar-w); }
+
+body:not(.guest-page) .main {
+    margin-left: calc(var(--sb-l) + var(--sb-s)) !important;
+    max-width: calc(100vw - var(--sb-l) - var(--sb-s)) !important;
+    transition: margin-left var(--nav-dur) var(--nav-ease), max-width var(--nav-dur) var(--nav-ease) !important;
+}
+.subnav { left: var(--sb-l) !important; }
+.subnav-peek { left: calc(var(--sb-l) + 6px) !important; }
+
+/* On a phone there is no room to push into, so the panels float over it */
+@media (max-width: 760px) {
+    body:not(.guest-page) .main {
+        margin-left: var(--sidebar-w-collapsed) !important;
+        max-width: calc(100vw - var(--sidebar-w-collapsed)) !important;
+    }
+}
+
+/* ======================================== entrance, once per browser session */
+
+.sb-intro .sidebar .sb-bg { animation: sb-card-in 700ms var(--sb-ease) both; }
+.sb-intro .sidebar .logo,
+.sb-intro .sidebar-nav > a,
+.sb-intro .sidebar-nav > .sidebar-section,
+.sb-intro .sidebar .sb-foot {
+    animation: sb-item-in 560ms var(--sb-ease) both;
+    animation-delay: calc(140ms + var(--i, 0) * 38ms);
+}
+.sb-intro .subnav::before { animation: sb-card-in 700ms 160ms var(--sb-ease) both; }
+.sb-intro .subnav-head,
+.sb-intro .subnav-body .rail-label,
+.sb-intro .subnav-body .rail-item,
+.sb-intro .subnav-body .rail-note {
+    animation: sb-item-in 560ms var(--sb-ease) both;
+    animation-delay: calc(320ms + var(--i, 0) * 40ms);
+}
+
+/* ============================================================ less motion */
+
+@media (prefers-reduced-motion: reduce) {
+    .sb-bg span, .sb-head-bg span, .sb-colon, .sb-online::after,
+    .sidebar .logo .logo-mark, .sidebar .logo:hover .logo-mark::after,
+    .sidebar-nav a:hover > i, .rail-item:hover > i, .rail-item .rail-count,
+    .sidebar-nav a.active::before, .rail-item.active::before,
+    .subnav-head .company-switch-btn:hover .cs-mark::after,
+    .sb-intro * { animation: none !important; }
+    body:not(.guest-page) .main, .sidebar-nav a, .sidebar-nav a > span, .rail-item, .rail-item > span,
+    .sb-user, .sb-user-av, .nav-collapse i, .subnav-head .company-switch-btn,
+    .subnav-head .company-switch .cs-mark, .subnav-peek i { transition: none !important; }
+    .sidebar-nav a:hover > span, .rail-item:hover > span:not(.rail-count),
+    .sb-user:hover, .sb-user:hover .sb-user-av, .sidebar .logo:hover .logo-mark,
+    .subnav-head .company-switch-btn:hover, .subnav-head .company-switch-btn:hover .cs-mark { transform: none !important; }
+}
+
+/* The company menu's marks, flat like the rest of the panel */
+.company-menu .cm-item.selected .cm-mark,
+.company-menu .cm-listing-icon { background: var(--p600) !important; color: #fff !important; }
+
+/* ==================================================== item highlights
+
+   Each row lights itself the instant it is hovered, and lets go the instant
+   the pointer leaves - nothing travels between rows or trails behind a fast
+   pointer. The current page keeps a steady highlight of its own. */
+
+.sidebar-nav a,
+.rail-item {
+    transition: background-color 120ms linear, color 160ms var(--sb-ease),
+                box-shadow 160ms var(--sb-ease), transform 140ms var(--sb-ease) !important;
+}
+
+.sidebar-nav a:hover { background: var(--sb-wash) !important; }
+.sidebar-nav a.active {
+    background: var(--sb-wash-active) !important;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .16) !important;
+}
+:root[data-theme="dark"] .sidebar-nav a.active { box-shadow: inset 0 0 0 1px rgba(180, 180, 188, .22) !important; }
+
+.rail-item:hover,
+:root[data-theme="dark"] .rail-item:hover { background: var(--sb-rail-wash) !important; }
+.rail-item.active,
+:root[data-theme="dark"] .rail-item.active {
+    background: var(--sb-rail-wash) !important;
+    box-shadow: inset 0 0 0 1px var(--p200) !important;
+}
+:root[data-theme="dark"] .rail-item.active { box-shadow: inset 0 0 0 1px var(--line2) !important; }
+
+/* ======================================================= a third panel
+
+   Payroll Master's lists, docked beside the Payroll menu. The page makes
+   room for whatever is open; pms.js keeps it to two panels at a time. */
+
+body { --sb-s2: 0px; --peek-w: 46px; }
+body.has-subnav2 { --sb-s2: var(--subnav-w); }
+body.has-subnav2.subnav2-hidden { --sb-s2: var(--peek-w); }
+
+@media (min-width: 761px) {
+    body.has-subnav2:not(.guest-page) .main {
+        margin-left: calc(var(--sb-l) + var(--sb-s) + var(--sb-s2)) !important;
+        max-width: calc(100vw - var(--sb-l) - var(--sb-s) - var(--sb-s2)) !important;
+    }
+}
+
+#subnav2 {
+    left: calc(var(--sb-l) + var(--sb-s)) !important;
+    width: var(--subnav-w); opacity: 1; z-index: 1031;
+}
+body.subnav2-hidden #subnav2 { width: 0 !important; opacity: 0 !important; overflow: hidden !important; }
+body.subnav-hidden #subnav2 .subnav-head .panel-toggle i { transform: none; }
+
+/* Its tab waits on the edge it left through, below the Payroll tab */
+#subnav2Peek { display: none !important; }
+body.subnav2-hidden #subnav2Peek {
+    display: flex !important;
+    left: calc(var(--sb-l) + var(--sb-s) + 6px) !important;
+}
+
+@media (max-width: 760px) {
+    #subnav2 { width: 0 !important; }
+    #subnav2Peek, body.subnav2-hidden #subnav2Peek { display: none !important; }
+}
+
+/* While the page is first drawn the panels are already where they were left:
+   nothing slides in */
+.pms-still .sidebar, .pms-still .subnav, .pms-still .subnav-peek,
+.pms-still .main, .pms-still .subnav::before { transition: none !important; }

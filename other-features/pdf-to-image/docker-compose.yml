@@ -1,0 +1,15 @@
+services:
+  pdf-to-image:
+    build: .
+    env_file: .env
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8082:8082"   # only nginx on the same machine reaches it
+    # Resource limits (rendering is CPU and memory heavy; a 100-megapixel page needs about 400 MB):
+    # deploy:
+    #   resources:
+    #     limits:
+    #       cpus: "2.0"
+    #       memory: 3g
+    # tmpfs:
+    #   - /tmp:size=2g     # page images wait here until they are streamed out

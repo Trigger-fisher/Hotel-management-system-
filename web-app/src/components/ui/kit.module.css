@@ -1,0 +1,269 @@
+/* The buttons of the sign-in flow (Button.tsx). The dashboard draws its own controls in Pallav's markup. */
+
+
+/* ---------- Buttons ---------- */
+.btn {
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 18px;
+  border-radius: var(--d-r-btn);
+  border: 1px solid transparent;
+  font: inherit;
+  font-size: var(--hms-text-button);
+  line-height: var(--hms-leading-button);
+  font-weight: var(--hms-weight-semibold);
+  white-space: nowrap;
+  cursor: pointer;
+  text-decoration: none;
+  transition:
+    background-color var(--d-base) var(--d-ease),
+    border-color var(--d-base) var(--d-ease),
+    color var(--d-base) var(--d-ease),
+    box-shadow var(--d-base) var(--d-ease),
+    transform var(--d-fast) var(--d-ease),
+    opacity var(--d-base) var(--d-ease);
+}
+
+.btnLg {
+  min-height: 48px;
+  padding: 0 20px;
+  font-size: var(--hms-text-body);
+}
+
+.btnBlock {
+  width: 100%;
+  /* Long labels wrap (large text, 200% zoom) instead of overflowing. */
+  white-space: normal;
+  text-align: center;
+}
+
+.btnArrow {
+  flex-shrink: 0;
+  transition: transform var(--d-base) var(--d-ease);
+}
+
+/* Sheen: parked off the left edge until hover sweeps it across once. */
+.primary::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image: linear-gradient(110deg, transparent 30%, color-mix(in srgb, var(--d-on-primary) 26%, transparent) 50%, transparent 70%);
+  transform: translateX(-101%);
+}
+
+/* Movement only when the user has not asked for less: no lift, sheen, nudge or press scale otherwise. */
+@media (prefers-reduced-motion: no-preference) {
+  @media (hover: hover) {
+    .primary:not(:disabled):not([aria-busy="true"]):hover {
+      transform: translateY(-1px);
+    }
+    .primary:not(:disabled):not([aria-busy="true"]):hover::after {
+    }
+    .primary:not(:disabled):not([aria-busy="true"]):hover .btnArrow {
+      transform: translateX(3px);
+    }
+  }
+  .btn:not(:disabled):not([aria-busy="true"]):active {
+    transform: scale(0.97);
+    transition-duration: var(--d-fast);
+  }
+}
+
+/* The glass sign-in frame (decision 69, globals.css .hms-glass): a sheen sweeps across the ink capsule once on hover. Only inside that frame. */
+:global(.hms-glass) .primary::after {
+  background-image: linear-gradient(110deg, transparent 30%, var(--g-sheen) 50%, transparent 70%);
+}
+
+@keyframes kit-sheen {
+  from { transform: translateX(-101%); }
+  to { transform: translateX(101%); }
+}
+
+@media (prefers-reduced-motion: no-preference) and (hover: hover) {
+  :global(.hms-glass) .primary:not(:disabled):not([aria-busy="true"]):hover::after {
+    animation: kit-sheen 900ms var(--d-ease) 1;
+  }
+}
+
+/* Sign-in buttons: measured on the real Pallav login: 44px high, 14.5px / 600 label. */
+.authBtn {
+  font-size: var(--hms-text-buttonSignIn);
+  font-weight: var(--hms-weight-semibold);
+}
+
+.btnSm {
+  min-height: 36px;
+  padding: 0 12px;
+  font-size: var(--hms-text-small);
+}
+
+/* sm keeps a 44px hit area without growing the visual box. */
+.btnSm::after {
+  content: "";
+  position: absolute;
+  inset: -4px 0;
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--d-focus);
+  outline-offset: 2px;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn[aria-busy="true"] {
+  opacity: 0.72;
+  cursor: progress;
+}
+
+.primary {
+  color: var(--d-on-primary);
+  background-image: var(--d-primary-fill);
+  box-shadow: var(--d-primary-shadow);
+  overflow: hidden;
+}
+
+.primary::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image: var(--d-primary-fill-hover);
+  opacity: 0;
+  transition: opacity var(--d-base) var(--d-ease);
+}
+
+.secondary {
+  color: var(--d-sec-fg);
+  background: var(--d-sec-bg);
+  border-color: var(--d-sec-border);
+}
+
+.ghost {
+  color: var(--d-accent);
+  background: transparent;
+}
+
+.danger {
+  color: var(--d-on-primary);
+  background: var(--d-danger-solid);
+}
+
+/* Destructive row and page actions: red text, no fill; always followed by a confirm dialog. */
+.dangerGhost {
+  color: var(--d-t-danger-fg);
+  background: transparent;
+}
+
+@media (hover: hover) {
+  .primary:not(:disabled):not([aria-busy="true"]):hover {
+    box-shadow: var(--d-primary-shadow-hover);
+  }
+  .primary:not(:disabled):not([aria-busy="true"]):hover::before {
+    opacity: 1;
+  }
+  .secondary:not(:disabled):not([aria-busy="true"]):hover {
+    background: var(--d-sec-hover-bg);
+    border-color: var(--d-sec-hover-border);
+    color: var(--d-sec-hover-fg);
+  }
+  .ghost:not(:disabled):not([aria-busy="true"]):hover {
+    background: var(--d-ghost-hover);
+  }
+  .danger:not(:disabled):not([aria-busy="true"]):hover {
+    background: var(--d-danger-solid-hover);
+  }
+  .dangerGhost:not(:disabled):not([aria-busy="true"]):hover {
+    background: var(--d-t-danger-bg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @media (hover: hover) {
+    .primary:not(:disabled):not([aria-busy="true"]):hover {
+      transform: translateY(-1px);
+    }
+  }
+  .btn:not(:disabled):not([aria-busy="true"]):active {
+    transform: scale(0.97);
+  }
+}
+
+/* IconButton: 40 visual / 44 hit. */
+.iconBtn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  border: 0;
+  background: transparent;
+  color: var(--d-muted);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background-color var(--d-base) var(--d-ease), color var(--d-base) var(--d-ease);
+}
+
+.iconBtn::after {
+  content: "";
+  position: absolute;
+  inset: -2px;
+}
+
+.iconBtn:focus-visible {
+  outline: 2px solid var(--d-focus);
+  outline-offset: 1px;
+}
+
+.iconBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+@media (hover: hover) {
+  .iconBtn:not(:disabled):hover {
+    background: var(--d-accent-soft);
+    color: var(--d-accent);
+  }
+  .iconBtnDanger:not(:disabled):hover {
+    background: var(--d-danger-soft);
+    color: var(--d-danger-solid);
+  }
+}
+
+.iconBtn:not(:disabled):active {
+  background: var(--d-accent-soft);
+  color: var(--d-accent);
+}
+
+.iconBtnDanger:not(:disabled):active {
+  background: var(--d-danger-soft);
+  color: var(--d-danger-solid);
+}
+
+/* ---------- Spinner ---------- */
+.spinner {
+  width: 16px;
+  height: 16px;
+  border-radius: 999px;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  animation: kit-spin 0.8s linear infinite;
+  flex-shrink: 0;
+}
+
+@keyframes kit-spin {
+  to { transform: rotate(360deg); }
+}

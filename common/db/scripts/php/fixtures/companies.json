@@ -1,0 +1,962 @@
+{
+    "source": "Pallav Support/CompanyLedger.php build/totals/period/modes and CompanyLedgerController::searchLines (verbatim); PHP 8.4.24",
+    "companyId": 1,
+    "advances": [
+        {
+            "id": 11,
+            "entry": 1,
+            "company_id": 1,
+            "receipt_number": "2026 / 801",
+            "guest_name": "Ravi Mehta",
+            "room_number": "204",
+            "payment_date": "2026-09-01",
+            "hotel_amount": "5000.00",
+            "food_amount": "500.50",
+            "hotel_mode": "upi",
+            "food_mode": "CASH",
+            "instruction": "Booking advance",
+            "hotel_refund_amount": null,
+            "food_refund_amount": null,
+            "refund_payment_date": null,
+            "refund_guest_name": null,
+            "hotel_refund_mode": null,
+            "food_refund_mode": null,
+            "refund_instruction": null
+        },
+        {
+            "id": 12,
+            "entry": 2,
+            "company_id": 1,
+            "receipt_number": "2026 / 802",
+            "guest_name": "Neha Shah",
+            "room_number": null,
+            "payment_date": "2026-09-05",
+            "hotel_amount": "3000.00",
+            "food_amount": "0.00",
+            "hotel_mode": "Card",
+            "food_mode": null,
+            "instruction": null,
+            "hotel_refund_amount": "1200.25",
+            "food_refund_amount": null,
+            "refund_payment_date": "2026-09-20",
+            "refund_guest_name": "Neha S.",
+            "hotel_refund_mode": "bank transfer",
+            "food_refund_mode": null,
+            "refund_instruction": "Cancelled night"
+        },
+        {
+            "id": 13,
+            "entry": 3,
+            "company_id": 1,
+            "receipt_number": "Excessive / 2026 / 1190",
+            "guest_name": "Arjun Rao",
+            "room_number": null,
+            "payment_date": "2026-09-25",
+            "hotel_amount": "250.00",
+            "food_amount": "0.00",
+            "hotel_mode": null,
+            "food_mode": null,
+            "instruction": null,
+            "hotel_refund_amount": "250.00",
+            "food_refund_amount": "0.00",
+            "refund_payment_date": "2026-09-28",
+            "refund_guest_name": null,
+            "hotel_refund_mode": "Cash",
+            "food_refund_mode": null,
+            "refund_instruction": null
+        },
+        {
+            "id": 14,
+            "entry": 4,
+            "company_id": 1,
+            "receipt_number": "2026 / 804",
+            "guest_name": "Om Patel",
+            "room_number": "101",
+            "payment_date": "2026-10-01",
+            "hotel_amount": "1000.00",
+            "food_amount": "0.00",
+            "hotel_mode": "Cash",
+            "food_mode": null,
+            "instruction": null,
+            "hotel_refund_amount": "0.00",
+            "food_refund_amount": null,
+            "refund_payment_date": "2026-10-02",
+            "refund_guest_name": null,
+            "hotel_refund_mode": null,
+            "food_refund_mode": null,
+            "refund_instruction": null
+        }
+    ],
+    "bills": [
+        {
+            "id": 21,
+            "entry": 1,
+            "company_id": 1,
+            "bill_number": "2026 / 1188",
+            "bill_date": "2026-09-01",
+            "guest_name": "Ravi Mehta",
+            "room_number": "204",
+            "instruction": "GST bill",
+            "total_hotel_amount": "8000.00",
+            "total_food_amount": "1500.00",
+            "hotel_mode_of_payment": "Debit",
+            "food_mode_of_payment": "debit",
+            "advance_hotel_amount": "5000.00",
+            "advance_food_amount": "500.50",
+            "advance_receipt_number": "2026 / 801",
+            "advance_company_id": 1,
+            "debit": [
+                [
+                    "2026-09-10",
+                    "2000.00",
+                    "500.00",
+                    "neft",
+                    "Cash"
+                ],
+                [
+                    "2026-09-15",
+                    "1000.00",
+                    "499.50",
+                    "UPI",
+                    null
+                ],
+                [
+                    null,
+                    "0",
+                    "0",
+                    null,
+                    null
+                ],
+                [
+                    null,
+                    null,
+                    null,
+                    null,
+                    null
+                ],
+                [
+                    null,
+                    null,
+                    null,
+                    null,
+                    null
+                ]
+            ],
+            "debit_instruction": "Cheque 4411"
+        },
+        {
+            "id": 22,
+            "entry": 2,
+            "company_id": 1,
+            "bill_number": "2026 / 1189",
+            "bill_date": "2026-09-05",
+            "guest_name": "Neha Shah",
+            "room_number": "305",
+            "instruction": null,
+            "total_hotel_amount": "4500.75",
+            "total_food_amount": "0.00",
+            "hotel_mode_of_payment": "Cash",
+            "food_mode_of_payment": null,
+            "advance_hotel_amount": "1500.00",
+            "advance_food_amount": "0.00",
+            "advance_receipt_number": "2026 / 777",
+            "advance_company_id": 9,
+            "debit": [
+                [
+                    null,
+                    null,
+                    null,
+                    null,
+                    null
+                ],
+                [
+                    null,
+                    null,
+                    null,
+                    null,
+                    null
+                ],
+                [
+                    null,
+                    null,
+                    null,
+                    null,
+                    null
+                ],
+                [
+                    null,
+                    null,
+                    null,
+                    null,
+                    null
+                ],
+                [
+                    null,
+                    null,
+                    null,
+                    null,
+                    null
+                ]
+            ],
+            "debit_instruction": null
+        },
+        {
+            "id": 23,
+            "entry": 3,
+            "company_id": 1,
+            "bill_number": "2026 / 1190",
+            "bill_date": "2026-09-05",
+            "guest_name": "Arjun Rao",
+            "room_number": "110",
+            "instruction": null,
+            "total_hotel_amount": "0.10",
+            "total_food_amount": "0.20",
+            "hotel_mode_of_payment": "Debit",
+            "food_mode_of_payment": "card",
+            "advance_hotel_amount": "0.00",
+            "advance_food_amount": "0.00",
+            "advance_receipt_number": null,
+            "advance_company_id": null,
+            "debit": [
+                [
+                    "2026-09-25",
+                    "0.35",
+                    "0",
+                    "Cash",
+                    null
+                ],
+                [
+                    null,
+                    null,
+                    null,
+                    null,
+                    null
+                ],
+                [
+                    null,
+                    null,
+                    null,
+                    null,
+                    null
+                ],
+                [
+                    null,
+                    null,
+                    null,
+                    null,
+                    null
+                ],
+                [
+                    null,
+                    null,
+                    null,
+                    null,
+                    null
+                ]
+            ],
+            "debit_instruction": null
+        },
+        {
+            "id": 24,
+            "entry": 4,
+            "company_id": 1,
+            "bill_number": "2026 / 1191",
+            "bill_date": null,
+            "guest_name": "Ghost",
+            "room_number": null,
+            "instruction": null,
+            "total_hotel_amount": "999.00",
+            "total_food_amount": "0.00",
+            "hotel_mode_of_payment": "Cash",
+            "food_mode_of_payment": null,
+            "advance_hotel_amount": "0.00",
+            "advance_food_amount": "0.00",
+            "advance_receipt_number": null,
+            "advance_company_id": null,
+            "debit": [
+                [
+                    null,
+                    null,
+                    null,
+                    null,
+                    null
+                ],
+                [
+                    null,
+                    null,
+                    null,
+                    null,
+                    null
+                ],
+                [
+                    null,
+                    null,
+                    null,
+                    null,
+                    null
+                ],
+                [
+                    null,
+                    null,
+                    null,
+                    null,
+                    null
+                ],
+                [
+                    null,
+                    null,
+                    null,
+                    null,
+                    null
+                ]
+            ],
+            "debit_instruction": null
+        },
+        {
+            "id": 25,
+            "entry": 5,
+            "company_id": 1,
+            "bill_number": "2026 / 1200",
+            "bill_date": "2026-10-02",
+            "guest_name": "Om Patel",
+            "room_number": "101",
+            "instruction": null,
+            "total_hotel_amount": "900.00",
+            "total_food_amount": "0.00",
+            "hotel_mode_of_payment": "Cash",
+            "food_mode_of_payment": null,
+            "advance_hotel_amount": "900.00",
+            "advance_food_amount": "0.00",
+            "advance_receipt_number": "2026 / 804",
+            "advance_company_id": 1,
+            "debit": [
+                [
+                    null,
+                    null,
+                    null,
+                    null,
+                    null
+                ],
+                [
+                    null,
+                    null,
+                    null,
+                    null,
+                    null
+                ],
+                [
+                    null,
+                    null,
+                    null,
+                    null,
+                    null
+                ],
+                [
+                    null,
+                    null,
+                    null,
+                    null,
+                    null
+                ],
+                [
+                    null,
+                    null,
+                    null,
+                    null,
+                    null
+                ]
+            ],
+            "debit_instruction": null
+        }
+    ],
+    "lines": [
+        {
+            "kind": "advance",
+            "date": "2026-09-01",
+            "id": 11,
+            "entry": 1,
+            "ref": "Receipt 2026 / 801",
+            "guest": "Ravi Mehta",
+            "room": "204",
+            "mode": "UPI, Cash",
+            "note": "Booking advance",
+            "debitPaise": 0,
+            "creditPaise": 550050,
+            "balancePaise": -550050
+        },
+        {
+            "kind": "bill",
+            "date": "2026-09-01",
+            "id": 21,
+            "entry": 1,
+            "ref": "Bill 2026 / 1188",
+            "guest": "Ravi Mehta",
+            "room": "204",
+            "mode": "Debit",
+            "note": "GST bill",
+            "debitPaise": 950000,
+            "creditPaise": 0,
+            "balancePaise": 399950
+        },
+        {
+            "kind": "advance",
+            "date": "2026-09-05",
+            "id": 12,
+            "entry": 2,
+            "ref": "Receipt 2026 / 802",
+            "guest": "Neha Shah",
+            "room": null,
+            "mode": "Card",
+            "note": null,
+            "debitPaise": 0,
+            "creditPaise": 300000,
+            "balancePaise": 99950
+        },
+        {
+            "kind": "bill",
+            "date": "2026-09-05",
+            "id": 22,
+            "entry": 2,
+            "ref": "Bill 2026 / 1189",
+            "guest": "Neha Shah",
+            "room": "305",
+            "mode": "Cash",
+            "note": null,
+            "debitPaise": 450075,
+            "creditPaise": 0,
+            "balancePaise": 550025
+        },
+        {
+            "kind": "bill",
+            "date": "2026-09-05",
+            "id": 23,
+            "entry": 3,
+            "ref": "Bill 2026 / 1190",
+            "guest": "Arjun Rao",
+            "room": "110",
+            "mode": "Debit, Card",
+            "note": null,
+            "debitPaise": 30,
+            "creditPaise": 0,
+            "balancePaise": 550055
+        },
+        {
+            "kind": "adjusted",
+            "date": "2026-09-05",
+            "id": 22,
+            "entry": 2,
+            "ref": "Receipt 2026 / 777",
+            "guest": "Neha Shah",
+            "room": "305",
+            "mode": null,
+            "note": "Used on bill 2026 / 1189",
+            "debitPaise": 0,
+            "creditPaise": 150000,
+            "balancePaise": 400055
+        },
+        {
+            "kind": "checkout",
+            "date": "2026-09-05",
+            "id": 22,
+            "entry": 2,
+            "ref": "Bill 2026 / 1189",
+            "guest": "Neha Shah",
+            "room": "305",
+            "mode": "Cash",
+            "note": null,
+            "debitPaise": 0,
+            "creditPaise": 300075,
+            "balancePaise": 99980
+        },
+        {
+            "kind": "checkout",
+            "date": "2026-09-05",
+            "id": 23,
+            "entry": 3,
+            "ref": "Bill 2026 / 1190",
+            "guest": "Arjun Rao",
+            "room": "110",
+            "mode": "Card",
+            "note": null,
+            "debitPaise": 0,
+            "creditPaise": 20,
+            "balancePaise": 99960
+        },
+        {
+            "kind": "settlement",
+            "date": "2026-09-10",
+            "id": 21,
+            "entry": 1,
+            "ref": "Bill 2026 / 1188",
+            "guest": "Ravi Mehta",
+            "room": "204",
+            "mode": "Neft, Cash",
+            "note": "Cheque 4411",
+            "debitPaise": 0,
+            "creditPaise": 250000,
+            "balancePaise": -150040
+        },
+        {
+            "kind": "settlement",
+            "date": "2026-09-15",
+            "id": 21,
+            "entry": 1,
+            "ref": "Bill 2026 / 1188",
+            "guest": "Ravi Mehta",
+            "room": "204",
+            "mode": "UPI",
+            "note": null,
+            "debitPaise": 0,
+            "creditPaise": 149950,
+            "balancePaise": -299990
+        },
+        {
+            "kind": "refund",
+            "date": "2026-09-20",
+            "id": 12,
+            "entry": 2,
+            "ref": "Receipt 2026 / 802",
+            "guest": "Neha S.",
+            "room": null,
+            "mode": "Bank transfer",
+            "note": "Cancelled night",
+            "debitPaise": 120025,
+            "creditPaise": 0,
+            "balancePaise": -179965
+        },
+        {
+            "kind": "settlement",
+            "date": "2026-09-25",
+            "id": 23,
+            "entry": 3,
+            "ref": "Bill 2026 / 1190",
+            "guest": "Arjun Rao",
+            "room": "110",
+            "mode": "Cash",
+            "note": null,
+            "debitPaise": 0,
+            "creditPaise": 35,
+            "balancePaise": -180000
+        },
+        {
+            "kind": "refund",
+            "date": "2026-09-28",
+            "id": 13,
+            "entry": 3,
+            "ref": "Receipt Excessive / 2026 / 1190",
+            "guest": "Arjun Rao",
+            "room": null,
+            "mode": "Cash",
+            "note": null,
+            "debitPaise": 25000,
+            "creditPaise": 0,
+            "balancePaise": -155000
+        },
+        {
+            "kind": "advance",
+            "date": "2026-10-01",
+            "id": 14,
+            "entry": 4,
+            "ref": "Receipt 2026 / 804",
+            "guest": "Om Patel",
+            "room": "101",
+            "mode": "Cash",
+            "note": null,
+            "debitPaise": 0,
+            "creditPaise": 100000,
+            "balancePaise": -255000
+        },
+        {
+            "kind": "bill",
+            "date": "2026-10-02",
+            "id": 25,
+            "entry": 5,
+            "ref": "Bill 2026 / 1200",
+            "guest": "Om Patel",
+            "room": "101",
+            "mode": "Cash",
+            "note": null,
+            "debitPaise": 90000,
+            "creditPaise": 0,
+            "balancePaise": -165000
+        }
+    ],
+    "totals": {
+        "billed": 1490105,
+        "received": 1800130,
+        "refunded": 145025,
+        "balance": -165000
+    },
+    "periods": [
+        {
+            "from": null,
+            "to": null,
+            "openingPaise": 0,
+            "closingPaise": -165000,
+            "count": 15,
+            "ids": [
+                "advance:11",
+                "bill:21",
+                "advance:12",
+                "bill:22",
+                "bill:23",
+                "adjusted:22",
+                "checkout:22",
+                "checkout:23",
+                "settlement:21",
+                "settlement:21",
+                "refund:12",
+                "settlement:23",
+                "refund:13",
+                "advance:14",
+                "bill:25"
+            ],
+            "totals": {
+                "billed": 1490105,
+                "received": 1800130,
+                "refunded": 145025,
+                "balance": -165000
+            }
+        },
+        {
+            "from": "2026-09-05",
+            "to": "2026-09-20",
+            "openingPaise": 399950,
+            "closingPaise": -179965,
+            "count": 9,
+            "ids": [
+                "advance:12",
+                "bill:22",
+                "bill:23",
+                "adjusted:22",
+                "checkout:22",
+                "checkout:23",
+                "settlement:21",
+                "settlement:21",
+                "refund:12"
+            ],
+            "totals": {
+                "billed": 450105,
+                "received": 1150045,
+                "refunded": 120025,
+                "balance": -579915
+            }
+        },
+        {
+            "from": "2026-09-21",
+            "to": null,
+            "openingPaise": -179965,
+            "closingPaise": -165000,
+            "count": 4,
+            "ids": [
+                "settlement:23",
+                "refund:13",
+                "advance:14",
+                "bill:25"
+            ],
+            "totals": {
+                "billed": 90000,
+                "received": 100035,
+                "refunded": 25000,
+                "balance": 14965
+            }
+        },
+        {
+            "from": null,
+            "to": "2026-09-04",
+            "openingPaise": 0,
+            "closingPaise": 399950,
+            "count": 2,
+            "ids": [
+                "advance:11",
+                "bill:21"
+            ],
+            "totals": {
+                "billed": 950000,
+                "received": 550050,
+                "refunded": 0,
+                "balance": 399950
+            }
+        },
+        {
+            "from": "2026-11-01",
+            "to": "2026-11-30",
+            "openingPaise": -165000,
+            "closingPaise": -165000,
+            "count": 0,
+            "ids": [],
+            "totals": {
+                "billed": 0,
+                "received": 0,
+                "refunded": 0,
+                "balance": 0
+            }
+        },
+        {
+            "from": "2026-09-05",
+            "to": "2026-09-05",
+            "openingPaise": 399950,
+            "closingPaise": 99960,
+            "count": 6,
+            "ids": [
+                "advance:12",
+                "bill:22",
+                "bill:23",
+                "adjusted:22",
+                "checkout:22",
+                "checkout:23"
+            ],
+            "totals": {
+                "billed": 450105,
+                "received": 750095,
+                "refunded": 0,
+                "balance": -299990
+            }
+        }
+    ],
+    "searches": [
+        {
+            "q": "ravi",
+            "ids": [
+                "advance:11:0",
+                "bill:21:0",
+                "settlement:21:0",
+                "settlement:21:1"
+            ]
+        },
+        {
+            "q": "room 204",
+            "ids": [
+                "advance:11:0",
+                "bill:21:0",
+                "settlement:21:0",
+                "settlement:21:1"
+            ]
+        },
+        {
+            "q": "upi",
+            "ids": [
+                "advance:11:0",
+                "settlement:21:1"
+            ]
+        },
+        {
+            "q": "payment",
+            "ids": [
+                "settlement:21:0",
+                "settlement:21:1",
+                "settlement:23:0"
+            ]
+        },
+        {
+            "q": "1,500",
+            "ids": [
+                "adjusted:22:0"
+            ]
+        },
+        {
+            "q": "2000",
+            "ids": []
+        },
+        {
+            "q": "5500.50",
+            "ids": [
+                "advance:11:0"
+            ]
+        },
+        {
+            "q": "#2",
+            "ids": [
+                "advance:12:0",
+                "bill:22:0",
+                "adjusted:22:0",
+                "checkout:22:0",
+                "refund:12:0"
+            ]
+        },
+        {
+            "q": "#0002",
+            "ids": [
+                "advance:12:0",
+                "bill:22:0",
+                "adjusted:22:0",
+                "checkout:22:0",
+                "refund:12:0"
+            ]
+        },
+        {
+            "q": "0002",
+            "ids": [
+                "advance:12:0",
+                "bill:22:0",
+                "adjusted:22:0",
+                "checkout:22:0",
+                "refund:12:0"
+            ]
+        },
+        {
+            "q": "2",
+            "ids": [
+                "advance:11:0",
+                "bill:21:0",
+                "advance:12:0",
+                "bill:22:0",
+                "bill:23:0",
+                "adjusted:22:0",
+                "checkout:22:0",
+                "checkout:23:0",
+                "settlement:21:0",
+                "settlement:21:1",
+                "refund:12:0",
+                "settlement:23:0",
+                "refund:13:0",
+                "advance:14:0",
+                "bill:25:0"
+            ]
+        },
+        {
+            "q": "05-09-2026",
+            "ids": [
+                "advance:12:0",
+                "bill:22:0",
+                "bill:23:0",
+                "adjusted:22:0",
+                "checkout:22:0",
+                "checkout:23:0"
+            ]
+        },
+        {
+            "q": "05/09/2026",
+            "ids": [
+                "advance:12:0",
+                "bill:22:0",
+                "bill:23:0",
+                "adjusted:22:0",
+                "checkout:22:0",
+                "checkout:23:0"
+            ]
+        },
+        {
+            "q": "2026-09-05",
+            "ids": [
+                "advance:12:0",
+                "bill:22:0",
+                "bill:23:0",
+                "adjusted:22:0",
+                "checkout:22:0",
+                "checkout:23:0"
+            ]
+        },
+        {
+            "q": "05 sep 2026",
+            "ids": [
+                "advance:12:0",
+                "bill:22:0",
+                "bill:23:0",
+                "adjusted:22:0",
+                "checkout:22:0",
+                "checkout:23:0"
+            ]
+        },
+        {
+            "q": "advance used",
+            "ids": [
+                "adjusted:22:0"
+            ]
+        },
+        {
+            "q": "cheque",
+            "ids": [
+                "settlement:21:0"
+            ]
+        },
+        {
+            "q": "neha refund",
+            "ids": [
+                "refund:12:0"
+            ]
+        },
+        {
+            "q": "xyz",
+            "ids": []
+        },
+        {
+            "q": "",
+            "ids": [
+                "advance:11:0",
+                "bill:21:0",
+                "advance:12:0",
+                "bill:22:0",
+                "bill:23:0",
+                "adjusted:22:0",
+                "checkout:22:0",
+                "checkout:23:0",
+                "settlement:21:0",
+                "settlement:21:1",
+                "refund:12:0",
+                "settlement:23:0",
+                "refund:13:0",
+                "advance:14:0",
+                "bill:25:0"
+            ]
+        },
+        {
+            "q": "bill 1190 card",
+            "ids": [
+                "bill:23:0",
+                "checkout:23:0"
+            ]
+        }
+    ],
+    "modes": [
+        {
+            "in": [
+                "upi",
+                "UPI"
+            ],
+            "out": "UPI"
+        },
+        {
+            "in": [
+                "cash",
+                null
+            ],
+            "out": "Cash"
+        },
+        {
+            "in": [
+                "CASH",
+                "cash"
+            ],
+            "out": "Cash"
+        },
+        {
+            "in": [
+                "  ",
+                null
+            ],
+            "out": null
+        },
+        {
+            "in": [
+                "bank transfer",
+                "neft"
+            ],
+            "out": "Bank transfer, Neft"
+        },
+        {
+            "in": [
+                null,
+                null
+            ],
+            "out": null
+        },
+        {
+            "in": [
+                "Debit",
+                "debit"
+            ],
+            "out": "Debit"
+        }
+    ]
+}

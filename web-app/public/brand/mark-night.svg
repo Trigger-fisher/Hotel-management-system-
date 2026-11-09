@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="370 150 540 420" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" shape-rendering="geometricPrecision" role="img" aria-label="Easy Hotel Solutions">
+  <defs>
+    <linearGradient id="goldRoof" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FBE9A6"/>
+      <stop offset="40%" stop-color="#E7B948"/>
+      <stop offset="100%" stop-color="#B8860B"/>
+    </linearGradient>
+    <linearGradient id="goldWallLeft" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#F6D878"/>
+      <stop offset="100%" stop-color="#D3A133"/>
+    </linearGradient>
+    <linearGradient id="goldWallDark" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#E4B646"/>
+      <stop offset="100%" stop-color="#B07E12"/>
+    </linearGradient>
+    <linearGradient id="goldWallSmall" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#F3D06A"/>
+      <stop offset="100%" stop-color="#C9962A"/>
+    </linearGradient>
+    <linearGradient id="goldSwoosh" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#C08A1A"/>
+      <stop offset="50%" stop-color="#FBE59C"/>
+      <stop offset="100%" stop-color="#C08A1A"/>
+    </linearGradient>
+  </defs>
+  <g id="building-icon">
+    <path fill="url(#goldRoof)" d="M656,163 L838,290 L838,343 L784,343 L784,333 L656,235 Z"/>
+    <path fill="url(#goldWallDark)" d="M784,333 L838,333 L838,466 L784,466 Z"/>
+    <path fill="url(#goldWallLeft)" d="M520,245 L656,163 L656,450 L592,450 L592,300 L520,318 Z"/>
+    <path fill="url(#goldWallSmall)" d="M436,380 L574,304 L574,460 L436,496 Z"/>
+    <path fill="url(#goldWallDark)" d="M690,335 L746,365 L746,455 L690,455 Z"/>
+    <path fill="url(#goldSwoosh)" d="M380,552 C560,470 760,452 900,520 C740,478 540,500 380,552 Z"/>
+  </g>
+</svg>

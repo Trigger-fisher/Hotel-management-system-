@@ -1,0 +1,38 @@
+# Run the app container on the VPS (security plan 2026-11-01, section 5):   docker compose -f security/deploy/docker/docker-compose.yml up -d --build
+# From the repository root. Settings come from /etc/hms/hms.env (root-only, mode 600; names in common/docs/ENVIRONMENT.md). Do NOT put PG_OWNER_URL or PGSUPERUSER_URL in it.
+# NOT RUN ANYWHERE YET.
+services:
+  hms:
+    build:
+      context: ../../..
+      dockerfile: security/deploy/docker/Dockerfile
+    image: hms:local
+    restart: unless-stopped
+    env_file: /etc/hms/hms.env
+    environment:
+      NODE_ENV: production
+      # nginx/hms.conf passes the visitor as ONE X-Forwarded-For entry
+      HMS_PROXY_HOPS: "1"
+      NEXT_TELEMETRY_DISABLED: "1"
+    # only nginx on this machine reaches the app; the world does not
+    ports:
+      - "127.0.0.1:3000:3000"
+    user: "1000:1000"
+    read_only: true
+    tmpfs:
+      - /tmp
+      - /repo/web-app/.next/cache:uid=1000,gid=1000
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    pids_limit: 512
+    mem_limit: 3g
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:3000/api/v1/health').then(r => process.exit(r.ok ? 0 : 1)).catch(() => process.exit(1))"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 40s
+    # Photos and ID scans: use MEDIA_DRIVER=db or s3 in hms.env (nothing is written to this container's disk). To keep local files instead, mount a folder:
+    #   volumes: ["/var/lib/hms/media:/var/lib/hms/media"]   and set HMS_MEDIA_DIR=/var/lib/hms/media (owned by uid 1000)

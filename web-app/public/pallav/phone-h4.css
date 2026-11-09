@@ -1,0 +1,8 @@
+/* Staff phone fixes of slice H4: Companies (Company Profiles, Customers, Email Marketing, Notifications; not the ledgers) (docs/plans/WORK-SPLIT-2026-10-18.md). Phones only: every rule sits under
+   @media (max-width: 768px) and starts with body.portal-mobile. Owned by that slice; the shared phone kit is hms-overrides.css (session C). */
+@media (max-width: 768px) {
+    /* Notification detail: the Important / Active chips go under the title instead of squeezing it (it took four lines at 360px) */
+    body.portal-mobile .nt-detail-head { flex-wrap: wrap; }
+    body.portal-mobile .nt-detail-head .nt-detail-chips { margin-left: 0 !important; flex-basis: 100%; flex-direction: row !important; align-items: center !important; justify-content: flex-start !important; }
+    body.portal-mobile .nt-detail-head .nt-detail-chips > * { flex: 0 0 auto !important; width: auto !important; }
+}

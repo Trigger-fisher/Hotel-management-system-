@@ -1,0 +1,6 @@
+/* Staff phone fixes of slice H2: Company Ledger and Statement, Payroll (every payroll screen), Reports (Daily, Food Plan, Occupancy, GST) (docs/plans/WORK-SPLIT-2026-10-18.md). Phones only: every rule sits under
+   @media (max-width: 768px) and starts with body.portal-mobile. Owned by that slice; the shared phone kit is hms-overrides.css (session C). */
+@media (max-width: 768px) {
+    /* Attendance: the keyboard keys (arrows, Enter, Ctrl+D) mean nothing on a touch screen */
+    body.portal-mobile .att-keys { display: none !important; }
+}

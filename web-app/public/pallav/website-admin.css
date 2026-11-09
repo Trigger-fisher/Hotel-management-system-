@@ -1,0 +1,158 @@
+/* Website section of the admin: the row of tabs across its pages, and the few
+   pieces its screens need that the shared list/card styles do not already
+   give (photo grids, drag handles, the rate calendar, plan cards). */
+
+/* ---- The row of tabs across the Website pages ---------------------------- */
+.wa-nav {
+    display: flex; gap: 6px; flex-wrap: wrap; align-items: center;
+    margin: 0 0 18px; padding: 6px; border: 1px solid var(--line); border-radius: var(--r-md);
+    background: var(--surface, #fff); box-shadow: var(--sh-xs);
+}
+.wa-tab {
+    display: inline-flex; align-items: center; gap: 7px; padding: 8px 13px; border-radius: 10px;
+    font-size: 13px; font-weight: 650; color: var(--muted); text-decoration: none; white-space: nowrap;
+    transition: color var(--dur-base) var(--ease-out), background-color var(--dur-base) var(--ease-out);
+}
+.wa-tab:hover { color: var(--ink); background: var(--p50); text-decoration: none; }
+.wa-tab.active { color: #fff; background: var(--p600); box-shadow: var(--sh-sm); }
+.wa-tab i { font-size: 13.5px; }
+.wa-tab.wa-live { margin-left: auto; color: var(--p700); }
+.wa-tab.wa-live:hover { background: var(--p50); }
+@media (max-width: 767px) {
+    .wa-nav { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none;
+        /* scroll cue: a soft shadow on the side that has more tabs (it goes when the strip is scrolled to that end) */
+        background:
+            linear-gradient(to right, var(--surface, #fff) 30%, transparent) left center / 32px 100% no-repeat local,
+            linear-gradient(to left, var(--surface, #fff) 30%, transparent) right center / 32px 100% no-repeat local,
+            radial-gradient(farthest-side at 0 50%, var(--tab-cue, rgba(17, 17, 20, .45)), transparent) left center / 20px 100% no-repeat scroll,
+            radial-gradient(farthest-side at 100% 50%, var(--tab-cue, rgba(17, 17, 20, .45)), transparent) right center / 20px 100% no-repeat scroll,
+            var(--surface, #fff); }
+    .wa-nav::-webkit-scrollbar { display: none; }
+    .wa-tab.wa-live { margin-left: 0; }
+    /* a min-width on a flex item replaces its automatic minimum: without flex: none the tabs shrink and overlap instead of scrolling the strip (as .bm-tab, 681e07c) */
+    .wa-nav .wa-tab { flex: none; }
+    :root[data-theme="dark"] .wa-nav { --tab-cue: rgba(228, 228, 231, .8); }
+}
+
+/* ---- Cards that can be dragged into order -------------------------------- */
+.wa-handle {
+    display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; flex: none;
+    border-radius: 8px; color: var(--muted); cursor: grab; background: transparent; border: 0;
+}
+.wa-handle:hover { color: var(--p700); background: var(--p50); }
+.wa-handle:active { cursor: grabbing; }
+.wa-dragging { opacity: .45; }
+.wa-over { outline: 2px dashed var(--p400); outline-offset: 2px; }
+
+/* A grid of small cards: rooms, services, policies, places, plans */
+.wa-grid { display: grid; gap: 14px; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
+.wa-card {
+    position: relative; border: 1px solid var(--line); border-radius: var(--r-md); background: var(--surface, #fff);
+    box-shadow: var(--sh-xs); padding: 16px; display: flex; flex-direction: column; gap: 10px;
+    transition: box-shadow var(--dur-base) var(--ease-out), border-color var(--dur-base) var(--ease-out);
+}
+.wa-card:hover { box-shadow: var(--sh-md); border-color: var(--p200, var(--line)); }
+.wa-card.is-off { opacity: .55; }
+.wa-card-head { display: flex; align-items: center; gap: 10px; }
+.wa-card-title { font-weight: 800; color: var(--ink); min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.wa-card-sub { font-size: 12.5px; color: var(--muted); }
+.wa-card-actions { display: flex; gap: 6px; flex-wrap: wrap; margin-top: auto; padding-top: 4px; }
+.wa-badge {
+    display: inline-flex; align-items: center; padding: 2px 9px; border-radius: 20px; font-size: 11px; font-weight: 800;
+    text-transform: uppercase; letter-spacing: .04em; background: var(--p50); color: var(--p700);
+}
+.wa-badge.ok { background: #DCFCE7; color: #15803D; }
+.wa-badge.off { background: #FEE2E2; color: #B91C1C; }
+.wa-icon-tile {
+    width: 44px; height: 44px; border-radius: 12px; flex: none; display: flex; align-items: center; justify-content: center;
+    background: var(--p50); color: var(--p700); overflow: hidden;
+}
+.wa-icon-tile svg, .wa-icon-tile img { width: 24px; height: 24px; object-fit: contain; }
+.wa-lines { margin: 0; padding-left: 18px; font-size: 13px; color: var(--ink2, var(--ink)); }
+.wa-lines li { margin: 2px 0; }
+
+/* ---- Photos ----------------------------------------------------------------- */
+.wa-photos { display: grid; gap: 12px; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); }
+.wa-photo {
+    position: relative; border: 1px solid var(--line); border-radius: var(--r-md); overflow: hidden; background: var(--surface, #fff);
+    box-shadow: var(--sh-xs);
+}
+.wa-photo img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; background: var(--p50); }
+.wa-photo .wa-handle { position: absolute; top: 8px; left: 8px; background: rgba(20, 10, 40, .72); color: #fff; }
+.wa-photo-body { padding: 10px; display: flex; flex-direction: column; gap: 6px; }
+.wa-photo-actions { display: flex; gap: 6px; padding: 0 10px 10px; }
+.wa-photo.is-removing img { opacity: .35; }
+
+.wa-room-photo { display: flex; gap: 12px; align-items: flex-start; padding: 10px; border: 1px solid var(--line); border-radius: var(--r-md); }
+.wa-room-photo img { width: 84px; height: 84px; object-fit: cover; border-radius: 10px; flex: none; }
+.wa-room-photo .wa-fields { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 6px; }
+.wa-room-photo.is-removing img { opacity: .35; }
+
+/* ---- Tariff plan cards ------------------------------------------------------- */
+.wa-room-block { margin-bottom: 22px; }
+.wa-room-head {
+    display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px;
+    padding: 18px 20px; border-radius: var(--r-lg) var(--r-lg) 0 0; color: #fff;
+    background: linear-gradient(120deg, var(--p900, #111114), var(--p700));
+}
+.wa-room-head h3 { margin: 0; font-size: 19px; font-weight: 800; color: #fff; }
+.wa-room-head small { color: rgba(255, 255, 255, .78); }
+.wa-room-tonight { text-align: right; }
+.wa-room-tonight small { display: block; font-size: 10.5px; font-weight: 800; text-transform: uppercase; letter-spacing: .06em; }
+.wa-room-tonight strong { font-size: 26px; font-weight: 800; }
+.wa-room-body { border: 1px solid var(--line); border-top: 0; border-radius: 0 0 var(--r-lg) var(--r-lg); padding: 18px 20px; background: var(--surface, #fff); }
+.wa-price-row { display: flex; align-items: baseline; justify-content: space-between; font-size: 13.5px; }
+.wa-price-row span { color: var(--muted); font-weight: 650; }
+.wa-price-row b { color: var(--p700); font-weight: 800; }
+.wa-tier { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 8px; }
+.wa-tier .form-control { max-width: 120px; }
+
+/* ---- Rate and inventory calendar ---------------------------------------------- */
+.wa-cal-wrap { border: 1px solid var(--line); border-radius: var(--r-lg); overflow: hidden; background: var(--surface, #fff); box-shadow: var(--sh-xs); }
+.wa-cal-bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 16px; border-bottom: 1px solid var(--line); background: var(--p50); }
+.wa-cal-bar .btn { padding: 4px 10px; }
+.wa-cal-scroll { overflow-x: auto; }
+.wa-cal { width: 100%; min-width: 860px; border-collapse: collapse; font-size: 13px; }
+.wa-cal thead th { background: var(--p900, #111114); color: #fff; padding: 10px 8px; font-weight: 700; text-align: center !important; }
+.wa-cal thead th.is-today { background: var(--p700); }
+.wa-cal thead th small { display: block; font-size: 10px; letter-spacing: .08em; text-transform: uppercase; color: rgba(255, 255, 255, .7); }
+.wa-cal th:first-child, .wa-cal td:first-child { position: sticky; left: 0; z-index: 2; text-align: left !important; min-width: 210px; background: var(--surface, #fff); }
+.wa-cal thead th:first-child { background: var(--p900, #111114); z-index: 3; }
+.wa-cal tr.wa-cal-room td { background: var(--p50); border-top: 2px solid var(--line); vertical-align: top; }
+.wa-cal tr.wa-cal-room td:first-child { background: var(--p50); }
+.wa-cal tr.wa-cal-plan td { border-top: 1px solid var(--line); }
+.wa-cal td { padding: 8px 6px; text-align: center !important; }
+.wa-cal .wa-cal-name { font-weight: 800; color: var(--ink); }
+.wa-cal .wa-cal-hint { font-size: 10.5px; font-weight: 800; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); }
+.wa-cal input[type=number] {
+    width: 74px; text-align: center; font-weight: 700; padding: 5px 4px; border: 1px solid var(--line); border-radius: 9px;
+    background: var(--surface, #fff); color: var(--ink);
+}
+.wa-cal input.cal-inv { width: 60px; border-color: #A7F3D0; background: #ECFDF5; color: #047857; }
+.wa-cal input.cal-inv.is-blocked { border-color: #FDA4AF; background: #FFF1F2; color: #E11D48; }
+.wa-cal input.is-recent { border-color: #E3C867; background: #FFFBEB; color: #8A6D1A; }
+.wa-cal input.is-dirty { box-shadow: 0 0 0 2px #FBBF24; }
+.wa-cal .wa-cal-sold { font-size: 10.5px; color: var(--muted); margin-top: 3px; }
+.wa-cal .cal-block { border: 0; background: none; font-size: 10.5px; font-weight: 800; color: var(--muted); padding: 0; }
+.wa-cal .cal-block:hover { color: var(--p700); }
+.wa-cal .cal-block.on { color: #E11D48; }
+.wa-cal-save {
+    position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); z-index: 1050; display: none; align-items: center; gap: 12px;
+    padding: 10px 18px; border-radius: var(--r-md); background: var(--surface, #fff); border: 1px solid var(--p200, var(--line)); box-shadow: var(--sh-xl);
+}
+.wa-cal-save.show { display: flex; }
+
+/* ---- Settings: the people told about enquiries -------------------------------- */
+.wa-recipient { display: grid; gap: 8px; grid-template-columns: 1fr 1.4fr auto; align-items: center; margin-bottom: 8px; }
+@media (max-width: 575px) { .wa-recipient { grid-template-columns: 1fr; } }
+
+/* The rich-text boxes on the Content page */
+.wa-rich .ql-container { min-height: 90px; font-size: 14px; border-radius: 0 0 10px 10px; }
+.wa-rich .ql-toolbar { border-radius: 10px 10px 0 0; }
+.wa-rich .ql-editor { min-height: 90px; }
+
+/* Phone: small links on the Website pages are 44px tap targets. wa-tap-inline keeps a link inside a sentence on its line and only grows its touch area. */
+@media (max-width: 767.98px) {
+    .wa-tap { display: inline-flex; align-items: center; min-height: 44px; padding: 0 6px; }
+    .wa-tap-inline { display: inline-block; padding: 12px 2px; margin: -12px -2px; }
+}

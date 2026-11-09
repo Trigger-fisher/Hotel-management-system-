@@ -1,0 +1,6 @@
+/* Guest portal. New rules for this area go here, never into hms-overrides.css. */
+
+.gg-page .pk-row { margin: 8px 0 16px; }
+
+.gg-page .gp-money .kpi-grid { margin: 0; }
+.gg-page .pk-row, .gg-page .gp-money { margin-bottom: 16px; }

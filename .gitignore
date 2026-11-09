@@ -1,0 +1,63 @@
+# Secrets: never commit. Only the names-only example is allowed.
+.env*
+!.env.example
+*.pem
+*.key
+common/db/.dev-login.txt
+
+# Database dumps and backups
+common/db/dumps/
+*.dump
+*.sql.gz
+backups/
+backup/
+# Code folders that happen to be named "backup" (not dumps): without these, git add skips them (see 52f3912).
+!web-app/src/app/api/v1/cron/backup/
+!web-app/src/server/services/backup/
+
+# Dependencies and build output
+node_modules/
+.next/
+.next-*/
+dist/
+coverage/
+*.tsbuildinfo
+
+# OS / editor
+.DS_Store
+Thumbs.db
+
+# Review screenshots (kept on disk, not in git; MJ #18)
+common/docs/sessions/*-screens/
+
+# PM dashboard: generated session briefs and launch scripts
+pm-dashboard/briefs/
+pm-dashboard/data/config.json
+pm-dashboard/data/registry.json
+pm-dashboard/data/snapshot.json
+pm-dashboard/data/*.bak
+pm-dashboard/data/*.tmp
+common/db/.dev-mail.log
+
+# the Backup & Restore API routes are source code, not backups
+!web-app/src/app/api/v1/admin/backup/
+
+# uploaded website photos, icons and logos (local media store)
+web-app/.data/
+
+# Generated hosted-database exports and production credentials: never in git (regenerate with the db scripts)
+common/db/production/
+common/db/full-schema.sql
+common/db/schema-part-*.sql
+
+# Pathik portal page samples saved by MJ (may hold session values or guest data): never commit
+pathik/worker/portal-samples/
+common/db/hosted-secrets.txt
+
+# raw, unproven SQL bundle for a hosted database (generated, never commit)
+common/db/raw-sql-unproven/
+common/db/hosted-sql/
+pm-dashboard/tools/cloud.html
+
+# Local only (MJ, 17 Oct 2026): loose HMS files from D:\ (old SQL, notes, the Pathik worker token, old web-app snapshots). Never uploaded.
+/_local/

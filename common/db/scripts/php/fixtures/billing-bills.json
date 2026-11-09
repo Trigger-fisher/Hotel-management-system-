@@ -1,0 +1,676 @@
+{
+    "source": "Pallav BillMasterController::prepareBill, MealPlanRate::price (real), :433-444 and :525-546 (verbatim); PHP 8.4.24",
+    "rates": [
+        {
+            "plan": "CP",
+            "effectiveFrom": "2026-01-01",
+            "ratePaise": 25000
+        },
+        {
+            "plan": "CP",
+            "effectiveFrom": "2026-10-10",
+            "ratePaise": 27500
+        },
+        {
+            "plan": "MAP",
+            "effectiveFrom": "2026-01-01",
+            "ratePaise": 60000
+        },
+        {
+            "plan": "AP",
+            "effectiveFrom": "2026-05-01",
+            "ratePaise": 90000
+        },
+        {
+            "plan": "ep",
+            "effectiveFrom": "2026-01-01",
+            "ratePaise": 0
+        }
+    ],
+    "prepare": [
+        {
+            "lines": {
+                "hotel_amount": 400000,
+                "hotel_plan_amount": 50000,
+                "hotel_extra_bed_amount": 80000,
+                "hotel_laundry_amount": 15050,
+                "hotel_other_amount": 7500,
+                "hotel_gst": 66000,
+                "food_amount": 120000,
+                "food_plan_amount": 0,
+                "food_laundry_amount": 0,
+                "food_gst": 6000
+            },
+            "stay": [],
+            "hotelTotalPaise": 618550,
+            "foodTotalPaise": 126000,
+            "planFoodPaise": 0,
+            "segments": null
+        },
+        {
+            "lines": {
+                "hotel_amount": 10,
+                "hotel_gst": 20,
+                "food_amount": 30
+            },
+            "stay": [
+                {
+                    "from": "2026-10-05",
+                    "to": "2026-10-08",
+                    "plan": "CP",
+                    "persons": 2
+                }
+            ],
+            "hotelTotalPaise": 30,
+            "foodTotalPaise": 30,
+            "planFoodPaise": 150000,
+            "segments": [
+                {
+                    "from": "2026-10-05",
+                    "to": "2026-10-08",
+                    "plan": "CP",
+                    "persons": 2,
+                    "nights": 3,
+                    "ratePaise": 25000,
+                    "amountPaise": 150000
+                }
+            ]
+        },
+        {
+            "lines": {
+                "hotel_amount": -50000,
+                "hotel_gst": -2500,
+                "food_amount": 10000
+            },
+            "stay": [
+                {
+                    "from": "2026-10-08",
+                    "to": "2026-10-12",
+                    "plan": "cp",
+                    "persons": 2
+                }
+            ],
+            "hotelTotalPaise": -52500,
+            "foodTotalPaise": 10000,
+            "planFoodPaise": 210000,
+            "segments": [
+                {
+                    "from": "2026-10-08",
+                    "to": "2026-10-12",
+                    "plan": "cp",
+                    "persons": 2,
+                    "nights": 4,
+                    "ratePaise": null,
+                    "amountPaise": 210000
+                }
+            ]
+        },
+        {
+            "lines": [],
+            "stay": [
+                {
+                    "from": "2026-10-01",
+                    "to": "2026-10-03",
+                    "plan": "MAP",
+                    "persons": 3
+                },
+                {
+                    "from": "2026-10-03",
+                    "to": "2026-10-04",
+                    "plan": "EP",
+                    "persons": 3
+                }
+            ],
+            "hotelTotalPaise": 0,
+            "foodTotalPaise": 0,
+            "planFoodPaise": 360000,
+            "segments": [
+                {
+                    "from": "2026-10-01",
+                    "to": "2026-10-03",
+                    "plan": "MAP",
+                    "persons": 3,
+                    "nights": 2,
+                    "ratePaise": 60000,
+                    "amountPaise": 360000
+                },
+                {
+                    "from": "2026-10-03",
+                    "to": "2026-10-04",
+                    "plan": "EP",
+                    "persons": 3,
+                    "nights": 1,
+                    "ratePaise": 0,
+                    "amountPaise": 0
+                }
+            ]
+        },
+        {
+            "lines": {
+                "hotel_amount": 9999999999,
+                "food_gst": 1
+            },
+            "stay": [
+                {
+                    "from": "2026-04-29",
+                    "to": "2026-05-02",
+                    "plan": "AP",
+                    "persons": 1
+                }
+            ],
+            "hotelTotalPaise": 9999999999,
+            "foodTotalPaise": 1,
+            "planFoodPaise": 90000,
+            "segments": [
+                {
+                    "from": "2026-04-29",
+                    "to": "2026-05-02",
+                    "plan": "AP",
+                    "persons": 1,
+                    "nights": 3,
+                    "ratePaise": null,
+                    "amountPaise": 90000
+                }
+            ]
+        },
+        {
+            "lines": {
+                "hotel_amount": 123456,
+                "hotel_plan_amount": 789012,
+                "hotel_laundry_amount": 345678,
+                "hotel_gst": 34,
+                "food_amount": 1,
+                "food_laundry_amount": 2
+            },
+            "stay": [
+                {
+                    "from": "2026-10-05",
+                    "to": "2026-10-06",
+                    "plan": "",
+                    "persons": 4
+                },
+                {
+                    "from": "",
+                    "to": "2026-10-06",
+                    "plan": "CP",
+                    "persons": 1
+                }
+            ],
+            "hotelTotalPaise": 1258180,
+            "foodTotalPaise": 3,
+            "planFoodPaise": 0,
+            "segments": [
+                {
+                    "from": "2026-10-05",
+                    "to": "2026-10-06",
+                    "plan": "",
+                    "persons": 4,
+                    "nights": 1,
+                    "ratePaise": 0,
+                    "amountPaise": 0
+                }
+            ]
+        }
+    ],
+    "stays": [
+        {
+            "stay": [],
+            "totalPaise": 0,
+            "segments": []
+        },
+        {
+            "stay": [
+                {
+                    "from": "2026-10-05",
+                    "to": "2026-10-08",
+                    "plan": "CP",
+                    "persons": 2
+                }
+            ],
+            "totalPaise": 150000,
+            "segments": [
+                {
+                    "from": "2026-10-05",
+                    "to": "2026-10-08",
+                    "plan": "CP",
+                    "persons": 2,
+                    "nights": 3,
+                    "ratePaise": 25000,
+                    "amountPaise": 150000
+                }
+            ]
+        },
+        {
+            "stay": [
+                {
+                    "from": "2026-10-08",
+                    "to": "2026-10-12",
+                    "plan": "cp",
+                    "persons": 2
+                }
+            ],
+            "totalPaise": 210000,
+            "segments": [
+                {
+                    "from": "2026-10-08",
+                    "to": "2026-10-12",
+                    "plan": "cp",
+                    "persons": 2,
+                    "nights": 4,
+                    "ratePaise": null,
+                    "amountPaise": 210000
+                }
+            ]
+        },
+        {
+            "stay": [
+                {
+                    "from": "2026-10-01",
+                    "to": "2026-10-03",
+                    "plan": "MAP",
+                    "persons": 3
+                },
+                {
+                    "from": "2026-10-03",
+                    "to": "2026-10-04",
+                    "plan": "EP",
+                    "persons": 3
+                }
+            ],
+            "totalPaise": 360000,
+            "segments": [
+                {
+                    "from": "2026-10-01",
+                    "to": "2026-10-03",
+                    "plan": "MAP",
+                    "persons": 3,
+                    "nights": 2,
+                    "ratePaise": 60000,
+                    "amountPaise": 360000
+                },
+                {
+                    "from": "2026-10-03",
+                    "to": "2026-10-04",
+                    "plan": "EP",
+                    "persons": 3,
+                    "nights": 1,
+                    "ratePaise": 0,
+                    "amountPaise": 0
+                }
+            ]
+        },
+        {
+            "stay": [
+                {
+                    "from": "2026-04-29",
+                    "to": "2026-05-02",
+                    "plan": "AP",
+                    "persons": 1
+                }
+            ],
+            "totalPaise": 90000,
+            "segments": [
+                {
+                    "from": "2026-04-29",
+                    "to": "2026-05-02",
+                    "plan": "AP",
+                    "persons": 1,
+                    "nights": 3,
+                    "ratePaise": null,
+                    "amountPaise": 90000
+                }
+            ]
+        },
+        {
+            "stay": [
+                {
+                    "from": "2026-10-05",
+                    "to": "2026-10-06",
+                    "plan": "",
+                    "persons": 4
+                },
+                {
+                    "from": "",
+                    "to": "2026-10-06",
+                    "plan": "CP",
+                    "persons": 1
+                }
+            ],
+            "totalPaise": 0,
+            "segments": [
+                {
+                    "from": "2026-10-05",
+                    "to": "2026-10-06",
+                    "plan": "",
+                    "persons": 4,
+                    "nights": 1,
+                    "ratePaise": 0,
+                    "amountPaise": 0
+                }
+            ]
+        },
+        {
+            "stay": [
+                {
+                    "from": "2025-12-30",
+                    "to": "2026-01-02",
+                    "plan": "CP",
+                    "persons": 2
+                }
+            ],
+            "totalPaise": 50000,
+            "segments": [
+                {
+                    "from": "2025-12-30",
+                    "to": "2026-01-02",
+                    "plan": "CP",
+                    "persons": 2,
+                    "nights": 3,
+                    "ratePaise": null,
+                    "amountPaise": 50000
+                }
+            ]
+        },
+        {
+            "stay": [
+                {
+                    "from": "2026-10-05",
+                    "to": "2026-10-06",
+                    "plan": "Deluxe",
+                    "persons": 2
+                }
+            ],
+            "totalPaise": 0,
+            "segments": [
+                {
+                    "from": "2026-10-05",
+                    "to": "2026-10-06",
+                    "plan": "Deluxe",
+                    "persons": 2,
+                    "nights": 1,
+                    "ratePaise": 0,
+                    "amountPaise": 0
+                }
+            ]
+        }
+    ],
+    "apply": [
+        {
+            "advanceHotelBalancePaise": 500000,
+            "advanceFoodBalancePaise": 0,
+            "hotelTotalPaise": 300000,
+            "foodTotalPaise": 0,
+            "hotelMode": "Cash",
+            "foodMode": null,
+            "takenHotelPaise": 300000,
+            "takenFoodPaise": 0,
+            "leftHotelPaise": 200000,
+            "leftFoodPaise": 0,
+            "balanceHotelPaise": 0,
+            "balanceFoodPaise": 0
+        },
+        {
+            "advanceHotelBalancePaise": 500000,
+            "advanceFoodBalancePaise": 0,
+            "hotelTotalPaise": 800000,
+            "foodTotalPaise": 0,
+            "hotelMode": "Debit",
+            "foodMode": null,
+            "takenHotelPaise": 500000,
+            "takenFoodPaise": 0,
+            "leftHotelPaise": 0,
+            "leftFoodPaise": 0,
+            "balanceHotelPaise": 800000,
+            "balanceFoodPaise": 0
+        },
+        {
+            "advanceHotelBalancePaise": 200000,
+            "advanceFoodBalancePaise": 100000,
+            "hotelTotalPaise": 150000,
+            "foodTotalPaise": 250000,
+            "hotelMode": "debit",
+            "foodMode": "Card",
+            "takenHotelPaise": 150000,
+            "takenFoodPaise": 100000,
+            "leftHotelPaise": 50000,
+            "leftFoodPaise": 0,
+            "balanceHotelPaise": 150000,
+            "balanceFoodPaise": 0
+        },
+        {
+            "advanceHotelBalancePaise": 0,
+            "advanceFoodBalancePaise": 100000,
+            "hotelTotalPaise": 50000,
+            "foodTotalPaise": 30000,
+            "hotelMode": "UPI",
+            "foodMode": "DEBIT",
+            "takenHotelPaise": 0,
+            "takenFoodPaise": 30000,
+            "leftHotelPaise": 0,
+            "leftFoodPaise": 70000,
+            "balanceHotelPaise": 0,
+            "balanceFoodPaise": 30000
+        },
+        {
+            "advanceHotelBalancePaise": 100050,
+            "advanceFoodBalancePaise": 0,
+            "hotelTotalPaise": 100025,
+            "foodTotalPaise": 0,
+            "hotelMode": "Cash",
+            "foodMode": null,
+            "takenHotelPaise": 100025,
+            "takenFoodPaise": 0,
+            "leftHotelPaise": 25,
+            "leftFoodPaise": 0,
+            "balanceHotelPaise": 0,
+            "balanceFoodPaise": 0
+        },
+        {
+            "advanceHotelBalancePaise": 300000,
+            "advanceFoodBalancePaise": 0,
+            "hotelTotalPaise": 0,
+            "foodTotalPaise": 0,
+            "hotelMode": null,
+            "foodMode": null,
+            "takenHotelPaise": 0,
+            "takenFoodPaise": 0,
+            "leftHotelPaise": 300000,
+            "leftFoodPaise": 0,
+            "balanceHotelPaise": 0,
+            "balanceFoodPaise": 0
+        },
+        {
+            "advanceHotelBalancePaise": 1000000,
+            "advanceFoodBalancePaise": 200000,
+            "hotelTotalPaise": 450075,
+            "foodTotalPaise": 199999,
+            "hotelMode": "Debit",
+            "foodMode": "Debit",
+            "takenHotelPaise": 450075,
+            "takenFoodPaise": 199999,
+            "leftHotelPaise": 549925,
+            "leftFoodPaise": 1,
+            "balanceHotelPaise": 450075,
+            "balanceFoodPaise": 199999
+        }
+    ],
+    "settle": [
+        {
+            "balanceHotelPaise": 800000,
+            "balanceFoodPaise": 0,
+            "slots": [
+                [
+                    300000,
+                    0
+                ],
+                [
+                    500000,
+                    0
+                ]
+            ],
+            "debitHotelAdvance": "0",
+            "debitFoodAdvance": "0",
+            "leftHotelPaise": 0,
+            "leftFoodPaise": 0,
+            "excessHotelPaise": 0,
+            "excessFoodPaise": 0
+        },
+        {
+            "balanceHotelPaise": 800000,
+            "balanceFoodPaise": 0,
+            "slots": [
+                [
+                    300000,
+                    0
+                ]
+            ],
+            "debitHotelAdvance": "0",
+            "debitFoodAdvance": "0",
+            "leftHotelPaise": 500000,
+            "leftFoodPaise": 0,
+            "excessHotelPaise": 0,
+            "excessFoodPaise": 0
+        },
+        {
+            "balanceHotelPaise": 800000,
+            "balanceFoodPaise": 0,
+            "slots": [
+                [
+                    900000,
+                    0
+                ]
+            ],
+            "debitHotelAdvance": "1000",
+            "debitFoodAdvance": "0",
+            "leftHotelPaise": 0,
+            "leftFoodPaise": 0,
+            "excessHotelPaise": 100000,
+            "excessFoodPaise": 0
+        },
+        {
+            "balanceHotelPaise": 150000,
+            "balanceFoodPaise": 250000,
+            "slots": [
+                [
+                    100000,
+                    100000
+                ],
+                [
+                    50000,
+                    100000
+                ],
+                [
+                    0,
+                    60000
+                ]
+            ],
+            "debitHotelAdvance": "0",
+            "debitFoodAdvance": "100",
+            "leftHotelPaise": 0,
+            "leftFoodPaise": 0,
+            "excessHotelPaise": 0,
+            "excessFoodPaise": 10000
+        },
+        {
+            "balanceHotelPaise": 0,
+            "balanceFoodPaise": 0,
+            "slots": [
+                [
+                    70000,
+                    0
+                ]
+            ],
+            "debitHotelAdvance": "700",
+            "debitFoodAdvance": "0",
+            "leftHotelPaise": 0,
+            "leftFoodPaise": 0,
+            "excessHotelPaise": 70000,
+            "excessFoodPaise": 0
+        },
+        {
+            "balanceHotelPaise": 100010,
+            "balanceFoodPaise": 0,
+            "slots": [
+                [
+                    99980,
+                    0
+                ]
+            ],
+            "debitHotelAdvance": "0",
+            "debitFoodAdvance": "0",
+            "leftHotelPaise": 30,
+            "leftFoodPaise": 0,
+            "excessHotelPaise": 0,
+            "excessFoodPaise": 0
+        },
+        {
+            "balanceHotelPaise": 500000,
+            "balanceFoodPaise": 500000,
+            "slots": [
+                [
+                    100000,
+                    100000
+                ],
+                [
+                    100000,
+                    100000
+                ],
+                [
+                    100000,
+                    100000
+                ],
+                [
+                    100000,
+                    100000
+                ],
+                [
+                    100000,
+                    150000
+                ]
+            ],
+            "debitHotelAdvance": "0",
+            "debitFoodAdvance": "500",
+            "leftHotelPaise": 0,
+            "leftFoodPaise": 0,
+            "excessHotelPaise": 0,
+            "excessFoodPaise": 50000
+        },
+        {
+            "balanceHotelPaise": 25050,
+            "balanceFoodPaise": 0,
+            "slots": [
+                [
+                    50,
+                    0
+                ],
+                [
+                    25000,
+                    0
+                ]
+            ],
+            "debitHotelAdvance": "0",
+            "debitFoodAdvance": "0",
+            "leftHotelPaise": 0,
+            "leftFoodPaise": 0,
+            "excessHotelPaise": 0,
+            "excessFoodPaise": 0
+        },
+        {
+            "balanceHotelPaise": 10000,
+            "balanceFoodPaise": 0,
+            "slots": [
+                [
+                    15025,
+                    0
+                ]
+            ],
+            "debitHotelAdvance": "50.25",
+            "debitFoodAdvance": "0",
+            "leftHotelPaise": 0,
+            "leftFoodPaise": 0,
+            "excessHotelPaise": 5025,
+            "excessFoodPaise": 0
+        }
+    ],
+    "excessReceipt": "Excessive / 2026 / 1188"
+}

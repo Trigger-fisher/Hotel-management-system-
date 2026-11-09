@@ -1,0 +1,19 @@
+[
+    {
+        "id": 1,
+        "date": "2026-10-03 00:00:00",
+        "time": "10:00:00",
+        "user_id": 2,
+        "full_name": "Priya Shah",
+        "expense_name": "Vegetable Supplier Payment",
+        "amount": 5400,
+        "instruction": "Weekly fresh produce order",
+        "amount_in_words": "Five Thousand Four Hundred Rupees Only",
+        "created_at": "2026-10-05 18:52:22",
+        "updated_at": "2026-10-05 18:52:22",
+        "entry_no": 1,
+        "expense_head": null,
+        "deleted_at": null,
+        "deleted_by": null
+    }
+]

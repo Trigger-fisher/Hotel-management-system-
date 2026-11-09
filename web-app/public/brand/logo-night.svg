@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2200 727" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" role="img" aria-label="Easy Hotel Solutions. Smart Hotel Management">
+  <defs>
+    <linearGradient id="goldRoof" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FBE9A6"/>
+      <stop offset="40%" stop-color="#E7B948"/>
+      <stop offset="100%" stop-color="#B8860B"/>
+    </linearGradient>
+    <linearGradient id="goldWallLeft" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#F6D878"/>
+      <stop offset="100%" stop-color="#D3A133"/>
+    </linearGradient>
+    <linearGradient id="goldWallDark" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#E4B646"/>
+      <stop offset="100%" stop-color="#B07E12"/>
+    </linearGradient>
+    <linearGradient id="goldWallSmall" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#F3D06A"/>
+      <stop offset="100%" stop-color="#C9962A"/>
+    </linearGradient>
+    <linearGradient id="goldSwoosh" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#C08A1A"/>
+      <stop offset="50%" stop-color="#FBE59C"/>
+      <stop offset="100%" stop-color="#C08A1A"/>
+    </linearGradient>
+    <linearGradient id="goldText" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FBE6A0"/>
+      <stop offset="55%" stop-color="#E5B744"/>
+      <stop offset="100%" stop-color="#C08E18"/>
+    </linearGradient>
+    <linearGradient id="whiteText" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#D6D6D6"/>
+    </linearGradient>
+    <linearGradient id="dividerLine" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.2"/>
+      <stop offset="50%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0.2"/>
+    </linearGradient>
+    <filter id="swooshGlow" x="-20%" y="-60%" width="140%" height="240%">
+      <feGaussianBlur stdDeviation="14"/>
+    </filter>
+    <filter id="textShadow" x="-5%" y="-10%" width="110%" height="130%">
+      <feDropShadow dx="0" dy="6" stdDeviation="6" flood-color="#000000" flood-opacity="0.6"/>
+    </filter>
+    <filter id="iconShadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="8" stdDeviation="8" flood-color="#000000" flood-opacity="0.55"/>
+    </filter>
+  </defs>
+
+  <g id="highlights">
+    <path fill="#F5C842" fill-opacity="0.75" filter="url(#swooshGlow)" d="M380,552 C560,470 760,452 900,520 C760,476 560,488 380,552 Z"/>
+  </g>
+
+  <g id="midground" filter="url(#iconShadow)">
+    <g id="building-icon">
+      <path id="roof" fill="url(#goldRoof)" d="M656,163 L838,290 L838,343 L784,343 L784,333 L656,235 Z"/>
+      <path id="right-column" fill="url(#goldWallDark)" d="M784,333 L838,333 L838,466 L784,466 Z"/>
+      <path id="main-tower" fill="url(#goldWallLeft)" d="M520,245 L656,163 L656,450 L592,450 L592,300 L520,318 Z"/>
+      <path id="left-block" fill="url(#goldWallSmall)" d="M436,380 L574,304 L574,460 L436,496 Z"/>
+      <path id="window-block" fill="url(#goldWallDark)" d="M690,335 L746,365 L746,455 L690,455 Z"/>
+      <path id="base-swoosh" fill="url(#goldSwoosh)" d="M380,552 C560,470 760,452 900,520 C740,478 540,500 380,552 Z"/>
+    </g>
+  </g>
+
+  <g id="divider">
+    <rect x="906" y="185" width="4" height="310" fill="url(#dividerLine)"/>
+  </g>
+
+  <g id="foreground" font-family="Montserrat, 'Poppins', 'Segoe UI', Arial, sans-serif" filter="url(#textShadow)">
+    <text id="easy" x="968" y="296" fill="url(#goldText)" font-size="160" font-weight="800" letter-spacing="2">Easy</text>
+    <text id="hotel-solutions" x="968" y="432" fill="url(#whiteText)" font-size="124" font-weight="700" letter-spacing="1" textLength="1150" lengthAdjust="spacingAndGlyphs">Hotel Solutions</text>
+    <g id="tagline">
+      <rect x="1166" y="486" width="50" height="4" fill="#FFFFFF"/>
+      <text x="1543" y="500" fill="#FFFFFF" font-size="46" font-weight="600" letter-spacing="1" text-anchor="middle" textLength="610" lengthAdjust="spacingAndGlyphs">Smart Hotel Management</text>
+      <rect x="1870" y="486" width="50" height="4" fill="#FFFFFF"/>
+    </g>
+  </g>
+</svg>

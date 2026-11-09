@@ -1,0 +1,1023 @@
+{
+    "php": "8.4.24",
+    "rich": [
+        {
+            "in": "",
+            "out": "",
+            "again": "",
+            "blank": true,
+            "validUtf8": true
+        },
+        {
+            "in": "   ",
+            "out": "",
+            "again": "",
+            "blank": true,
+            "validUtf8": true
+        },
+        {
+            "in": "plain text",
+            "out": "plain text",
+            "again": "plain text",
+            "blank": false,
+            "validUtf8": true
+        },
+        {
+            "in": "<p>Hello <strong>world</strong></p>",
+            "out": "<p>Hello <strong>world</strong></p>",
+            "again": "<p>Hello <strong>world</strong></p>",
+            "blank": false,
+            "validUtf8": true
+        },
+        {
+            "in": "<p>One</p><p>Two</p>",
+            "out": "<p>One</p><p>Two</p>",
+            "again": "<p>One</p><p>Two</p>",
+            "blank": false,
+            "validUtf8": true
+        },
+        {
+            "in": "<p><br></p>",
+            "out": "<p><br></p>",
+            "again": "<p><br></p>",
+            "blank": true,
+            "validUtf8": true
+        },
+        {
+            "in": "<p></p>",
+            "out": "<p></p>",
+            "again": "<p></p>",
+            "blank": true,
+            "validUtf8": true
+        },
+        {
+            "in": "a < b & c > d",
+            "out": "a &lt; b &amp; c &gt; d",
+            "again": "a &lt; b &amp; c &gt; d",
+            "blank": false,
+            "validUtf8": true
+        },
+        {
+            "in": "Tom &amp; Jerry",
+            "out": "Tom &amp; Jerry",
+            "again": "Tom &amp; Jerry",
+            "blank": false,
+            "validUtf8": true
+        },
+        {
+            "in": "&nbsp;&copy;&euro;",
+            "out": " ©€",
+            "again": " ©€",
+            "blank": false,
+            "validUtf8": true
+        },
+        {
+            "in": "₹ 1,200 – कमरा / રૂમ",
+            "out": "₹ 1,200 – कमरा / રૂમ",
+            "again": "₹ 1,200 – कमरा / રૂમ",
+            "blank": false,
+            "validUtf8": true
+        },
+        {
+            "in": "<ul><li>First</li><li class=\"ql-indent-1\" data-list=\"bullet\" style=\"color:red\">Second</li></ul>",
+            "out": "<ul><li>First</li><li class=\"ql-indent-1\" data-list=\"bullet\">Second</li></ul>",
+            "again": "<ul><li>First</li><li class=\"ql-indent-1\" data-list=\"bullet\">Second</li></ul>",
+            "blank": false,
+            "validUtf8": true
+        },
+        {
+            "in": "<ol><li>One</li></ol>",
+            "out": "<ol><li>One</li></ol>",
+            "again": "<ol><li>One</li></ol>",
+            "blank": false,
+            "validUtf8": true
+        },
+        {
+            "in": "<p>Visit <a href=\"https://example.com/a?b=1&c=2\" target=\"_blank\" onclick=\"x()\">our site</a></p>",
+            "out": "<p>Visit <a href=\"https://example.com/a?b=1&amp;c=2\" target=\"_blank\" rel=\"noopener noreferrer\">our site</a></p>",
+            "again": "<p>Visit <a href=\"https://example.com/a?b=1&amp;c=2\" target=\"_blank\" rel=\"noopener noreferrer\">our site</a></p>",
+            "blank": false,
+            "validUtf8": true
+        },
+        {
+            "in": "<a href=\"javascript:alert(1)\">bad</a>",
+            "out": "<a>bad</a>",
+            "again": "<a>bad</a>",
+            "blank": false,
+            "validUtf8": true
+        },
+        {
+            "in": "<a href=\"JaVaScRiPt:alert(1)\">bad</a>",
+            "out": "<a>bad</a>",
+            "again": "<a>bad</a>",
+            "blank": false,
+            "validUtf8": true
+        },
+        {
+            "in": "<a href=\"java&#09;script:alert(1)\">bad</a>",
+            "out": "<a>bad</a>",
+            "again": "<a>bad</a>",
+            "blank": false,
+            "validUtf8": true
+        },
+        {
+            "in": "<a href=\"  javascript:alert(1)\">bad</a>",
+            "out": "<a>bad</a>",
+            "again": "<a>bad</a>",
+            "blank": false,
+            "validUtf8": true
+        },
+        {
+            "in": "<a href=\"data:text/html;base64,PHNjcmlwdD4=\">bad</a>",
+            "out": "<a>bad</a>",
+            "again": "<a>bad</a>",
+            "blank": false,
+            "validUtf8": true
+        },
+        {
+            "in": "<a href=\"/relative/page\">rel</a>",
+            "out": "<a href=\"/relative/page\">rel</a>",
+            "again": "<a href=\"/relative/page\">rel</a>",
+            "blank": false,
+            "validUtf8": true
+        },
+        {
+            "in": "<a href=\"mailto:hotel@example.com\">mail</a>",
+            "out": "<a href=\"mailto:hotel@example.com\">mail</a>",
+            "again": "<a href=\"mailto:hotel@example.com\">mail</a>",
+            "blank": false,
+            "validUtf8": true
+        },
+        {
+            "in": "<a href=\"tel:+912812456789\">call</a>",
+            "out": "<a href=\"tel:+912812456789\">call</a>",
+            "again": "<a href=\"tel:+912812456789\">call</a>",
+            "blank": false,
+            "validUtf8": true
+        },
+        {
+            "in": "<a href=\"ftp://x.example/y\">ftp</a>",
+            "out": "<a>ftp</a>",
+            "again": "<a>ftp</a>",
+            "blank": false,
+            "validUtf8": true
+        },
+        {
+            "in": "<a href=\"\">empty</a>",
+            "out": "<a>empty</a>",
+            "again": "<a>empty</a>",
+            "blank": false,
+            "validUtf8": true
+        },
+        {
+            "in": "<a href=\"#top\">hash</a>",
+            "out": "<a href=\"#top\">hash</a>",
+            "again": "<a href=\"#top\">hash</a>",
+            "blank": false,
+            "validUtf8": true
+        },
+        {
+            "in": "<a target=\"_blank\">no href</a>",
+            "out": "<a target=\"_blank\">no href</a>",
+            "again": "<a target=\"_blank\">no href</a>",
+            "blank": false,
+            "validUtf8": true
+        },
+        {
+            "in": "<a href=\"http://x.example\" target=\"_blank\" rel=\"opener\">blank</a>",
+            "out": "<a href=\"http://x.example\" target=\"_blank\" rel=\"noopener noreferrer\">blank</a>",
+            "again": "<a href=\"http://x.example\" target=\"_blank\" rel=\"noopener noreferrer\">blank</a>",
+            "blank": false,
+            "validUtf8": true
+        },
+        {
+            "in": "<a href=\"http://x.example\" target=\"_self\">self</a>",
+            "out": "<a href=\"http://x.example\" target=\"_self\">self</a>",
+            "again": "<a href=\"http://x.example\" target=\"_self\">self</a>",
+            "blank": false,
+            "validUtf8": true
+        },
+        {
+            "in": "<script>alert(1)</script>after",
+            "out": "after",
+            "again": "after",
+            "blank": false,
+            "validUtf8": true
+        },
+        {
+            "in": "<p>x<script>alert(1)</script>y</p>",
+            "out": "<p>xy</p>",
+            "again": "<p>xy</p>",
+            "blank": false,
+            "validUtf8": true
+        },
+        {
+            "in": "<style>p{color:red}</style><p>styled</p>",
+            "out": "<p>styled</p>",
+            "again": "<p>styled</p>",
+            "blank": false,
+            "validUtf8": true
+        },
+        {
+            "in": "<iframe src=\"http://evil\"></iframe>text",
+            "out": "text",
+            "again": "text",
+            "blank": false,
+            "validUtf8": true
+        },
+        {
+            "in": "<object data=\"x\">o</object>",
+            "out": "",
+            "again": "",
+            "blank": true,
+            "validUtf8": true
+        },
+        {
+            "in": "<embed src=\"x\">",
+            "out": "",
+            "again": "",
+            "blank": true,
+            "validUtf8": true
+        },
+        {
+            "in": "<form action=\"x\"><input name=\"a\"><button>go</button></form>kept",
+            "out": "kept",
+            "again": "kept",
+            "blank": false,
+            "validUtf8": true
+        },
+        {
+            "in": "<textarea>t</textarea><select><option>o</option></select>",
+            "out": "",
+            "again": "",
+            "blank": true,
+            "validUtf8": true
+        },
+        {
+            "in": "<svg><script>alert(1)</script><circle/></svg>done",
+            "out": "done",
+            "again": "done",
+            "blank": false,
+            "validUtf8": true
+        },
+        {
+            "in": "<math><mi>x</mi></math>m",
+            "out": "m",
+            "again": "m",
+            "blank": false,
+            "validUtf8": true
+        },
+        {
+            "in": "<noscript>n</noscript>ns",
+            "out": "ns",
+            "again": "ns",
+            "blank": false,
+            "validUtf8": true
+        },
+        {
+            "in": "<template><b>t</b></template>tp",
+            "out": "tp",
+            "again": "tp",
+            "blank": false,
+            "validUtf8": true
+        },
+        {
+            "in": "<link rel=\"stylesheet\" href=\"x\"><meta charset=\"x\"><base href=\"x\">",
+            "out": "",
+            "again": "",
+            "blank": true,
+            "validUtf8": true
+        },
+        {
+            "in": "<!-- comment --><p>c</p>",
+            "out": "<p>c</p>",
+            "again": "<p>c</p>",
+            "blank": false,
+            "validUtf8": true
+        },
+        {
+            "in": "<?php echo 1; ?>after",
+            "out": "after",
+            "again": "after",
+            "blank": false,
+            "validUtf8": true
+        },
+        {
+            "in": "<div>block <span class=\"a b\" style=\"x:y\" id=\"z\">span</span></div>",
+            "out": "block <span class=\"a b\">span</span>",
+            "again": "block <span class=\"a b\">span</span>",
+            "blank": false,
+            "validUtf8": true
+        },
+        {
+            "in": "<h1>Head</h1><h2>Sub</h2>",
+            "out": "HeadSub",
+            "again": "HeadSub",
+            "blank": false,
+            "validUtf8": true
+        },
+        {
+            "in": "<font color=\"red\"><center>old</center></font>",
+            "out": "old",
+            "again": "old",
+            "blank": false,
+            "validUtf8": true
+        },
+        {
+            "in": "<img src=\"x\" onerror=\"alert(1)\">img",
+            "out": "img",
+            "again": "img",
+            "blank": false,
+            "validUtf8": true
+        },
+        {
+            "in": "<p onclick=\"x()\" style=\"y\">p</p>",
+            "out": "<p>p</p>",
+            "again": "<p>p</p>",
+            "blank": false,
+            "validUtf8": true
+        },
+        {
+            "in": "<p>Line<br>break<br/>again</p>",
+            "out": "<p>Line<br>break<br>again</p>",
+            "again": "<p>Line<br>break<br>again</p>",
+            "blank": false,
+            "validUtf8": true
+        },
+        {
+            "in": "<b>b</b><i>i</i><u>u</u><s>s</s><em>e</em><blockquote>q</blockquote>",
+            "out": "<b>b</b><i>i</i><u>u</u><s>s</s><em>e</em><blockquote>q</blockquote>",
+            "again": "<b>b</b><i>i</i><u>u</u><s>s</s><em>e</em><blockquote>q</blockquote>",
+            "blank": false,
+            "validUtf8": true
+        },
+        {
+            "in": "<p>unclosed <b>bold",
+            "out": "<p>unclosed <b>bold</b></p>",
+            "again": "<p>unclosed <b>bold</b></p>",
+            "blank": false,
+            "validUtf8": true
+        },
+        {
+            "in": "</p>stray close",
+            "out": "stray close",
+            "again": "stray close",
+            "blank": false,
+            "validUtf8": true
+        },
+        {
+            "in": "<p>nested <p>paragraphs</p></p>",
+            "out": "<p>nested </p><p>paragraphs</p>",
+            "again": "<p>nested </p><p>paragraphs</p>",
+            "blank": false,
+            "validUtf8": true
+        },
+        {
+            "in": "<ul><li>a<ul><li>b</li></ul></li></ul>",
+            "out": "<ul><li>a<ul><li>b</li></ul></li></ul>",
+            "again": "<ul><li>a<ul><li>b</li></ul></li></ul>",
+            "blank": false,
+            "validUtf8": true
+        },
+        {
+            "in": "<table><tr><td>cell</td></tr></table>",
+            "out": "cell",
+            "again": "cell",
+            "blank": false,
+            "validUtf8": true
+        },
+        {
+            "in": "<p>\"quotes\" and 'apos'</p>",
+            "out": "<p>\"quotes\" and 'apos'</p>",
+            "again": "<p>\"quotes\" and 'apos'</p>",
+            "blank": false,
+            "validUtf8": true
+        },
+        {
+            "in": "<a href=\"http://x.example/?a='b'&q=\\\"c\\\"\">q</a>",
+            "out": "<a href=\"http://x.example/?a='b'&amp;q=\\\">q</a>",
+            "again": "<a href=\"http://x.example/?a='b'&amp;q=\\\">q</a>",
+            "blank": false,
+            "validUtf8": true
+        },
+        {
+            "in": "<a href=\"http://x.example/é\">accent</a>",
+            "out": "<a href=\"http://x.example/%C3%A9\">accent</a>",
+            "again": "<a href=\"http://x.example/%C3%A9\">accent</a>",
+            "blank": false,
+            "validUtf8": true
+        },
+        {
+            "in": "<p>emoji 😀 text</p>",
+            "out": "<p>emoji  text</p>",
+            "again": "<p>emoji  text</p>",
+            "blank": false,
+            "validUtf8": true
+        },
+        {
+            "in": "text<br>more",
+            "out": "text<br>more",
+            "again": "text<br>more",
+            "blank": false,
+            "validUtf8": true
+        },
+        {
+            "in": "<span>only span</span>",
+            "out": "<span>only span</span>",
+            "again": "<span>only span</span>",
+            "blank": false,
+            "validUtf8": true
+        },
+        {
+            "in": "<SCRIPT>alert(1)</SCRIPT><P>UPPER</P>",
+            "out": "<p>UPPER</p>",
+            "again": "<p>UPPER</p>",
+            "blank": false,
+            "validUtf8": true
+        },
+        {
+            "in": "<p>a</p>\n<p>b</p>",
+            "out": "<p>a</p>\n<p>b</p>",
+            "again": "<p>a</p>\n<p>b</p>",
+            "blank": false,
+            "validUtf8": true
+        },
+        {
+            "in": "<p>tab\there</p>",
+            "out": "<p>tab\there</p>",
+            "again": "<p>tab\there</p>",
+            "blank": false,
+            "validUtf8": true
+        },
+        {
+            "in": "<p>&lt;script&gt;alert(1)&lt;/script&gt;</p>",
+            "out": "<p>&lt;script&gt;alert(1)&lt;/script&gt;</p>",
+            "again": "<p>&lt;script&gt;alert(1)&lt;/script&gt;</p>",
+            "blank": false,
+            "validUtf8": true
+        },
+        {
+            "in": "<a href=\"http://x.example\" title=\"t\" class=\"c\">attrs</a>",
+            "out": "<a href=\"http://x.example\">attrs</a>",
+            "again": "<a href=\"http://x.example\">attrs</a>",
+            "blank": false,
+            "validUtf8": true
+        },
+        {
+            "in": "<li>stray li</li>",
+            "out": "<li>stray li</li>",
+            "again": "<li>stray li</li>",
+            "blank": false,
+            "validUtf8": true
+        },
+        {
+            "in": "<p>0</p>",
+            "out": "<p>0</p>",
+            "again": "<p>0</p>",
+            "blank": false,
+            "validUtf8": true
+        },
+        {
+            "in": "0",
+            "out": "0",
+            "again": "0",
+            "blank": false,
+            "validUtf8": true
+        }
+    ],
+    "coordinates": [
+        {
+            "url": "https://www.google.com/maps/place/Rajkot+Airport/@22.3092,70.7795,17z/data=!3m1!4b1!4m6!3m5!1s0x0:0x0!8m2!3d22.3093456!4d70.7794321",
+            "result": {
+                "lat": 22.3093456,
+                "lng": 70.7794321
+            }
+        },
+        {
+            "url": "https://www.google.com/maps/@22.3039,70.8022,15z",
+            "result": {
+                "lat": 22.3039,
+                "lng": 70.8022
+            }
+        },
+        {
+            "url": "https://maps.google.com/?q=22.30,70.80",
+            "result": {
+                "lat": 22.3,
+                "lng": 70.8
+            }
+        },
+        {
+            "url": "https://www.google.com/maps?foo=1&q=-33.8688,151.2093",
+            "result": {
+                "lat": -33.8688,
+                "lng": 151.2093
+            }
+        },
+        {
+            "url": "https://maps.app.goo.gl/abc123",
+            "result": null
+        },
+        {
+            "url": "https://www.google.com/maps/search/hotel",
+            "result": null
+        },
+        {
+            "url": "https://www.google.com/maps/@22,70,15z",
+            "result": null
+        },
+        {
+            "url": "https://x.example/@12.5,77.6",
+            "result": {
+                "lat": 12.5,
+                "lng": 77.6
+            }
+        },
+        {
+            "url": "https://x.example/?q=1.5,2.5&z=10",
+            "result": {
+                "lat": 1.5,
+                "lng": 2.5
+            }
+        },
+        {
+            "url": "https://x.example/!3d1.5!4d2.5/@9.9,8.8",
+            "result": {
+                "lat": 1.5,
+                "lng": 2.5
+            }
+        }
+    ],
+    "distances": [
+        {
+            "from": [
+                22.3092,
+                70.7795
+            ],
+            "to": [
+                22.3039,
+                70.8022
+            ],
+            "km": 2.408451263981073,
+            "label": "2.4 km"
+        },
+        {
+            "from": [
+                22.3039,
+                70.8022
+            ],
+            "to": [
+                23.0225,
+                72.5714
+            ],
+            "km": 198.34070018209601,
+            "label": "198 km"
+        },
+        {
+            "from": [
+                0,
+                0
+            ],
+            "to": [
+                0,
+                0
+            ],
+            "km": 0,
+            "label": "0.0 km"
+        },
+        {
+            "from": [
+                51.5074,
+                -0.1278
+            ],
+            "to": [
+                48.8566,
+                2.3522
+            ],
+            "km": 343.55606034104164,
+            "label": "344 km"
+        },
+        {
+            "from": [
+                -33.8688,
+                151.2093
+            ],
+            "to": [
+                22.3039,
+                70.8022
+            ],
+            "km": 10540.054704734092,
+            "label": "10,540 km"
+        },
+        {
+            "from": [
+                22.3,
+                70.8
+            ],
+            "to": [
+                22.31,
+                70.81
+            ],
+            "km": 1.5148453990299418,
+            "label": "1.5 km"
+        },
+        {
+            "from": [
+                10,
+                10
+            ],
+            "to": [
+                10,
+                10.05
+            ],
+            "km": 5.475281287520554,
+            "label": "5.5 km"
+        },
+        {
+            "from": [
+                28.6139,
+                77.209
+            ],
+            "to": [
+                19.076,
+                72.8777
+            ],
+            "km": 1148.0948730375999,
+            "label": "1,148 km"
+        }
+    ],
+    "kmLabels": [
+        {
+            "km": 0,
+            "label": "0.0 km"
+        },
+        {
+            "km": 0.04,
+            "label": "0.0 km"
+        },
+        {
+            "km": 0.05,
+            "label": "0.1 km"
+        },
+        {
+            "km": 0.95,
+            "label": "1.0 km"
+        },
+        {
+            "km": 1,
+            "label": "1.0 km"
+        },
+        {
+            "km": 3.25,
+            "label": "3.3 km"
+        },
+        {
+            "km": 3.35,
+            "label": "3.4 km"
+        },
+        {
+            "km": 9.94,
+            "label": "9.9 km"
+        },
+        {
+            "km": 9.95,
+            "label": "10.0 km"
+        },
+        {
+            "km": 9.99,
+            "label": "10.0 km"
+        },
+        {
+            "km": 10,
+            "label": "10 km"
+        },
+        {
+            "km": 10.4,
+            "label": "10 km"
+        },
+        {
+            "km": 10.5,
+            "label": "11 km"
+        },
+        {
+            "km": 11.5,
+            "label": "12 km"
+        },
+        {
+            "km": 12.5,
+            "label": "13 km"
+        },
+        {
+            "km": 99.5,
+            "label": "100 km"
+        },
+        {
+            "km": 1234.56,
+            "label": "1,235 km"
+        },
+        {
+            "km": 0.449999,
+            "label": "0.4 km"
+        }
+    ],
+    "icons": [
+        {
+            "title": "Rajkot Airport",
+            "icon": "airport"
+        },
+        {
+            "title": "Railway Station",
+            "icon": "rail"
+        },
+        {
+            "title": "Rail Station Road",
+            "icon": "rail"
+        },
+        {
+            "title": "Central Bus Stand",
+            "icon": "bus"
+        },
+        {
+            "title": "Civil Hospital",
+            "icon": "hospital"
+        },
+        {
+            "title": "City Mall",
+            "icon": "shopping"
+        },
+        {
+            "title": "Jain Temple",
+            "icon": "worship"
+        },
+        {
+            "title": "Swaminarayan MANDIR",
+            "icon": "worship"
+        },
+        {
+            "title": "St. Mary Church",
+            "icon": "worship"
+        },
+        {
+            "title": "Jama Mosque",
+            "icon": "worship"
+        },
+        {
+            "title": "Presidency School",
+            "icon": "school"
+        },
+        {
+            "title": "Atmiya University",
+            "icon": "school"
+        },
+        {
+            "title": "Race Course Ground",
+            "icon": "stadium"
+        },
+        {
+            "title": "Racecourse",
+            "icon": "pin"
+        },
+        {
+            "title": "Cricket Stadium",
+            "icon": "stadium"
+        },
+        {
+            "title": "Botanical Garden",
+            "icon": "park"
+        },
+        {
+            "title": "Gandhi Park",
+            "icon": "park"
+        },
+        {
+            "title": "Hotel Pallav",
+            "icon": "pin"
+        },
+        {
+            "title": "ATM",
+            "icon": "pin"
+        },
+        {
+            "title": "AIRPORT road",
+            "icon": "airport"
+        },
+        {
+            "title": "Medical College",
+            "icon": "hospital"
+        },
+        {
+            "title": "Shopping Complex",
+            "icon": "shopping"
+        }
+    ],
+    "lines": [
+        {
+            "in": "a\nb",
+            "points": [
+                "a",
+                "b"
+            ],
+            "policy": [
+                "a",
+                "b"
+            ]
+        },
+        {
+            "in": " a \r\n\r\n b \r\n",
+            "points": [
+                "a",
+                "b"
+            ],
+            "policy": [
+                "a",
+                "b"
+            ]
+        },
+        {
+            "in": "0\n1\n 0 \n00",
+            "points": [
+                "1",
+                "00"
+            ],
+            "policy": [
+                "1",
+                "00"
+            ]
+        },
+        {
+            "in": "x\ry\rz",
+            "points": [
+                "x",
+                "y",
+                "z"
+            ],
+            "policy": [
+                "x",
+                "y",
+                "z"
+            ]
+        },
+        {
+            "in": "line1\n\n\nline2",
+            "points": [
+                "line1",
+                "line2"
+            ],
+            "policy": [
+                "line1",
+                "line2"
+            ]
+        },
+        {
+            "in": "",
+            "points": [],
+            "policy": []
+        },
+        {
+            "in": "   \n  ",
+            "points": [],
+            "policy": []
+        },
+        {
+            "in": "é\nક\nxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+            "points": [
+                "é",
+                "ક",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+            ],
+            "policy": [
+                "é",
+                "ક",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+            ]
+        },
+        {
+            "in": "1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15\n16\n17\n18\n19\n20\n21\n22\n23\n24\n25\n26\n27\n28\n29\n30\n31\n32\n33\n34\n35\n36\n37\n38\n39\n40\n41\n42\n43\n44\n45\n46\n47\n48\n49\n50\n51\n52\n53\n54\n55\n56\n57\n58\n59\n60",
+            "points": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11",
+                "12",
+                "13",
+                "14",
+                "15",
+                "16",
+                "17",
+                "18",
+                "19",
+                "20",
+                "21",
+                "22",
+                "23",
+                "24",
+                "25",
+                "26",
+                "27",
+                "28",
+                "29",
+                "30",
+                "31",
+                "32",
+                "33",
+                "34",
+                "35",
+                "36",
+                "37",
+                "38",
+                "39",
+                "40",
+                "41",
+                "42",
+                "43",
+                "44",
+                "45",
+                "46",
+                "47",
+                "48",
+                "49",
+                "50",
+                "51",
+                "52",
+                "53",
+                "54",
+                "55",
+                "56",
+                "57",
+                "58",
+                "59",
+                "60"
+            ],
+            "policy": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11",
+                "12",
+                "13",
+                "14",
+                "15",
+                "16",
+                "17",
+                "18",
+                "19",
+                "20",
+                "21",
+                "22",
+                "23",
+                "24",
+                "25",
+                "26",
+                "27",
+                "28",
+                "29",
+                "30",
+                "31",
+                "32",
+                "33",
+                "34",
+                "35",
+                "36",
+                "37",
+                "38",
+                "39",
+                "40",
+                "41",
+                "42",
+                "43",
+                "44",
+                "45",
+                "46",
+                "47",
+                "48",
+                "49",
+                "50"
+            ]
+        },
+        {
+            "in": "tab\there\n\tindented",
+            "points": [
+                "tab\there",
+                "indented"
+            ],
+            "policy": [
+                "tab\there",
+                "indented"
+            ]
+        }
+    ]
+}

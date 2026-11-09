@@ -1,0 +1,14 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "nextjs",
+  "installCommand": "npm ci",
+  "buildCommand": "npm run build",
+  "crons": [
+    { "path": "/api/v1/cron/daily-summary", "schedule": "30 15 * * *" },
+    { "path": "/api/v1/cron/mail", "schedule": "0 2 * * *" },
+    { "path": "/api/v1/cron/backup", "schedule": "30 20 * * *" },
+    { "path": "/api/v1/cron/conversations", "schedule": "0 1 * * *" },
+    { "path": "/api/v1/cron/mail-files", "schedule": "30 3 * * *" },
+    { "path": "/api/v1/cron/whatsapp", "schedule": "15 4 * * *" }
+  ]
+}

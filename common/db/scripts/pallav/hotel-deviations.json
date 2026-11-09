@@ -1,0 +1,862 @@
+{
+ "deviations": {
+  "option_sets": {
+   "drop": [],
+   "add": [
+    "legacy_id"
+   ],
+   "renamed": {},
+   "notes": []
+  },
+  "option_items": {
+   "drop": [],
+   "add": [
+    "legacy_id"
+   ],
+   "renamed": {},
+   "notes": []
+  },
+  "app_settings": {
+   "drop": [],
+   "add": [
+    "legacy_id"
+   ],
+   "renamed": {},
+   "notes": []
+  },
+  "business_units": {
+   "drop": [],
+   "add": [
+    "legacy_id"
+   ],
+   "renamed": {},
+   "notes": []
+  },
+  "health_checks": {
+   "drop": [],
+   "add": [
+    "legacy_id"
+   ],
+   "renamed": {},
+   "notes": []
+  },
+  "feature_errors": {
+   "drop": [],
+   "add": [
+    "legacy_id",
+    "created_at",
+    "updated_at"
+   ],
+   "renamed": {},
+   "notes": []
+  },
+  "system_logs": {
+   "drop": [],
+   "add": [
+    "legacy_id",
+    "trace_id"
+   ],
+   "renamed": {},
+   "notes": []
+  },
+  "user_audit_logs": {
+   "drop": [],
+   "add": [
+    "legacy_id"
+   ],
+   "renamed": {},
+   "notes": []
+  },
+  "force_logs": {
+   "drop": [],
+   "add": [
+    "legacy_id"
+   ],
+   "renamed": {},
+   "notes": []
+  },
+  "company_profiles": {
+   "drop": [
+    "md_one_name",
+    "md_one_email",
+    "md_one_mobile",
+    "md_second_name",
+    "md_second_email",
+    "md_second_mobile",
+    "hr_head_name",
+    "hr_head_email",
+    "hr_head_mobile",
+    "assistant_hr_name",
+    "assistant_hr_email",
+    "assistant_hr_mobile",
+    "accountant_head_name",
+    "accountant_head_email",
+    "accountant_head_mobile",
+    "accountant_assistant_one_name",
+    "accountant_assistant_one_email",
+    "accountant_assistant_one_mobile",
+    "accountant_assistant_two_name",
+    "accountant_assistant_two_email",
+    "accountant_assistant_two_mobile"
+   ],
+   "add": [
+    "legacy_id"
+   ],
+   "renamed": {
+    "modified_by": "updated_by"
+   },
+   "notes": [
+    "dropped: md_one_name, md_one_email, md_one_mobile, md_second_name, md_second_email, md_second_mobile, hr_head_name, hr_head_email, hr_head_mobile, assistant_hr_name, assistant_hr_email, assistant_hr_mobile, accountant_head_name, accountant_head_email, accountant_head_mobile, accountant_assistant_one_name, accountant_assistant_one_email, accountant_assistant_one_mobile, accountant_assistant_two_name, accountant_assistant_two_email, accountant_assistant_two_mobile (Pallav's 21 fixed contact-slot columns (md_one_*, hr_head_*, ...) were folded into the contacts list and 'stay in the table, unused'; not carried over)"
+   ]
+  },
+  "customers": {
+   "drop": [
+    "password",
+    "must_change_password",
+    "last_login_at"
+   ],
+   "add": [
+    "legacy_id",
+    "id_proof_number_index"
+   ],
+   "renamed": {
+    "modified_by": "updated_by"
+   },
+   "notes": [
+    "id_proof_number_index: blind index (CHAR(64) hex, HMS_BLIND_INDEX_KEY) of the encrypted ID number so a guest can be found by it without decrypting anything (standard X3)",
+    "dropped: password, must_change_password, last_login_at (portal sign-in details live in platform.users (password hash, forced change, last login); the guest record keeps only guest data)"
+   ]
+  },
+  "crm_leads": {
+   "drop": [],
+   "add": [
+    "legacy_id",
+    "updated_by"
+   ],
+   "renamed": {
+    "value": "value_paise"
+   },
+   "notes": []
+  },
+  "crm_activities": {
+   "drop": [],
+   "add": [
+    "legacy_id"
+   ],
+   "renamed": {},
+   "notes": []
+  },
+  "expense_categories": {
+   "drop": [],
+   "add": [
+    "legacy_id"
+   ],
+   "renamed": {},
+   "notes": []
+  },
+  "expense_items": {
+   "drop": [],
+   "add": [
+    "legacy_id"
+   ],
+   "renamed": {
+    "price": "price_paise"
+   },
+   "notes": []
+  },
+  "hotel_cash_deposits": {
+   "drop": [
+    "revenue_source"
+   ],
+   "add": [
+    "legacy_id",
+    "created_by",
+    "updated_by"
+   ],
+   "renamed": {
+    "amount": "amount_paise"
+   },
+   "notes": [
+    "entry_no is NOT NULL here (Pallav: nullable until backfilled); UNIQUE counts soft-deleted rows too (Pallav rule)",
+    "dropped: revenue_source (Pallav carried it into reason and left the column unused)"
+   ]
+  },
+  "food_cash_deposits": {
+   "drop": [
+    "revenue_source"
+   ],
+   "add": [
+    "legacy_id",
+    "created_by",
+    "updated_by"
+   ],
+   "renamed": {
+    "amount": "amount_paise"
+   },
+   "notes": [
+    "entry_no is NOT NULL here (Pallav: nullable until backfilled); UNIQUE counts soft-deleted rows too (Pallav rule)",
+    "dropped: revenue_source (Pallav carried it into reason and left the column unused)"
+   ]
+  },
+  "hotel_cash_withdrawals": {
+   "drop": [],
+   "add": [
+    "legacy_id",
+    "created_by",
+    "updated_by"
+   ],
+   "renamed": {
+    "amount": "amount_paise"
+   },
+   "notes": [
+    "entry_no is NOT NULL here (Pallav: nullable until backfilled); UNIQUE counts soft-deleted rows too (Pallav rule)"
+   ]
+  },
+  "food_cash_withdrawals": {
+   "drop": [],
+   "add": [
+    "legacy_id",
+    "created_by",
+    "updated_by"
+   ],
+   "renamed": {
+    "amount": "amount_paise"
+   },
+   "notes": [
+    "entry_no is NOT NULL here (Pallav: nullable until backfilled); UNIQUE counts soft-deleted rows too (Pallav rule)"
+   ]
+  },
+  "hotel_misc_expenses": {
+   "drop": [],
+   "add": [
+    "legacy_id",
+    "created_by",
+    "updated_by"
+   ],
+   "renamed": {
+    "amount": "amount_paise"
+   },
+   "notes": [
+    "entry_no is NOT NULL here (Pallav: nullable until backfilled); UNIQUE counts soft-deleted rows too (Pallav rule)"
+   ]
+  },
+  "food_misc_expenses": {
+   "drop": [],
+   "add": [
+    "legacy_id",
+    "created_by",
+    "updated_by"
+   ],
+   "renamed": {
+    "amount": "amount_paise"
+   },
+   "notes": [
+    "entry_no is NOT NULL here (Pallav: nullable until backfilled); UNIQUE counts soft-deleted rows too (Pallav rule)"
+   ]
+  },
+  "expense_lines": {
+   "drop": [],
+   "add": [
+    "legacy_id"
+   ],
+   "renamed": {
+    "price": "price_paise",
+    "total": "total_paise"
+   },
+   "notes": []
+  },
+  "shift_handovers": {
+   "drop": [],
+   "add": [
+    "legacy_id",
+    "created_by",
+    "updated_by"
+   ],
+   "renamed": {
+    "d500_total": "d500_total_paise",
+    "d200_total": "d200_total_paise",
+    "d100_total": "d100_total_paise",
+    "d50_total": "d50_total_paise",
+    "d20_total": "d20_total_paise",
+    "d10_total": "d10_total_paise",
+    "d5_total": "d5_total_paise",
+    "coins_total": "coins_total_paise",
+    "total": "total_paise"
+   },
+   "notes": [
+    "entry_no is NOT NULL here (Pallav: nullable until backfilled); UNIQUE counts soft-deleted rows too (Pallav rule)"
+   ],
+   "addedFks": [
+    {
+     "column": "employee_id",
+     "target": "employees",
+     "action": "SET NULL",
+     "file": "0007_payroll_core"
+    }
+   ]
+  },
+  "staff_advances": {
+   "drop": [],
+   "add": [
+    "legacy_id",
+    "created_by",
+    "updated_by"
+   ],
+   "renamed": {
+    "amount": "amount_paise"
+   },
+   "notes": [
+    "entry_no is NOT NULL here (Pallav: nullable until backfilled); UNIQUE counts soft-deleted rows too (Pallav rule)"
+   ],
+   "addedFks": [
+    {
+     "column": "employee_id",
+     "target": "employees",
+     "action": "SET NULL",
+     "file": "0007_payroll_core"
+    }
+   ]
+  },
+  "accounting_years": {
+   "drop": [],
+   "add": [
+    "legacy_id"
+   ],
+   "renamed": {},
+   "notes": []
+  },
+  "bill_master_advances": {
+   "drop": [],
+   "add": [
+    "legacy_id",
+    "updated_by"
+   ],
+   "renamed": {
+    "hotel_amount": "hotel_amount_paise",
+    "food_amount": "food_amount_paise",
+    "hotel_balance": "hotel_balance_paise",
+    "food_balance": "food_balance_paise",
+    "total": "total_paise",
+    "hotel_refund_amount": "hotel_refund_amount_paise",
+    "food_refund_amount": "food_refund_amount_paise"
+   },
+   "notes": [
+    "company_id: Pallav ON DELETE CASCADE became RESTRICT (a money or booking record is never deleted with its parent; parents are soft-deleted)",
+    "entry_no is NOT NULL here (Pallav: nullable until backfilled); UNIQUE counts soft-deleted rows too (Pallav rule)"
+   ],
+   "addedFks": [
+    {
+     "column": "reservation_id",
+     "target": "pms_reservations",
+     "action": "SET NULL",
+     "file": "0006_front_office"
+    }
+   ]
+  },
+  "bill_master_bills": {
+   "drop": [],
+   "add": [
+    "legacy_id",
+    "updated_by",
+    "hotel_gst_percent",
+    "food_gst_percent"
+   ],
+   "renamed": {
+    "debit_hotel_amount": "debit_hotel_amount_paise",
+    "debit_hotel_amount_1": "debit_hotel_amount_1_paise",
+    "debit_hotel_amount_2": "debit_hotel_amount_2_paise",
+    "debit_hotel_amount_3": "debit_hotel_amount_3_paise",
+    "debit_hotel_amount_4": "debit_hotel_amount_4_paise",
+    "debit_food_amount": "debit_food_amount_paise",
+    "debit_food_amount_1": "debit_food_amount_1_paise",
+    "debit_food_amount_2": "debit_food_amount_2_paise",
+    "debit_food_amount_3": "debit_food_amount_3_paise",
+    "debit_food_amount_4": "debit_food_amount_4_paise",
+    "hotel_amount": "hotel_amount_paise",
+    "hotel_plan_amount": "hotel_plan_amount_paise",
+    "hotel_laundry_amount": "hotel_laundry_amount_paise",
+    "hotel_gst": "hotel_gst_paise",
+    "food_plan_amount": "food_plan_amount_paise",
+    "food_laundry_amount": "food_laundry_amount_paise",
+    "food_amount": "food_amount_paise",
+    "food_gst": "food_gst_paise",
+    "total_hotel_amount": "total_hotel_amount_paise",
+    "total_food_amount": "total_food_amount_paise",
+    "balance_hotel_amount": "balance_hotel_amount_paise",
+    "balance_food_amount": "balance_food_amount_paise",
+    "advance_hotel_amount": "advance_hotel_amount_paise",
+    "advance_food_amount": "advance_food_amount_paise",
+    "advance_delete_hotel_amount": "advance_delete_hotel_amount_paise",
+    "advance_delete_food_amount": "advance_delete_food_amount_paise",
+    "hotel_extra_bed_amount": "hotel_extra_bed_amount_paise",
+    "hotel_other_amount": "hotel_other_amount_paise",
+    "plan_food_amount": "plan_food_amount_paise"
+   },
+   "notes": [
+    "company_id: Pallav ON DELETE CASCADE became RESTRICT (a money or booking record is never deleted with its parent; parents are soft-deleted)",
+    "entry_no is NOT NULL here (Pallav: nullable until backfilled); UNIQUE counts soft-deleted rows too (Pallav rule)",
+    "hotel_gst_percent and food_gst_percent: the GST percent actually used at check-out, stored with the record (MJ #19); NULL until check-out, checked 0..28; the defaults come from app_settings checkout.*_gst_percent"
+   ]
+  },
+  "site_settings": {
+   "drop": [],
+   "add": [
+    "legacy_id",
+    "created_by",
+    "updated_by"
+   ],
+   "renamed": {},
+   "notes": [
+    "One row per hotel (the hotel's public website settings). Hotel Pallav's own phone numbers, email and opening year are not baked in as defaults: they come from the import or the hotel's setup.",
+    "singleton: a one-valued column `singleton` with a UNIQUE key allows only one row per hotel (R3; MySQL has no index on a constant)",
+    "opened_year: Pallav's hotel-specific default value is not baked into the template",
+    "gm_phone: Pallav's hotel-specific default value is not baked into the template",
+    "reception_phone: Pallav's hotel-specific default value is not baked into the template",
+    "whatsapp: Pallav's hotel-specific default value is not baked into the template",
+    "email: Pallav's hotel-specific default value is not baked into the template"
+   ]
+  },
+  "site_page_content": {
+   "drop": [],
+   "add": [
+    "legacy_id",
+    "created_by",
+    "updated_by"
+   ],
+   "renamed": {},
+   "notes": [
+    "One row per hotel (the public website's wording).",
+    "singleton: a one-valued column `singleton` with a UNIQUE key allows only one row per hotel (R3; MySQL has no index on a constant)"
+   ]
+  },
+  "site_rooms": {
+   "drop": [],
+   "add": [
+    "legacy_id",
+    "created_by",
+    "updated_by"
+   ],
+   "renamed": {},
+   "notes": []
+  },
+  "site_rate_plans": {
+   "drop": [],
+   "add": [
+    "legacy_id",
+    "created_by",
+    "updated_by"
+   ],
+   "renamed": {
+    "price_double": "price_double_paise",
+    "price_single": "price_single_paise",
+    "extra_person_price": "extra_person_price_paise"
+   },
+   "notes": [
+    "Prices were whole rupees in Pallav; here they are paise (the import multiplies by 100). occupancy_prices holds paise too.",
+    "price_double, price_single, extra_person_price: whole rupees in Pallav, paise here (import x100)"
+   ]
+  },
+  "site_plan_date_rates": {
+   "drop": [],
+   "add": [
+    "legacy_id"
+   ],
+   "renamed": {
+    "price_double": "price_double_paise",
+    "price_single": "price_single_paise"
+   },
+   "notes": [
+    "price_double, price_single: whole rupees in Pallav, paise here (import x100)"
+   ]
+  },
+  "site_room_date_inventory": {
+   "drop": [],
+   "add": [
+    "legacy_id"
+   ],
+   "renamed": {},
+   "notes": []
+  },
+  "site_reference_counters": {
+   "drop": [],
+   "add": [],
+   "renamed": {},
+   "notes": [
+    "keyed by fiscal_year (Pallav's primary key); no id, legacy_id or timestamps"
+   ],
+   "noStandardColumns": true
+  },
+  "site_enquiries": {
+   "drop": [],
+   "add": [
+    "legacy_id",
+    "created_by",
+    "updated_by"
+   ],
+   "renamed": {},
+   "notes": []
+  },
+  "site_gallery_photos": {
+   "drop": [],
+   "add": [
+    "legacy_id",
+    "created_by",
+    "updated_by"
+   ],
+   "renamed": {},
+   "notes": []
+  },
+  "site_services": {
+   "drop": [],
+   "add": [
+    "legacy_id",
+    "created_by",
+    "updated_by"
+   ],
+   "renamed": {},
+   "notes": []
+  },
+  "site_policy_cards": {
+   "drop": [],
+   "add": [
+    "legacy_id",
+    "created_by",
+    "updated_by"
+   ],
+   "renamed": {},
+   "notes": []
+  },
+  "site_nearby_places": {
+   "drop": [],
+   "add": [
+    "legacy_id",
+    "created_by",
+    "updated_by"
+   ],
+   "renamed": {},
+   "notes": []
+  },
+  "pms_rooms": {
+   "drop": [],
+   "add": [
+    "legacy_id",
+    "created_by",
+    "updated_by"
+   ],
+   "renamed": {},
+   "notes": []
+  },
+  "pms_reservations": {
+   "drop": [],
+   "add": [
+    "legacy_id",
+    "updated_by"
+   ],
+   "renamed": {
+    "rate": "rate_paise"
+   },
+   "notes": []
+  },
+  "pms_stays": {
+   "drop": [],
+   "add": [
+    "legacy_id",
+    "updated_by",
+    "hotel_gst_percent",
+    "food_gst_percent",
+    "id_proof_number_index"
+   ],
+   "renamed": {
+    "rate": "rate_paise"
+   },
+   "notes": [
+    "hotel_gst_percent and food_gst_percent: the GST percent actually used at check-out, stored with the record (MJ #19); NULL until check-out, checked 0..28; the defaults come from app_settings checkout.*_gst_percent",
+    "id_proof_number_index: blind index (CHAR(64) hex, HMS_BLIND_INDEX_KEY) of the encrypted ID number so a guest can be found by it without decrypting anything (standard X3)"
+   ]
+  },
+  "pms_charges": {
+   "drop": [],
+   "add": [
+    "legacy_id",
+    "updated_by"
+   ],
+   "renamed": {
+    "unit_price": "unit_price_paise",
+    "amount": "amount_paise"
+   },
+   "notes": []
+  },
+  "payroll_companies": {
+   "drop": [],
+   "add": [
+    "legacy_id",
+    "updated_by"
+   ],
+   "renamed": {},
+   "notes": []
+  },
+  "id_proof_types": {
+   "drop": [],
+   "add": [
+    "legacy_id"
+   ],
+   "renamed": {},
+   "notes": []
+  },
+  "employees": {
+   "drop": [],
+   "add": [
+    "legacy_id",
+    "updated_by"
+   ],
+   "renamed": {
+    "salary": "salary_paise"
+   },
+   "notes": [
+    "payroll_company_id: Pallav ON DELETE CASCADE became RESTRICT (a money or booking record is never deleted with its parent; parents are soft-deleted)"
+   ]
+  },
+  "attendance_statuses": {
+   "drop": [],
+   "add": [
+    "legacy_id"
+   ],
+   "renamed": {},
+   "notes": []
+  },
+  "attendance_months": {
+   "drop": [],
+   "add": [
+    "legacy_id"
+   ],
+   "renamed": {},
+   "notes": []
+  },
+  "attendance_entries": {
+   "drop": [],
+   "add": [
+    "legacy_id"
+   ],
+   "renamed": {},
+   "notes": []
+  },
+  "deductions": {
+   "drop": [],
+   "add": [
+    "legacy_id",
+    "created_by",
+    "updated_by"
+   ],
+   "renamed": {
+    "amount": "amount_paise"
+   },
+   "notes": []
+  },
+  "employee_deductions": {
+   "drop": [],
+   "add": [
+    "legacy_id",
+    "created_by",
+    "updated_by"
+   ],
+   "renamed": {
+    "amount": "amount_paise"
+   },
+   "notes": []
+  },
+  "joining_letters": {
+   "drop": [],
+   "add": [
+    "legacy_id",
+    "created_by",
+    "updated_by"
+   ],
+   "renamed": {},
+   "notes": []
+  },
+  "experience_letters": {
+   "drop": [],
+   "add": [
+    "legacy_id",
+    "created_by",
+    "updated_by"
+   ],
+   "renamed": {},
+   "notes": []
+  },
+  "employee_separations": {
+   "drop": [],
+   "add": [
+    "legacy_id",
+    "updated_by"
+   ],
+   "renamed": {},
+   "notes": [
+    "payroll_company_id: Pallav ON DELETE CASCADE became RESTRICT (a money or booking record is never deleted with its parent; parents are soft-deleted)",
+    "employee_id: Pallav ON DELETE CASCADE became RESTRICT (a money or booking record is never deleted with its parent; parents are soft-deleted)",
+    "entry_no is NOT NULL here (Pallav: nullable until backfilled); UNIQUE counts soft-deleted rows too (Pallav rule)"
+   ]
+  },
+  "employee_meal_periods": {
+   "drop": [],
+   "add": [
+    "legacy_id",
+    "updated_by"
+   ],
+   "renamed": {},
+   "notes": [
+    "payroll_company_id: Pallav ON DELETE CASCADE became RESTRICT (a money or booking record is never deleted with its parent; parents are soft-deleted)",
+    "employee_id: Pallav ON DELETE CASCADE became RESTRICT (a money or booking record is never deleted with its parent; parents are soft-deleted)"
+   ]
+  },
+  "food_charge_rates": {
+   "drop": [],
+   "add": [
+    "legacy_id",
+    "updated_by"
+   ],
+   "renamed": {
+    "monthly_amount": "monthly_amount_paise"
+   },
+   "notes": []
+  },
+  "meal_plan_rates": {
+   "drop": [],
+   "add": [
+    "legacy_id",
+    "updated_by"
+   ],
+   "renamed": {
+    "rate_per_person": "rate_per_person_paise"
+   },
+   "notes": []
+  },
+  "payroll_master_items": {
+   "drop": [],
+   "add": [
+    "legacy_id"
+   ],
+   "renamed": {},
+   "notes": [
+    "unique labels per list (Pallav had none)"
+   ]
+  },
+  "payroll_logs": {
+   "drop": [],
+   "add": [
+    "legacy_id"
+   ],
+   "renamed": {},
+   "notes": [
+    "payroll_company_id: ON DELETE SET NULL became RESTRICT (an append-only table is never rewritten; the parent is soft-deleted)"
+   ]
+  },
+  "staff_emails": {
+   "drop": [],
+   "add": [
+    "legacy_id"
+   ],
+   "renamed": {},
+   "notes": []
+  },
+  "salary_processings": {
+   "drop": [],
+   "add": [
+    "legacy_id"
+   ],
+   "renamed": {
+    "monthly_salary": "monthly_salary_paise",
+    "daily_salary": "daily_salary_paise",
+    "attendance_salary": "attendance_salary_paise",
+    "hourly_rate": "hourly_rate_paise",
+    "overtime_amount": "overtime_amount_paise",
+    "bonus_amount": "bonus_amount_paise",
+    "incentive_amount": "incentive_amount_paise",
+    "deduction_amount": "deduction_amount_paise",
+    "advance_deduction": "advance_deduction_paise",
+    "pending_advance_amount": "pending_advance_amount_paise",
+    "net_salary": "net_salary_paise",
+    "paid_amount": "paid_amount_paise"
+   },
+   "notes": [
+    "payroll_company_id: no foreign key (history record; Pallav cut the tie so deleting an employee/company never deletes salary history); indexed reference",
+    "employee_id: no foreign key (history record; Pallav cut the tie so deleting an employee/company never deletes salary history); indexed reference"
+   ]
+  },
+  "salary_processing_lines": {
+   "drop": [],
+   "add": [
+    "legacy_id"
+   ],
+   "renamed": {
+    "amount": "amount_paise",
+    "pending_amount": "pending_amount_paise"
+   },
+   "notes": []
+  },
+  "salary_update_histories": {
+   "drop": [],
+   "add": [
+    "legacy_id"
+   ],
+   "renamed": {},
+   "notes": [
+    "employee_id: no foreign key (history record; Pallav cut the tie so deleting an employee/company never deletes salary history); indexed reference",
+    "previous_value and new_value are TEXT, wide enough for the sealed text (context salary_update_histories.value, 'v1:...') that the Account Number and IFSC Code rows hold"
+   ]
+  },
+  "payroll_advances": {
+   "drop": [],
+   "add": [
+    "legacy_id",
+    "updated_by"
+   ],
+   "renamed": {
+    "amount": "amount_paise",
+    "deduction_amount": "deduction_amount_paise",
+    "recovered_amount": "recovered_amount_paise"
+   },
+   "notes": [
+    "payroll_company_id: Pallav ON DELETE CASCADE became RESTRICT (a money or booking record is never deleted with its parent; parents are soft-deleted)",
+    "employee_id: Pallav ON DELETE CASCADE became RESTRICT (a money or booking record is never deleted with its parent; parents are soft-deleted)",
+    "entry_no is NOT NULL here (Pallav: nullable until backfilled); UNIQUE counts soft-deleted rows too (Pallav rule)"
+   ]
+  },
+  "bonus_incentives": {
+   "drop": [],
+   "add": [
+    "legacy_id",
+    "updated_by"
+   ],
+   "renamed": {
+    "amount": "amount_paise"
+   },
+   "notes": [
+    "payroll_company_id: Pallav ON DELETE CASCADE became RESTRICT (a money or booking record is never deleted with its parent; parents are soft-deleted)",
+    "employee_id: Pallav ON DELETE CASCADE became RESTRICT (a money or booking record is never deleted with its parent; parents are soft-deleted)",
+    "entry_no is NOT NULL here (Pallav: nullable until backfilled); UNIQUE counts soft-deleted rows too (Pallav rule)"
+   ]
+  },
+  "razorpay_events": {
+   "drop": [],
+   "add": [
+    "legacy_id"
+   ],
+   "renamed": {},
+   "notes": []
+  },
+  "razorpay_payments": {
+   "drop": [],
+   "add": [
+    "legacy_id"
+   ],
+   "renamed": {
+    "amount": "amount_paise",
+    "amount_refunded": "amount_refunded_paise",
+    "fee": "fee_paise",
+    "tax": "tax_paise"
+   },
+   "notes": []
+  }
+ }
+}

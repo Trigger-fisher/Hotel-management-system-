@@ -1,0 +1,53 @@
+/* Platform console, desktop parity (docs/design/DESKTOP-PARITY-2026-10-18.md): the screens use the hotel's own card, pager and settings classes. These few rules only
+   give two screens the spacing the hotel pattern already has. Colours come from Pallav's variables, so night mode follows. */
+
+/* Platform health: the list card of the hotel pattern (a card with the table and a foot), not the padded health panel. */
+.panel {
+  padding: 0;
+  overflow: hidden;
+}
+.tableWrap {
+  padding: 8px 18px 4px;
+}
+.noteFoot {
+  padding: 12px 18px;
+  border-top: 1px solid var(--line);
+}
+/* Phone: the table is a stack of cards (the phone kit), so it gets no inset of its own and the foot is plain text under the cards. */
+@media (max-width: 768px) {
+  .tableWrap {
+    padding: 0;
+  }
+  .noteFoot {
+    padding: 12px 4px;
+    border-top: 0;
+  }
+}
+
+/* Settings tabs that bring their own body (API access, Bounces and holds): the card body padding the other settings sections get from st-grid. A st-grid
+   inside it (the key form) keeps its columns but not its own padding, so nothing is padded twice. */
+.body {
+  padding: 22px;
+}
+.body :global(.st-grid) {
+  padding: 0;
+}
+@media (max-width: 768px) {
+  .body {
+    padding: 14px;
+  }
+}
+
+/* Phone: a settings card's foot (the Save button) stays on screen above the bottom tab bar while the long form scrolls (the plan's sticky primary action,
+   as .pt-m-savebar does for the portals). overflow: clip keeps the card's rounded corners without making the card a scroll container, which would stop the
+   foot from sticking. Desktop is unchanged. */
+@media (max-width: 768px) {
+  .stickySave {
+    overflow: clip;
+  }
+  .stickySave > :global(.st-foot) {
+    position: sticky;
+    bottom: calc(86px + env(safe-area-inset-bottom, 0px));
+    z-index: 5;
+  }
+}

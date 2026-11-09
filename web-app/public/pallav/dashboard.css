@@ -1,0 +1,137 @@
+/* ===========================================================================
+   Dashboard. Built from the same pieces as the Handover and Payroll pages
+   (kpi cards and dash panels); this file only adds what those do not have:
+   section headings, the cash flow chart, the two cash books and the
+   spending bars. Colours come from the app tokens, so night mode follows.
+   =========================================================================== */
+
+.hd { --hd-in: #047857; --hd-out: #BE123C; display: flex; flex-direction: column; gap: 16px; }
+:root[data-theme="dark"] .hd { --hd-in: #34D399; --hd-out: #FB7185; }
+.hd > * { min-width: 0; }
+.hd .kpi-grid { margin-bottom: 0; }
+
+/* A section heading with its page link, above each row of figures */
+.hd-sec { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: 6px 2px -4px; }
+.hd-sec:first-child { margin-top: 0; }
+.hd-sec h3 { margin: 0; font-size: 11.5px; font-weight: 800; letter-spacing: .09em; text-transform: uppercase; color: var(--p600); }
+.hd-sec a { font-size: 12.5px; font-weight: 700; color: var(--p700); display: inline-flex; align-items: center; }
+.hd-sec a i { font-size: 17px; transition: transform var(--dur-base) var(--ease-out); }
+.hd-sec a:hover i { transform: translateX(2px); }
+
+/* Page head actions, laid out like the Handover page's */
+.hd-head-actions { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-left: auto; }
+.hd-head-actions .btn { height: 40px; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+@media (max-width: 640px) {
+    .hd-head-actions { width: 100%; margin-left: 0; }
+    .hd-head-actions .btn { flex: 1 1 auto; justify-content: center; }
+}
+
+/* kpi cards that open their page, like Payroll's */
+a.hd-kpi { color: inherit; }
+a.hd-kpi:focus-visible { outline: 2px solid var(--p500); outline-offset: 2px; }
+
+/* Same box as the Handover page: figure centred at one height, so the tags line up */
+.hd .kpi { display: flex; flex-direction: column; }
+.hd .kpi .kpi-value {
+    height: 36px; line-height: 36px; text-align: center;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-variant-numeric: tabular-nums;
+}
+.hd .kpi .kpi-foot { margin-top: auto; padding-top: 10px; }
+.hd .kpi-chip { max-width: 100%; white-space: normal; line-height: 1.3; text-align: left; } /* a long note wraps to a second line instead of ending in dots */
+.hd .kpi-chip.up, .hd .kpi-chip.down { display: inline-flex; }
+.hd .kpi .hd-kpi-small { font-size: 19px; }
+.hd .kpi.warn .kpi-value { color: #B45309; }
+:root[data-theme="dark"] .hd .kpi.warn .kpi-value { color: #FCD34D; }
+.hd-neg { color: var(--hd-out) !important; }
+
+/* The chart and the list beside it: the chart gets the wider share */
+.hd .dash-columns { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.hd .dash-columns.hd-wide-left { grid-template-columns: minmax(0, 1.65fr) minmax(0, 1fr); }
+@media (max-width: 1000px) { .hd .dash-columns, .hd .dash-columns.hd-wide-left { grid-template-columns: minmax(0, 1fr); } }
+.hd .dash-panel { display: flex; flex-direction: column; margin: 0; }
+
+/* ------------------------------------------------------------ Cash flow */
+
+.hd-flow-head { justify-content: space-between; align-items: flex-start; }
+.hd-range-sum { display: flex; flex-wrap: wrap; gap: 4px 16px; margin: 4px 0 0; font-size: 12.5px; color: var(--muted); }
+.hd-range-sum strong { color: var(--ink); font-weight: 700; font-variant-numeric: tabular-nums; margin-left: 2px; }
+.hd-key { display: inline-block; width: 9px; height: 9px; border-radius: 3px; margin-right: 3px; }
+.hd-key.in { background: var(--p600); }
+.hd-key.out { background: var(--p300); }
+
+.hd-seg { display: inline-flex; gap: 2px; padding: 3px; border-radius: 11px; background: var(--surface-2, #FAFAFB); border: 1px solid var(--line); flex: none; }
+.hd-seg button {
+    border: 0; background: none; padding: 5px 11px; border-radius: 8px; font-size: 12px; font-weight: 700; color: var(--muted); white-space: nowrap;
+    transition: background-color var(--dur-base) var(--ease-out), color var(--dur-base) var(--ease-out), box-shadow var(--dur-base) var(--ease-out);
+}
+.hd-seg button:hover { color: var(--p800); }
+.hd-seg button.active { background: var(--surface, #fff); color: var(--p800); box-shadow: var(--sh-sm); }
+.hd-seg button:focus-visible { outline: 2px solid var(--p500); outline-offset: 1px; }
+:root[data-theme="dark"] .hd-seg button.active { background: var(--p100); }
+
+.hd-chart { position: relative; flex: 1; min-height: 260px; padding: 14px 18px 12px; }
+@media (max-width: 560px) {
+    .hd-flow-head { flex-direction: column; }
+    .hd-chart { min-height: 220px; }
+}
+
+/* ------------------------------------------------------------ Cash books */
+
+.hd-book-figs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); padding: 16px 22px 6px; gap: 12px; }
+.hd-book-figs span { display: block; font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.hd-book-figs strong {
+    display: block; margin-top: 3px; font-size: 18px; font-weight: 800; letter-spacing: -.02em; color: var(--ink);
+    font-variant-numeric: tabular-nums; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.hd-book-figs strong.accent { color: var(--p700); }
+
+.hd-book-month { padding: 12px 22px 18px; }
+.hd-book-month-head { display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; font-size: 12.5px; color: var(--muted); margin-bottom: 8px; font-variant-numeric: tabular-nums; }
+.hd-book-month-head > span:first-child { font-weight: 700; color: var(--ink2); }
+.hd-book-month-head strong { color: var(--ink); font-weight: 700; }
+
+.hd-split { display: flex; gap: 3px; height: 8px; border-radius: 999px; overflow: hidden; background: var(--p50); }
+.hd-split span { width: var(--w); border-radius: 999px; transform-origin: left; animation: hdGrow var(--dur-large) var(--ease-out) both; }
+.hd-split .in { background: var(--p600); }
+.hd-split .out { background: var(--p300); }
+
+.hd-links { display: flex; gap: 18px; padding: 11px 22px; margin-top: auto; border-top: 1px solid var(--line); background: var(--surface-2, #FAFAFB); }
+.hd-links a { font-size: 12.5px; font-weight: 700; color: var(--p700); display: inline-flex; align-items: center; }
+.hd-links a i { font-size: 17px; transition: transform var(--dur-base) var(--ease-out); }
+.hd-links a:hover i { transform: translateX(2px); }
+
+@media (max-width: 480px) {
+    .hd-book-figs { grid-template-columns: 1fr 1fr; }
+    .hd-book-figs > div:last-child { grid-column: span 2; }
+}
+
+/* -------------------------------------------------------- Latest entries */
+
+.hd-ellipsis { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.hd-amount { flex: none; display: flex; flex-direction: column; align-items: flex-end; text-align: right; }
+.hd-amount strong { font-size: 14px; font-weight: 800; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.hd-amount strong.in { color: var(--hd-in); }
+.hd-amount strong.out { color: var(--hd-out); }
+
+/* ------------------------------------------------------------- Spending */
+
+.hd-bars { padding: 16px 22px 18px; }
+.hd-bar + .hd-bar { margin-top: 14px; }
+.hd-bar-head { display: flex; justify-content: space-between; gap: 12px; font-size: 13px; }
+.hd-bar-head span { font-weight: 600; color: var(--ink); min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.hd-bar-head strong { font-weight: 700; color: var(--ink); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.hd-bar-track { height: 6px; margin: 6px 0 4px; border-radius: 999px; background: var(--p50); overflow: hidden; }
+.hd-bar-track span { display: block; height: 100%; width: var(--w); border-radius: inherit; background: var(--p500); transform-origin: left; animation: hdGrow var(--dur-large) var(--ease-out) both; }
+.hd-bar-note { font-size: 11.5px; color: var(--muted); }
+
+@keyframes hdGrow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+@media (prefers-reduced-motion: reduce) {
+    .hd-split span, .hd-bar-track span { animation: none; }
+}
+
+/* Phone: every link and switch in the dashboard is a 44px tap target. */
+@media (max-width: 767.98px) {
+    .hd-sec a, .hd-links a { min-height: 44px; padding: 0 4px; }
+    .hd-seg button { min-height: 44px; min-width: 44px; }
+}

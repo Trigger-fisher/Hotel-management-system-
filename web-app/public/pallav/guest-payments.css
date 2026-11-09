@@ -1,0 +1,128 @@
+/* ==========================================================================================================================================
+   Guest portal: PAYMENTS (decision 71). Owned by the Payments page; loaded on every guest page after guest-glass.css (pageCss.ts). Layout rules unscoped
+   and under .gg-payments (the statement sheet is drawn outside the page, so its blocks are gg-stmt-*); the look under :root body.hms-guest. Shared pieces
+   (segments, chips, rows, ActivityRow, cards, sheets, skeletons, motion and the fallbacks) are styled in guest-glass.css.
+   Desktop: the day cards on the left, the help card on the right (2fr 1fr). Phone: one column, 16px gutters (the foundation's), the help card last.
+   ========================================================================================================================================== */
+
+/* ---- Layout (unscoped) ---- */
+.gg-payments .gg-pay-filters { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.gg-payments .gg-pay-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; align-items: start; max-width: 1200px; }
+.gg-payments .gg-pay-grid.has-side { grid-template-columns: minmax(0, 2fr) minmax(260px, 1fr); }
+.gg-payments .gg-pay-main { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+.gg-payments .gg-pay-main > * { margin-top: 0; margin-bottom: 0; }
+.gg-payments .gg-pay-day { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.gg-payments .gg-pay-day > .gg-section-title { margin: 0 6px; font-variant-numeric: tabular-nums; }
+.gg-payments .gg-pay-card { padding: 6px 12px; }
+.gg-payments .gg-pay-card > .gg-list { margin: 0 -4px; }
+.gg-payments .gg-pay-card .pt-row-title { font-weight: 700; }
+.gg-payments .gg-pay-card .pt-row-sub { font-size: 13px; font-variant-numeric: tabular-nums; }
+.gg-payments .gg-activity .pt-row-amt.credit { color: inherit; }
+.gg-payments .gg-pay-empty { padding: 28px 20px; }
+.gg-payments .gg-pay-help { position: sticky; top: 88px; display: flex; flex-direction: column; align-items: flex-start; gap: 6px; }
+.gg-payments .gg-pay-help h2 { margin: 0; font-size: 17px; font-weight: 700; letter-spacing: -.02em; line-height: 1.3; }
+.gg-payments .gg-pay-help p { margin: 0 0 8px; font-size: 14px; line-height: 1.45; color: var(--pt-muted); }
+.gg-payments .gg-pay-help .pt-btn { max-width: 100%; }
+/* the phone's "Showing 12 of 12" (LoadMore): laid out only where the shared rule shows it (a desktop has the pager card's line instead, never both) */
+.gg-payments .app-more:not(.app-only-phone) { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+
+/* MJ, 26 Oct 2026: wider on big screens (no empty band), and each payment is a drop-down: its details and "Download receipt" open under the row
+   smoothly (grid rows 0fr to 1fr, so the real height animates without measuring); the panel stays in the page and is inert while closed */
+.gg-payments .gg-pay-grid { max-width: none; }
+.gg-payments .gg-pay-grid:has(.gg-pay-sum) { grid-template-columns: minmax(0, 2fr) minmax(260px, 1fr); }
+.gg-payments .gg-pay-side { display: flex; flex-direction: column; gap: 16px; min-width: 0; position: sticky; top: 96px; }
+.gg-payments .gg-pay-side:empty { display: none; }
+.gg-payments .gg-pay-side .gg-pay-help { position: static; }
+.gg-payments .gg-pay-sum { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; }
+.gg-payments .gg-pay-sum h2 { margin: 0; font-size: 13px; font-weight: 600; color: var(--pt-muted); }
+.gg-payments .gg-pay-sum-amt { margin: 2px 0 0; font-size: 30px; font-weight: 800; letter-spacing: -.03em; font-variant-numeric: tabular-nums; line-height: 1.1; }
+.gg-payments .gg-pay-sum-sub { margin: 0; font-size: 13px; color: var(--pt-muted); }
+.gg-payments .gg-pay-sum-last { display: flex; flex-direction: column; gap: 2px; width: 100%; margin: 12px 0 0; padding-top: 12px; border-top: 1px solid var(--pt-line); }
+.gg-payments .gg-pay-sum-last span { font-size: 12px; font-weight: 600; color: var(--pt-muted); }
+.gg-payments .gg-pay-sum-last strong { font-size: 14px; font-variant-numeric: tabular-nums; }
+/* narrower: one column, the summary first, the list, then the help card */
+@media (max-width: 1099px) {
+    .gg-payments .gg-pay-grid:has(.gg-pay-sum) { grid-template-columns: minmax(0, 1fr); }
+    .gg-payments .gg-pay-side { display: contents; }
+    .gg-payments .gg-pay-sum { order: -1; }
+}
+:root body.hms-guest .gg-payments :is(.gg-pay-sum h2, .gg-pay-sum-sub, .gg-pay-sum-last span) { color: var(--gg-muted); }
+:root body.hms-guest .gg-payments .gg-pay-sum-amt { color: var(--gg-ink); }
+:root body.hms-guest .gg-payments .gg-pay-sum-last { border-top-color: var(--gg-sep); }
+@media (min-width: 1600px) { .gg-payments .gg-pay-grid.has-side { grid-template-columns: minmax(0, 2.2fr) minmax(320px, 1fr); } }
+.gg-payments .gg-pay-item { border-radius: 18px; transition: background-color 260ms cubic-bezier(.16, 1, .3, 1); }
+.gg-payments .gg-pay-item + .gg-pay-item { margin-top: 2px; }
+.gg-payments .gg-pay-drop { display: grid; grid-template-rows: 0fr; opacity: 0; transition: grid-template-rows 380ms cubic-bezier(.16, 1, .3, 1), opacity 260ms cubic-bezier(.16, 1, .3, 1); }
+.gg-payments .gg-pay-item.is-open .gg-pay-drop { grid-template-rows: 1fr; opacity: 1; }
+.gg-payments .gg-pay-drop-in { min-height: 0; overflow: hidden; display: flex; flex-direction: column; align-items: flex-start; gap: 14px; padding: 0 14px 0 66px; }
+.gg-payments .gg-pay-item.is-open .gg-pay-drop-in { padding-bottom: 16px; }
+.gg-payments .gg-pay-dl { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 12px 24px; width: 100%; margin: 4px 0 0; }
+.gg-payments .gg-pay-dl > div { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.gg-payments .gg-pay-dl dt { font-size: 12px; font-weight: 600; color: var(--pt-muted); }
+.gg-payments .gg-pay-dl dd { margin: 0; font-size: 14px; font-weight: 600; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+.gg-payments .gg-pay-none { margin: 0; font-size: 13px; color: var(--pt-muted); }
+@media (max-width: 768px) {
+    .gg-payments .gg-pay-drop-in { padding: 0 12px 0 12px; }
+    .gg-payments .gg-pay-dl { grid-template-columns: 1fr 1fr; }
+    .gg-payments .gg-pay-drop-in > .pt-btn { width: 100%; justify-content: center; min-height: 48px; }
+}
+:root body.hms-guest .gg-payments .gg-pay-item.is-open { background: rgba(var(--gg-ink-rgb), .035); }
+:root body.hms-guest .gg-payments .gg-pay-dl dt { color: var(--gg-muted); }
+:root body.hms-guest .gg-payments .gg-pay-dl dd { color: var(--gg-ink); }
+:root body.hms-guest .gg-payments .gg-pay-none { color: var(--gg-muted); }
+:root body.hms-guest .gg-payments .gg-pay-item.is-open .gg-pay-dl > div { animation: gg-row-in 380ms cubic-bezier(.16, 1, .3, 1) backwards; }
+:root body.hms-guest .gg-payments .gg-pay-item.is-open .gg-pay-dl > div:nth-child(2) { animation-delay: 40ms; }
+:root body.hms-guest .gg-payments .gg-pay-item.is-open .gg-pay-dl > div:nth-child(3) { animation-delay: 80ms; }
+:root body.hms-guest .gg-payments .gg-pay-item.is-open .gg-pay-dl > div:nth-child(n+4) { animation-delay: 120ms; }
+@media (prefers-reduced-motion: reduce) { .gg-payments .gg-pay-drop, .gg-payments .gg-pay-item { transition: none; } }
+
+/* the statement sheet (portalled to the body: not under .gg-payments) */
+.gg-stmt-intro { margin: 0 0 14px; font-size: 14.5px; line-height: 1.45; color: var(--pt-ink2); }
+.gg-stmt-fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.gg-stmt-field { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.gg-stmt-field label { margin: 0; font-size: 13px; font-weight: 700; color: var(--pt-ink2); }
+.gg-stmt-field .pt-input { width: 100%; min-height: 48px; }
+.gg-stmt-covers, .gg-stmt-bad { margin: 12px 0 0; font-size: 13.5px; line-height: 1.45; font-variant-numeric: tabular-nums; }
+.gg-stmt-covers { color: var(--pt-muted); }
+.gg-stmt-bad { color: #B42318; font-weight: 600; }
+
+@media (max-width: 960px) {
+    .gg-payments .gg-pay-grid.has-side { grid-template-columns: minmax(0, 1fr); }
+    .gg-payments .gg-pay-help { position: static; }
+}
+@media (max-width: 768px) {
+    .gg-payments .gg-page-actions { flex: none; }
+    .gg-payments .gg-page-actions .pt-btn { min-height: 44px; padding: 0 14px; }
+    .gg-payments .gg-pay-card { padding: 4px 8px; border-radius: 24px; }
+    .gg-payments .gg-pay-card .gg-listrow, .gg-payments .gg-pay-card .gg-activity { min-height: 60px; }
+    .gg-payments .gg-pay-help { align-items: stretch; }
+    .gg-payments .gg-pay-help .pt-btn { width: 100%; justify-content: center; min-height: 48px; }
+    /* a phone row (MJ, 26 Oct 2026: all the information on every screen size): the title and the detail wrap in full; the amount keeps its column */
+    .gg-payments .gg-pay-card :is(.gg-listrow, .gg-activity) .pt-row-sub { white-space: normal; overflow-wrap: anywhere; }
+    .gg-payments .gg-pay-card :is(.gg-listrow, .gg-activity) .pt-row-title { overflow-wrap: anywhere; }
+    .gg-payments .gg-pay-card .gg-listrow { gap: 10px; }
+}
+@media (max-width: 380px) {
+    .gg-stmt-fields { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* ---- The look (guest portal only) ---- */
+:root body.hms-guest .gg-payments .gg-pay-day > .gg-section-title { color: var(--gg-muted); }
+:root body.hms-guest .gg-payments .gg-pay-help p, :root body.hms-guest .gg-stmt-covers { color: var(--gg-muted); }
+:root body.hms-guest .gg-stmt-intro, :root body.hms-guest .gg-stmt-field label { color: var(--gg-ink2); }
+:root body.hms-guest .gg-stmt-bad { color: var(--gg-bad); }
+:root body.hms-guest .gg-payments .gg-pay-row .gg-amt { color: var(--gg-ink); }
+:root body.hms-guest .gg-payments .gg-pay-row .gg-amt.muted { color: var(--gg-muted); }
+/* the day cards rise in turn (at most four steps of 30 ms, 200 ms each); nothing moves under reduced motion (guest-glass.css section 9) */
+:root body.hms-guest .gg-payments .gg-pay-day { animation: gg-enter var(--gg-dur-enter) var(--gg-ease) backwards; }
+:root body.hms-guest .gg-payments .gg-pay-day:nth-child(2) { animation-delay: 30ms; }
+:root body.hms-guest .gg-payments .gg-pay-day:nth-child(3) { animation-delay: 60ms; }
+:root body.hms-guest .gg-payments .gg-pay-day:nth-child(n+4) { animation-delay: 90ms; }
+@media (max-width: 768px) {
+    /* the notch-free sheet: the fields stay 16px (the foundation), the dates fill the row */
+    :root body.hms-guest.portal-mobile .gg-stmt-field .pt-input { font-size: 16px; }
+    :root body.hms-guest.portal-mobile .gg-payments .gg-pay-help .pt-btn { border-radius: 999px; }
+}
+@media print {
+    :root body.hms-guest .gg-payments :is(.gg-segments, .gg-pay-filters, .gg-pay-help, .gg-page-actions) { display: none !important; }
+}

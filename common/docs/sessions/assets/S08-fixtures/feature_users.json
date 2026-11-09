@@ -1,0 +1,182 @@
+[
+    {
+        "feature": "login",
+        "day": "2026-10-05",
+        "user_id": 1
+    },
+    {
+        "feature": "dashboard",
+        "day": "2026-10-05",
+        "user_id": 1
+    },
+    {
+        "feature": "revenue",
+        "day": "2026-10-05",
+        "user_id": 1
+    },
+    {
+        "feature": "expense",
+        "day": "2026-10-05",
+        "user_id": 1
+    },
+    {
+        "feature": "bill-master",
+        "day": "2026-10-05",
+        "user_id": 1
+    },
+    {
+        "feature": "masters",
+        "day": "2026-10-05",
+        "user_id": 1
+    },
+    {
+        "feature": "payroll.index",
+        "day": "2026-10-05",
+        "user_id": 1
+    },
+    {
+        "feature": "users",
+        "day": "2026-10-05",
+        "user_id": 1
+    },
+    {
+        "feature": "login",
+        "day": "2026-10-05",
+        "user_id": 2
+    },
+    {
+        "feature": "payroll.index",
+        "day": "2026-10-05",
+        "user_id": 2
+    },
+    {
+        "feature": "dashboard",
+        "day": "2026-10-05",
+        "user_id": 2
+    },
+    {
+        "feature": "payroll.dashboard",
+        "day": "2026-10-05",
+        "user_id": 2
+    },
+    {
+        "feature": "payroll.staff",
+        "day": "2026-10-05",
+        "user_id": 2
+    },
+    {
+        "feature": "payroll.company",
+        "day": "2026-10-05",
+        "user_id": 2
+    },
+    {
+        "feature": "pms",
+        "day": "2026-10-05",
+        "user_id": 1
+    },
+    {
+        "feature": "payroll.attendance",
+        "day": "2026-10-05",
+        "user_id": 2
+    },
+    {
+        "feature": "payroll.attendance-status",
+        "day": "2026-10-05",
+        "user_id": 2
+    },
+    {
+        "feature": "payroll.deduction",
+        "day": "2026-10-05",
+        "user_id": 2
+    },
+    {
+        "feature": "payroll.separation",
+        "day": "2026-10-05",
+        "user_id": 2
+    },
+    {
+        "feature": "payroll.salary-update",
+        "day": "2026-10-05",
+        "user_id": 2
+    },
+    {
+        "feature": "payroll.salary-payment",
+        "day": "2026-10-05",
+        "user_id": 2
+    },
+    {
+        "feature": "payroll.salary-slip",
+        "day": "2026-10-05",
+        "user_id": 2
+    },
+    {
+        "feature": "shift-handover",
+        "day": "2026-10-05",
+        "user_id": 1
+    },
+    {
+        "feature": "payroll.advance",
+        "day": "2026-10-05",
+        "user_id": 2
+    },
+    {
+        "feature": "payroll.bonus-incentive",
+        "day": "2026-10-05",
+        "user_id": 2
+    },
+    {
+        "feature": "payroll.food-price",
+        "day": "2026-10-05",
+        "user_id": 2
+    },
+    {
+        "feature": "payroll.food-charge",
+        "day": "2026-10-05",
+        "user_id": 2
+    },
+    {
+        "feature": "payroll.monthly-report",
+        "day": "2026-10-05",
+        "user_id": 2
+    },
+    {
+        "feature": "payroll.period-report",
+        "day": "2026-10-05",
+        "user_id": 2
+    },
+    {
+        "feature": "payroll.joining-letter",
+        "day": "2026-10-05",
+        "user_id": 2
+    },
+    {
+        "feature": "payroll.experience-letter",
+        "day": "2026-10-05",
+        "user_id": 2
+    },
+    {
+        "feature": "payroll.log",
+        "day": "2026-10-05",
+        "user_id": 2
+    },
+    {
+        "feature": "payroll.master",
+        "day": "2026-10-05",
+        "user_id": 2
+    },
+    {
+        "feature": "company",
+        "day": "2026-10-05",
+        "user_id": 2
+    },
+    {
+        "feature": "customer",
+        "day": "2026-10-05",
+        "user_id": 2
+    },
+    {
+        "feature": "reports",
+        "day": "2026-10-05",
+        "user_id": 2
+    }
+]

@@ -1,0 +1,22 @@
+# Training venvs OUTSIDE the repo on a short path (Windows long paths are off):
+#   D:\hmst\pg  GPU:  pip install paddlepaddle-gpu==3.3.1 -i https://www.paddlepaddle.org.cn/packages/stable/cu126/
+#   D:\hmst\pv  CPU:  pip install paddlepaddle==3.3.1        (also used for the export step)
+# then in both:  pip install -r requirements-train.txt
+# PaddleOCR training code: git clone --depth 1 --branch v3.7.0 https://github.com/PaddlePaddle/PaddleOCR.git D:\hmst\PaddleOCR
+albucore
+albumentations==2.0.8
+cython
+lmdb
+onnxruntime==1.31.1
+opencv-contrib-python==5.0.0.93
+opencv-python==5.0.0.93
+packaging
+psutil
+pyclipper
+PyYAML
+rapidfuzz
+requests
+scikit-image==0.26.0
+setuptools
+shapely
+tqdm

@@ -1,0 +1,1456 @@
+/* ==========================================================================================================================================
+   The guest portal's "Full Transparent" look: the FOUNDATION sheet (decisions 70 and 71, MJ 26 Oct 2026). HMS's own sheet, not Pallav's: loaded as a page
+   sheet for the guest and company portals and the hotel's guest-portal preview only (pageCss.ts), so no staff dashboard ever has it. MJ, 26 Oct 2026:
+   the company portal takes the same look (body.hms-glass is set for both portals; hms-guest stays the guest's own class for the guest page sheets).
+
+   The guest sheets (all five load on every guest page, after this one):
+     guest-glass.css     this file: tokens, glass panels, controls, the shell's guest look, the guest kit's components (kit/), the phone app frame, motion,
+                         and the reduced motion / reduced transparency / forced colours / print fallbacks.
+     guest-home.css      Home                     (owned by the Home page)
+     guest-order.css     Room service             (owned by the Room service page)
+     guest-bills.css     Bills and one bill       (owned by the Bills page)
+     guest-payments.css  Payments                 (owned by the Payments page)
+     guest-account.css   Account                  (owned by the Account page)
+
+   Two layers, in every sheet:
+   1. LAYOUT of the guest blocks (.gg-*): unscoped, so the hotel's guest-portal preview (hotel.admin.guestPortal, which draws the same screens inside the hotel
+      shell) gets the structure in its own graphite look. These rules only name gg-* classes, which exist nowhere else, and never fix anything to the screen.
+   2. THE LOOK and everything fixed to the screen (the tab bar, the action bar, sheets from the bottom, the compact title): every rule starts with
+      `:root body.hms-glass` (night: `:root[data-theme="dark"] body.hms-glass`). PallavShell sets body.hms-glass only while the guest or the company portal is on screen
+      (look="guest" or "corporate"); app/layout.tsx writes it into the first HTML and unloadPallav removes it. Day is White & Grey (light grey page, white see-through
+      panels), night is near-black with faint panels; every panel is drawn by a 1px luminous rim, an inner top highlight and a soft drop. Monochrome ink and
+      white; coral for pending, red for problems. Blur only on the shell (rail, top-bar controls), bars, sheets, dialogs and dropdowns.
+
+   Class conventions: kit components are gg-<name> (gg-listrow, gg-chips, gg-sheet, gg-actionbar, gg-capsule, gg-moneycard, gg-staygroup, gg-sk ...). A page's
+   own blocks sit under its root class (.gg-home, .gg-order, .gg-bills, .gg-bill, .gg-payments, .gg-account) in its own sheet. Body classes: hms-glass (the
+   look, both portals), hms-guest (the guest portal), portal-mobile (a bottom bar is shown), gg-has-large / gg-titled (GgPage's large title is on screen / has scrolled away).
+
+   This sheet loads before pallav-last.css (night mode and hms-overrides.css), so its selectors out-specify them; !important only where they use it.
+   Variables: the portal's --pt-* are declared on :root as var(--p50) and so on, so both sets are redefined here on body.
+   ========================================================================================================================================== */
+
+/* ------------------------------------------------------------------------------------------------------------------------------------------
+   1. Layout of the shared guest blocks (unscoped; plain fallback look from the portal tokens)
+   ------------------------------------------------------------------------------------------------------------------------------------------ */
+.gg-page { min-width: 0; }
+.gg-home, .gg-billpage, .gg-profile, .gg-order, .gg-bill, .gg-payments, .gg-account { display: flex; flex-direction: column; gap: 16px; }
+.gg-home > *, .gg-billpage > *, .gg-profile > *, .gg-order > *, .gg-bill > *, .gg-payments > *, .gg-account > * { margin-top: 0 !important; margin-bottom: 0 !important; min-width: 0; }
+.gg-bills, .gg-history { display: flex; flex-direction: column; }
+.gg-bills > .page-head, .gg-history > .page-head { order: -1; }
+.gg-bills:has(> .gg-page-head) { gap: 16px; }
+.gg-bills:has(> .gg-page-head) > * { margin-top: 0; margin-bottom: 0; min-width: 0; }
+
+/* GgPage: the large title (phones), the status line and the page's actions */
+.gg-page-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 8px 16px; flex-wrap: wrap; min-width: 0; }
+.gg-page-titles { min-width: 0; flex: 1 1 240px; }
+.gg-large { display: none; font-size: 34px; font-weight: 800; letter-spacing: -.035em; line-height: 1.1; color: var(--pt-ink); overflow-wrap: anywhere; }
+.gg-status { margin: 0; font-size: 15px; font-weight: 600; line-height: 1.4; color: var(--pt-ink2); }
+.gg-page-actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.gg-page-head:not(:has(.gg-status)):not(:has(.gg-page-actions)) { display: none; }
+/* the large title is the guest phone's only (the hotel's portal preview keeps its own shell title) */
+@media (max-width: 768px) {
+    :root body.hms-glass .gg-large { display: block; }
+    :root body.hms-glass .gg-page-head { display: flex !important; align-items: flex-end; }
+}
+
+/* The stay hero (StayHero) */
+.gg-hero { position: relative; border-radius: 28px; padding: 26px 28px; display: flex; flex-direction: column; gap: 18px; background: var(--pt-surface); border: 1px solid var(--pt-line); color: var(--pt-ink); }
+.gg-hero-txt { display: flex; flex-direction: column; align-items: flex-start; min-width: 0; }
+.gg-eyebrow { font-size: 13px; font-weight: 600; letter-spacing: .01em; color: var(--pt-muted); }
+.gg-hero-h { margin: 6px 0 0; font-size: clamp(24px, 3vw, 32px); font-weight: 800; letter-spacing: -.035em; line-height: 1.1; color: inherit; overflow-wrap: anywhere; }
+.gg-hero-sub { margin: 8px 0 0; font-size: 15.5px; line-height: 1.45; color: var(--pt-ink2); }
+.gg-hero-txt > .gg-chip { margin-top: 10px; }
+.gg-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.gg-pill { display: inline-flex; align-items: center; gap: 7px; min-height: 28px; padding: 3px 12px; border-radius: 999px; font-size: 12.5px; font-weight: 700; color: var(--pt-ink2); border: 1px solid var(--pt-line); font-variant-numeric: tabular-nums; }
+.gg-pill .bi { font-size: 13px; opacity: .8; }
+.gg-progress { position: relative; width: 100%; height: 10px; max-width: 560px; margin: 18px 0 6px; border-radius: 999px; overflow: hidden; background: var(--pt-p100); }
+.gg-progress > span { display: block; height: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--pt-p500), var(--pt-p700)); transform-origin: left center; }
+.gg-progress-ends { display: flex; justify-content: space-between; gap: 10px; width: 100%; max-width: 560px; font-size: 12px; font-weight: 600; color: var(--pt-muted); font-variant-numeric: tabular-nums; }
+
+/* The action capsule (ActionCapsule): full-width stacked buttons on a phone, a row of capsules on a desktop; 48px or taller */
+.gg-capsule { display: grid; grid-template-columns: repeat(var(--gg-cap-n, 3), minmax(0, 1fr)); gap: 8px; }
+.gg-capsule.n1 { --gg-cap-n: 1; max-width: 360px; }
+.gg-capsule.n2 { --gg-cap-n: 2; max-width: 620px; }
+.gg-cap-btn { display: flex; align-items: center; gap: 10px; min-height: 52px; padding: 8px 18px; border: 1px solid var(--pt-line); border-radius: 999px; background: var(--pt-surface); color: var(--pt-ink); font: inherit; font-size: 15px; font-weight: 700; letter-spacing: -.01em; text-align: left; text-decoration: none; cursor: pointer; min-width: 0; }
+.gg-cap-btn:hover { color: var(--pt-ink); }
+.gg-cap-btn > .bi { flex: none; font-size: 18px; }
+.gg-cap-txt { display: flex; flex-direction: column; min-width: 0; line-height: 1.2; }
+.gg-cap-lbl { overflow-wrap: anywhere; }
+.gg-cap-sub { font-size: 12.5px; font-weight: 600; color: var(--pt-muted); font-variant-numeric: tabular-nums; }
+.gg-cap-btn.primary { background: var(--pt-ink); color: var(--pt-surface); border-color: transparent; }
+.gg-cap-btn.primary .gg-cap-sub { color: inherit; opacity: .78; }
+@media (max-width: 768px) {
+    .gg-capsule, .gg-capsule.n1, .gg-capsule.n2 { grid-template-columns: minmax(0, 1fr); max-width: none; }
+}
+
+/* Cards: the shared panel, its head, and a list of rows inside it */
+.gg-card { position: relative; border-radius: 28px; padding: 18px 20px; min-width: 0; background: var(--pt-surface); border: 1px solid var(--pt-line); color: var(--pt-ink); }
+.gg-card-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 4px 12px; margin: 0 0 8px; }
+.gg-card-head h2 { margin: 0; font-size: 17px; font-weight: 700; letter-spacing: -.02em; line-height: 1.3; color: inherit; }
+.gg-card-sub { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: var(--pt-muted); }
+.gg-list { display: flex; flex-direction: column; min-width: 0; }
+.gg-list > .pt-row { padding: 12px 10px; border-radius: 16px; }
+.gg-card > .gg-list { margin: 0 -8px; }
+.gg-section-title { margin: 6px 4px 0; font-size: 13px; font-weight: 700; letter-spacing: .02em; color: var(--pt-muted); }
+
+/* Panel heads used by the older blocks (Home's lists, the orders card) */
+.gg-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 8px; }
+.gg-head > div { min-width: 0; }
+.gg-head h2 { margin: 0; font-size: 18px; font-weight: 700; letter-spacing: -.02em; line-height: 1.3; color: inherit; }
+.gg-head span { display: block; margin-top: 2px; font-size: 13px; color: var(--pt-muted); }
+.pt-block > .pt-section.gg-head { flex-direction: row; justify-content: space-between; align-items: flex-start; }
+.gg-more { flex: none; display: inline-flex; align-items: center; gap: 6px; min-height: 36px; padding: 0 12px; border-radius: 999px; color: var(--pt-ink); font-size: 14px; font-weight: 600; white-space: nowrap; text-decoration: none; }
+.gg-more:hover { color: var(--pt-ink); background: var(--pt-p50); }
+.gg-more .bi { font-size: 13px; transition: transform 200ms cubic-bezier(.16, 1, .3, 1); }
+.gg-more:hover .bi { transform: translateX(3px); }
+
+/* A full-width tappable row (GgRow): the whole row is one target, 52px or taller, a value and a chevron at the right */
+.gg-listrow { display: flex; align-items: center; gap: 12px; width: 100%; min-height: 52px; margin: 0; padding: 10px 10px; border: 0; border-radius: 16px; background: transparent; color: inherit; font: inherit; text-align: left; text-decoration: none; }
+a.gg-listrow, button.gg-listrow { cursor: pointer; }
+a.gg-listrow:hover, button.gg-listrow:hover { color: inherit; }
+button.gg-listrow:disabled { cursor: default; opacity: .5; }
+.gg-listrow .pt-row-main { display: flex; flex-direction: column; min-width: 0; flex: 1 1 auto; }
+.gg-listrow .pt-row-title, .gg-listrow .pt-row-sub { display: block; overflow-wrap: anywhere; }
+.gg-row-end { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; flex: none; text-align: right; }
+.gg-chev { flex: none; font-size: 14px; color: var(--pt-muted); }
+.gg-amt { font-weight: 700; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.gg-amt.muted { color: var(--pt-muted); text-decoration: line-through; }
+.gg-amt.warn, .gg-listrow.warn .gg-amt { color: var(--pt-warn); }
+.gg-listrow.bad .gg-amt { color: #B42318; }
+.gg-activity-end { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; }
+
+/* Status capsules (GgChip): coral = pending, red = a problem, ink with a check = done, muted = neither */
+.gg-chip { display: inline-flex; align-items: center; gap: 6px; min-height: 22px; padding: 2px 10px; border-radius: 999px; font-size: 12px; font-weight: 700; line-height: 1.3; color: var(--pt-ink2); border: 1px solid var(--pt-line); text-decoration: none; white-space: nowrap; }
+.gg-chip::before { content: ""; flex: none; width: 5px; height: 5px; border-radius: 50%; background: currentColor; opacity: .7; }
+.gg-chip-muted::before, .gg-chip-ink::before, .gg-chip.link::before { display: none; }
+.gg-chip-warn, .gg-chip.warn { color: var(--pt-warn); border-color: currentColor; }
+.gg-chip-bad { color: #B42318; border-color: currentColor; }
+.gg-chip-ok::before, .gg-chip.good::before { width: 9px; height: 5px; border-radius: 0; background: none; opacity: 1; border-left: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: translateY(-1.5px) rotate(-45deg); }
+.gg-chip-muted { color: var(--pt-muted); }
+.gg-chip .bi { font-size: 12px; }
+
+/* Filter chips (GgChips, GgHotelChips): one row, sideways scroll on a narrow phone */
+.gg-chips { display: flex; gap: 8px; overflow-x: auto; overscroll-behavior-x: contain; scrollbar-width: none; padding: 2px; margin: -2px; -webkit-overflow-scrolling: touch; }
+.gg-chips::-webkit-scrollbar { display: none; }
+.gg-chipbtn { flex: none; display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 0 16px; border: 1px solid var(--pt-line); border-radius: 999px; background: var(--pt-surface); color: var(--pt-ink2); font: inherit; font-size: 14px; font-weight: 700; white-space: nowrap; cursor: pointer; }
+.gg-chipbtn.on { background: var(--pt-ink); color: var(--pt-surface); border-color: transparent; }
+.gg-chipcount { min-width: 20px; padding: 0 6px; border-radius: 999px; font-size: 12px; line-height: 20px; text-align: center; background: var(--pt-p100); font-variant-numeric: tabular-nums; }
+.gg-chipcount.warn { color: var(--pt-warn); }
+.gg-chipbtn.on .gg-chipcount { background: transparent; color: inherit; box-shadow: inset 0 0 0 1px currentColor; }
+
+/* Segments (GgSegments, MoneySegments): the shared SegTabs in one capsule track */
+.gg-segments .seg-tabs { display: inline-flex; flex-wrap: nowrap; margin: 0; max-width: 100%; }
+@media (max-width: 768px) {
+    .gg-segments .seg-tabs { display: flex; width: 100%; }
+    .gg-segments .seg-tabs > li { flex: 1 1 0; }
+    .gg-segments .seg-tabs > li > button { width: 100%; min-height: 40px; justify-content: center; }
+}
+
+/* A stay's bills (StayGroup): a head that folds the group */
+.gg-staygroup { padding: 6px 10px 6px; }
+.gg-staygroup-head { display: flex; align-items: center; gap: 12px; width: 100%; min-height: 56px; padding: 10px 8px; border: 0; background: transparent; color: inherit; font: inherit; text-align: left; cursor: pointer; border-radius: 18px; }
+.gg-staygroup-txt { display: flex; flex-direction: column; min-width: 0; flex: 1 1 auto; }
+.gg-staygroup-title { font-size: 15px; font-weight: 700; letter-spacing: -.01em; overflow-wrap: anywhere; }
+.gg-staygroup-sub { font-size: 12.5px; color: var(--pt-muted); }
+.gg-fold { flex: none; font-size: 14px; color: var(--pt-muted); transition: transform 320ms cubic-bezier(.32, 1.25, .45, 1); }
+.gg-staygroup.open .gg-fold, .gg-listrow[aria-expanded="true"] .gg-fold { transform: rotate(180deg); }
+.gg-staygroup > .gg-list { padding: 0 0 6px; }
+
+/* The money card (MoneySummary): never pays, the whole card opens Bills */
+.gg-moneycard { display: flex; align-items: center; justify-content: space-between; gap: 12px; width: 100%; text-align: left; font: inherit; }
+button.gg-moneycard { cursor: pointer; }
+.gg-money-body { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.gg-moneycard > .gg-money-label, .gg-money-label { font-size: 13px; font-weight: 700; letter-spacing: .02em; color: var(--pt-muted); }
+.gg-money-amt { font-size: 30px; font-weight: 800; letter-spacing: -.03em; line-height: 1.1; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+.gg-money-amt.warn { color: var(--pt-warn); }
+.gg-money-of, .gg-money-note { font-size: 13px; color: var(--pt-muted); font-variant-numeric: tabular-nums; }
+.gg-money-bad { font-size: 13px; font-weight: 700; color: #B42318; }
+.gg-money-go { flex: none; display: inline-flex; align-items: center; gap: 6px; min-height: 40px; padding: 0 14px; border-radius: 999px; font-size: 14px; font-weight: 700; border: 1px solid var(--pt-line); }
+section.gg-moneycard { flex-direction: column; align-items: flex-start; gap: 2px; }
+
+/* The hotel card (HotelInfoCard) */
+.gg-hotelinfo .gg-card-sub .bi { font-size: 13px; }
+
+/* The action bar (GgActionBar): inline here; fixed above the tab bar on a guest phone (section 7) */
+.gg-actionbar { display: flex; align-items: center; gap: 12px; padding: 10px 10px 10px 18px; border-radius: 24px; background: var(--pt-surface); border: 1px solid var(--pt-line); color: var(--pt-ink); min-width: 0; }
+.gg-actionbar-sum { flex: 1 1 auto; min-width: 0; font-size: 14.5px; font-weight: 700; line-height: 1.3; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+.gg-actionbar-act { flex: none; display: flex; gap: 8px; }
+.gg-actionbar-act > .pt-btn { min-height: 48px; }
+
+/* Sheets (GgSheet): the head, an amount at the top, a note at the bottom */
+.gg-sheet-head { display: flex; flex-direction: column; flex: 1 1 auto; min-width: 0; }
+.gg-sheet-amount { display: flex; flex-direction: column; gap: 2px; margin: 0 0 12px; }
+.gg-sheet-note { display: flex; gap: 8px; margin: 12px 0 0; font-size: 12.5px; line-height: 1.4; color: var(--pt-muted); }
+.gg-sheet-foot { gap: 8px; }
+.gg-sheet-foot > .pt-btn { min-height: 48px; }
+
+/* Skeletons (GgSkeleton): placeholder shapes with a calm shimmer */
+.gg-skeleton { display: flex; flex-direction: column; gap: 14px; }
+.gg-sk { display: block; max-width: 100%; border-radius: 8px; background: linear-gradient(90deg, var(--pt-p100) 0%, var(--pt-p50) 50%, var(--pt-p100) 100%); background-size: 200% 100%; animation: gg-shimmer 1.2s linear infinite; }
+.gg-sk.round { border-radius: 999px; }
+.gg-sk-card { display: flex; flex-direction: column; gap: 4px; padding: 10px 14px; }
+.gg-sk-row { display: flex; align-items: center; gap: 12px; min-height: 56px; }
+.gg-sk-row > .gg-sk:first-child { flex: none; }
+.gg-sk-row > .gg-sk:last-child { flex: none; margin-left: auto; }
+.gg-sk-lines { display: flex; flex-direction: column; gap: 8px; flex: 1 1 auto; min-width: 0; }
+.gg-sk-hero { display: flex; flex-direction: column; gap: 12px; padding: 24px; }
+.gg-sk-hero.center { align-items: center; }
+.gg-sk-capsule { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.gg-sk-capsule.row { display: flex; }
+@media (max-width: 768px) { .gg-sk-capsule:not(.row) { grid-template-columns: minmax(0, 1fr); } }
+
+/* A quiet note line */
+.gg-note { display: flex; align-items: center; gap: 10px; padding: 12px 16px; border-radius: 18px; background: var(--pt-p50); color: var(--pt-ink2); font-weight: 600; font-size: 14px; }
+
+@media (max-width: 760px) {
+    .gg-hero { padding: 22px 18px; border-radius: 24px; gap: 16px; }
+    .gg-card { border-radius: 24px; padding: 14px 14px; }
+    .gg-card > .gg-list { margin: 0 -4px; }
+    .gg-money-amt { font-size: 28px; }
+}
+
+/* ------------------------------------------------------------------------------------------------------------------------------------------
+   2. The look: tokens (day), re-pointed Pallav and portal variables
+   ------------------------------------------------------------------------------------------------------------------------------------------ */
+:root body.hms-glass {
+    --gg-ink-rgb: 17, 17, 19;
+    --gg-page: #ECECEF;
+    --gg-page-a: rgba(236, 236, 239, .94);
+    --gg-page-a0: rgba(236, 236, 239, 0);
+    --gg-ink: #111113;
+    --gg-ink2: rgba(17, 17, 19, .78);
+    --gg-muted: rgba(17, 17, 19, .64);
+    --gg-fill: rgba(255, 255, 255, .80);
+    --gg-fill-h: rgba(255, 255, 255, .94);
+    --gg-solid: #FFFFFF;
+    --gg-pop: rgba(255, 255, 255, .88);
+    --gg-r-hi: rgba(0, 0, 0, .32);
+    --gg-r-lo: rgba(0, 0, 0, .09);
+    --gg-r-hi2: rgba(0, 0, 0, .25);
+    --gg-r-hover: rgba(0, 0, 0, .5);
+    --gg-ctl: rgba(17, 17, 19, .16);
+    --gg-hl: inset 0 1px 0 rgba(255, 255, 255, .95), inset 1px 0 0 rgba(255, 255, 255, .55);
+    --gg-drop: 0 1px 2px rgba(0, 0, 0, .05), 0 14px 30px -18px rgba(0, 0, 0, .24);
+    --gg-float: 0 1px 2px rgba(0, 0, 0, .06), 0 24px 60px -22px rgba(0, 0, 0, .35);
+    --gg-line: rgba(0, 0, 0, .09);
+    --gg-sep: rgba(0, 0, 0, .14);
+    --gg-warn: #A8410D;
+    --gg-warn-rim: rgba(168, 65, 13, .5);
+    --gg-warn-lo: rgba(168, 65, 13, .16);
+    --gg-bad: #B42318;
+    --gg-bad-rim: rgba(180, 35, 24, .5);
+    --gg-bad-lo: rgba(180, 35, 24, .16);
+    --gg-focus: rgba(17, 17, 19, .85);
+    --gg-on-ink: #FFFFFF;
+    --gg-ease: cubic-bezier(.16, 1, .3, 1);
+    --gg-blur: blur(12px) saturate(1.4);
+    --gg-font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", system-ui, sans-serif;
+    --gg-glow: radial-gradient(1200px 900px at 55% 22%, #F3F3F5 0%, rgba(243, 243, 245, 0) 70%), radial-gradient(140% 120% at 50% 40%, rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, .05) 100%);
+    /* the phone app frame (section 7) */
+    --gg-tabbar-h: 74px;
+    --gg-safe-b: env(safe-area-inset-bottom, 0px);
+    --gg-dur-enter: 560ms;
+    --gg-dur-sheet: 380ms;
+
+    /* the portal's own variables */
+    --pt-surface: var(--gg-fill);
+    --pt-bg: var(--gg-page);
+    --pt-ink: var(--gg-ink);
+    --pt-ink2: var(--gg-ink2);
+    --pt-muted: var(--gg-muted);
+    --pt-line: var(--gg-line);
+    --pt-r: 24px;
+    --pt-p50: rgba(var(--gg-ink-rgb), .04);
+    --pt-p100: rgba(var(--gg-ink-rgb), .07);
+    --pt-p200: rgba(var(--gg-ink-rgb), .16);
+    --pt-p500: rgba(var(--gg-ink-rgb), .55);
+    --pt-p600: rgba(var(--gg-ink-rgb), .75);
+    --pt-p700: var(--gg-ink2);
+    --pt-p800: var(--gg-ink);
+    --pt-p900: var(--gg-ink);
+    --pt-ok: var(--gg-ink);
+    --pt-warn: var(--gg-warn);
+
+    /* Pallav's variables: an ink scale instead of the old coloured one */
+    --p50: rgba(var(--gg-ink-rgb), .04);
+    --p100: rgba(var(--gg-ink-rgb), .07);
+    --p200: rgba(var(--gg-ink-rgb), .16);
+    --p300: rgba(var(--gg-ink-rgb), .3);
+    --p400: rgba(var(--gg-ink-rgb), .45);
+    --p500: rgba(var(--gg-ink-rgb), .55);
+    --p600: rgba(var(--gg-ink-rgb), .75);
+    --p700: var(--gg-ink2);
+    --p800: var(--gg-ink);
+    --p900: var(--gg-ink);
+    --ink: var(--gg-ink);
+    --ink2: var(--gg-ink2);
+    --muted: var(--gg-muted);
+    --line: var(--gg-line);
+    --line2: var(--gg-sep);
+    --cream: var(--gg-page);
+    --white: var(--gg-solid);
+    --surface: var(--gg-fill);
+    --surface-2: rgba(var(--gg-ink-rgb), .035);
+    --card: var(--gg-fill);
+    --accent: var(--gg-ink);
+    --accent-hover: rgba(var(--gg-ink-rgb), .86);
+    --accent-ink: var(--gg-ink);
+    --accent-solid: var(--gg-ink);
+    --gold: var(--gg-ink);
+    --ok: var(--gg-ink);
+    --ok-bg: rgba(var(--gg-ink-rgb), .06);
+    --info: var(--gg-ink);
+    --info-bg: rgba(var(--gg-ink-rgb), .06);
+    --warn: var(--gg-warn);
+    --warn-bg: var(--gg-warn-lo);
+    --bad: var(--gg-bad);
+    --bad-bg: var(--gg-bad-lo);
+    --sh-xs: var(--gg-drop);
+    --sh-sm: var(--gg-drop);
+    --sh-md: var(--gg-drop);
+    --sh-lg: var(--gg-float);
+    --nav-surface: var(--gg-fill);
+    --nav-ink: var(--gg-ink);
+    --nav-ink-dim: var(--gg-ink2);
+    --nav-ink-faint: var(--gg-muted);
+    --nav-line: var(--gg-line);
+    --nav-hover: rgba(var(--gg-ink-rgb), .06);
+    --nav-active: rgba(var(--gg-ink-rgb), .08);
+    --sb-glass: rgba(var(--gg-ink-rgb), .04);
+    --sb-glass-hover: rgba(var(--gg-ink-rgb), .07);
+    --sb-glass-edge: var(--gg-line);
+    --sb-tile: transparent;
+    --sb-tile-hover: transparent;
+    --sb-wash: rgba(var(--gg-ink-rgb), .06);
+    --sb-wash-active: rgba(var(--gg-ink-rgb), .08);
+    --sb-marker: transparent;
+    --sb-marker-glow: transparent;
+    --sb-active-tile: transparent;
+    --sb-active-icon: var(--gg-ink);
+    --sb-card-shadow: var(--gg-drop);
+    --sb-card-edge: inset 0 0 0 0 transparent;
+    --sb-rail-wash: rgba(var(--gg-ink-rgb), .06);
+    /* Bootstrap's links and focus ring */
+    --bs-link-color-rgb: var(--gg-ink-rgb);
+    --bs-link-hover-color-rgb: var(--gg-ink-rgb);
+    --bs-body-color: var(--gg-ink);
+    --bs-focus-ring-color: rgba(var(--gg-ink-rgb), .25);
+
+    background: var(--gg-page);
+    color: var(--gg-ink);
+    font-family: var(--gg-font);
+    letter-spacing: -.003em;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: transparent;
+    min-height: 100vh;
+    min-height: 100dvh;
+}
+/* Night: near-black, faint vignette, white luminous rims (keyed off the dashboard's own day / night choice, <html data-theme>) */
+@media screen {
+    :root[data-theme="dark"] body.hms-glass {
+        --gg-ink-rgb: 255, 255, 255;
+        --gg-page: #0B0B0C;
+        --gg-page-a: rgba(11, 11, 12, .94);
+        --gg-page-a0: rgba(11, 11, 12, 0);
+        --gg-ink: #FFFFFF;
+        --gg-ink2: rgba(255, 255, 255, .8);
+        --gg-muted: rgba(255, 255, 255, .62);
+        --gg-fill: rgba(255, 255, 255, .035);
+        --gg-fill-h: rgba(255, 255, 255, .07);
+        --gg-solid: #161618;
+        --gg-pop: rgba(22, 22, 24, .86);
+        --gg-r-hi: rgba(255, 255, 255, .6);
+        --gg-r-lo: rgba(255, 255, 255, .09);
+        --gg-r-hi2: rgba(255, 255, 255, .45);
+        --gg-r-hover: rgba(255, 255, 255, .88);
+        --gg-ctl: rgba(255, 255, 255, .18);
+        --gg-hl: inset 0 1px 0 rgba(255, 255, 255, .06);
+        --gg-drop: 0 2px 4px rgba(0, 0, 0, .45), 0 20px 44px -20px rgba(0, 0, 0, .9);
+        --gg-float: 0 2px 6px rgba(0, 0, 0, .5), 0 28px 70px -20px rgba(0, 0, 0, .95);
+        --gg-line: rgba(255, 255, 255, .08);
+        --gg-sep: rgba(255, 255, 255, .14);
+        --gg-warn: #FDBA8C;
+        --gg-warn-rim: rgba(253, 186, 140, .6);
+        --gg-warn-lo: rgba(253, 186, 140, .16);
+        --gg-bad: #FF6961;
+        --gg-bad-rim: rgba(255, 105, 97, .6);
+        --gg-bad-lo: rgba(255, 105, 97, .16);
+        --gg-focus: rgba(255, 255, 255, .9);
+        --gg-on-ink: #0B0B0C;
+        --gg-glow: radial-gradient(1200px 900px at 55% 22%, #131315 0%, rgba(19, 19, 21, 0) 70%), radial-gradient(140% 120% at 50% 40%, rgba(0, 0, 0, 0) 55%, rgba(0, 0, 0, .55) 100%);
+        color-scheme: dark;
+    }
+}
+/* the page colour also wins over the reload outline's own body colour (globals.css, html[data-shell="app"] body) */
+:root[data-theme] body.hms-glass, :root[data-shell] body.hms-glass { background: var(--gg-page); }
+/* the page's soft light (day) or vignette (night), fixed behind everything */
+:root body.hms-glass::before { content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none; background: var(--gg-glow); }
+:root body.hms-glass ::selection { background: rgba(var(--gg-ink-rgb), .16); }
+:root body.hms-glass input:not([type="range"]) { accent-color: var(--gg-ink); }
+
+/* ------------------------------------------------------------------------------------------------------------------------------------------
+   3. Panels: fill + 1px gradient rim + inner highlight + soft drop (no blur: content scrolls fast)
+   ------------------------------------------------------------------------------------------------------------------------------------------ */
+:root body.hms-glass :is(.pt-card, .sh-card, .bm-fbar, .gg-card, .gg-hero, .gg-kpi, .gg-qa, .content .card) {
+    --gg-ra: var(--gg-r-hi); --gg-rm: var(--gg-r-lo); --gg-rb: var(--gg-r-hi2);
+    position: relative;
+    background: var(--gg-fill);
+    border: 0;
+    box-shadow: var(--gg-hl), var(--gg-drop);
+    color: var(--gg-ink);
+    transition: background-color 200ms var(--gg-ease), translate 200ms var(--gg-ease), scale 80ms var(--gg-ease);
+}
+:root body.hms-glass :is(.pt-card, .sh-card, .bm-fbar, .gg-card, .gg-hero, .gg-kpi, .gg-qa, .content .card)::before {
+    content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 1px; pointer-events: none;
+    background: linear-gradient(135deg, var(--gg-ra) 0%, var(--gg-rm) 30%, var(--gg-rm) 70%, var(--gg-rb) 100%);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+}
+:root body.hms-glass .pt-card { border-radius: 24px; }
+:root body.hms-glass .content .card { border-radius: 24px; }
+:root body.hms-glass .sh-card { border-radius: 22px; margin-bottom: 10px; }
+:root body.hms-glass .bm-fbar { border-radius: 24px; }
+:root body.hms-glass .pt-intro-card { border-radius: 22px; padding: 14px 18px; }
+:root body.hms-glass .pt-intro-card .h6 { font-size: 15px; font-weight: 700; letter-spacing: -.01em; }
+:root body.hms-glass .pt-intro { color: var(--gg-ink2); }
+:root body.hms-glass .pt-intro li::marker { color: var(--gg-muted); }
+:root body.hms-glass .sh-card[open] { --gg-ra: var(--gg-r-hover); --gg-rb: var(--gg-r-hover); background: var(--gg-fill-h); }
+:root body.hms-glass .pt-bill.selected { --gg-ra: var(--gg-r-hover); --gg-rb: var(--gg-r-hover); box-shadow: var(--gg-hl), var(--gg-drop), 0 0 0 3px rgba(var(--gg-ink-rgb), .08); }
+/* a desktop section card holds its rows without a second panel inside */
+@media (min-width: 769px) {
+    :root body.hms-glass .pt-block {
+        --gg-ra: var(--gg-r-hi); --gg-rm: var(--gg-r-lo); --gg-rb: var(--gg-r-hi2);
+        position: relative; background: var(--gg-fill); border: 0; border-radius: 28px; box-shadow: var(--gg-hl), var(--gg-drop); overflow: visible;
+    }
+    :root body.hms-glass .pt-block::before {
+        content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 1px; pointer-events: none;
+        background: linear-gradient(135deg, var(--gg-ra) 0%, var(--gg-rm) 30%, var(--gg-rm) 70%, var(--gg-rb) 100%);
+        -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor;
+        mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+    }
+    :root body.hms-glass .pt-block > .pt-section { padding: 18px 18px 8px; }
+    :root body.hms-glass .pt-block > .pt-section h2 { font-size: 18px; font-weight: 700; letter-spacing: -.02em; }
+    :root body.hms-glass .pt-block > .pt-card { background: transparent; box-shadow: none; border-top: 0; padding: 0 8px 8px; }
+    :root body.hms-glass .pt-block > .pt-card::before { display: none; }
+}
+/* hover (pointer devices only): a panel that opens something lifts, its rim brightens and its fill firms up */
+@media (hover: hover) {
+    :root body.hms-glass :is(.sh-card.pt-acc, .pt-bill, button.gg-moneycard):hover { translate: 0 -2px; background: var(--gg-fill-h); --gg-ra: var(--gg-r-hover); --gg-rb: var(--gg-r-hover); }
+    :root body.hms-glass button.gg-moneycard.owing:hover { --gg-ra: var(--gg-warn); --gg-rb: var(--gg-warn); }
+}
+
+/* Headings and words */
+:root body.hms-glass .page-head .pms-sub { color: var(--gg-ink2); font-weight: 600; font-size: 15px; }
+:root body.hms-glass .pt-section h2 { font-size: 19px; font-weight: 700; letter-spacing: -.02em; }
+:root body.hms-glass .pt-formcard { padding: 20px 22px; border-radius: 28px; }
+:root body.hms-glass .pt-formcard > h3, :root body.hms-glass .gh-statement h3 { margin: 0 0 12px; font-size: 17px; font-weight: 700; letter-spacing: -.02em; color: var(--gg-ink); text-transform: none; }
+:root body.hms-glass .pt-form label, :root body.hms-glass .pt-search label { font-size: 12.5px; font-weight: 600; letter-spacing: 0; text-transform: none; color: var(--gg-muted); }
+:root body.hms-glass .pt-row-sub { color: var(--gg-muted); }
+:root body.hms-glass .pt-empty { color: var(--gg-muted); }
+:root body.hms-glass .pt-empty i { color: rgba(var(--gg-ink-rgb), .3); }
+:root body.hms-glass .text-muted { color: var(--gg-muted) !important; }
+:root body.hms-glass .gg-large { color: var(--gg-ink); }
+:root body.hms-glass .gg-status { color: var(--gg-ink2); }
+
+/* ------------------------------------------------------------------------------------------------------------------------------------------
+   4. Controls: capsules
+   ------------------------------------------------------------------------------------------------------------------------------------------ */
+:root body.hms-glass .pt-btn {
+    border: 0; border-radius: 999px; min-height: 44px; padding: 0 18px; font-size: 14px; font-weight: 700; letter-spacing: -.01em; font-family: inherit;
+    transition: background-color 200ms var(--gg-ease), box-shadow 200ms var(--gg-ease), color 200ms var(--gg-ease), translate 200ms var(--gg-ease), scale 80ms var(--gg-ease);
+}
+/* the main button: solid ink (white at night) */
+:root body.hms-glass :is(.pt-btn-solid, .pt-btn-primary, .pt-paybar .pt-btn-primary) { background: var(--gg-ink); color: var(--gg-on-ink); box-shadow: 0 1px 2px rgba(0, 0, 0, .12), 0 10px 22px -12px rgba(0, 0, 0, .45); }
+:root body.hms-glass :is(.pt-btn-line, .pt-btn-ghost, .pt-paybar .pt-btn-ghost) { background: var(--gg-fill); color: var(--gg-ink); border: 0; box-shadow: var(--gg-hl), inset 0 0 0 1px var(--gg-ctl); }
+@media (hover: hover) {
+    :root body.hms-glass :is(.pt-btn-solid, .pt-btn-primary):hover:not(:disabled) { background: rgba(var(--gg-ink-rgb), .86); color: var(--gg-on-ink); translate: 0 -1px; }
+    :root body.hms-glass :is(.pt-btn-line, .pt-btn-ghost):hover:not(:disabled) { background: var(--gg-fill-h); box-shadow: var(--gg-hl), inset 0 0 0 1px var(--gg-r-hover); translate: 0 -1px; }
+}
+:root body.hms-glass .pt-btn[disabled] { opacity: .45; translate: none; }
+
+:root body.hms-glass .btn { border-radius: 999px; font-weight: 700; font-family: inherit; }
+:root body.hms-glass :is(.btn-p, .btn-p:focus) {
+    --bs-btn-color: var(--gg-on-ink); --bs-btn-hover-color: var(--gg-on-ink); --bs-btn-active-color: var(--gg-on-ink); --bs-btn-disabled-color: var(--gg-on-ink);
+    background: var(--gg-ink) !important; background-image: none !important; color: var(--gg-on-ink) !important; border: 0 !important;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, .12), 0 10px 22px -12px rgba(0, 0, 0, .45) !important;
+}
+:root body.hms-glass .btn-p:hover { background: rgba(var(--gg-ink-rgb), .86) !important; color: var(--gg-on-ink) !important; }
+:root body.hms-glass :is(.btn-outline-p, .btn-outline-secondary, .btn-ghost) {
+    --bs-btn-color: var(--gg-ink); --bs-btn-hover-color: var(--gg-ink); --bs-btn-active-color: var(--gg-ink);
+    background: var(--gg-fill) !important; color: var(--gg-ink) !important; border: 0 !important; box-shadow: var(--gg-hl), inset 0 0 0 1px var(--gg-ctl) !important;
+}
+:root body.hms-glass :is(.btn-outline-p, .btn-outline-secondary, .btn-ghost):hover { background: var(--gg-fill-h) !important; box-shadow: var(--gg-hl), inset 0 0 0 1px var(--gg-r-hover) !important; }
+:root body.hms-glass .btn-danger-solid { background: var(--gg-bad) !important; color: #FFFFFF !important; border: 0 !important; }
+:root body.hms-glass .sh-pager-card .pms-pager .pg-controls button { min-height: 38px; border: 0; border-radius: 999px; background: var(--gg-fill); color: var(--gg-ink); box-shadow: var(--gg-hl), inset 0 0 0 1px var(--gg-ctl); font-weight: 700; }
+
+/* fields: capsules; on focus the rim brightens and a soft ring opens */
+:root body.hms-glass :is(.pt-input, .form-control, .form-select) {
+    min-height: 46px; border: 0; border-radius: 999px; padding-left: 18px; padding-right: 18px;
+    background-color: var(--gg-fill); color: var(--gg-ink); font-family: inherit;
+    box-shadow: var(--gg-hl), inset 0 0 0 1px var(--gg-ctl);
+    transition: box-shadow 200ms var(--gg-ease), background-color 200ms var(--gg-ease);
+}
+:root body.hms-glass :is(textarea.pt-input, textarea.form-control) { border-radius: 18px; padding-top: 12px; padding-bottom: 12px; }
+:root body.hms-glass :is(.pt-input, .form-control, .form-select):focus { outline: none; background-color: var(--gg-fill-h); box-shadow: var(--gg-hl), inset 0 0 0 1px var(--gg-r-hover), 0 0 0 3px rgba(var(--gg-ink-rgb), .1); }
+:root body.hms-glass :is(.pt-input, .form-control)::placeholder { color: var(--gg-muted); }
+:root body.hms-glass .form-control.is-invalid, :root body.hms-glass .pt-input.is-invalid { box-shadow: var(--gg-hl), inset 0 0 0 1px var(--gg-bad-rim); }
+/* the search (MJ, 26 Oct 2026: "the search bar is not good, add some motion"): one glass capsule on every list of every user. The glass lens icon leans in
+   and darkens on focus, the rim firms up and a soft ring opens, the words in the box slide aside, the clear cross pops in; while a search is typed the rim stays
+   firm so the person sees the list is filtered. On a desktop page head the box widens a little while it is in use. */
+:root body.hms-glass .search-field { position: relative; display: flex; align-items: center; min-width: 0; }
+:root body.hms-glass .search-field.pt-form { margin-bottom: 12px; }
+:root body.hms-glass .search-field :is(.form-control, .pt-input) {
+    width: 100%; min-height: 44px; padding-left: 44px; padding-right: 44px; border-radius: 999px;
+    background-color: var(--gg-fill); box-shadow: var(--gg-hl), inset 0 0 0 1px var(--gg-ctl), var(--gg-drop);
+    transition: background-color 220ms var(--gg-ease), box-shadow 260ms var(--gg-ease);
+}
+:root body.hms-glass .search-field :is(.form-control, .pt-input)::-webkit-search-cancel-button { -webkit-appearance: none; appearance: none; }
+:root body.hms-glass .search-field :is(.form-control, .pt-input)::placeholder { transition: opacity 220ms var(--gg-ease), translate 260ms var(--gg-ease); }
+@media (hover: hover) { :root body.hms-glass .search-field :is(.form-control, .pt-input):hover { background-color: var(--gg-fill-h); box-shadow: var(--gg-hl), inset 0 0 0 1px var(--gg-r-hi2), var(--gg-drop); } }
+:root body.hms-glass .search-field :is(.form-control, .pt-input):focus { background-color: var(--gg-fill-h); box-shadow: var(--gg-hl), inset 0 0 0 1.5px var(--gg-r-hover), 0 0 0 4px rgba(var(--gg-ink-rgb), .08), var(--gg-drop); }
+:root body.hms-glass .search-field :is(.form-control, .pt-input):focus::placeholder { opacity: .45; translate: 6px 0; }
+:root body.hms-glass .search-field:has(input:not(:placeholder-shown)) :is(.form-control, .pt-input) { box-shadow: var(--gg-hl), inset 0 0 0 1.5px var(--gg-r-hover), var(--gg-drop); }
+:root body.hms-glass .search-field > .bi {
+    position: absolute; left: 16px; top: 50%; z-index: 1; font-size: 15px; line-height: 1; color: var(--gg-muted); pointer-events: none;
+    transform: translateY(-50%); transition: transform 360ms cubic-bezier(.32, 1.25, .45, 1), color 220ms var(--gg-ease);
+}
+:root body.hms-glass .search-field:focus-within > .bi, :root body.hms-glass .search-field:has(input:not(:placeholder-shown)) > .bi { color: var(--gg-ink); transform: translateY(-50%) scale(1.14) rotate(-10deg); }
+:root body.hms-glass .search-field .search-clear {
+    position: absolute; right: 7px; top: 50%; z-index: 1; width: 30px; height: 30px; padding: 0; border: 0; border-radius: 50%;
+    display: inline-grid; place-items: center; font-size: 11px; cursor: pointer;
+    background: rgba(var(--gg-ink-rgb), .08); color: var(--gg-ink); transform: translateY(-50%);
+    animation: gg-clear-in 260ms cubic-bezier(.32, 1.25, .45, 1) both; transition: background-color 160ms var(--gg-ease), color 160ms var(--gg-ease);
+}
+:root body.hms-glass .search-field .search-clear:hover { background: var(--gg-ink); color: var(--gg-on-ink); }
+:root body.hms-glass .search-field .search-clear:focus-visible { outline: 2px solid var(--gg-focus); outline-offset: 2px; }
+:root body.hms-glass .search-field .search-clear .bi { position: static; transform: none; font-size: 11px; color: inherit; }
+@keyframes gg-clear-in { from { opacity: 0; transform: translateY(-50%) scale(.4) rotate(-90deg); } }
+@media (min-width: 769px) {
+    :root body.hms-glass .page-head .search-field { transition: flex-basis 320ms var(--gg-ease), width 320ms var(--gg-ease); }
+    :root body.hms-glass .page-head .search-field:focus-within { flex-basis: 360px; width: 360px; max-width: 100%; }
+}
+@media (prefers-reduced-motion: reduce) {
+    :root body.hms-glass .search-field, :root body.hms-glass .search-field > .bi, :root body.hms-glass .search-field :is(.form-control, .pt-input)::placeholder { transition: none; }
+    :root body.hms-glass .search-field .search-clear { animation: none; }
+}
+:root body.hms-glass .pt-form.mb-3[role="search"] { max-width: 420px; }
+
+/* status chips: done = ink with a check, pending = coral, problem = red, neutral = muted */
+:root body.hms-glass .pt-badge { display: inline-flex; align-items: center; gap: 6px; padding: 3px 10px; border-radius: 999px; font-size: 12px; font-weight: 700; background: rgba(var(--gg-ink-rgb), .03); color: var(--gg-muted); box-shadow: inset 0 0 0 1px rgba(var(--gg-ink-rgb), .16); white-space: nowrap; }
+:root body.hms-glass .pt-badge.ok { color: var(--gg-ink); background: rgba(var(--gg-ink-rgb), .04); box-shadow: inset 0 0 0 1px rgba(var(--gg-ink-rgb), .34); }
+:root body.hms-glass .pt-badge.ok::before { content: ""; flex: none; width: 9px; height: 5px; border-left: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: translateY(-1.5px) rotate(-45deg); }
+:root body.hms-glass .pt-badge.ok:has(> .bi)::before { display: none; }
+:root body.hms-glass .pt-badge.warn { color: var(--gg-warn); background: transparent; box-shadow: inset 0 0 0 1px var(--gg-warn-rim); }
+:root body.hms-glass .pt-badge.warn::before { content: ""; flex: none; width: 5px; height: 5px; border-radius: 50%; background: currentColor; }
+:root body.hms-glass .pt-badge.bad { color: var(--gg-bad); background: transparent; box-shadow: inset 0 0 0 1px var(--gg-bad-rim); }
+
+/* the tab tracks: a rimmed capsule; the chosen one is an ink-tinted lens that fades and scales in */
+:root body.hms-glass :is(.pt-period, .pt-tabs, .gg-segments .seg-tabs) {
+    display: inline-flex; flex-wrap: nowrap; gap: 2px; max-width: 100%; padding: 4px; border-radius: 999px; overflow-x: auto; scrollbar-width: none; border: 0;
+    background: var(--gg-fill); box-shadow: var(--gg-hl), inset 0 0 0 1px var(--gg-ctl);
+}
+:root body.hms-glass :is(.pt-period, .pt-tabs, .gg-segments .seg-tabs)::-webkit-scrollbar { display: none; }
+:root body.hms-glass :is(.pt-period a, .pt-tab, .gg-segments .seg-tabs button) {
+    flex: none; display: inline-flex; align-items: center; justify-content: center; gap: 7px; min-height: 36px; padding: 0 16px; border: 0; border-radius: 999px;
+    background: transparent; color: var(--gg-muted); font-size: 13.5px; font-weight: 700; text-decoration: none; box-shadow: none;
+    transition: background-color 200ms var(--gg-ease), box-shadow 200ms var(--gg-ease), color 200ms var(--gg-ease), scale 80ms var(--gg-ease);
+}
+:root body.hms-glass :is(.pt-period a, .pt-tab, .gg-segments .seg-tabs button):hover { color: var(--gg-ink); }
+:root body.hms-glass :is(.pt-period a.active, .pt-tab.active, .gg-segments .seg-tabs button.active) { background: rgba(var(--gg-ink-rgb), .1); color: var(--gg-ink); border: 0; box-shadow: var(--gg-hl), inset 0 0 0 1px rgba(var(--gg-ink-rgb), .26); animation: gg-lens 200ms var(--gg-ease); }
+:root body.hms-glass .gg-segments .seg-tabs > li { list-style: none; }
+@media (max-width: 768px) { :root body.hms-glass .gg-segments .seg-tabs { display: flex; width: 100%; } :root body.hms-glass .gg-segments .seg-tabs button { flex: 1 1 auto; width: 100%; min-height: 40px; } }
+/* the desktop filter bar: the same track inside its card */
+:root body.hms-glass .bm-fbar { z-index: 30; }
+:root body.hms-glass .bm-fbar-top { border-bottom: 0; padding: 8px 14px 8px 8px; }
+:root body.hms-glass .bm-fbar-row { border-top: 1px solid var(--gg-line); }
+:root body.hms-glass .bm-tabs { gap: 2px; padding: 4px; border-radius: 999px; background: rgba(var(--gg-ink-rgb), .03); box-shadow: inset 0 0 0 1px var(--gg-line); }
+:root body.hms-glass .bm-tabs:empty { display: none; }
+:root body.hms-glass .bm-tab { min-height: 36px; padding: 0 16px; border-radius: 999px; color: var(--gg-muted); font-weight: 700; transition: background-color 200ms var(--gg-ease), box-shadow 200ms var(--gg-ease), color 200ms var(--gg-ease); }
+:root body.hms-glass .bm-tab::after { display: none; }
+:root body.hms-glass .bm-tab:hover { color: var(--gg-ink); background: transparent; }
+:root body.hms-glass .bm-tab.active { color: var(--gg-ink); background: rgba(var(--gg-ink-rgb), .1); box-shadow: var(--gg-hl), inset 0 0 0 1px rgba(var(--gg-ink-rgb), .26); animation: gg-lens 200ms var(--gg-ease); }
+:root body.hms-glass .bm-fbar-summary { color: var(--gg-muted); }
+
+/* filter chips (GgChips): glass capsules; the chosen one is solid ink (white by night) */
+:root body.hms-glass .gg-chipbtn { border: 0; background: var(--gg-fill); color: var(--gg-ink2); box-shadow: var(--gg-hl), inset 0 0 0 1px var(--gg-ctl); transition: background-color 200ms var(--gg-ease), color 200ms var(--gg-ease), box-shadow 200ms var(--gg-ease), scale 80ms var(--gg-ease); }
+:root body.hms-glass .gg-chipbtn.on { background: var(--gg-ink); color: var(--gg-on-ink); box-shadow: 0 1px 2px rgba(0, 0, 0, .12), 0 8px 18px -12px rgba(0, 0, 0, .45); }
+:root body.hms-glass .gg-chipcount { background: rgba(var(--gg-ink-rgb), .07); }
+:root body.hms-glass .gg-chipcount.warn { color: var(--gg-warn); box-shadow: inset 0 0 0 1px var(--gg-warn-rim); background: transparent; }
+:root body.hms-glass .gg-chipbtn.on .gg-chipcount { color: inherit; box-shadow: inset 0 0 0 1px currentColor; background: transparent; }
+
+/* alerts and notes */
+:root body.hms-glass .pt-alert { border-radius: 18px; background: var(--gg-fill); color: var(--gg-ink); box-shadow: var(--gg-hl), inset 0 0 0 1px var(--gg-line); }
+:root body.hms-glass .pt-alert.ok > .bi { color: var(--gg-ink); }
+:root body.hms-glass .pt-alert.err { color: var(--gg-bad); box-shadow: var(--gg-hl), inset 0 0 0 1px var(--gg-bad-lo); }
+:root body.hms-glass .gg-note { background: rgba(var(--gg-ink-rgb), .04); color: var(--gg-ink2); box-shadow: inset 0 0 0 1px var(--gg-line); }
+
+/* ------------------------------------------------------------------------------------------------------------------------------------------
+   5. Lists, rows, the kit's components
+   ------------------------------------------------------------------------------------------------------------------------------------------ */
+:root body.hms-glass .pt-row + .pt-row { border-top-color: var(--gg-line); }
+:root body.hms-glass :is(.pt-row-ico, .pt-bill-ico) { border-radius: 50%; background: rgba(var(--gg-ink-rgb), .04); color: var(--gg-ink); box-shadow: inset 0 0 0 1px rgba(var(--gg-ink-rgb), .2), inset 0 1px 0 rgba(var(--gg-ink-rgb), .14); }
+:root body.hms-glass .pt-row-amt, :root body.hms-glass .pt-row-amt.credit { color: var(--gg-ink); font-variant-numeric: tabular-nums; }
+:root body.hms-glass :is(a.pt-row, .gh-bill-row, .gg-listrow.gg-tap) { transition: background-color 120ms var(--gg-ease), scale 80ms var(--gg-ease); }
+@media (hover: hover) {
+    :root body.hms-glass :is(a.pt-row, .gh-bill-row, .gg-listrow.gg-tap):hover { background: rgba(var(--gg-ink-rgb), .05); border-radius: 16px; }
+}
+:root body.hms-glass .gg-list > .pt-row + .pt-row { border-top: 1px solid var(--gg-line); border-radius: 0; }
+:root body.hms-glass .gg-list > .gg-listrow.gg-tap + .gg-listrow.gg-tap { border-top: 1px solid var(--gg-line); }
+:root body.hms-glass .gg-chev { color: var(--gg-muted); }
+:root body.hms-glass .gg-amt.warn, :root body.hms-glass .gg-listrow.warn .gg-amt { color: var(--gg-warn); }
+:root body.hms-glass .gg-listrow.bad .gg-amt { color: var(--gg-bad); }
+:root body.hms-glass .gg-listrow.warn .pt-row-ico { color: var(--gg-warn); box-shadow: inset 0 0 0 1px var(--gg-warn-rim); background: transparent; }
+:root body.hms-glass .gg-listrow.bad .pt-row-ico { color: var(--gg-bad); box-shadow: inset 0 0 0 1px var(--gg-bad-rim); background: transparent; }
+:root body.hms-glass .pt-line { color: var(--gg-ink2); }
+:root body.hms-glass .pt-line b, :root body.hms-glass .pt-line.paid b { color: var(--gg-ink); }
+:root body.hms-glass .pt-bill { overflow: hidden; }
+:root body.hms-glass .pt-bill-head { border-bottom-color: var(--gg-line); }
+:root body.hms-glass .pt-bill-ico { color: var(--gg-ink); }
+:root body.hms-glass .pt-bill-due { background: rgba(var(--gg-ink-rgb), .03); border-top-color: var(--gg-line); }
+:root body.hms-glass .pt-bill-due strong, :root body.hms-glass .pt-bill-due.clear strong { color: var(--gg-ink); }
+:root body.hms-glass .pt-pick { color: var(--gg-ink2); }
+:root body.hms-glass .pt-led th { background: rgba(var(--gg-ink-rgb), .03); color: var(--gg-muted); }
+:root body.hms-glass .pt-led td { border-top-color: var(--gg-line); }
+:root body.hms-glass .pt-led tr.carry td { background: rgba(var(--gg-ink-rgb), .04); }
+:root body.hms-glass .bm-room { color: var(--gg-ink); }
+:root body.hms-glass .sh-card > summary { border-radius: 22px; }
+:root body.hms-glass .sh-body { border-top-color: var(--gg-line); }
+:root body.hms-glass .sh-card[open] .sh-caret { color: var(--gg-ink); }
+:root body.hms-glass .sh-cash strong { color: var(--gg-ink); font-variant-numeric: tabular-nums; }
+
+/* status capsules (GgChip) */
+:root body.hms-glass .gg-chip { border: 0; color: var(--gg-ink2); background: rgba(var(--gg-ink-rgb), .03); box-shadow: inset 0 0 0 1px rgba(var(--gg-ink-rgb), .16); }
+:root body.hms-glass :is(.gg-chip-ok, .gg-chip-ink, .gg-chip.good) { color: var(--gg-ink); box-shadow: inset 0 0 0 1px rgba(var(--gg-ink-rgb), .34); }
+:root body.hms-glass :is(.gg-chip-warn, .gg-chip.warn) { color: var(--gg-warn); background: transparent; box-shadow: inset 0 0 0 1px var(--gg-warn-rim); }
+:root body.hms-glass .gg-chip-bad { color: var(--gg-bad); background: transparent; box-shadow: inset 0 0 0 1px var(--gg-bad-rim); }
+:root body.hms-glass .gg-chip-muted { color: var(--gg-muted); }
+
+/* the stay hero */
+:root body.hms-glass .gg-hero { border: 0; }
+:root body.hms-glass .gg-pill { border: 0; color: var(--gg-ink2); box-shadow: inset 0 0 0 1px rgba(var(--gg-ink-rgb), .2); }
+:root body.hms-glass .gg-progress { background: rgba(var(--gg-ink-rgb), .06); box-shadow: inset 0 0 0 1px rgba(var(--gg-ink-rgb), .1); }
+:root body.hms-glass .gg-progress > span { background: linear-gradient(90deg, rgba(var(--gg-ink-rgb), .4), rgba(var(--gg-ink-rgb), .95)); animation: gg-grow-x 600ms var(--gg-ease) 120ms backwards; }
+
+/* the action capsule: glass capsules, the main one solid ink */
+:root body.hms-glass .gg-cap-btn { border: 0; background: var(--gg-fill); color: var(--gg-ink); box-shadow: var(--gg-hl), inset 0 0 0 1px var(--gg-ctl), var(--gg-drop); -webkit-backdrop-filter: var(--gg-blur); backdrop-filter: var(--gg-blur); transition: background-color 200ms var(--gg-ease), box-shadow 200ms var(--gg-ease), translate 200ms var(--gg-ease), scale 80ms var(--gg-ease), opacity 80ms; }
+:root body.hms-glass .gg-cap-btn.primary { background: var(--gg-ink); color: var(--gg-on-ink); box-shadow: 0 1px 2px rgba(0, 0, 0, .12), 0 12px 26px -14px rgba(0, 0, 0, .5); }
+@media (hover: hover) {
+    :root body.hms-glass .gg-cap-btn:hover { background: var(--gg-fill-h); color: var(--gg-ink); translate: 0 -1px; box-shadow: var(--gg-hl), inset 0 0 0 1px var(--gg-r-hover), var(--gg-drop); }
+    :root body.hms-glass .gg-cap-btn.primary:hover { background: rgba(var(--gg-ink-rgb), .86); color: var(--gg-on-ink); }
+}
+
+/* the money card: coral rim while something is owed */
+:root body.hms-glass .gg-moneycard { border: 0; }
+:root body.hms-glass .gg-moneycard.owing { --gg-ra: var(--gg-warn-rim); --gg-rm: var(--gg-warn-lo); --gg-rb: var(--gg-warn-rim); }
+:root body.hms-glass .gg-money-amt.warn { color: var(--gg-warn); }
+:root body.hms-glass .gg-money-bad { color: var(--gg-bad); }
+:root body.hms-glass .gg-money-go { border: 0; color: var(--gg-ink); box-shadow: inset 0 0 0 1px var(--gg-ctl); }
+
+/* a stay group's head */
+@media (hover: hover) { :root body.hms-glass .gg-staygroup-head:hover { background: rgba(var(--gg-ink-rgb), .04); } }
+
+/* skeletons and the action bar */
+:root body.hms-glass .gg-sk { background: linear-gradient(90deg, rgba(var(--gg-ink-rgb), .07) 0%, rgba(var(--gg-ink-rgb), .03) 50%, rgba(var(--gg-ink-rgb), .07) 100%); background-size: 200% 100%; }
+:root body.hms-glass .gg-actionbar {
+    border: 0; background: var(--gg-pop); color: var(--gg-ink); -webkit-backdrop-filter: var(--gg-blur); backdrop-filter: var(--gg-blur);
+    box-shadow: var(--gg-hl), inset 0 0 0 1px var(--gg-ctl), var(--gg-float);
+}
+@media (min-width: 769px) { :root body.hms-glass .gg-actionbar { position: sticky; bottom: 16px; z-index: 20; } }
+
+/* the pay bar (Bills): a floating glass bar, it overlays the list while sticky */
+:root body.hms-glass .pt-paybar {
+    border: 0; border-radius: 26px; color: var(--gg-ink); background: var(--gg-pop);
+    -webkit-backdrop-filter: var(--gg-blur); backdrop-filter: var(--gg-blur);
+    box-shadow: var(--gg-hl), inset 0 0 0 1px var(--gg-r-lo), var(--gg-float);
+}
+:root body.hms-glass .pt-paybar small, :root body.hms-glass .pt-paybar .pt-razor { color: var(--gg-muted); opacity: 1; }
+:root body.hms-glass .pt-paybar strong { color: var(--gg-ink); font-variant-numeric: tabular-nums; }
+
+/* panel heads of the older blocks */
+:root body.hms-glass .gg-more:hover { color: var(--gg-ink); background: rgba(var(--gg-ink-rgb), .07); }
+
+/* ------------------------------------------------------------------------------------------------------------------------------------------
+   6. The shell: the rail, the top bar, the hotel switch and popover, the user menu, toasts, dialogs and sheets (these get the blur)
+   ------------------------------------------------------------------------------------------------------------------------------------------ */
+/* the rail: a glass card with 28px corners */
+:root body.hms-glass .sidebar { background: transparent !important; color: var(--gg-ink) !important; border-right: 0 !important; }
+:root body.hms-glass .sb-bg {
+    --gg-ra: var(--gg-r-hi); --gg-rm: var(--gg-r-lo); --gg-rb: var(--gg-r-hi2);
+    border-radius: 28px; background: var(--gg-fill); overflow: hidden;
+    -webkit-backdrop-filter: var(--gg-blur); backdrop-filter: var(--gg-blur);
+    box-shadow: var(--gg-hl), var(--gg-drop);
+}
+:root body.hms-glass .sb-bg::before {
+    display: block; content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 1px; pointer-events: none;
+    background: linear-gradient(135deg, var(--gg-ra) 0%, var(--gg-rm) 30%, var(--gg-rm) 70%, var(--gg-rb) 100%);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor;
+    mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+}
+:root body.hms-glass.sidebar-peeking .sb-bg { box-shadow: var(--gg-hl), var(--gg-float); }
+:root body.hms-glass .sidebar .logo { color: var(--gg-ink) !important; }
+:root body.hms-glass .sidebar .logo::after { background: var(--gg-line); }
+:root body.hms-glass .sidebar .logo .logo-mark {
+    border-radius: 15px !important; background: rgba(var(--gg-ink-rgb), .06) !important; color: var(--gg-ink) !important;
+    box-shadow: inset 0 0 0 1px rgba(var(--gg-ink-rgb), .28), inset 0 1px 0 rgba(var(--gg-ink-rgb), .18) !important;
+    font-family: var(--gg-font); font-weight: 800; letter-spacing: .02em; animation: none !important;
+}
+:root body.hms-glass .sidebar .logo .logo-mark::after { display: none; }
+:root body.hms-glass .sidebar .logo .logo-text { font-family: var(--gg-font) !important; font-weight: 700 !important; letter-spacing: -.02em !important; color: var(--gg-ink) !important; }
+:root body.hms-glass .sidebar .logo .logo-text > span { font-family: var(--gg-font) !important; font-size: 12px !important; font-weight: 500 !important; letter-spacing: 0 !important; text-transform: none !important; color: var(--gg-muted) !important; }
+:root body.hms-glass .sidebar-section { color: var(--gg-muted) !important; font-size: 12px !important; font-weight: 600 !important; letter-spacing: .02em !important; text-transform: none !important; margin: 14px 12px 6px !important; }
+:root body.hms-glass .sidebar-section::after { display: none; }
+/* menu items: 38px capsules; the current page is an ink-tinted lens with the inner highlight, fading and scaling in */
+:root body.hms-glass .sidebar-nav a {
+    min-height: 38px; align-items: center; gap: 11px !important; padding: 0 12px !important; margin-bottom: 2px !important; border-radius: 999px !important;
+    color: var(--gg-ink) !important; font-size: 14px !important; font-weight: 500 !important; letter-spacing: -.01em;
+    background: transparent !important; box-shadow: none !important;
+    transition: background-color 200ms var(--gg-ease), box-shadow 200ms var(--gg-ease), color 160ms var(--gg-ease), scale 80ms var(--gg-ease) !important;
+}
+:root body.hms-glass .sidebar-nav a::before { display: none !important; }
+:root body.hms-glass .sidebar-nav a > i { width: 20px !important; height: 20px; font-size: 16px !important; background: transparent !important; box-shadow: none !important; color: inherit !important; }
+:root body.hms-glass .sidebar-nav a > span { transform: none !important; }
+:root body.hms-glass .sidebar-nav a:hover { background: rgba(var(--gg-ink-rgb), .06) !important; color: var(--gg-ink) !important; }
+:root body.hms-glass .sidebar-nav a:active { transform: none !important; scale: .98; }
+:root body.hms-glass .sidebar-nav a.active {
+    font-weight: 700 !important; background: rgba(var(--gg-ink-rgb), .08) !important;
+    box-shadow: var(--gg-hl), inset 0 0 0 1px rgba(var(--gg-ink-rgb), .22) !important;
+    animation: gg-lens 200ms var(--gg-ease) !important;
+}
+:root body.hms-glass .sidebar-nav a:focus-visible { outline: 2px solid var(--gg-focus) !important; outline-offset: 2px; }
+:root body.hms-glass .sb-foot::before { background: var(--gg-line); }
+:root body.hms-glass .sb-user { border: 0; border-radius: 999px; background: rgba(var(--gg-ink-rgb), .04); box-shadow: var(--gg-hl), inset 0 0 0 1px var(--gg-line); color: var(--gg-ink); }
+:root body.hms-glass .sb-user:hover { background: rgba(var(--gg-ink-rgb), .07); color: var(--gg-ink); }
+:root body.hms-glass .sb-user-name { color: var(--gg-ink); }
+:root body.hms-glass .sb-user-role { color: var(--gg-muted); font-size: 11px; font-weight: 500; letter-spacing: 0; text-transform: none; }
+:root body.hms-glass .sb-online { background: var(--gg-ink); border-color: var(--gg-solid); }
+:root body.hms-glass .sb-online::after { display: none; }
+:root body.hms-glass .nav-collapse { border: 0 !important; border-radius: 999px; background: rgba(var(--gg-ink-rgb), .04) !important; box-shadow: var(--gg-hl), inset 0 0 0 1px var(--gg-line); color: var(--gg-ink2); }
+:root body.hms-glass .nav-collapse:hover { background: rgba(var(--gg-ink-rgb), .08) !important; color: var(--gg-ink); }
+/* avatars: an ink ring, not the role colour */
+:root body.hms-glass .avatar { background: rgba(var(--gg-ink-rgb), .06) !important; background-image: none !important; color: var(--gg-ink) !important; box-shadow: inset 0 0 0 1px rgba(var(--gg-ink-rgb), .28) !important; border-radius: 50% !important; }
+:root body.hms-glass .pp-photo { background: rgba(var(--gg-ink-rgb), .06); color: var(--gg-ink); box-shadow: inset 0 0 0 1px rgba(var(--gg-ink-rgb), .28); }
+:root body.hms-glass .pp-cam { background: var(--gg-ink); color: var(--gg-on-ink); border-color: var(--gg-solid); }
+
+/* the hotel switch: a glass capsule */
+:root body.hms-glass :is(.hotel-switch-btn, .hotel-switch.single) {
+    border: 0; border-radius: 999px; background: rgba(var(--gg-ink-rgb), .04); color: var(--gg-ink);
+    box-shadow: var(--gg-hl), inset 0 0 0 1px var(--gg-ctl);
+    transition: background-color 200ms var(--gg-ease), box-shadow 200ms var(--gg-ease), scale 80ms var(--gg-ease);
+}
+:root body.hms-glass .hotel-switch-btn:hover, :root body.hms-glass .hotel-switch.open .hotel-switch-btn { background: rgba(var(--gg-ink-rgb), .08); box-shadow: var(--gg-hl), inset 0 0 0 1px var(--gg-r-hover); }
+:root body.hms-glass .hotel-switch-btn:focus-visible { outline: 2px solid var(--gg-focus); }
+:root body.hms-glass .hotel-switch .hs-mark { border-radius: 50%; background: rgba(var(--gg-ink-rgb), .06); color: var(--gg-ink); box-shadow: inset 0 0 0 1px rgba(var(--gg-ink-rgb), .2); }
+:root body.hms-glass .hotel-switch .hs-hint { color: var(--gg-muted); opacity: 1; letter-spacing: .02em; text-transform: none; }
+/* its popover: glass with blur */
+:root body.hms-glass .hotel-pop {
+    border: 0; border-radius: 22px; color: var(--gg-ink); background: var(--gg-pop);
+    -webkit-backdrop-filter: var(--gg-blur); backdrop-filter: var(--gg-blur);
+    box-shadow: var(--gg-hl), inset 0 0 0 1px var(--gg-r-lo), var(--gg-float);
+}
+:root body.hms-glass .hotel-pop :is(.hp-label, .hp-sub, .hp-hint) { color: var(--gg-muted); }
+:root body.hms-glass .hotel-pop .hp-hint { border-top-color: var(--gg-line); }
+:root body.hms-glass .hotel-pop .hp-item { border-radius: 14px; }
+:root body.hms-glass .hotel-pop .hp-item:hover, :root body.hms-glass .hotel-pop .hp-item:focus-visible { background: rgba(var(--gg-ink-rgb), .06); }
+:root body.hms-glass .hotel-pop .hp-item:focus-visible { box-shadow: inset 0 0 0 2px var(--gg-focus); }
+:root body.hms-glass .hotel-pop .hp-item.selected, :root body.hms-glass .hotel-pop .hp-check { color: var(--gg-ink); }
+:root body.hms-glass .hotel-pop .hp-mark, :root body.hms-glass .hotel-pop .hp-mark.all, :root body.hms-glass .hotel-pop .hp-item.selected .hp-mark:not(.all) { border-radius: 50%; background: rgba(var(--gg-ink-rgb), .06); color: var(--gg-ink); box-shadow: inset 0 0 0 1px rgba(var(--gg-ink-rgb), .22); }
+:root body.hms-glass .hotel-pop .hp-item.selected .hp-mark { background: var(--gg-ink); color: var(--gg-on-ink); }
+:root body.hms-glass .hotel-pop .hp-search { border-radius: 999px; border-color: var(--gg-ctl); background: transparent; }
+:root body.hms-glass .hotel-pop .hp-divider::after { background: var(--gg-line); }
+:root body.hms-glass .hotel-pop :is(.hp-divider, .hp-empty) { color: var(--gg-muted); }
+:root body.hms-glass .hotel-pop .hp-warn { background: transparent; color: var(--gg-warn); box-shadow: inset 0 0 0 1px var(--gg-warn-rim); }
+:root body.hms-glass .hotel-pop-scrim { background: rgba(0, 0, 0, .3); }
+
+/* the top bar: no card; it fades out of the page colour, as the reference's .top::before */
+:root body.hms-glass .topbar::before { top: calc(-1 * var(--sb-gutter) - 1px); height: auto; bottom: -22px; background: linear-gradient(180deg, var(--gg-page-a) 0%, var(--gg-page-a) 55%, var(--gg-page-a0) 100%); }
+:root body.hms-glass .topbar::after { background: transparent !important; border: 0 !important; box-shadow: none !important; -webkit-backdrop-filter: none; backdrop-filter: none; }
+:root body.hms-glass .tb-icon { border-radius: 50%; background: rgba(var(--gg-ink-rgb), .04); color: var(--gg-ink); box-shadow: inset 0 0 0 1px rgba(var(--gg-ink-rgb), .2), inset 0 1px 0 rgba(var(--gg-ink-rgb), .14); animation: none; }
+:root body.hms-glass .tb-icon::after { display: none; }
+:root body.hms-glass .tb-title:hover .tb-icon { transform: none; }
+:root body.hms-glass .tb-eyebrow { color: var(--gg-muted); font-size: 12px; font-weight: 600; letter-spacing: .02em; text-transform: none; }
+:root body.hms-glass .topbar h1 { color: var(--gg-ink) !important; font-size: 22px !important; font-weight: 800 !important; letter-spacing: -.03em; }
+:root body.hms-glass .tb-tile, :root body.hms-glass .tb-chip:hover .tb-tile { border-radius: 50%; background: rgba(var(--gg-ink-rgb), .04); color: var(--gg-ink); box-shadow: inset 0 0 0 1px rgba(var(--gg-ink-rgb), .18); }
+:root body.hms-glass .tb-lbl { color: var(--gg-muted); font-weight: 600; }
+/* decision 71: no clock for a guest (the greeting stays on a desktop) */
+:root body.hms-glass:not(.hms-staff) .topbar .tb-clock { display: none !important; }
+:root body.hms-glass .tb-val, :root body.hms-glass .tb-val * { color: var(--gg-ink); }
+/* its buttons: glass circles and capsules with blur */
+:root body.hms-glass .topbar :is(.theme-btn, .user-menu-btn) {
+    height: 44px; border: 0 !important; color: var(--gg-ink) !important; background: var(--gg-fill) !important;
+    -webkit-backdrop-filter: var(--gg-blur); backdrop-filter: var(--gg-blur);
+    box-shadow: var(--gg-hl), inset 0 0 0 1px var(--gg-ctl), var(--gg-drop) !important;
+}
+:root body.hms-glass .topbar .theme-btn { width: 44px; border-radius: 50%; }
+:root body.hms-glass .topbar .user-menu-btn { border-radius: 999px; padding: 0 14px 0 5px; }
+@media (hover: hover) {
+    :root body.hms-glass .topbar :is(.theme-btn, .user-menu-btn):hover { background: var(--gg-fill-h) !important; color: var(--gg-ink) !important; transform: translateY(-1px); box-shadow: var(--gg-hl), inset 0 0 0 1px var(--gg-r-hover), var(--gg-drop) !important; }
+}
+:root body.hms-glass .topbar .user-menu-btn[aria-expanded="true"] { background: var(--gg-fill-h) !important; color: var(--gg-ink) !important; box-shadow: var(--gg-hl), inset 0 0 0 1px var(--gg-r-hover), var(--gg-drop) !important; }
+:root body.hms-glass .topbar :is(.theme-btn, .user-menu-btn):active { transform: none; scale: .96; }
+:root body.hms-glass .topbar .user-menu-btn .avatar { width: 34px !important; height: 34px !important; border-radius: 50% !important; flex: 0 0 34px; margin: 0 !important; }
+/* the user chip: avatar, name and chevron on one centre line (MJ: "the username logo is not properly aligned") */
+:root body.hms-glass .topbar .user-menu-btn { display: inline-flex !important; align-items: center; gap: 10px; line-height: 1; }
+:root body.hms-glass .topbar .user-menu-btn .um-text { display: flex; flex-direction: column; justify-content: center; gap: 3px; padding: 0 !important; text-align: left; }
+:root body.hms-glass .topbar .user-menu-btn .um-name { font-size: 13px; font-weight: 700; line-height: 1.1; }
+:root body.hms-glass .topbar .user-menu-btn .um-role { line-height: 1; }
+:root body.hms-glass .topbar .user-menu-btn > .bi { margin: 0 0 0 2px !important; font-size: 12px; }
+@media (max-width: 768px) {
+    /* a phone shows the avatar alone: a 44px circle with the 34px avatar in its centre */
+    :root body.hms-glass .topbar .user-menu-btn { width: 44px; min-width: 44px; padding: 0 !important; justify-content: center; gap: 0; }
+    :root body.hms-glass .topbar .user-menu-btn .um-text,
+    :root body.hms-glass .topbar .user-menu-btn > .bi { display: none !important; }
+}
+
+/* the bell's count (MJ, 26 Oct 2026: "the notification colour is cut"): the button no longer clips it; a full red badge on the bell's corner */
+:root body.hms-glass .topbar .tb-bell { overflow: visible !important; position: relative; }
+:root body.hms-glass .topbar .tb-bell .tb-bell-count {
+    position: absolute; top: -3px; right: -3px; z-index: 2; min-width: 19px; height: 19px; padding: 0 5px; border-radius: 999px;
+    display: inline-grid; place-items: center; background: var(--gg-bad) !important; color: #fff !important; font-size: 11px; font-weight: 800; line-height: 1;
+    box-shadow: 0 0 0 2px var(--gg-solid); clip-path: none !important;
+}
+/* every top-bar drop-down (the bell's list, the user menu) opens centred under ITS OWN button (MJ, 26 Oct 2026: "centre to the button only");
+   PallavShell nudges it with --dd-shift only when it would leave the screen. The hotel list does the same (HotelSwitch measures its place). */
+:root body.hms-glass .topbar .dropdown { position: relative; }
+:root body.hms-glass .topbar .dropdown-menu.show {
+    position: absolute !important; top: calc(100% + 10px) !important; left: 50% !important; right: auto !important; bottom: auto !important;
+    inset-inline-start: 50% !important; inset-inline-end: auto !important; margin: 0 !important;
+    transform: translateX(calc(-50% + var(--dd-shift, 0px))) !important;
+    width: min(320px, calc(100vw - 24px)); max-width: calc(100vw - 24px); max-height: calc(100dvh - var(--pt-m-top, 72px) - 24px); overflow-y: auto;
+}
+/* the top bar's middle (GuestTopInfo): the stay status and one action in a glass capsule */
+:root body.hms-glass .topbar .gg-top { display: flex; justify-content: center; min-width: 0; flex: 1 1 auto; }
+:root body.hms-glass .gg-top-pill {
+    display: inline-flex; align-items: center; gap: 6px; min-width: 0; max-width: 100%; padding: 5px 5px 5px 14px; border-radius: 999px;
+    background: var(--gg-fill); -webkit-backdrop-filter: var(--gg-blur); backdrop-filter: var(--gg-blur);
+    box-shadow: var(--gg-hl), inset 0 0 0 1px var(--gg-ctl), var(--gg-drop);
+    animation: gg-top-in 420ms var(--gg-ease) both;
+}
+:root body.hms-glass .gg-top-status { display: inline-flex; align-items: center; gap: 10px; min-width: 0; padding-right: 8px; }
+:root body.hms-glass .gg-top-dot { flex: 0 0 8px; width: 8px; height: 8px; border-radius: 50%; background: var(--gg-muted); }
+:root body.hms-glass .gg-top-status.is-stay .gg-top-dot { background: var(--gg-ink); box-shadow: 0 0 0 0 rgba(var(--gg-ink-rgb), .35); animation: gg-top-pulse 2.4s var(--gg-ease) 600ms 3; }
+:root body.hms-glass .gg-top-status.is-due .gg-top-dot { background: var(--gg-warn); }
+:root body.hms-glass .gg-top-lines { display: flex; flex-direction: column; gap: 2px; min-width: 0; line-height: 1.1; }
+:root body.hms-glass .gg-top-lbl { font-size: 11px; font-weight: 600; color: var(--gg-muted); }
+:root body.hms-glass .gg-top-val { font-size: 13px; font-weight: 700; color: var(--gg-ink); white-space: nowrap; }
+:root body.hms-glass .gg-top-status.is-due .gg-top-val { color: var(--gg-warn); }
+:root body.hms-glass .gg-top-act {
+    display: inline-flex; align-items: center; gap: 8px; height: 34px; padding: 0 14px; border: 0; border-radius: 999px; flex: 0 0 auto;
+    background: var(--gg-ink); color: var(--gg-on-ink); font-size: 13px; font-weight: 700; cursor: pointer;
+    transition: transform 160ms var(--gg-ease), box-shadow 200ms var(--gg-ease);
+}
+@media (hover: hover) { :root body.hms-glass .gg-top-act:hover { transform: translateY(-1px); box-shadow: 0 8px 18px -10px rgba(0, 0, 0, .55); } }
+:root body.hms-glass .gg-top-act:active { transform: none; scale: .96; }
+:root body.hms-glass .gg-top-act:focus-visible { outline: 2px solid var(--gg-focus); outline-offset: 2px; }
+/* the hotel drop-down in the top bar (MJ, 26 Oct 2026: the hotel is changed from the top bar on every screen size): a glass capsule before the status */
+:root body.hms-glass .topbar .gg-top { gap: 8px; align-items: center; }
+:root body.hms-glass .topbar .gg-top .hotel-switch { flex: 0 1 auto; min-width: 0; max-width: 260px; margin: 0; }
+:root body.hms-glass .topbar .gg-top .hotel-switch-btn { min-height: 44px; padding: 4px 12px 4px 4px; border-radius: 999px; }
+:root body.hms-glass .topbar .gg-top .hotel-switch .hs-mark { width: 34px; height: 34px; flex: 0 0 34px; }
+:root body.hms-glass .topbar .gg-top .hotel-switch .hs-name { white-space: nowrap; }
+@media (max-width: 768px) {
+    /* a phone: the drop-down is a round button with the hotel's mark; its list opens under it */
+    :root body.hms-glass .topbar .gg-top .hotel-switch-btn { width: 44px; min-width: 44px; padding: 4px; justify-content: center; }
+    :root body.hms-glass .topbar .gg-top .hotel-switch .hs-text,
+    :root body.hms-glass .topbar .gg-top .hotel-switch .hs-caret { display: none !important; }
+}
+/* a narrow phone in the company portal (no large title under the bar): the hotel button and the page title come first; the amount stays on the page */
+@media (max-width: 430px) {
+    :root body.hms-glass:not(.hms-guest) .topbar .gg-top:has(.hotel-switch) .gg-top-pill { display: none; }
+}
+@keyframes gg-top-in { from { opacity: 0; transform: translateY(-6px) scale(.98); } }
+@keyframes gg-top-pulse { 0% { box-shadow: 0 0 0 0 rgba(var(--gg-ink-rgb), .35); } 70% { box-shadow: 0 0 0 8px rgba(var(--gg-ink-rgb), 0); } 100% { box-shadow: 0 0 0 0 rgba(var(--gg-ink-rgb), 0); } }
+@media (prefers-reduced-motion: reduce) { :root body.hms-glass :is(.gg-top-pill, .gg-top-dot) { animation: none !important; } }
+:root body.hms-glass .um-name { color: var(--gg-ink); }
+:root body.hms-glass .um-role { color: var(--gg-muted); font-size: 11px; letter-spacing: 0; text-transform: none; }
+
+/* the user menu: glass with blur */
+:root body.hms-glass .dropdown-menu, :root body.hms-glass .tb-menu.pms-dropdown {
+    border: 0 !important; border-radius: 22px !important; color: var(--gg-ink); background: var(--gg-pop) !important;
+    -webkit-backdrop-filter: var(--gg-blur); backdrop-filter: var(--gg-blur);
+    box-shadow: var(--gg-hl), inset 0 0 0 1px var(--gg-r-lo), var(--gg-float) !important;
+}
+:root body.hms-glass .tbm-head { border-radius: 16px; background: rgba(var(--gg-ink-rgb), .04); }
+:root body.hms-glass .tbm-role { background: transparent; color: var(--gg-ink2); box-shadow: inset 0 0 0 1px rgba(var(--gg-ink-rgb), .3); letter-spacing: .02em; text-transform: none; font-size: 10.5px; }
+:root body.hms-glass .tb-menu .dropdown-item { border-radius: 14px !important; color: var(--gg-ink); }
+:root body.hms-glass .tb-menu .dropdown-item:hover, :root body.hms-glass .tb-menu .dropdown-item:focus-visible { background: rgba(var(--gg-ink-rgb), .06) !important; }
+:root body.hms-glass .tbm-ic { border-radius: 50%; background: rgba(var(--gg-ink-rgb), .05); color: var(--gg-ink); }
+:root body.hms-glass .tb-menu .dropdown-item:hover .tbm-ic { background: var(--gg-ink); color: var(--gg-on-ink); }
+:root body.hms-glass .tbm-go { color: var(--gg-muted); }
+:root body.hms-glass .tb-menu .tbm-out .tbm-ic { background: var(--gg-bad-lo); color: var(--gg-bad); }
+:root body.hms-glass .tb-menu .tbm-out .tbm-txt > span { color: var(--gg-bad); }
+:root body.hms-glass .tb-menu .tbm-out:hover { background: var(--gg-bad-lo) !important; }
+
+/* dialogs, the bill preview and the sheets: glass with blur, 28px corners */
+:root body.hms-glass .modal-content, :root body.hms-glass .pms-dialog {
+    border: 0; border-radius: 28px; color: var(--gg-ink); background: var(--gg-pop) !important;
+    -webkit-backdrop-filter: var(--gg-blur); backdrop-filter: var(--gg-blur);
+    box-shadow: var(--gg-hl), inset 0 0 0 1px var(--gg-r-lo), var(--gg-float);
+}
+:root body.hms-glass :is(.modal-header, .modal-footer) { background: transparent !important; background-image: none !important; border-color: var(--gg-line) !important; }
+:root body.hms-glass .modal-title, :root body.hms-glass .pms-dialog .pd-title { color: var(--gg-ink); font-weight: 700; letter-spacing: -.02em; }
+:root body.hms-glass .pms-dialog .pd-message { color: var(--gg-ink2); }
+:root body.hms-glass .pms-dialog .pd-icon { border-radius: 50%; background: rgba(var(--gg-ink-rgb), .05); color: var(--gg-ink); box-shadow: inset 0 0 0 1px rgba(var(--gg-ink-rgb), .2); }
+:root body.hms-glass .pms-dialog.tone-danger .pd-icon { background: var(--gg-bad-lo); color: var(--gg-bad); box-shadow: inset 0 0 0 1px var(--gg-bad-rim); }
+:root body.hms-glass .pms-dialog.tone-warning .pd-icon { background: var(--gg-warn-lo); color: var(--gg-warn); box-shadow: inset 0 0 0 1px var(--gg-warn-rim); }
+:root body.hms-glass .modal-backdrop.show { opacity: .35; animation: gg-fade 150ms ease-out; }
+:root body.hms-glass .pms-dialog-backdrop { background: rgba(0, 0, 0, .32); }
+/* the sheet's visible X: a 44px round glass button */
+:root body.hms-glass .gg-sheet .btn-close { width: 44px; height: 44px; padding: 0; margin: -6px -8px -6px auto; border-radius: 50%; background-color: rgba(var(--gg-ink-rgb), .06); background-size: 12px; opacity: .85; box-shadow: inset 0 0 0 1px var(--gg-ctl); }
+:root[data-theme="dark"] body.hms-glass .gg-sheet .btn-close { filter: invert(1) grayscale(1) brightness(1.6); }
+
+/* toasts */
+:root body.hms-glass .toast-item { border: 0; border-radius: 20px; color: var(--gg-ink); background: var(--gg-pop) !important; box-shadow: var(--gg-hl), inset 0 0 0 1px var(--gg-r-lo), var(--gg-float); }
+:root body.hms-glass .toast-item .ti-icon { border-radius: 50%; }
+:root body.hms-glass .toast-item.success .ti-icon, :root body.hms-glass .toast-item.info .ti-icon { background: var(--gg-ink); color: var(--gg-on-ink); }
+:root body.hms-glass .toast-item.error .ti-icon { background: var(--gg-bad); color: #FFFFFF; }
+:root body.hms-glass .toast-item .ti-body { color: var(--gg-ink); }
+:root body.hms-glass .toast-item .ti-progress { background: var(--gg-ink); }
+
+/* ------------------------------------------------------------------------------------------------------------------------------------------
+   7. Phones (768px and down): the app frame. A fixed tab bar (56px + the home-indicator inset), the large title handing over to the top bar's compact one,
+   the action bar above the tab bar, bottom sheets, 16px fields, 44px targets, no tap flash, no sideways scroll. Desktop keeps the sidebar.
+   ------------------------------------------------------------------------------------------------------------------------------------------ */
+@media (max-width: 768px) {
+    :root body.hms-glass.portal-mobile { overflow-x: hidden; }
+    /* the page column: 16px gutters, room under it for the tab bar (and the action bar when the page has one) */
+    :root body.hms-glass.portal-mobile .main[data-hms-dash] .content { padding-left: 16px; padding-right: 16px; padding-bottom: calc(var(--gg-tabbar-h) + var(--gg-safe-b) + 16px); }
+    :root body.hms-glass.portal-mobile .main[data-hms-dash] .content:has(.gg-actionbar, .app-sticky) { padding-bottom: calc(var(--gg-tabbar-h) + var(--gg-safe-b) + 16px + 72px); }
+
+    /* the top bar: the notch inset on top; no menu button, no clock, no greeting (the tab bar and the page say it all) */
+    /* it stays at the top while the page scrolls (the shared phone bar rule, hms-overrides.css body.portal-mobile .topbar, makes it scroll away), day and night */
+    /* an app bar: edge to edge from the very top (Pallav's floating bar sits 10px in, with !important, so content showed above it), the notch inset on top */
+    :root body.hms-glass.portal-mobile .topbar, :root[data-theme] body.hms-glass.portal-mobile .topbar {
+        position: sticky; top: 0 !important; z-index: 1020; margin: 0 !important; border-radius: 0;
+        padding: calc(6px + env(safe-area-inset-top, 0px)) 12px 6px !important; min-height: calc(60px + env(safe-area-inset-top, 0px));
+        transition: background-color 150ms ease-out, box-shadow 150ms ease-out;
+    }
+    :root body.hms-glass.portal-mobile .topbar::before { top: 0; bottom: -18px; left: 0; right: 0; }
+    :root body.hms-glass.portal-mobile .topbar .tb-drawer-btn { display: none !important; }
+    /* the phone's top bar is used (MJ, 26 Oct 2026): the status capsule stays, compact: the value alone and a round action */
+    :root body.hms-glass.portal-mobile .topbar .tb-info:not(.gg-top) { display: none !important; }
+    :root body.hms-glass.portal-mobile .topbar .gg-top { display: flex !important; flex: 1 1 auto; justify-content: flex-end; min-width: 0; margin: 0 6px; }
+    :root body.hms-glass.portal-mobile .gg-top-pill { padding: 3px 3px 3px 12px; gap: 4px; }
+    :root body.hms-glass.portal-mobile .gg-top-lbl { display: none; }
+    :root body.hms-glass.portal-mobile .gg-top-status { gap: 7px; padding-right: 4px; }
+    :root body.hms-glass.portal-mobile .gg-top-val { font-size: 12.5px; }
+    /* a phone: no action button in the capsule (the tab bar carries those pages), the room alone without the hotel, and the page title keeps its room */
+    :root body.hms-glass.portal-mobile .gg-top-act, :root body.hms-glass.portal-mobile .gg-top-more { display: none !important; }
+    :root body.hms-glass.portal-mobile .gg-top-pill { padding: 6px 12px; }
+    :root body.hms-glass.portal-mobile .gg-top-status { padding-right: 0; }
+    :root body.hms-glass.portal-mobile .topbar .gg-top { flex: 0 1 auto; order: 2; }
+    :root body.hms-glass.portal-mobile .topbar .tb-title { min-width: 0; flex: 1 1 auto; }
+    :root body.hms-glass.portal-mobile .topbar .tb-actions { order: 3; }
+    :root body.hms-glass.portal-mobile .gg-top-act > span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+    :root body.hms-glass.portal-mobile .topbar .tb-text h1 { color: var(--gg-ink) !important; font-size: 17px !important; font-weight: 700 !important; letter-spacing: -.02em; }
+    :root body.hms-glass.portal-mobile .topbar .tb-eyebrow { display: none; }
+    /* the large title is on screen: the top bar's title waits; once it scrolls away the compact one fades in (150 ms). .tb-title is display: contents on a
+       phone (hms-overrides.css), so it draws no box and its opacity does nothing: the rule sits on its children (the icon and the words). */
+    :root body.hms-glass.portal-mobile .topbar .tb-title > * { transition: opacity 150ms ease-out; }
+    :root body.hms-glass.portal-mobile.gg-has-large:not(.gg-titled) .topbar .tb-title > * { opacity: 0; pointer-events: none; }
+    /* the compact header: once the large title has gone, the bar is a glass strip with a hairline rim under it (solid under reduced transparency) */
+    :root body.hms-glass.portal-mobile.gg-titled .topbar, :root[data-theme] body.hms-glass.portal-mobile.gg-titled .topbar {
+        background: var(--gg-pop) !important; -webkit-backdrop-filter: blur(20px) saturate(1.6); backdrop-filter: blur(20px) saturate(1.6);
+        box-shadow: inset 0 -1px 0 var(--gg-sep);
+    }
+    :root body.hms-glass.portal-mobile.gg-titled .topbar::before { opacity: 0; }
+    :root body.hms-glass.portal-mobile .gg-page-head { padding-top: 2px; }
+
+    /* the tab bar (MJ, 26 Oct 2026: "capsule design, make it smooth"): a floating glass capsule inset from the edges, over the home-indicator inset; the
+       current tab sits in an inner capsule lens that SLIDES between tabs (data-lit on the bar, set by GuestTabBar); it never hides on scroll.
+       --gg-tabbar-h is the bar's height plus its 10px gap above the screen edge, so the page padding and the action bar keep clear of it. */
+    :root body.hms-glass.portal-mobile .pt-m-nav.gg-tabbar {
+        --gg-tabs: 4; --lit: 0;
+        left: max(12px, env(safe-area-inset-left, 0px)); right: max(12px, env(safe-area-inset-right, 0px)); bottom: calc(var(--gg-safe-b) + 10px);
+        max-width: 520px; margin: 0 auto; gap: 0; isolation: isolate;
+        height: calc(var(--gg-tabbar-h) - 10px); min-height: 0; padding: 6px;
+        border: 0; border-radius: 999px; background: var(--gg-pop);
+        -webkit-backdrop-filter: var(--gg-blur); backdrop-filter: var(--gg-blur);
+        box-shadow: var(--gg-hl), inset 0 0 0 1px var(--gg-ctl), 0 18px 40px -18px rgba(0, 0, 0, .45), 0 2px 6px rgba(0, 0, 0, .08);
+        transform: none !important; transition: none;
+    }
+    :root body.hms-glass.portal-mobile .pt-m-nav.gg-tabbar[data-lit="1"] { --lit: 1; }
+    :root body.hms-glass.portal-mobile .pt-m-nav.gg-tabbar[data-lit="2"] { --lit: 2; }
+    :root body.hms-glass.portal-mobile .pt-m-nav.gg-tabbar[data-lit="3"] { --lit: 3; }
+    :root body.hms-glass.portal-mobile .pt-m-nav.gg-tabbar[data-lit="4"] { --lit: 4; }
+    /* the company portal's bar has five tabs (four and More) */
+    :root body.hms-glass.portal-mobile .pt-m-nav.gg-tabbar[data-tabs="5"] { --gg-tabs: 5; }
+    /* five tabs: every word shown in full (MJ: all the information on every screen size), a touch smaller, never cut */
+    :root body.hms-glass.portal-mobile .pt-m-nav.gg-tabbar[data-tabs="5"] > a span { font-size: 10px; letter-spacing: -.02em; overflow: visible; text-overflow: clip; white-space: nowrap; max-width: none; }
+    /* the company tabs are a plain icon and a word (no .gg-tab-ico wrapper): the same size and lift; their unread count sits on the icon */
+    :root body.hms-glass.portal-mobile .pt-m-nav.gg-tabbar > a > .bi { font-size: 20px; line-height: 1; transition: transform 320ms cubic-bezier(.32, 1.25, .45, 1); }
+    :root body.hms-glass.portal-mobile .pt-m-nav.gg-tabbar > a.active > .bi { transform: translateY(-1px) scale(1.06); }
+    :root body.hms-glass.portal-mobile .pt-m-nav.gg-tabbar > a > .pt-m-dot { position: absolute; top: 4px; left: calc(50% + 6px); min-width: 17px; height: 17px; padding: 0 4px; border-radius: 9px; background: var(--gg-ink); color: var(--gg-on-ink); font-size: 10px; font-weight: 800; font-style: normal; line-height: 17px; text-align: center; box-shadow: 0 0 0 2px var(--gg-solid); }
+    /* the lens: one capsule the width of a tab, moved with a transform (no layout work), a soft spring at the end */
+    :root body.hms-glass.portal-mobile .gg-tab-lens {
+        position: absolute; z-index: 0; top: 6px; bottom: 6px; left: 6px; width: calc((100% - 12px) / var(--gg-tabs));
+        border-radius: 999px; background: rgba(var(--gg-ink-rgb), .09);
+        box-shadow: var(--gg-hl), inset 0 0 0 1px rgba(var(--gg-ink-rgb), .2);
+        transform: translateX(calc(var(--lit) * 100%));
+        transition: transform 420ms cubic-bezier(.32, 1.25, .45, 1), opacity 200ms var(--gg-ease);
+        pointer-events: none;
+    }
+    :root body.hms-glass.portal-mobile .pt-m-nav.gg-tabbar[data-lit="-1"] .gg-tab-lens { opacity: 0; }
+    :root body.hms-glass.portal-mobile .pt-m-nav.gg-tabbar > a {
+        position: relative; z-index: 1; flex: 1 1 0; min-width: 0; min-height: 0; height: 100%; gap: 1px; padding: 2px; border-radius: 999px; background: transparent; box-shadow: none;
+        color: var(--gg-muted); font-size: 11px; font-weight: 600; letter-spacing: -.01em; text-decoration: none;
+        transition: color 220ms var(--gg-ease), scale 120ms var(--gg-ease), opacity 120ms;
+    }
+    :root body.hms-glass.portal-mobile .pt-m-nav.gg-tabbar > a span { font-size: 11px; }
+    :root body.hms-glass.portal-mobile .pt-m-nav.gg-tabbar > a.active { background: transparent; color: var(--gg-ink); font-weight: 700; box-shadow: none; animation: none; }
+    :root body.hms-glass.portal-mobile .gg-tab-ico { position: relative; display: grid; place-items: center; width: 40px; height: 26px; transition: transform 320ms cubic-bezier(.32, 1.25, .45, 1); }
+    :root body.hms-glass.portal-mobile .gg-tab-ico .bi { font-size: 20px; line-height: 1; }
+    :root body.hms-glass.portal-mobile .pt-m-nav.gg-tabbar > a.active .gg-tab-ico { transform: translateY(-1px) scale(1.06); }
+    @media (prefers-reduced-motion: reduce) {
+        :root body.hms-glass.portal-mobile .gg-tab-lens,
+        :root body.hms-glass.portal-mobile .gg-tab-ico { transition: none; }
+    }
+    :root body.hms-glass.portal-mobile .gg-tab-count { position: absolute; top: -3px; left: calc(50% + 6px); min-width: 17px; height: 17px; padding: 0 4px; border-radius: 9px; background: var(--gg-ink); color: var(--gg-on-ink); font-size: 10px; font-weight: 800; font-style: normal; line-height: 17px; text-align: center; box-shadow: 0 0 0 2px var(--gg-solid); }
+    :root body.hms-glass.portal-mobile .gg-tab-dot { position: absolute; top: 2px; left: calc(50% + 8px); width: 9px; height: 9px; border-radius: 50%; background: var(--gg-warn); box-shadow: 0 0 0 2px var(--gg-solid); }
+    :root body.hms-glass.portal-mobile .pt-m-nav.gg-tabbar > a:focus-visible { outline: 2px solid var(--gg-focus); outline-offset: -2px; }
+    :root body.hms-glass.portal-mobile .pt-m-nav.gg-tabbar > a:active { transform: none; scale: .94; opacity: .85; }
+
+    /* the action bar (GgActionBar) and the older fixed bars (.app-sticky): above the tab bar */
+    :root body.hms-glass.portal-mobile .gg-actionbar {
+        position: fixed; left: 12px; right: 12px; bottom: calc(var(--gg-tabbar-h) + var(--gg-safe-b) + 8px); z-index: 990;
+        max-width: 560px; margin: 0 auto; padding: 8px 8px 8px 16px; border-radius: 24px;
+    }
+    :root body.hms-glass.portal-mobile .gg-actionbar-act > .pt-btn { min-height: 48px; padding: 0 20px; }
+    :root body.hms-glass.portal-mobile .app-sticky {
+        bottom: calc(var(--gg-tabbar-h) + var(--gg-safe-b) + 8px);
+        border: 0; border-radius: 24px; background: var(--gg-pop);
+        -webkit-backdrop-filter: var(--gg-blur); backdrop-filter: var(--gg-blur);
+        box-shadow: var(--gg-hl), inset 0 0 0 1px var(--gg-ctl), var(--gg-float);
+    }
+    :root body.hms-glass.portal-mobile .pt-paybar { border-radius: 24px; }
+
+    /* sheets and dialogs from the bottom (the shared sheet: hms-overrides.css .pms-modal): 28px corners, the insets, scroll kept inside */
+    :root body.hms-glass.portal-mobile .pms-modal .modal-content { border-radius: 28px 28px 0 0; max-height: calc(92dvh - env(safe-area-inset-top, 0px)); overscroll-behavior: contain; }
+    :root body.hms-glass.portal-mobile .pms-modal .modal-content::before, :root body.hms-glass.portal-mobile .pms-dialog::before { background: rgba(var(--gg-ink-rgb), .25); }
+    :root body.hms-glass.portal-mobile .pms-modal .modal-body { overscroll-behavior: contain; }
+    :root body.hms-glass.portal-mobile .gg-sheet .modal-footer { padding-bottom: calc(12px + var(--gg-safe-b)); }
+    :root body.hms-glass.portal-mobile .gg-sheet .modal-footer > .pt-btn { flex: 1 1 0; }
+    :root body.hms-glass.portal-mobile .gg-sheet .modal-content { animation: gg-sheet-up var(--gg-dur-sheet) var(--gg-ease) backwards; }
+    /* every GgSheet sits on the bottom edge: Bootstrap's scrollable dialog (.modal-dialog-scrollable) is as tall as the screen, which put the sheet's
+       content at the top; the dialog hugs its content instead and both stop under the notch */
+    :root body.hms-glass.portal-mobile .gg-sheet .modal-dialog { top: auto; bottom: 0; margin: 0; height: auto; max-height: calc(100dvh - env(safe-area-inset-top, 0px) - 16px); }
+    :root body.hms-glass.portal-mobile .gg-sheet .modal-content { max-height: calc(100dvh - env(safe-area-inset-top, 0px) - 16px); }
+    :root body.hms-glass.portal-mobile .pms-dialog { border-radius: 28px 28px 0 0; }
+    /* the hotel list (MJ, 26 Oct 2026: "the same drop-down as the desktop, in every view"): a floating list under its button on a phone too, not a sheet */
+    :root body.hms-glass .hotel-pop {
+        left: var(--hp-left) !important; right: auto !important; top: var(--hp-top, auto) !important; bottom: var(--hp-bottom, auto) !important;
+        width: var(--hp-w) !important; max-height: var(--hp-max) !important; padding: 8px !important; border-radius: 22px !important; border-bottom: inherit;
+    }
+    :root body.hms-glass .hotel-pop::before { display: none !important; }
+    :root body.hms-glass .hotel-pop-scrim { background: transparent !important; }
+    :root body.hms-glass .hotel-pop .hp-item { min-height: 48px; font-size: 15px; }
+
+    /* the More sheet and its scrim (the company portal's; kept for a guest bar that ever brings one back) */
+    :root body.hms-glass.portal-mobile .pt-m-scrim { background: rgba(0, 0, 0, .3); }
+
+    /* fields: 16px so the phone does not zoom in; buttons and rows 44px or taller */
+    :root body.hms-glass.portal-mobile :is(input:not([type="checkbox"]):not([type="radio"]):not([type="range"]), select, textarea, .pt-input, .form-control, .form-select) { font-size: 16px; }
+    :root body.hms-glass.portal-mobile :is(.pt-btn, .btn) { min-height: 44px; }
+    :root body.hms-glass.portal-mobile :is(.gg-chipbtn, .gg-segments .seg-tabs button, .gg-money-go, .gg-more, .go-cancel) { min-height: 44px; }
+
+    /* the list-card badge (the bill's date) is an ink pill */
+    :root body.hms-glass.portal-mobile .pt-acc .sh-when .bm-room { background: rgba(var(--gg-ink-rgb), .06); color: var(--gg-ink); box-shadow: inset 0 0 0 1px rgba(var(--gg-ink-rgb), .2); }
+    :root body.hms-glass.portal-mobile .sh-card > summary { border-radius: 22px; }
+
+    /* Bills: the page line and the search come first on a phone too */
+    :root body.hms-glass.portal-mobile .gg-bills > .page-head { order: -1; }
+    /* the shell's sideways slide is not used: the guest pages enter with gg-enter (section 8) */
+    :root body.hms-glass.portal-mobile #dash-content > div:last-child { animation: none; }
+    /* toasts clear the notch */
+    :root body.hms-glass.portal-mobile .toast-stack { top: calc(12px + env(safe-area-inset-top, 0px)); right: 12px; width: calc(100vw - 24px); }
+}
+
+/* ------------------------------------------------------------------------------------------------------------------------------------------
+   7a. The lists' pager (MJ, 26 Oct 2026: page-wise pagination on every screen size): "Showing 26-50 of 60" at the left, Previous, page numbers and Next
+       at the right; on a phone the line sits above the buttons. Layout unscoped (portal/AppKit.tsx LoadMore), the look under body.hms-glass.
+   ------------------------------------------------------------------------------------------------------------------------------------------ */
+.pt-pager { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px 16px; margin-top: 4px; padding: 10px 14px; border-radius: 22px; }
+.pt-pager-info { font-size: 13.5px; font-weight: 600; color: var(--pt-muted); font-variant-numeric: tabular-nums; }
+.pt-pager-err { color: #B42318; }
+.pt-pager-ctl { display: inline-flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.pt-pager-btn { display: inline-grid; place-items: center; min-width: 44px; height: 44px; padding: 0 12px; border: 1px solid var(--pt-line); border-radius: 999px; background: var(--pt-surface); color: var(--pt-ink); font: inherit; font-size: 14px; font-weight: 700; font-variant-numeric: tabular-nums; cursor: pointer; }
+.pt-pager-btn:disabled { opacity: .4; cursor: default; }
+.pt-pager-btn.on { background: var(--pt-ink); color: var(--pt-surface); border-color: transparent; }
+.pt-pager-gap { padding: 0 2px; color: var(--pt-muted); }
+@media (max-width: 768px) { .pt-pager { flex-direction: column; align-items: stretch; text-align: center; } .pt-pager-ctl { justify-content: center; } }
+:root body.hms-glass .pt-pager { background: var(--gg-fill); box-shadow: var(--gg-hl), inset 0 0 0 1px var(--gg-ctl), var(--gg-drop); }
+:root body.hms-glass .pt-pager-info { color: var(--gg-muted); }
+:root body.hms-glass .pt-pager-err { color: var(--gg-bad); }
+:root body.hms-glass .pt-pager-btn { border: 0; background: var(--gg-fill); color: var(--gg-ink); box-shadow: var(--gg-hl), inset 0 0 0 1px var(--gg-ctl); transition: background-color 160ms var(--gg-ease), scale 80ms var(--gg-ease); }
+:root body.hms-glass .pt-pager-btn.on { background: var(--gg-ink); color: var(--gg-on-ink); box-shadow: 0 6px 14px -8px rgba(0, 0, 0, .5); animation: gg-lens 280ms var(--gg-ease); }
+:root body.hms-glass .pt-pager-btn:active:not(:disabled) { scale: .94; }
+@media (hover: hover) { :root body.hms-glass .pt-pager-btn:not(.on):not(:disabled):hover { background: var(--gg-fill-h); } }
+
+/* ------------------------------------------------------------------------------------------------------------------------------------------
+   7b. The company portal (MJ, 26 Oct 2026: the same look): its screens use the shared dashboard kit (Kpi, StatusChip's .pill, Bootstrap cards) and the
+       portals' phone welcome card and quick actions; here they become glass and monochrome. Only kit classes the guest pages never use (.kpi, .pill,
+       .pt-m-welcome, .pt-m-quick), so nothing changes for the guest.
+   ------------------------------------------------------------------------------------------------------------------------------------------ */
+/* a notice that just arrived (NoticeToaster, MJ 26 Oct 2026): a glass card in the centre of the screen for 6 seconds, a thin line running out over that time */
+.nt-toast {
+    position: fixed; z-index: 1300; top: 50%; left: 50%; width: min(440px, calc(100vw - 24px)); translate: -50% -50%;
+    display: flex; align-items: center; gap: 12px; padding: 12px 8px 14px 14px; border-radius: 22px; overflow: hidden;
+    background: #fff; color: #111113; box-shadow: 0 18px 44px -18px rgba(0, 0, 0, .45);
+    animation: nt-in 320ms cubic-bezier(.22, 1, .36, 1) both;
+}
+.nt-toast.leaving { animation: nt-out 220ms cubic-bezier(.4, 0, 1, 1) both; }
+.nt-toast-ico { flex: 0 0 40px; width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; font-size: 18px; }
+.nt-toast-txt { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.nt-toast-txt strong { font-size: 14.5px; font-weight: 750; line-height: 1.3; overflow-wrap: anywhere; }
+.nt-toast-txt small { font-size: 12.5px; color: #6e6e73; }
+.nt-toast-view { flex: none; min-height: 36px; padding: 0 14px; border: 0; border-radius: 999px; font: inherit; font-size: 13px; font-weight: 750; cursor: pointer; }
+.nt-toast-x { flex: none; width: 36px; height: 36px; border: 0; border-radius: 50%; background: transparent; color: inherit; cursor: pointer; }
+.nt-toast-bar { position: absolute; left: 14px; right: 14px; bottom: 6px; height: 2px; border-radius: 2px; transform-origin: left center; animation: nt-run 6000ms linear both; }
+.nt-toast:hover .nt-toast-bar, .nt-toast:focus-within .nt-toast-bar { animation-play-state: paused; }
+@keyframes nt-in { from { opacity: 0; translate: -50% -50%; scale: .94; } to { opacity: 1; translate: -50% -50%; scale: 1; } }
+@keyframes nt-out { to { opacity: 0; translate: -50% -50%; scale: .96; } }
+@keyframes nt-run { from { transform: scaleX(1); } to { transform: scaleX(0); } }
+:root body.hms-glass .nt-toast { background: var(--gg-pop); color: var(--gg-ink); -webkit-backdrop-filter: var(--gg-blur); backdrop-filter: var(--gg-blur); box-shadow: var(--gg-hl), inset 0 0 0 1px var(--gg-r-hi), 0 18px 44px -18px rgba(0, 0, 0, .5); }
+:root body.hms-glass .nt-toast-ico { background: rgba(var(--gg-ink-rgb), .06); box-shadow: inset 0 0 0 1px var(--gg-ctl); }
+:root body.hms-glass .nt-toast.important .nt-toast-ico { color: var(--gg-bad); box-shadow: inset 0 0 0 1px var(--gg-bad-rim); }
+:root body.hms-glass .nt-toast-txt small { color: var(--gg-muted); }
+:root body.hms-glass .nt-toast-view { background: var(--gg-ink); color: var(--gg-on-ink); }
+:root body.hms-glass .nt-toast-x:hover { background: rgba(var(--gg-ink-rgb), .06); }
+:root body.hms-glass .nt-toast-bar { background: rgba(var(--gg-ink-rgb), .35); }
+@media (prefers-reduced-motion: reduce) { .nt-toast, .nt-toast.leaving { animation: none; } .nt-toast-bar { display: none; } }
+/* the Notices page: a day heading over each day's notices, and the desktop-alerts switch beside the search */
+.nt-day { margin: 18px 4px 8px; font-size: 13px; font-weight: 750; letter-spacing: .02em; color: var(--pt-muted, #6e6e73); }
+.nt-day:first-child { margin-top: 4px; }
+.nt-desk { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 14px; border: 0; border-radius: 999px; background: transparent; font: inherit; font-size: 13.5px; font-weight: 650; color: inherit; cursor: pointer; white-space: nowrap; }
+:root body.hms-glass .nt-day { color: var(--gg-muted); }
+:root body.hms-glass .nt-desk { background: var(--gg-fill); box-shadow: var(--gg-hl), inset 0 0 0 1px var(--gg-ctl); color: var(--gg-ink); }
+:root body.hms-glass .nt-desk.on { cursor: default; }
+
+/* the company dashboard (MJ, 26 Oct 2026): a full-width grid, left the age of what is owed and the oldest bills, right the payments and the hotels */
+.cp-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 20px; align-items: start; margin-top: 20px; }
+@media (min-width: 1100px) { .cp-grid { grid-template-columns: minmax(0, 1.6fr) minmax(320px, 1fr); } }
+@media (min-width: 1600px) { .cp-grid { grid-template-columns: minmax(0, 1.5fr) minmax(400px, 1fr); gap: 24px; } }
+.cp-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+@media (max-width: 768px) { .cp-actions > * { flex: 1 1 140px; justify-content: center; min-height: 48px; } }
+.cp-col { display: flex; flex-direction: column; gap: 20px; min-width: 0; }
+.cp-card { margin: 0 !important; padding: 18px 18px 14px; }
+.cp-head h2 { margin: 0; font-size: 17px; font-weight: 750; letter-spacing: -.02em; }
+.cp-head p { margin: 2px 0 0; font-size: 13px; color: var(--pt-muted, #6b7280); }
+.cp-empty { margin: 14px 0 6px; font-size: 14px; color: var(--pt-muted, #6b7280); }
+.cp-list { margin: 10px -8px 0; }
+.cp-foot { margin-top: 10px; }
+.cp-agebar { display: flex; gap: 3px; height: 14px; margin: 16px 0 14px; border-radius: 999px; overflow: hidden; }
+.cp-agebar > span { flex-basis: 0; min-width: 6px; }
+.cp-ages { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+@media (max-width: 700px) { .cp-ages { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.cp-age { display: flex; flex-direction: column; gap: 4px; min-width: 0; padding: 12px; border-radius: 16px; }
+.cp-age-dot { width: 10px; height: 10px; border-radius: 50%; }
+.cp-age-lbl { font-size: 12.5px; font-weight: 600; color: var(--pt-muted, #6b7280); }
+.cp-age strong { font-size: 16px; font-weight: 800; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+.cp-age-0 { background: rgba(17, 17, 19, .22); } .cp-age-1 { background: rgba(17, 17, 19, .45); } .cp-age-2 { background: #c2410c; } .cp-age-3 { background: #b42318; }
+:root body.hms-glass .cp-head h2, :root body.hms-glass .cp-age strong { color: var(--gg-ink); }
+:root body.hms-glass :is(.cp-head p, .cp-empty, .cp-age-lbl) { color: var(--gg-muted); }
+:root body.hms-glass .cp-age { background: rgba(var(--gg-ink-rgb), .035); box-shadow: inset 0 0 0 1px var(--gg-ctl); }
+:root body.hms-glass .cp-age-0 { background: rgba(var(--gg-ink-rgb), .2); }
+:root body.hms-glass .cp-age-1 { background: rgba(var(--gg-ink-rgb), .45); }
+:root body.hms-glass .cp-age-2 { background: var(--gg-warn); }
+:root body.hms-glass .cp-age-3 { background: var(--gg-bad); }
+:root body.hms-glass .cp-agebar > span { animation: gg-grow-x 700ms var(--gg-ease) 200ms backwards; transform-origin: left center; }
+
+:root body.hms-glass .content .kpi {
+    position: relative; isolation: isolate; border: 0 !important; border-radius: 24px; background: var(--gg-fill) !important;
+    box-shadow: var(--gg-hl), inset 0 0 0 1px var(--gg-ctl), var(--gg-drop) !important; color: var(--gg-ink);
+    transition: translate 260ms var(--gg-ease), box-shadow 260ms var(--gg-ease);
+}
+:root body.hms-glass .content .kpi::after { display: none !important; }
+:root body.hms-glass .content .kpi .kpi-icon {
+    background: rgba(var(--gg-ink-rgb), .05) !important; background-image: none !important; color: var(--gg-ink) !important; border-radius: 50% !important;
+    box-shadow: inset 0 0 0 1px rgba(var(--gg-ink-rgb), .22), inset 0 1px 0 rgba(var(--gg-ink-rgb), .12) !important;
+}
+:root body.hms-glass .content .kpi.warn .kpi-icon { color: var(--gg-warn) !important; box-shadow: inset 0 0 0 1px var(--gg-warn-rim) !important; }
+:root body.hms-glass .content .kpi .kpi-label { color: var(--gg-muted); letter-spacing: .02em; text-transform: none; font-weight: 600; }
+:root body.hms-glass .content .kpi .kpi-value { color: var(--gg-ink); letter-spacing: -.03em; }
+:root body.hms-glass .content .kpi.warn .kpi-value { color: var(--gg-warn); }
+:root body.hms-glass .content .kpi .kpi-chip { border: 0; background: rgba(var(--gg-ink-rgb), .05); color: var(--gg-ink2); box-shadow: inset 0 0 0 1px var(--gg-ctl); }
+@media (hover: hover) { :root body.hms-glass .content .kpi:hover { translate: 0 -2px; box-shadow: var(--gg-hl), inset 0 0 0 1px var(--gg-r-hover), var(--gg-drop), 0 22px 44px -26px rgba(0, 0, 0, .35) !important; } }
+/* the dashboard StatusChip (.pill): ink with a check when done, coral when due, red when it is a problem, muted otherwise */
+:root body.hms-glass .content .pill { display: inline-flex; align-items: center; gap: 6px; padding: 3px 10px; border: 0; border-radius: 999px; font-size: 12px; font-weight: 700; background: transparent; color: var(--gg-ink2); box-shadow: inset 0 0 0 1px var(--gg-ctl); }
+:root body.hms-glass .content .pill::before { display: none; }
+:root body.hms-glass .content .pill.pill-live { color: var(--gg-ink); background: rgba(var(--gg-ink-rgb), .04); box-shadow: inset 0 0 0 1px rgba(var(--gg-ink-rgb), .34); }
+:root body.hms-glass .content .pill.pill-unlocked { color: var(--gg-warn); box-shadow: inset 0 0 0 1px var(--gg-warn-rim); }
+:root body.hms-glass .content .pill.pill-danger { color: var(--gg-bad); box-shadow: inset 0 0 0 1px var(--gg-bad-rim); }
+:root body.hms-glass .content .pill.pill-locked { color: var(--gg-muted); }
+/* rows inside the company cards: the Bootstrap border-top lines become the glass hairline */
+:root body.hms-glass .content .card .border-top { border-top-color: var(--gg-sep) !important; }
+:root body.hms-glass .content .card .text-muted { color: var(--gg-muted) !important; }
+/* phones: the welcome card is glass with ink words (no colour), the quick actions are glass tiles */
+:root body.hms-glass .pt-m-welcome {
+    border: 0; background: var(--gg-fill) !important; background-image: none !important; color: var(--gg-ink) !important;
+    -webkit-backdrop-filter: var(--gg-blur); backdrop-filter: var(--gg-blur);
+    box-shadow: var(--gg-hl), inset 0 0 0 1px var(--gg-r-hi), var(--gg-drop) !important;
+}
+:root body.hms-glass .pt-m-welcome :is(small, span) { color: var(--gg-muted) !important; }
+:root body.hms-glass .pt-m-welcome strong { color: var(--gg-ink) !important; }
+:root body.hms-glass .pt-m-welcome .pt-m-welcome-due { color: var(--gg-bad) !important; background: transparent !important; box-shadow: inset 0 0 0 1px var(--gg-bad-rim); }
+:root body.hms-glass .pt-m-quick button {
+    border: 0; background: var(--gg-fill) !important; color: var(--gg-ink) !important;
+    box-shadow: var(--gg-hl), inset 0 0 0 1px var(--gg-ctl), var(--gg-drop) !important;
+    transition: scale 120ms var(--gg-ease), box-shadow 200ms var(--gg-ease);
+}
+:root body.hms-glass .pt-m-quick button:active { scale: .96; }
+:root body.hms-glass .pt-m-quick .pt-m-dot, :root body.hms-glass .sidebar-nav .sb-count { background: var(--gg-ink) !important; color: var(--gg-on-ink) !important; }
+/* the phone More sheet: glass from the bottom */
+:root body.hms-glass.portal-mobile .pt-m-sheet {
+    border: 0; border-radius: 28px 28px 0 0; background: var(--gg-pop) !important; color: var(--gg-ink);
+    -webkit-backdrop-filter: var(--gg-blur); backdrop-filter: var(--gg-blur); box-shadow: var(--gg-hl), 0 -18px 40px -20px rgba(0, 0, 0, .45);
+    animation: gg-sheet-up var(--gg-dur-sheet) var(--gg-ease) backwards;
+}
+:root body.hms-glass.portal-mobile .pt-m-sheet a { color: var(--gg-ink); border-radius: 16px; }
+:root body.hms-glass.portal-mobile .pt-m-sheet a.active { background: rgba(var(--gg-ink-rgb), .08); }
+:root body.hms-glass.portal-mobile .pt-m-hotel { padding: 4px 4px 12px; margin-bottom: 6px; border-bottom: 1px solid var(--gg-sep); }
+:root body.hms-glass.portal-mobile .pt-m-hotel .hotel-switch, :root body.hms-glass.portal-mobile .pt-m-hotel .hotel-switch-btn { width: 100%; }
+
+/* ------------------------------------------------------------------------------------------------------------------------------------------
+   7d. The staff pages in monochrome (MJ, 26 Oct 2026: the same look for every user, no colour). The hotel, platform and group pages still carried Pallav's
+       greens, ambers, greys and blues (found page by page with a colour scan); here every status speaks the portals' language: done / paid / healthy / in
+       is ink, pending / due / warning is coral, failed / cancelled / delete / out of order is red, the rest is grey. Money in and out keep their + and − signs.
+   ------------------------------------------------------------------------------------------------------------------------------------------ */
+:root body.hms-glass {
+    --hd-in: var(--gg-ink); --hd-out: var(--gg-ink2); --cl-cr: var(--gg-ink); --cl-cr-bg: rgba(var(--gg-ink-rgb), .06); --cl-due: var(--gg-warn); --cl-due-bg: var(--gg-warn-lo);
+    --gg-ok-chip: rgba(var(--gg-ink-rgb), .06); --gg-ok-rim: rgba(var(--gg-ink-rgb), .34);
+}
+/* the second panel (Payroll's company pages, the Website pages, Lists and rates): a glass card like the menu, its items the same capsules */
+:root body.hms-glass .subnav, :root[data-theme] body.hms-glass .subnav { background: transparent !important; border: 0 !important; box-shadow: none !important; color: var(--gg-ink); }
+:root body.hms-glass .subnav::before { border: 0; border-radius: 28px; background: var(--gg-fill); -webkit-backdrop-filter: var(--gg-blur); backdrop-filter: var(--gg-blur); box-shadow: var(--gg-hl), inset 0 0 0 1px var(--gg-r-lo), var(--gg-drop); }
+:root body.hms-glass.subnav-peeking .subnav::before { box-shadow: var(--gg-hl), inset 0 0 0 1px var(--gg-r-lo), var(--gg-float); }
+:root body.hms-glass .subnav :is(.subnav-head, .subnav-body) { background: transparent !important; color: var(--gg-ink) !important; }
+:root body.hms-glass .subnav .sb-head-bg { display: none !important; }
+:root body.hms-glass .subnav-title { color: var(--gg-muted) !important; font-size: 12px !important; font-weight: 600 !important; letter-spacing: .02em !important; text-transform: none !important; }
+:root body.hms-glass .subnav-title i { background: rgba(var(--gg-ink-rgb), .06) !important; color: var(--gg-ink) !important; box-shadow: inset 0 0 0 1px rgba(var(--gg-ink-rgb), .2) !important; border-radius: 50% !important; }
+:root body.hms-glass .subnav-head .company-switch .cs-hint { color: var(--gg-muted) !important; font-size: 10.5px !important; letter-spacing: .02em !important; text-transform: none !important; }
+:root body.hms-glass .subnav-head .company-switch .cs-name { color: var(--gg-ink) !important; }
+:root body.hms-glass .subnav-head .company-switch .cs-caret { background: rgba(var(--gg-ink-rgb), .06) !important; color: var(--gg-ink) !important; }
+:root body.hms-glass .subnav-head .company-switch .company-switch-btn { -webkit-backdrop-filter: none; backdrop-filter: none; }
+:root body.hms-glass .subnav .rail-label { color: var(--gg-muted) !important; font-size: 12px !important; font-weight: 600 !important; letter-spacing: .02em !important; text-transform: none !important; }
+:root body.hms-glass .subnav .rail-item {
+    min-height: 38px; align-items: center; gap: 11px; padding: 0 12px !important; margin-bottom: 2px; border-radius: 999px !important;
+    color: var(--gg-ink) !important; font-size: 14px; font-weight: 500; background: transparent !important; box-shadow: none !important;
+    transition: background-color 200ms var(--gg-ease), box-shadow 200ms var(--gg-ease), scale 80ms var(--gg-ease);
+}
+:root body.hms-glass .subnav .rail-item::before { display: none !important; }
+:root body.hms-glass .subnav .rail-item > .bi { color: inherit !important; background: transparent !important; box-shadow: none !important; }
+:root body.hms-glass .subnav .rail-item:hover { background: rgba(var(--gg-ink-rgb), .06) !important; }
+:root body.hms-glass .subnav .rail-item.active { font-weight: 700; background: rgba(var(--gg-ink-rgb), .08) !important; box-shadow: var(--gg-hl), inset 0 0 0 1px rgba(var(--gg-ink-rgb), .22) !important; animation: gg-lens 200ms var(--gg-ease); }
+:root body.hms-glass :is(.subnav .panel-toggle, .subnav-peek) { border: 0 !important; border-radius: 999px !important; background: rgba(var(--gg-ink-rgb), .04) !important; color: var(--gg-ink2) !important; box-shadow: var(--gg-hl), inset 0 0 0 1px var(--gg-line) !important; }
+:root body.hms-glass .company-switch-btn { border: 0 !important; border-radius: 22px !important; background: rgba(var(--gg-ink-rgb), .04) !important; color: var(--gg-ink) !important; box-shadow: var(--gg-hl), inset 0 0 0 1px var(--gg-ctl) !important; }
+:root body.hms-glass .company-switch .cs-mark, :root body.hms-glass .company-switch-btn .cs-mark { background: rgba(var(--gg-ink-rgb), .06) !important; background-image: none !important; color: var(--gg-ink) !important; box-shadow: inset 0 0 0 1px rgba(var(--gg-ink-rgb), .22) !important; animation: none !important; }
+:root body.hms-glass .company-switch .cs-mark::after { display: none !important; }
+/* the front desk pages: the menu lists their pages, so on a desktop the page head keeps only the two quick buttons (Reservation, Walk-in check-in) beside
+   the search; on a phone, where the menu is hidden, the tab strip stays, full width under the page line */
+:root body.hms-glass .page-head .wa-nav { display: flex; align-items: center; gap: 8px; margin: 0; padding: 0; border: 0; background: transparent !important; box-shadow: none !important; min-width: 0; }
+:root body.hms-glass .page-head .wa-nav::before { display: none !important; }
+:root body.hms-glass .page-head .wa-nav .fo-nav-actions { margin-left: 0 !important; }
+:root body.hms-glass .page-head .wa-nav .fo-nav-actions .btn { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 0 18px; border-radius: 999px; font-weight: 700; line-height: 1; white-space: nowrap; }
+@media (min-width: 769px) {
+    :root body.hms-glass .page-head .wa-nav .wa-tab { display: none !important; }
+}
+@media (max-width: 768px) {
+    :root body.hms-glass .page-head .wa-nav { flex: 1 1 100%; width: 100%; order: 99; overflow-x: auto; scrollbar-width: none; padding: 4px 0 2px; }
+    :root body.hms-glass .page-head .wa-nav::-webkit-scrollbar { display: none; }
+    :root body.hms-glass .page-head .wa-nav .wa-tab { flex: 0 0 auto; display: inline-flex; align-items: center; gap: 6px; min-height: 40px; padding: 0 14px; border-radius: 999px; white-space: nowrap; color: var(--gg-ink2); background: rgba(var(--gg-ink-rgb), .04); box-shadow: inset 0 0 0 1px var(--gg-line); }
+    :root body.hms-glass .page-head .wa-nav .wa-tab.active { color: var(--gg-ink); font-weight: 700; background: rgba(var(--gg-ink-rgb), .09); box-shadow: var(--gg-hl), inset 0 0 0 1px rgba(var(--gg-ink-rgb), .22); }
+    :root body.hms-glass .page-head .wa-nav .fo-nav-actions { flex: 0 0 auto; }
+}
+/* the Website pages: the second panel lists them and opens the live site (RoleDashboard, .rail-site), so on a desktop with the panel open the tab strip goes; on a phone
+   or with the panel hidden the tabs come back. A room card's name wraps instead of being cut short by its badge. */
+@media (min-width: 769px) {
+    :root body.hms-glass:not(.subnav-hidden) .wa-nav-site { justify-content: flex-end; padding: 0 !important; margin-bottom: 8px; background: transparent !important; box-shadow: none !important; border: 0 !important; }
+    :root body.hms-glass:not(.subnav-hidden) .wa-nav-site::before { display: none !important; }
+    :root body.hms-glass:not(.subnav-hidden) .wa-nav-site { display: none !important; }
+    /* a page whose head already opens the site (Content's "Preview site") needs no second link */
+    :root body.hms-glass:not(.subnav-hidden) .main:has(.page-head a[target="_blank"]) .wa-nav-site { display: none !important; }
+    :root body.hms-glass:not(.subnav-hidden) .wa-nav-site .wa-live { margin-left: auto; min-height: 40px; padding: 0 16px; border-radius: 999px; background: rgba(var(--gg-ink-rgb), .04); box-shadow: var(--gg-hl), inset 0 0 0 1px var(--gg-ctl); color: var(--gg-ink); font-weight: 700; }
+}
+:root body.hms-glass .wa-card-title { white-space: normal; overflow: visible; text-overflow: clip; line-height: 1.25; }
+:root body.hms-glass .wa-card-head { flex-wrap: wrap; row-gap: 6px; }
+:root body.hms-glass .wa-card-head > div:not(.wa-badge) { flex: 1 1 calc(100% - 40px); min-width: 0; }
+:root body.hms-glass .wa-card-head .wa-badge { order: 3; flex: 0 0 auto; margin-left: 28px !important; font-size: 10px; padding: 3px 9px; white-space: nowrap; }
+/* a one-field row with its remove button (the website's addresses): the field takes the room, the button stays round (the grid was made for name and email pairs) */
+:root body.hms-glass .wa-recipient:not(:has(> .form-control ~ .form-control)) { grid-template-columns: 1fr auto; }
+:root body.hms-glass .wa-recipient > .btn { width: 44px; min-width: 44px; height: 44px; padding: 0; border-radius: 50%; justify-content: center; }
+:root body.hms-glass .subnav .rail-site { margin: 0 0 10px; box-shadow: var(--gg-hl), inset 0 0 0 1px var(--gg-ctl) !important; font-weight: 700; }
+/* a hotel's type (Group / Individual) is a fact, not a state: grey, never coral */
+:root body.hms-glass .pay-pill.pay-kind { color: var(--gg-ink2) !important; box-shadow: inset 0 0 0 1px var(--gg-ctl) !important; }
+/* Reservations: the room type keeps a readable width ("1 × Executive Suite" was wrapping word by word beside the action buttons) */
+:root body.hms-glass .main td.fo-cell-room { min-width: 200px; }
+/* status words: one capsule, three tones */
+:root body.hms-glass :is(.bm-state, .pay-pill, .fo-status, .hl-pill, .sl-action, .cl-tag, .sh-count, .role-pill, .badge) {
+    display: inline-flex; align-items: center; gap: 6px; border: 0; border-radius: 999px; font-weight: 700;
+    background: transparent !important; color: var(--gg-ink2) !important; box-shadow: inset 0 0 0 1px var(--gg-ctl);
+}
+:root body.hms-glass :is(.bm-state.good, .pay-pill.pay-paid, .fo-status.checked_in, .fo-status.in_house, .fo-status.confirmed, .hl-pill.ok, .hl-pill.healthy, .badge.text-bg-success, .badge.bg-success) {
+    background: var(--gg-ok-chip) !important; color: var(--gg-ink) !important; box-shadow: inset 0 0 0 1px var(--gg-ok-rim);
+}
+:root body.hms-glass :is(.bm-state.warn, .pay-pill.pay-pending, .pay-pill.pay-partial, .hl-pill.warn, .hl-pill.degraded, .cl-tag.due, .sh-count.warn, .badge.bg-warning, .badge.text-bg-warning) {
+    color: var(--gg-warn) !important; box-shadow: inset 0 0 0 1px var(--gg-warn-rim);
+}
+:root body.hms-glass :is(.pay-pill.pay-failed, .fo-status.cancelled, .fo-status.no_show, .hl-pill.down, .badge.bg-danger, .badge.text-bg-danger) {
+    color: var(--gg-bad) !important; box-shadow: inset 0 0 0 1px var(--gg-bad-rim);
+}
+:root body.hms-glass :is(.pay-pill.pay-hold, .hl-pill.idle, .fo-status.checked_out) { color: var(--gg-muted) !important; }
+/* the activity log's action word: ink, red only for a removal */
+:root body.hms-glass .sh-shift.sl-action { background: transparent !important; color: var(--gg-ink2) !important; }
+/* dots before a status: ink when done, coral when due, grey otherwise */
+:root body.hms-glass :is(.bm-dot, .dot, .dp-dot, .dotc) { background: rgba(var(--gg-ink-rgb), .35) !important; }
+:root body.hms-glass :is(.bm-dot.paid, .dot.on, .dp-dot.tone-ok) { background: var(--gg-ink) !important; }
+:root body.hms-glass :is(.bm-dot.due, .dp-dot.tone-warn) { background: var(--gg-warn) !important; }
+:root body.hms-glass .dp-dot.tone-bad { background: var(--gg-bad) !important; }
+:root body.hms-glass .role-pill { --role: var(--gg-ink) !important; --role-bg: transparent !important; }
+/* the room board: the edge says the room's state (occupied ink, vacant light, dirty coral, out of order red) */
+:root body.hms-glass :is(.fo-room, .fo-legend span).s-vacant, :root body.hms-glass .fo-legend .s-vacant { --fo-c: rgba(var(--gg-ink-rgb), .22); }
+:root body.hms-glass :is(.fo-room, .fo-legend span).s-occupied, :root body.hms-glass .fo-legend .s-occupied { --fo-c: var(--gg-ink); }
+:root body.hms-glass :is(.fo-room, .fo-legend span).s-dirty, :root body.hms-glass .fo-legend .s-dirty { --fo-c: var(--gg-warn); }
+:root body.hms-glass :is(.fo-room, .fo-legend span).s-out_of_order, :root body.hms-glass .fo-legend .s-out_of_order { --fo-c: var(--gg-bad); }
+:root body.hms-glass .fo-room.s-occupied { background: rgba(var(--gg-ink-rgb), .05); }
+:root body.hms-glass .fo-room.s-out_of_order { background: var(--gg-bad-lo); }
+/* accent icons written inline (a role's own colour on Users, the WhatsApp mark, the preview tag): ink */
+:root body.hms-glass .main .bi[style*="color"], :root body.hms-glass .main .bi-whatsapp, :root body.hms-glass .main .cv-ch .bi { color: var(--gg-ink2) !important; }
+:root body.hms-glass .pt-tb-pill.preview { background: rgba(var(--gg-ink-rgb), .06) !important; color: var(--gg-ink) !important; box-shadow: inset 0 0 0 1px var(--gg-ctl); }
+/* attendance marks (the sheet, the monthly report, the marks list): their own colour is stored data; here they read by what the day pays:
+   a full day ink, a part day coral, no pay red; the letter (P, A, HD, WO ...) tells them apart */
+:root body.hms-glass .lc-key[data-tone] { display: inline-grid; place-items: center; min-width: 26px; height: 22px; padding: 0 6px; border-radius: 999px; font-size: 10.5px; font-weight: 800; letter-spacing: .02em; line-height: 1; }
+/* the payroll trail: its own line above the page head; the page you are on is never cut short */
+:root body.hms-glass .crumbs { margin-bottom: 10px; }
+:root body.hms-glass .crumbs-back { border: 0 !important; border-radius: 999px !important; background: rgba(var(--gg-ink-rgb), .04) !important; color: var(--gg-ink) !important; box-shadow: var(--gg-hl), inset 0 0 0 1px var(--gg-ctl) !important; }
+:root body.hms-glass .crumbs-trail a { color: var(--gg-ink2) !important; }
+:root body.hms-glass .crumbs-trail a:hover { background: rgba(var(--gg-ink-rgb), .06) !important; color: var(--gg-ink) !important; }
+:root body.hms-glass .crumbs-trail [aria-current] span { max-width: none; overflow: visible; }
+:root body.hms-glass :is(.lc-key, .att-chip)[data-tone] { background: rgba(var(--gg-ink-rgb), .08) !important; color: var(--gg-ink) !important; box-shadow: inset 0 0 0 1px rgba(var(--gg-ink-rgb), .25); }
+:root body.hms-glass :is(.lc-key, .att-chip)[data-tone="full"] { background: var(--gg-ink) !important; color: var(--gg-on-ink) !important; box-shadow: none; }
+:root body.hms-glass :is(.lc-key, .att-chip)[data-tone="part"] { background: var(--gg-warn-lo) !important; color: var(--gg-warn) !important; box-shadow: inset 0 0 0 1px var(--gg-warn-rim); }
+:root body.hms-glass :is(.lc-key, .att-chip)[data-tone="none"] { background: var(--gg-bad-lo) !important; color: var(--gg-bad) !important; box-shadow: inset 0 0 0 1px var(--gg-bad-rim); }
+:root body.hms-glass .status-cell[data-tone] { background: rgba(var(--gg-ink-rgb), .06) !important; border-color: rgba(var(--gg-ink-rgb), .3) !important; color: var(--gg-ink) !important; font-weight: 800; }
+:root body.hms-glass .status-cell[data-tone="part"] { background: var(--gg-warn-lo) !important; border-color: var(--gg-warn-rim) !important; color: var(--gg-warn) !important; }
+:root body.hms-glass .status-cell[data-tone="none"] { background: var(--gg-bad-lo) !important; border-color: var(--gg-bad-rim) !important; color: var(--gg-bad) !important; }
+/* Sundays and days still to come on the sheet: a faint ink shade, no peach or stripes */
+:root body.hms-glass :is(th, td).is-sunday { background: rgba(var(--gg-ink-rgb), .035) !important; }
+:root body.hms-glass th.is-sunday, :root body.hms-glass th.is-sunday * { color: var(--gg-ink) !important; }
+:root body.hms-glass td.day-cell.is-future { background-image: none !important; background-color: rgba(var(--gg-ink-rgb), .02) !important; }
+/* checkboxes and switches: ink when on */
+:root body.hms-glass .form-check-input:checked { background-color: var(--gg-ink) !important; border-color: var(--gg-ink) !important; }
+:root body.hms-glass .form-check-input:focus { box-shadow: 0 0 0 3px rgba(var(--gg-ink-rgb), .15) !important; border-color: rgba(var(--gg-ink-rgb), .5) !important; }
+/* the website pages: room badges, the rates calendar, the gallery shade */
+:root body.hms-glass .wa-badge { background: transparent !important; color: var(--gg-ink2) !important; box-shadow: inset 0 0 0 1px var(--gg-ctl); border-radius: 999px; }
+:root body.hms-glass .wa-badge.ok { color: var(--gg-ink) !important; background: rgba(var(--gg-ink-rgb), .06) !important; box-shadow: inset 0 0 0 1px rgba(var(--gg-ink-rgb), .34); }
+:root body.hms-glass .wa-badge.off { color: var(--gg-muted) !important; }
+:root body.hms-glass .cal-inv { background: rgba(var(--gg-ink-rgb), .04) !important; border-color: var(--gg-line) !important; }
+:root body.hms-glass .cal-inv.is-blocked { background: var(--gg-bad-lo) !important; border-color: var(--gg-bad-rim) !important; }
+:root body.hms-glass .cal-rate.is-recent { background: var(--gg-warn-lo) !important; border-color: var(--gg-warn-rim) !important; }
+:root body.hms-glass .cal-block.on { color: var(--gg-bad) !important; }
+:root body.hms-glass .wa-shade-wide { background-image: linear-gradient(180deg, rgba(0, 0, 0, 0) 40%, rgba(0, 0, 0, .55)) !important; }
+:root body.hms-glass .main code { color: var(--gg-ink) !important; background: rgba(var(--gg-ink-rgb), .06); padding: 1px 6px; border-radius: 6px; }
+/* money in and out: ink, out a shade lighter; the sign tells them apart */
+:root body.hms-glass :is(.amount-in, .c-amt.amount-in, strong.in, .text-success) { color: var(--gg-ink) !important; }
+:root body.hms-glass :is(.amount-out, .c-amt.amount-out, strong.out) { color: var(--gg-ink2) !important; }
+:root body.hms-glass :is(.cb-row, .cb-card).in { --tone: var(--gg-ink); }
+:root body.hms-glass :is(.cb-row, .cb-card).out { --tone: var(--gg-ink2); }
+:root body.hms-glass :is(.cb-book, .cv-ch) { color: var(--gg-ink2) !important; background: transparent !important; }
+/* gradients become flat ink tints */
+:root body.hms-glass :is(.sh-shift.bm-kind.both, .dr-step, .dr-hand, .dr-net, .dr-sum-part.result, .ac-rung-icon, .ac-role-icon, .ac-box) { background-image: none !important; background-color: rgba(var(--gg-ink-rgb), .06) !important; color: var(--gg-ink) !important; }
+:root body.hms-glass :is(.dr-step, .ac-rung-icon, .ac-role-icon) { box-shadow: inset 0 0 0 1px var(--gg-ctl) !important; }
+/* the Daily report's carry-forward card: a glass card with ink words (its white words sat on the old coloured fill) */
+:root body.hms-glass .dr-hand { background: var(--gg-fill) !important; border-radius: 24px; box-shadow: var(--gg-hl), inset 0 0 0 1px var(--gg-r-lo), var(--gg-drop) !important; color: var(--gg-ink) !important; }
+:root body.hms-glass .dr-hand :is(.dr-eyebrow, .dr-hint) { color: var(--gg-muted) !important; }
+:root body.hms-glass .dr-hand .dr-figure { color: var(--gg-ink) !important; }
+/* Hotel settings: the chosen tab is the menu's ink lens, the section icon a ringed tile (no coloured or black gradient) */
+:root body.hms-glass .st-tab { border-radius: 999px !important; transition: background-color 200ms var(--gg-ease), box-shadow 200ms var(--gg-ease); }
+:root body.hms-glass .st-tab:hover { background: rgba(var(--gg-ink-rgb), .06) !important; }
+:root body.hms-glass .st-tab.active { background: rgba(var(--gg-ink-rgb), .08) !important; background-image: none !important; color: var(--gg-ink) !important; font-weight: 700; box-shadow: var(--gg-hl), inset 0 0 0 1px rgba(var(--gg-ink-rgb), .22) !important; }
+:root body.hms-glass .st-tab.active i { color: var(--gg-ink) !important; }
+:root body.hms-glass .st-icon { background: rgba(var(--gg-ink-rgb), .06) !important; background-image: none !important; color: var(--gg-ink) !important; box-shadow: inset 0 0 0 1px rgba(var(--gg-ink-rgb), .22) !important; border-radius: 50% !important; }
+:root body.hms-glass .ac-rung.current { border-color: var(--gg-ink) !important; }
+/* the system map: grey lines, ink when data flows */
+:root body.hms-glass :is(line.edge, line.edge.data) { stroke: rgba(var(--gg-ink-rgb), .45) !important; }
+:root body.hms-glass :is(circle.dot) { fill: rgba(var(--gg-ink-rgb), .35) !important; }
+:root body.hms-glass i.data { background: var(--gg-ink) !important; }
+:root body.hms-glass .hl-card.idle { border-color: var(--gg-ctl) !important; }
+/* Bootstrap's coloured pieces: links in ink, notes as glass, the delete button red only in its words */
+:root body.hms-glass .btn-link { color: var(--gg-ink) !important; text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(var(--gg-ink-rgb), .3); }
+:root body.hms-glass .text-danger { color: var(--gg-bad) !important; }
+:root body.hms-glass .text-warning { color: var(--gg-warn) !important; }
+:root body.hms-glass :is(.text-primary, .text-info) { color: var(--gg-ink) !important; }
+:root body.hms-glass .btn-outline-danger { color: var(--gg-bad) !important; border-color: var(--gg-bad-rim) !important; background: transparent !important; border-radius: 999px; }
+:root body.hms-glass .btn-outline-danger:hover { background: var(--gg-bad-lo) !important; }
+:root body.hms-glass .alert:is(.alert-info, .alert-primary, .alert-secondary, .alert-light, .alert-success) {
+    border: 0; border-radius: 20px; background: var(--gg-fill) !important; color: var(--gg-ink) !important; box-shadow: var(--gg-hl), inset 0 0 0 1px var(--gg-ctl);
+}
+:root body.hms-glass .alert:is(.alert-info, .alert-primary, .alert-secondary, .alert-light, .alert-success) :not(.btn, .btn *) { color: inherit !important; }
+:root body.hms-glass .alert.alert-warning { border: 0; border-radius: 20px; background: var(--gg-warn-lo) !important; color: var(--gg-ink) !important; box-shadow: inset 0 0 0 1px var(--gg-warn-rim); }
+:root body.hms-glass .alert.alert-danger { border: 0; border-radius: 20px; background: var(--gg-bad-lo) !important; color: var(--gg-ink) !important; box-shadow: inset 0 0 0 1px var(--gg-bad-rim); }
+
+/* ------------------------------------------------------------------------------------------------------------------------------------------
+   8. Motion (MJ, 26 Oct 2026: "make sure you use motion, smoother"): CSS only. A page enters with a 560 ms fade, 18px rise and slight scale (steps of 70 ms), list rows follow one by one; a pushed page (one bill)
+   slides in from the right; sheets slide up in 220 ms over a 150 ms backdrop fade; the stay bar and the order steps grow from the left; chosen tabs and
+   chips fade and scale in; anything pressed squeezes at once (80 ms), with no reliance on hover. Skeletons shimmer (1.2 s loop).
+   ------------------------------------------------------------------------------------------------------------------------------------------ */
+@keyframes gg-enter { from { opacity: 0; translate: 0 18px; scale: .985; } to { opacity: 1; translate: 0 0; scale: 1; } }
+@keyframes gg-push { from { opacity: 0; translate: 36px 0; } to { opacity: 1; translate: 0 0; } }
+@keyframes gg-sheet-up { from { transform: translateY(100%); } to { transform: translateY(0); } }
+@keyframes gg-fade { from { opacity: 0; } }
+@keyframes gg-grow-x { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes gg-lens { from { opacity: .4; scale: .9; } 60% { scale: 1.03; } to { opacity: 1; scale: 1; } }
+@keyframes gg-shimmer { from { background-position: 200% 0; } to { background-position: -200% 0; } }
+/* kept for the older blocks that still name it */
+@keyframes gg-rise { from { opacity: 0; translate: 0 8px; } to { opacity: 1; translate: 0 0; } }
+:root body.hms-glass .gg-page > :not(.gg-actionbar):not(.app-sticky) { animation: gg-enter var(--gg-dur-enter) var(--gg-ease) backwards; }
+:root body.hms-glass .gg-page > :nth-child(2) { animation-delay: 70ms; }
+:root body.hms-glass .gg-page > :nth-child(3) { animation-delay: 140ms; }
+:root body.hms-glass .gg-page > :nth-child(4) { animation-delay: 210ms; } body.hms-glass .gg-page > :nth-child(n+5) { animation-delay: 280ms; }
+/* rows inside lists come in one after another (MJ, 26 Oct 2026: more motion), after their card; at most eight steps */ body.hms-glass :is(.gg-list, .pt-list) > * { animation: gg-row-in 460ms var(--gg-ease) backwards; } body.hms-glass :is(.gg-list, .pt-list) > :nth-child(1) { animation-delay: 180ms; } body.hms-glass :is(.gg-list, .pt-list) > :nth-child(2) { animation-delay: 230ms; } body.hms-glass :is(.gg-list, .pt-list) > :nth-child(3) { animation-delay: 280ms; } body.hms-glass :is(.gg-list, .pt-list) > :nth-child(4) { animation-delay: 330ms; } body.hms-glass :is(.gg-list, .pt-list) > :nth-child(5) { animation-delay: 380ms; } body.hms-glass :is(.gg-list, .pt-list) > :nth-child(6) { animation-delay: 430ms; } body.hms-glass :is(.gg-list, .pt-list) > :nth-child(7) { animation-delay: 480ms; } body.hms-glass :is(.gg-list, .pt-list) > :nth-child(n+8) { animation-delay: 530ms; }
+@keyframes gg-row-in { from { opacity: 0; translate: 0 10px; } to { opacity: 1; translate: 0 0; } }
+/* cards lift a little under a mouse (desktop) */
+@media (hover: hover) and (min-width: 769px) {
+    :root body.hms-glass .gg-card { transition: translate 260ms var(--gg-ease), box-shadow 260ms var(--gg-ease); }
+    :root body.hms-glass .gg-card:hover { translate: 0 -2px; box-shadow: var(--gg-hl), var(--gg-drop), 0 22px 44px -26px rgba(0, 0, 0, .35); }
+}
+@media (max-width: 768px) {
+    :root body.hms-glass .gg-page.gg-push { animation: gg-push var(--gg-dur-enter) var(--gg-ease) backwards; }
+    :root body.hms-glass .gg-page.gg-push > * { animation: none; }
+}
+/* press: an instant squeeze, desktop and phone */
+:root body.hms-glass :is(.pt-btn, .btn, .gg-cap-btn, .gg-chipbtn, .gg-listrow.gg-tap, button.gg-moneycard, .gg-staygroup-head, .gg-more, .gg-chip.link, .pt-period a, .pt-tab, .bm-tab, .gg-segments .seg-tabs button, a.pt-row, .gh-bill-row, .hotel-switch-btn, .pt-step button):active:not(:disabled) { transform: none; scale: .97; opacity: .85; transition-duration: 80ms; }
+:root body.hms-glass :is(.gg-listrow.gg-tap, button.gg-moneycard):active:not(:disabled) { scale: .985; background: rgba(var(--gg-ink-rgb), .05); }
+:root body.hms-glass .sh-card > summary:active { transform: none; scale: .99; }
+
+/* ------------------------------------------------------------------------------------------------------------------------------------------
+   9. Focus, reduced motion, reduced transparency, forced colours, print
+   ------------------------------------------------------------------------------------------------------------------------------------------ */
+:root body.hms-glass :is(a, button, summary, [role="button"], [role="tab"], [tabindex]):focus-visible { outline: 2px solid var(--gg-focus) !important; outline-offset: 3px; }
+
+@media (prefers-reduced-motion: reduce) {
+    :root body.hms-glass *, :root body.hms-glass *::before, :root body.hms-glass *::after { animation: none !important; transition: none !important; }
+    :root body.hms-glass * { scale: none !important; translate: none !important; }
+    .gg-sk { animation: none; }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+    :root[data-theme] body.hms-glass { --gg-fill: var(--gg-solid); --gg-fill-h: var(--gg-solid); --gg-pop: var(--gg-solid); --gg-page-a: var(--gg-page); --gg-page-a0: var(--gg-page); --gg-blur: none; }
+    :root body.hms-glass *, :root body.hms-glass *::before, :root body.hms-glass *::after { -webkit-backdrop-filter: none !important; backdrop-filter: none !important; }
+    :root body.hms-glass :is(.pt-period a.active, .pt-tab.active, .bm-tab.active, .sidebar-nav a.active, .gg-segments .seg-tabs button.active) { background: rgba(var(--gg-ink-rgb), .14) !important; }
+}
+
+@media (forced-colors: active) {
+    :root body.hms-glass :is(.pt-card, .sh-card, .bm-fbar, .gg-card, .gg-hero, .gg-kpi, .gg-qa, .content .card, .pt-block, .sb-bg)::before { display: none !important; }
+    :root body.hms-glass :is(.pt-card, .sh-card, .bm-fbar, .gg-card, .gg-hero, .gg-kpi, .gg-qa, .content .card, .sb-bg, .pt-paybar, .app-sticky, .gg-actionbar, .pt-m-nav, .pt-m-sheet, .hotel-pop, .modal-content, .pms-dialog, .dropdown-menu, .toast-item) { border: 1px solid CanvasText !important; }
+    :root body.hms-glass :is(.pt-btn, .btn, .pt-input, .form-control, .form-select, .gg-pill, .gg-chip, .gg-chipbtn, .gg-cap-btn, .pt-badge, .pt-period, .pt-tabs, .bm-tabs, .hotel-switch-btn, .pt-step, .topbar .theme-btn, .topbar .user-menu-btn) { border: 1px solid CanvasText !important; }
+    :root body.hms-glass :is(.sidebar-nav a.active, .pt-m-nav > a.active, .pt-period a.active, .pt-tab.active, .bm-tab.active, .gg-chipbtn.on, .gg-segments .seg-tabs button.active) { border: 2px solid Highlight !important; }
+    :root body.hms-glass :is(a, button, summary, input, select, textarea, [tabindex]):focus-visible { outline: 2px solid Highlight !important; }
+    :root body.hms-glass :is(.gg-progress > span, .gg-tab-dot, .gg-tab-count) { background: Highlight; forced-color-adjust: none; }
+    :root body.hms-glass .gg-sk { background: CanvasText; opacity: .2; }
+}
+
+@media print {
+    :root body.hms-glass::before { display: none; }
+    :root body.hms-glass :is(.pt-card, .gg-card, .gg-hero, .gg-kpi) { box-shadow: none; }
+    :root body.hms-glass :is(.pt-m-nav, .gg-actionbar, .app-sticky, .gg-sheet, .modal-backdrop, .gg-capsule) { display: none !important; }
+}

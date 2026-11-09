@@ -1,0 +1,8 @@
+{
+  "name": "id-capture",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Guided phone-browser capture of the front and back of an ID. No runtime dependencies.",
+  "scripts": { "test": "node --test", "demo": "node serve.mjs" }
+}

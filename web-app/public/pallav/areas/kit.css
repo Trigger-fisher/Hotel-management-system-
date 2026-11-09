@@ -1,0 +1,103 @@
+/* shared kit: components under dashboards/pallav/ui and components/. New rules for this area go here, never into hms-overrides.css. */
+
+.pk-row { margin-bottom: 16px; }
+.pk-row .kpi .skel-value { width: 64%; margin: 10px 0; }
+.pk-row .kpi .skel-small:last-child { width: 48%; }
+
+/* text on an --ink fill (day: white on near-black; night: near-black on the light ink), solid in both themes */
+:root { --on-ink: #FFFFFF; }
+:root[data-theme="dark"] { --on-ink: #111114; }
+
+/* DetailCard on phones: a long name or line takes the whole row and is never cut */
+@media (max-width: 767.98px) {
+    .dc-card .dc-fact.long { grid-column: 1 / -1; }
+    .dc-card .dc-fact .dc-val { -webkit-line-clamp: none; display: block; overflow: visible; }
+    .dc-card:not(.cp-nt) .dc-fact .dc-sub { -webkit-line-clamp: 4; }
+}
+
+/* HomeStats on wide screens: one row for up to four figures, three a row for five or six; each row starts at the left edge under a hairline */
+@media (min-width: 1101px) {
+    .hm-stats.n-1 { grid-template-columns: minmax(0, 1fr); }
+    .hm-stats.n-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .hm-stats:is(.n-3, .n-5, .n-6) { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .hm-stats:is(.n-5, .n-6) > .hm-stat:nth-child(3n + 1), .hm-stats.n-many > .hm-stat:nth-child(4n + 1) { border-left: 0; padding-left: 0; }
+    .hm-stats:is(.n-5, .n-6) > .hm-stat:nth-child(n + 4), .hm-stats.n-many > .hm-stat:nth-child(n + 5) { border-top: 1px solid var(--line); }
+}
+
+/* The KPI card (the original .kpi of pms-dash.css): a rounded card, an icon in a round outline, the label, the big figure and a one-line detail chip.
+   Day: white card, hairline border, soft shadow, graphite outline and chip. Night: dark card, light outline, gold for the graphite tile. */
+.kpi {
+    --kpi-ring: color-mix(in srgb, var(--ink) 28%, transparent);
+    --kpi-tone: var(--ink);
+    border-radius: 16px; padding: 16px; background: var(--surface); color: var(--ink);
+    border: 1px solid var(--line); box-shadow: 0 1px 2px rgba(17, 17, 20, .05), 0 4px 14px rgba(17, 17, 20, .05);
+    min-width: 0; text-align: left; font: inherit;
+}
+.kpi::after { display: none; }
+.kpi:hover { transform: none; box-shadow: 0 1px 2px rgba(17, 17, 20, .06), 0 8px 20px rgba(17, 17, 20, .08); }
+.kpi-top { gap: 10px; margin-bottom: 12px; }
+.kpi-icon, .kpi-icon.in, .kpi-icon.out, .kpi-icon.month, .kpi-icon.due {
+    width: 36px; height: 36px; border-radius: 50%; font-size: 16px; background: transparent;
+    color: var(--kpi-tone); box-shadow: inset 0 0 0 1.5px var(--kpi-ring);
+}
+.kpi-icon.month { --kpi-tone: var(--gold-ink); --kpi-ring: var(--gold-line); }
+.kpi-icon.in { --kpi-tone: #15803D; --kpi-ring: rgba(21, 128, 61, .5); }
+.kpi-icon.out { --kpi-tone: #B91C1C; --kpi-ring: rgba(185, 28, 28, .5); }
+.kpi-icon.due { --kpi-tone: #92400E; --kpi-ring: rgba(146, 64, 14, .5); }
+.kpi-label { color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
+.kpi-value { font-size: 24px; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+.kpi-foot { min-height: 26px; margin-top: 10px; }
+.kpi-chip { max-width: 100%; white-space: normal; text-align: left; border-radius: 10px; line-height: 1.35; background: color-mix(in srgb, var(--ink) 7%, transparent); color: var(--ink); }
+.kpi-chip.down { background: #FEE2E2; color: #991B1B; }
+.kpi-chip.up { background: #DCFCE7; color: #166534; }
+:root[data-theme="dark"] .kpi { background: var(--surface) !important; color: var(--ink); border-color: var(--line); box-shadow: 0 1px 2px rgba(0, 0, 0, .4), 0 6px 18px rgba(0, 0, 0, .3); }
+:root[data-theme="dark"] .kpi-icon.in { --kpi-tone: #6EE7B7; --kpi-ring: rgba(110, 231, 183, .5); }
+:root[data-theme="dark"] .kpi-icon.out { --kpi-tone: #FCA5A5; --kpi-ring: rgba(252, 165, 165, .5); }
+:root[data-theme="dark"] .kpi-icon.due { --kpi-tone: #FBBF24; --kpi-ring: rgba(251, 191, 36, .5); }
+:root[data-theme="dark"] .kpi-chip { background: color-mix(in srgb, var(--ink) 12%, transparent); color: var(--ink); }
+:root[data-theme="dark"] .kpi-chip.down { background: rgba(185, 28, 28, .26); color: #FCA5A5; }
+:root[data-theme="dark"] .kpi-chip.up { background: rgba(21, 128, 61, .26); color: #6EE7B7; }
+
+/* the strip: 4 across, 2x2 under 1100 px (also on a phone), 1 to 3 cards for a dialog */
+.kpi-grid { gap: 12px; }
+.kpi-grid.n-1 { grid-template-columns: minmax(0, 1fr); }
+.kpi-grid.n-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.kpi-grid.n-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+@media (max-width: 1100px) { .kpi-grid, .kpi-grid.n-3, .kpi-grid.n-many { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) {
+    .kpi-grid, .kpi-grid.n-3 { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+    .kpi { padding: 12px; }
+    .kpi-top { gap: 8px; margin-bottom: 8px; }
+    .kpi-icon, .kpi-icon.in, .kpi-icon.out, .kpi-icon.month, .kpi-icon.due { width: 32px; height: 32px; font-size: 14px; }
+    .kpi-label { font-size: 10.5px; }
+    .kpi-value { font-size: 20px; }
+}
+
+/* a card that opens a list or filter */
+button.kpi-press { display: block; width: 100%; min-height: 44px; cursor: pointer; transition: box-shadow var(--dur-base) var(--ease-out), border-color var(--dur-base) var(--ease-out); }
+button.kpi-press:hover { border-color: var(--gold-line); }
+button.kpi-press:focus-visible { outline: 2px solid var(--gold-line); outline-offset: 2px; }
+button.kpi-press.is-on { border-color: var(--gold-line); background: var(--gold-soft); }
+
+/* the inbox strip keeps its place at the top of the page; a phone scrolls the same four cards sideways */
+.kpi-grid.ibx-kpis { flex: none; margin-bottom: 12px; }
+.kpi-grid.ibx-kpis .kpi-foot { min-height: 0; }
+.wa-page.ibx-fit > .kpi-grid.ibx-kpis { grid-column: 1 / -1; }
+@media (max-width: 767.98px) {
+    .kpi-grid.ibx-kpis { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; margin-inline: -16px; padding: 2px 16px 6px; scrollbar-width: none; }
+    .kpi-grid.ibx-kpis::-webkit-scrollbar { display: none; }
+    .kpi-grid.ibx-kpis > .kpi { flex: 0 0 168px; scroll-snap-align: start; }
+}
+
+/* KPI card alignment: the label row, the figure and the detail chip all start at the left edge, on a desktop, a tablet and a phone (the phone portal and the button default had centred them) */
+:root body .kpi, :root body button.kpi { text-align: left; }
+:root body .kpi .kpi-top, :root body.portal-mobile .kpi .kpi-top { flex-direction: row; align-items: center; justify-content: flex-start; gap: 10px; }
+:root body .kpi .kpi-value, :root body.portal-mobile .kpi .kpi-value { display: block; text-align: left; }
+:root body .kpi .kpi-foot, :root body.portal-mobile .kpi .kpi-foot { display: flex; justify-content: flex-start; text-align: left; }
+:root body .kpi .kpi-chip { align-self: flex-start; }
+/* the inbox strip lines up with the page: same edge on both sides, room for the card shadow */
+@media (min-width: 768px) { .kpi-grid.ibx-kpis { margin-inline: 0; padding: 2px 2px 6px; box-sizing: border-box; } }
+
+/* An open list card no longer clips its own menu: the body clipped everything past its edge, so the More menu of a card showed as a cut-off sliver and never opened. */
+.dc-card[open]::details-content { overflow: visible; }
+.dc-card[open] .dc-foot { position: relative; z-index: 2; }

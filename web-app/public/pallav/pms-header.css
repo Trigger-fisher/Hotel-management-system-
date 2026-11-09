@@ -1,0 +1,383 @@
+/* ===========================================================================
+   Hotel Pallav - header
+
+   A floating glass card that lines up with the two sidebar cards: same
+   gutter, same corners, same graphite. The page icon and the line above the
+   title come from the sidebar entry for this page, so the three read as one
+   set. The controls share the sidebars' hover lift and ripple, and the card
+   gains depth once the page scrolls beneath it.
+
+   Uses the tokens and keyframes from pms-sidebar.css, which loads first.
+   =========================================================================== */
+
+/* ------------------------------------------------------------------ card */
+
+.topbar,
+:root[data-theme="dark"] .topbar {
+    position: sticky; top: var(--sb-gutter) !important; z-index: 1020;
+    margin: var(--sb-gutter) var(--sb-gutter) 0 0;
+    padding: 11px 14px 11px 12px !important;
+    min-height: 64px;
+    background: transparent !important; border-bottom: none !important;
+    isolation: isolate;
+}
+/* Page content that scrolls up behind the gap above the card is covered */
+.topbar::before {
+    content: ""; position: absolute; z-index: -2; pointer-events: none;
+    left: calc(-1 * var(--sb-gutter)); right: calc(-1 * var(--sb-gutter));
+    top: calc(-1 * var(--sb-gutter) - 1px); height: calc(var(--sb-gutter) + 32px);
+    background: var(--cream);
+}
+.topbar::after {
+    content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+    border-radius: var(--sb-radius);
+    background: rgba(255, 255, 255, .82);
+    -webkit-backdrop-filter: blur(16px) saturate(170%); backdrop-filter: blur(16px) saturate(170%);
+    border: 1px solid var(--line);
+    box-shadow: 0 1px 3px rgba(17, 17, 20, .06);
+    transition: box-shadow 320ms var(--sb-ease), background-color 320ms var(--sb-ease);
+}
+:root[data-theme="dark"] .topbar::after { background: rgba(23, 18, 35, .82); }
+body.tb-scrolled .topbar::after { box-shadow: 0 18px 38px -22px rgba(17, 17, 20, .45), 0 1px 3px rgba(17, 17, 20, .08); }
+:root[data-theme="dark"] body.tb-scrolled .topbar::after { box-shadow: 0 18px 38px -22px rgba(0, 0, 0, .9); }
+
+/* The rail card has no gutter on its right, so without the payroll panel
+   between them the header keeps its own */
+body.no-subnav .topbar,
+body.subnav-hidden:not(.subnav-peeking) .topbar { margin-left: var(--sb-gutter); }
+
+/* ----------------------------------------------------------------- title */
+
+.tb-title { display: flex; align-items: center; gap: 12px; min-width: 0; }
+.tb-icon {
+    position: relative; overflow: hidden; flex: none;
+    width: 40px; height: 40px; border-radius: 13px;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--nav-surface); color: #fff; font-size: 17px;
+    box-shadow: 0 8px 18px -8px rgba(17, 17, 20, .7), var(--sb-card-edge);
+    /* backwards, not both: a held end state would block the hover tilt */
+    animation: tb-icon-in 620ms var(--sb-spring) backwards;
+    transition: transform 420ms var(--sb-spring);
+}
+:root[data-theme="dark"] .tb-icon { background: #2B2B31; }
+.tb-icon::after {
+    content: ""; position: absolute; top: -20%; bottom: -20%; left: -60%; width: 40%;
+    background: linear-gradient(100deg, transparent, rgba(255, 255, 255, .55), transparent);
+    transform: skewX(-18deg); opacity: 0;
+    animation: sb-sheen 1100ms 450ms var(--sb-ease) both;
+}
+.tb-title:hover .tb-icon { transform: rotate(-6deg) scale(1.05); }
+
+.tb-text { min-width: 0; display: flex; flex-direction: column; animation: tb-text-in 520ms 80ms var(--sb-ease) both; }
+.tb-eyebrow {
+    font-size: 10px; font-weight: 800; letter-spacing: .15em; text-transform: uppercase;
+    color: var(--ink); line-height: 1.2; margin-bottom: 2px;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.topbar h1 {
+    font-size: 19px !important; font-weight: 800 !important; letter-spacing: -.02em;
+    color: var(--p600) !important; margin: 0; line-height: 1.2;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+
+@keyframes tb-icon-in {
+    from { opacity: 0; transform: scale(.6) rotate(-12deg); }
+    to   { opacity: 1; transform: none; }
+}
+@keyframes tb-text-in {
+    from { opacity: 0; transform: translateY(6px); }
+    to   { opacity: 1; transform: none; }
+}
+
+/* ------------------------------------------------------ today strip
+
+   Greeting, date and time, and the weather in the hotel's city, as three
+   small widgets between the title and the controls: an icon tile, a quiet
+   label, and the value in bold. When the header is too narrow,
+   pms-sidebar.js takes widgets out one at a time (data-tb-fit, the highest
+   number goes first) so nothing ever wraps or squeezes. */
+
+.tb-info {
+    flex: 1; min-width: 0; overflow: hidden;
+    display: flex; justify-content: center; padding: 0 16px;
+}
+.tb-pill {
+    display: inline-flex; align-items: center; gap: 22px; flex: none;
+    animation: tb-text-in 520ms 160ms var(--sb-ease) backwards;
+}
+.tb-pill.tb-empty { display: none; }
+.tb-chip { display: inline-flex; align-items: center; gap: 9px; white-space: nowrap; cursor: default; }
+.tb-chip.tb-off { display: none; }
+.tb-tile {
+    width: 34px; height: 34px; border-radius: 11px; flex: none;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--p100); color: var(--p700); font-size: 15px;
+    box-shadow: inset 0 0 0 1px var(--p200);
+    transition: background-color 220ms var(--sb-ease), color 220ms var(--sb-ease), box-shadow 220ms var(--sb-ease);
+}
+.tb-chip:hover .tb-tile { background: var(--p600); color: #fff; box-shadow: 0 6px 14px -6px rgba(17, 17, 20, .6); }
+.tb-chip:hover .tb-tile i { animation: sb-pop 600ms var(--sb-spring) both; }
+.tb-lines { display: flex; flex-direction: column; gap: 4px; line-height: 1; }
+/* The label on top in bold ink, the value beneath in bold theme graphite */
+.tb-lbl { font-size: 11.5px; font-weight: 700; color: var(--ink); }
+/* Every part of a value - hours, seconds, AM/PM, the weather words - is the
+   same colour and weight, so each reads as one piece */
+.tb-val, .tb-val * { font-size: 14px; font-weight: 800; color: var(--p800); letter-spacing: -.01em; }
+:root[data-theme="dark"] .tb-val,
+:root[data-theme="dark"] .tb-val * { color: var(--p700); }
+.tb-clock .tb-val { font-variant-numeric: tabular-nums; }
+.tb-desc:not(:empty)::before { content: "\00B7"; margin: 0 5px 0 1px; } /* middle dot */
+.tb-weather:not([hidden]) { animation: tb-text-in 480ms var(--sb-ease) backwards; }
+
+/* -------------------------------------------------------------- controls */
+
+.tb-actions { display: flex; align-items: center; gap: 8px; flex: none; }
+
+.topbar .theme-btn,
+.topbar .force-btn,
+.topbar .user-menu-btn,
+:root[data-theme="dark"] .topbar .theme-btn,
+:root[data-theme="dark"] .topbar .force-btn:not(.on),
+:root[data-theme="dark"] .topbar .user-menu-btn {
+    position: relative; overflow: hidden;
+    height: 40px; background: var(--surface, #fff) !important;
+    border: 1px solid var(--line2) !important;
+    box-shadow: 0 1px 2px rgba(17, 17, 20, .05);
+    transition: transform 260ms var(--sb-ease), box-shadow 260ms var(--sb-ease),
+                border-color 220ms var(--sb-ease), background-color 220ms var(--sb-ease), color 220ms var(--sb-ease) !important;
+}
+.topbar .theme-btn:hover,
+.topbar .force-btn:hover,
+.topbar .user-menu-btn:hover,
+.topbar .user-menu-btn[aria-expanded="true"] {
+    transform: translateY(-2px);
+    border-color: var(--p300) !important;
+    box-shadow: 0 10px 22px -12px rgba(17, 17, 20, .55) !important;
+}
+.topbar .theme-btn:active,
+.topbar .force-btn:active,
+.topbar .user-menu-btn:active { transform: scale(.95); }
+
+/* Theme switch: fills with the graphite, and the new icon spins in */
+.topbar .theme-btn { width: 40px; border-radius: 13px; color: var(--p700); font-size: 16px; }
+.topbar .theme-btn:hover,
+:root[data-theme="dark"] .topbar .theme-btn:hover {
+    background: var(--nav-surface) !important; color: #fff; border-color: transparent !important;
+}
+.topbar .theme-btn i { display: inline-block; animation: tb-spin-in 560ms var(--sb-spring) both; }
+@keyframes tb-spin-in {
+    from { opacity: 0; transform: rotate(-120deg) scale(.4); }
+    to   { opacity: 1; transform: none; }
+}
+
+/* Force mode */
+.topbar .force-btn { border-radius: 13px; padding: 0 14px; font-size: 12px; color: var(--ink2); }
+.topbar .force-btn i { color: var(--p600); transition: transform 380ms var(--sb-spring); }
+.topbar .force-btn:hover i { transform: rotate(-12deg) scale(1.15); }
+.topbar .force-btn.on { background: #FEF2F2 !important; border-color: #FCA5A5 !important; color: #B91C1C; }
+.topbar .force-btn.on i { color: #B91C1C; }
+
+/* Profile */
+.topbar .user-menu-btn { border-radius: 13px; padding: 0 12px 0 5px; gap: 10px; }
+/* Sized to sit inside the button with room to spare, and it does not grow
+   on hover - the button lifts instead, so nothing is clipped */
+.topbar .user-menu-btn .avatar {
+    width: 28px !important; height: 28px !important; border-radius: 9px !important;
+    font-size: 10.5px !important; box-shadow: none;
+}
+/* Name and role on two clear lines, with room between them */
+.topbar .user-menu-btn .um-text { gap: 3px; line-height: 1.1 !important; padding-right: 2px; }
+.topbar .user-menu-btn .um-name { font-size: 13px; line-height: 1.1; }
+.topbar .user-menu-btn .um-role { font-size: 9px; line-height: 1; letter-spacing: .12em; }
+.topbar .user-menu-btn > .bi-chevron-down { margin-left: 2px; }
+.topbar .user-menu-btn > .bi-chevron-down { transition: transform 320ms var(--sb-ease); }
+.topbar .user-menu-btn[aria-expanded="true"] > .bi-chevron-down { transform: rotate(180deg); }
+
+.topbar .sb-ripple { background: rgba(17, 17, 20, .16); }
+
+/* Role colours, flat, wherever the avatar sits in the chrome */
+.topbar .avatar.role-av-superadmin, .tb-menu .role-av-superadmin, .sb-user .role-av-superadmin { background: #2B2B31 !important; }
+.topbar .avatar.role-av-admin,      .tb-menu .role-av-admin,      .sb-user .role-av-admin      { background: #2563EB !important; }
+.topbar .avatar.role-av-editor,     .tb-menu .role-av-editor,     .sb-user .role-av-editor     { background: #0F766E !important; }
+.topbar .avatar.role-av-viewer,     .tb-menu .role-av-viewer,     .sb-user .role-av-viewer     { background: #64748B !important; }
+
+/* ----------------------------------------------------- the profile menu
+
+   Bootstrap places the menu with an inline transform, so the entrance uses
+   the separate scale and translate properties, which add to that transform
+   instead of replacing it - the menu never flashes in the wrong place. */
+
+.tb-menu.pms-dropdown {
+    width: 224px; padding: 6px !important; margin: 0 !important;
+    border-radius: 16px !important; border: 1px solid var(--line) !important;
+    background: var(--surface, #fff) !important;
+    box-shadow: 0 24px 48px -20px rgba(17, 17, 20, .45), 0 2px 6px rgba(17, 17, 20, .08) !important;
+}
+:root[data-theme="dark"] .tb-menu.pms-dropdown { box-shadow: 0 24px 48px -16px rgba(0, 0, 0, .85) !important; }
+.tb-menu.pms-dropdown.show { animation: tbm-in 300ms var(--sb-spring) both; transform-origin: top right; }
+.tb-menu.show > * { animation: tbm-item 360ms var(--sb-ease) backwards; }
+.tb-menu.show > :nth-child(2) { animation-delay: 40ms; }
+.tb-menu.show > :nth-child(3) { animation-delay: 80ms; }
+.tb-menu.show > :nth-child(4) { animation-delay: 110ms; }
+.tb-menu.show > :nth-child(5) { animation-delay: 140ms; }
+@keyframes tbm-in {
+    from { opacity: 0; scale: .94; translate: 0 -6px; }
+    to   { opacity: 1; scale: 1; translate: 0 0; }
+}
+@keyframes tbm-item {
+    from { opacity: 0; translate: 0 -4px; }
+    to   { opacity: 1; translate: 0 0; }
+}
+
+.tbm-head {
+    display: grid; grid-template-columns: auto 1fr; column-gap: 10px; row-gap: 3px; align-items: center;
+    padding: 9px 10px; margin-bottom: 4px; border-radius: 11px;
+    background: var(--p50);
+}
+.tbm-av {
+    grid-row: span 2; width: 36px !important; height: 36px !important;
+    border-radius: 11px !important; font-size: 12px !important;
+}
+.tbm-who { display: flex; flex-direction: column; min-width: 0; line-height: 1.25; }
+.tbm-name { font-size: 13px; font-weight: 750; color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.tbm-user { font-size: 11px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.tbm-role {
+    justify-self: start; font-size: 8.5px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase;
+    color: #fff; background: var(--p600); padding: 2px 7px; border-radius: 999px;
+}
+
+.tb-menu .dropdown-item {
+    gap: 10px !important; padding: 5px 8px 5px 5px !important; border-radius: 10px !important;
+    transition: background-color 200ms var(--sb-ease), color 200ms var(--sb-ease);
+}
+.tbm-ic {
+    width: 28px; height: 28px; border-radius: 8px; flex: none;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--p50); color: var(--p600); font-size: 13.5px;
+    transition: background-color 220ms var(--sb-ease), color 220ms var(--sb-ease);
+}
+.tbm-txt { display: flex; flex-direction: column; min-width: 0; line-height: 1.25; }
+.tbm-txt > span { font-size: 12.5px; font-weight: 650; color: var(--ink); }
+.tbm-txt > small { font-size: 11px; font-weight: 500; color: var(--muted); }
+.tbm-go {
+    margin-left: auto; font-size: 11px; color: var(--p600);
+    opacity: 0;
+    transition: opacity 200ms var(--sb-ease);
+}
+.tb-menu .dropdown-item:hover,
+.tb-menu .dropdown-item:focus-visible { background: var(--p50) !important; }
+.tb-menu .dropdown-item:hover .tbm-ic { background: var(--p600); color: #fff; }
+.tb-menu .dropdown-item:hover .tbm-go { opacity: 1; }
+.tb-menu .dropdown-divider { margin: 4px 4px !important; }
+
+.tb-menu .tbm-out .tbm-ic { background: #FEF2F2; color: #B91C1C; }
+.tb-menu .tbm-out .tbm-txt > span { color: #B91C1C; }
+.tb-menu .tbm-out:hover { background: #FEF2F2 !important; }
+.tb-menu .tbm-out:hover .tbm-ic { background: #DC2626; color: #fff; }
+:root[data-theme="dark"] .tb-menu .tbm-out .tbm-ic { background: rgba(220, 38, 38, .14); color: #F87171; }
+:root[data-theme="dark"] .tb-menu .tbm-out .tbm-txt > span { color: #F87171; }
+:root[data-theme="dark"] .tb-menu .tbm-out:hover { background: rgba(220, 38, 38, .10) !important; }
+
+/* ---------------------------------------------------- force mode banner */
+
+.force-banner {
+    margin: 8px var(--sb-gutter) 0 0; border-radius: 14px;
+    box-shadow: 0 10px 24px -14px rgba(127, 29, 29, .7);
+}
+body.no-subnav .force-banner,
+body.subnav-hidden:not(.subnav-peeking) .force-banner { margin-left: var(--sb-gutter); }
+
+/* ----------------------------------------------------------------- small */
+
+@media (max-width: 620px) {
+    .topbar { padding: 10px !important; }
+    .tb-icon { width: 36px; height: 36px; font-size: 15px; }
+    .topbar h1 { font-size: 16px !important; }
+    .tb-eyebrow { display: none; }
+}
+
+/* Entrance with the sidebars, once per session */
+.sb-intro .topbar { animation: tb-drop-in 640ms 120ms var(--sb-ease) both; }
+@keyframes tb-drop-in {
+    from { opacity: 0; transform: translateY(-14px); }
+    to   { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .tb-icon, .tb-icon::after, .tb-text, .topbar .theme-btn i, .sb-intro .topbar,
+    .tb-menu.pms-dropdown.show, .tb-menu.show > *, .tb-menu .dropdown-item:hover .tbm-ic { animation: none !important; }
+    .tb-menu .dropdown-item, .tbm-ic, .tbm-go { transition: none !important; }
+    .tb-pill, .tb-weather:not([hidden]) { animation: none !important; }
+    .tb-tile { transition: none !important; }
+    .tb-chip:hover .tb-tile i { animation: none !important; }
+    .topbar .theme-btn, .topbar .force-btn, .topbar .user-menu-btn, .topbar .avatar,
+    .topbar .force-btn i, .topbar::after { transition: none !important; }
+    .topbar .theme-btn:hover, .topbar .force-btn:hover, .topbar .user-menu-btn:hover,
+    .tb-title:hover .tb-icon { transform: none !important; }
+}
+
+/* ----------------------------------------------------- accounting year */
+.tb-year-btn {
+    position: relative; display: inline-flex; align-items: center; gap: 9px; height: 40px; padding: 0 12px 0 4px;
+    border-radius: 13px; background: var(--surface, #fff); border: 1px solid var(--line2); color: var(--ink);
+    box-shadow: 0 1px 2px rgba(17, 17, 20, .05);
+    transition: transform 260ms var(--sb-ease), box-shadow 260ms var(--sb-ease), border-color 220ms var(--sb-ease);
+}
+.tb-year-btn .tb-tile { width: 30px; height: 30px; border-radius: 9px; font-size: 14px; }
+.tb-year-btn .tb-lines { gap: 3px; text-align: left; }
+.tb-year-btn .tb-lbl { font-size: 10.5px; color: var(--muted); font-weight: 700; }
+.tb-year-btn .tb-val { font-size: 13.5px; }
+.tb-year-btn:hover, .tb-year-btn[aria-expanded="true"] { transform: translateY(-2px); border-color: var(--p300); box-shadow: 0 10px 22px -12px rgba(17, 17, 20, .55); }
+.tb-year-caret { font-size: 11px; color: var(--muted); transition: transform 220ms var(--sb-ease); }
+.tb-year-btn[aria-expanded="true"] .tb-year-caret { transform: rotate(180deg); }
+/* Looking at another year: it shows, so nobody mistakes it for this year */
+.tb-year.is-other .tb-year-btn { border-color: #F59E0B; background: #FFFBEB; }
+.tb-year.is-other .tb-tile { background: #FEF3C7; color: #B45309; box-shadow: inset 0 0 0 1px #FDE68A; }
+.tb-year.is-other .tb-lbl { color: #B45309; }
+.tb-year-dot { position: absolute; top: 5px; left: 29px; width: 9px; height: 9px; border-radius: 50%; background: #F59E0B; box-shadow: 0 0 0 2px var(--surface, #fff); }
+
+.tb-year-menu { width: 300px; padding: 8px; border-radius: 16px; border: 1px solid var(--line); box-shadow: 0 20px 44px -12px rgba(27, 18, 53, .28); }
+.ym-head { display: flex; flex-direction: column; gap: 2px; padding: 6px 8px 10px; }
+.ym-head strong { font-size: 13px; font-weight: 800; color: var(--ink); }
+.ym-head span { font-size: 11.5px; color: var(--muted); }
+.ym-list { display: flex; flex-direction: column; gap: 3px; max-height: 280px; overflow-y: auto; }
+.ym-year { display: flex; align-items: center; gap: 10px; padding: 9px 10px; border-radius: 11px; cursor: pointer; margin: 0; border: 1px solid transparent; }
+.ym-year:hover { background: var(--p50); }
+.ym-year.on, .ym-year:has(input:checked) { background: var(--p50); border-color: var(--p200, var(--line)); }
+.ym-year input { position: absolute; opacity: 0; pointer-events: none; }
+.ym-check { width: 20px; height: 20px; border-radius: 6px; border: 1.5px solid var(--line2); display: inline-flex; align-items: center; justify-content: center; color: transparent; flex: none; font-size: 12px; }
+.ym-year input:checked + .ym-check { background: var(--p600); border-color: var(--p600); color: #fff; }
+.ym-year input:focus-visible + .ym-check { box-shadow: 0 0 0 3px rgba(17, 17, 20, .3); }
+.ym-text { display: flex; flex-direction: column; line-height: 1.2; flex: 1; }
+.ym-text b { font-size: 13.5px; color: var(--ink); }
+.ym-text small { font-size: 11.5px; color: var(--muted); }
+.ym-tag { font-size: 10.5px; font-weight: 800; padding: 2px 8px; border-radius: 20px; background: var(--surface-2, #F4F1FB); color: var(--muted); white-space: nowrap; }
+.ym-tag.open { background: #D1FAE5; color: #065F46; }
+.ym-foot { display: flex; justify-content: flex-end; gap: 6px; padding: 10px 4px 4px; border-top: 1px solid var(--line); margin-top: 8px; }
+.ym-manage { display: flex; align-items: center; gap: 8px; margin-top: 6px; padding: 9px 10px; border-radius: 11px; font-size: 13px; font-weight: 700; color: var(--p700); text-decoration: none; }
+.ym-manage:hover { background: var(--p50); color: var(--p800); }
+.ym-manage.due { background: #FFFBEB; color: #92400E; }
+
+:root[data-theme="dark"] .tb-year-btn { background: var(--surface); border-color: var(--line2); }
+:root[data-theme="dark"] .tb-year.is-other .tb-year-btn { background: rgba(245, 158, 11, .1); border-color: rgba(245, 158, 11, .5); }
+:root[data-theme="dark"] .tb-year.is-other .tb-tile { background: rgba(245, 158, 11, .16); color: #FCD34D; box-shadow: none; }
+:root[data-theme="dark"] .tb-year.is-other .tb-lbl { color: #FCD34D; }
+:root[data-theme="dark"] .ym-tag.open { background: rgba(5, 150, 105, .2); color: #6EE7B7; }
+:root[data-theme="dark"] .ym-manage.due { background: rgba(245, 158, 11, .12); color: #FCD34D; }
+@media (max-width: 767.98px) {
+    .tb-year-btn .tb-lines, .tb-year-caret { display: none; }
+    .tb-year-btn { padding: 0 4px; }
+}
+
+/* Phone: the top bar's buttons keep their look and size; each gets a 44px-high touch area (4px around its border) drawn by an invisible ::after.
+   Their overflow:hidden would cut it off, so it is lifted on phones. */
+/* Phone: night mode and force mode move into the avatar menu (.tbm-phone-only items), so the page title is not cut short by a row of icons. */
+.tbm-phone-only { display: none !important; }
+@media (max-width: 767.98px) {
+    .topbar .tb-actions #themeToggle, .topbar .tb-actions .force-btn { display: none !important; }
+    .tbm-phone-only { display: flex !important; }
+}
+@media (max-width: 767.98px) {
+    .topbar :is(.theme-btn, .force-btn, .user-menu-btn, .tb-year-btn) { overflow: visible !important; }
+    .topbar :is(.theme-btn, .force-btn, .user-menu-btn, .tb-year-btn)::after { content: ""; position: absolute; inset: -5px; }
+}

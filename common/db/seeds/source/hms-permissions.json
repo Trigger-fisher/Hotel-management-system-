@@ -1,0 +1,17 @@
+{
+  "modules": [
+    {
+      "key": "conversations",
+      "label": "Conversations",
+      "actions": ["view", "edit"],
+      "parts": []
+    },
+    {
+      "key": "whatsapp",
+      "label": "WhatsApp",
+      "actions": ["view", "edit"],
+      "parts": []
+    }
+  ],
+  "abilities": []
+}

@@ -1,0 +1,3266 @@
+{
+    "source": "Pallav app/Support/PasswordPolicy.php, app/Http/Controllers/Auth/AuthController.php:382-392; PHP 8.4.24",
+    "constants": {
+        "maxAttempts": 5,
+        "lockSteps": [
+            15,
+            30,
+            60,
+            180,
+            480,
+            1440
+        ],
+        "maxLockMinutes": 1440,
+        "message": "Password must be at least 8 characters with an uppercase letter, a lowercase letter, a number and a special character."
+    },
+    "lockMinutes": [
+        {
+            "level": -3,
+            "minutes": 15
+        },
+        {
+            "level": -1,
+            "minutes": 15
+        },
+        {
+            "level": 0,
+            "minutes": 15
+        },
+        {
+            "level": 1,
+            "minutes": 30
+        },
+        {
+            "level": 2,
+            "minutes": 60
+        },
+        {
+            "level": 3,
+            "minutes": 180
+        },
+        {
+            "level": 4,
+            "minutes": 480
+        },
+        {
+            "level": 5,
+            "minutes": 1440
+        },
+        {
+            "level": 6,
+            "minutes": 1440
+        },
+        {
+            "level": 7,
+            "minutes": 1440
+        },
+        {
+            "level": 20,
+            "minutes": 1440
+        },
+        {
+            "level": 1000,
+            "minutes": 1440
+        }
+    ],
+    "lockLabels": [
+        {
+            "minutes": 1,
+            "label": "1 minutes"
+        },
+        {
+            "minutes": 14,
+            "label": "14 minutes"
+        },
+        {
+            "minutes": 15,
+            "label": "15 minutes"
+        },
+        {
+            "minutes": 30,
+            "label": "30 minutes"
+        },
+        {
+            "minutes": 59,
+            "label": "59 minutes"
+        },
+        {
+            "minutes": 60,
+            "label": "1 hour"
+        },
+        {
+            "minutes": 61,
+            "label": "1 hour"
+        },
+        {
+            "minutes": 90,
+            "label": "1 hour"
+        },
+        {
+            "minutes": 119,
+            "label": "1 hour"
+        },
+        {
+            "minutes": 120,
+            "label": "2 hours"
+        },
+        {
+            "minutes": 180,
+            "label": "3 hours"
+        },
+        {
+            "minutes": 479,
+            "label": "7 hours"
+        },
+        {
+            "minutes": 480,
+            "label": "8 hours"
+        },
+        {
+            "minutes": 1439,
+            "label": "23 hours"
+        },
+        {
+            "minutes": 1440,
+            "label": "24 hours"
+        },
+        {
+            "minutes": 3000,
+            "label": "24 hours"
+        }
+    ],
+    "passwords": [
+        {
+            "password": "",
+            "ok": false
+        },
+        {
+            "password": "a",
+            "ok": false
+        },
+        {
+            "password": "Abcdef1!",
+            "ok": true
+        },
+        {
+            "password": "abcdef1!",
+            "ok": false
+        },
+        {
+            "password": "ABCDEF1!",
+            "ok": false
+        },
+        {
+            "password": "Abcdefg!",
+            "ok": false
+        },
+        {
+            "password": "Abcdefg1",
+            "ok": false
+        },
+        {
+            "password": "Abc1!",
+            "ok": false
+        },
+        {
+            "password": "Abcdef1",
+            "ok": false
+        },
+        {
+            "password": "Abcdef!1",
+            "ok": true
+        },
+        {
+            "password": "Abcdef1 !",
+            "ok": false
+        },
+        {
+            "password": "Abcdef 1!",
+            "ok": false
+        },
+        {
+            "password": " Abcdef1!",
+            "ok": false
+        },
+        {
+            "password": "Abcdef1! ",
+            "ok": false
+        },
+        {
+            "password": "Abcdef1!x",
+            "ok": true
+        },
+        {
+            "password": "Abcdefghij1!",
+            "ok": true
+        },
+        {
+            "password": "A1!aaaaa",
+            "ok": true
+        },
+        {
+            "password": "A1!aaaa",
+            "ok": false
+        },
+        {
+            "password": "Aa1!Aa1!",
+            "ok": true
+        },
+        {
+            "password": "Passw0rd!",
+            "ok": true
+        },
+        {
+            "password": "password",
+            "ok": false
+        },
+        {
+            "password": "Password1",
+            "ok": false
+        },
+        {
+            "password": "P@ssw0rd",
+            "ok": true
+        },
+        {
+            "password": "Pass word1!",
+            "ok": false
+        },
+        {
+            "password": "Pass\tword1!",
+            "ok": false
+        },
+        {
+            "password": "Pa$$w0rd",
+            "ok": true
+        },
+        {
+            "password": "Пароль1!a",
+            "ok": false
+        },
+        {
+            "password": "Passwörd1!",
+            "ok": true
+        },
+        {
+            "password": "Abcdef1é",
+            "ok": false
+        },
+        {
+            "password": "Abcdef1¡",
+            "ok": false
+        },
+        {
+            "password": "ÀBcdef1!",
+            "ok": true
+        },
+        {
+            "password": "Abcdef1!xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+            "ok": true
+        },
+        {
+            "password": "Abcdef1!xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+            "ok": true
+        },
+        {
+            "password": "Abcdef1;",
+            "ok": true
+        },
+        {
+            "password": "Abcdef1'",
+            "ok": true
+        },
+        {
+            "password": "Abcdef1\"",
+            "ok": true
+        },
+        {
+            "password": "Abcdef1\\",
+            "ok": true
+        },
+        {
+            "password": "Abcdef1/",
+            "ok": true
+        },
+        {
+            "password": "Abcdef1`",
+            "ok": true
+        },
+        {
+            "password": "Abcdef1~",
+            "ok": true
+        },
+        {
+            "password": "Abcdef1|",
+            "ok": true
+        },
+        {
+            "password": "Abcdef1_",
+            "ok": true
+        },
+        {
+            "password": "Abcdef1-",
+            "ok": true
+        },
+        {
+            "password": "Abcdef1=",
+            "ok": true
+        },
+        {
+            "password": "Abcdef1+",
+            "ok": true
+        },
+        {
+            "password": "Abcdef1[",
+            "ok": true
+        },
+        {
+            "password": "Abcdef1{",
+            "ok": true
+        },
+        {
+            "password": "Abcdef1:",
+            "ok": true
+        },
+        {
+            "password": "Abcdef1,",
+            "ok": true
+        },
+        {
+            "password": "Abcdef1.",
+            "ok": true
+        },
+        {
+            "password": "Abcdef1<",
+            "ok": true
+        },
+        {
+            "password": "Abcdef1?",
+            "ok": true
+        },
+        {
+            "password": "Abcdef1*",
+            "ok": true
+        },
+        {
+            "password": "Abcdef1^",
+            "ok": true
+        },
+        {
+            "password": "Abcdef1%",
+            "ok": true
+        },
+        {
+            "password": "Abcdef1&",
+            "ok": true
+        },
+        {
+            "password": "Abcdef1#",
+            "ok": true
+        },
+        {
+            "password": "Abcdef1@",
+            "ok": true
+        },
+        {
+            "password": "Abcdef1(",
+            "ok": true
+        },
+        {
+            "password": "Abcdef1)",
+            "ok": true
+        },
+        {
+            "password": "Abcdef1\n!",
+            "ok": false
+        },
+        {
+            "password": "Abcdef1!\n",
+            "ok": true
+        },
+        {
+            "password": "Abcdef1!\r",
+            "ok": false
+        },
+        {
+            "password": "１２３Abcdef!",
+            "ok": false
+        },
+        {
+            "password": "Abcdef٣!",
+            "ok": false
+        },
+        {
+            "password": "abcDEF123#",
+            "ok": true
+        },
+        {
+            "password": "Zz9#zzzz",
+            "ok": true
+        },
+        {
+            "password": "Zz9#zzz",
+            "ok": false
+        },
+        {
+            "password": "zZ9#ZZZZ",
+            "ok": true
+        },
+        {
+            "password": "fi|wr`",
+            "ok": false
+        },
+        {
+            "password": "0OB<l1U~kw^j",
+            "ok": true
+        },
+        {
+            "password": "4XEEwE",
+            "ok": false
+        },
+        {
+            "password": "Y}\\Pni",
+            "ok": false
+        },
+        {
+            "password": "ZAxz!",
+            "ok": false
+        },
+        {
+            "password": "^]",
+            "ok": false
+        },
+        {
+            "password": "\\QU.+.r+A_",
+            "ok": false
+        },
+        {
+            "password": "4jGwO~beCV_`1b",
+            "ok": true
+        },
+        {
+            "password": "9#dD=Vm",
+            "ok": false
+        },
+        {
+            "password": "2 VL@",
+            "ok": false
+        },
+        {
+            "password": "/+ Y",
+            "ok": false
+        },
+        {
+            "password": "A)",
+            "ok": false
+        },
+        {
+            "password": "j",
+            "ok": false
+        },
+        {
+            "password": "vPZ%k0I|`V .^.",
+            "ok": false
+        },
+        {
+            "password": "iCH",
+            "ok": false
+        },
+        {
+            "password": "!N5{4*,^",
+            "ok": false
+        },
+        {
+            "password": "PN1,~l/{/k}",
+            "ok": true
+        },
+        {
+            "password": "!u0U+(|CFy0F>",
+            "ok": true
+        },
+        {
+            "password": "^_",
+            "ok": false
+        },
+        {
+            "password": "xPf)(rdKK2@",
+            "ok": true
+        },
+        {
+            "password": "vBC/",
+            "ok": false
+        },
+        {
+            "password": "F.vJ_epZ8P",
+            "ok": true
+        },
+        {
+            "password": "aEmuz",
+            "ok": false
+        },
+        {
+            "password": "C|5tx",
+            "ok": false
+        },
+        {
+            "password": "Y3",
+            "ok": false
+        },
+        {
+            "password": "*vJtL18*I",
+            "ok": true
+        },
+        {
+            "password": "d1UMWq!V",
+            "ok": true
+        },
+        {
+            "password": "t_bE@R*/<",
+            "ok": false
+        },
+        {
+            "password": "lekz^*",
+            "ok": false
+        },
+        {
+            "password": "F+ly]",
+            "ok": false
+        },
+        {
+            "password": "%?}ye",
+            "ok": false
+        },
+        {
+            "password": "pHDY!/K1",
+            "ok": true
+        },
+        {
+            "password": "YhP!(H2^_",
+            "ok": true
+        },
+        {
+            "password": "0<.Q)GUA9P2|q-",
+            "ok": true
+        },
+        {
+            "password": "-.j@$9j2.^e",
+            "ok": false
+        },
+        {
+            "password": "Ti%m[UMd",
+            "ok": false
+        },
+        {
+            "password": "&/-Ub6Rj`P6&,}",
+            "ok": true
+        },
+        {
+            "password": "d@t<>'@(Lbi_4",
+            "ok": true
+        },
+        {
+            "password": "g%L\"yiB$/cN3B",
+            "ok": true
+        },
+        {
+            "password": "'wIxCZ4",
+            "ok": false
+        },
+        {
+            "password": "jJp",
+            "ok": false
+        },
+        {
+            "password": "%",
+            "ok": false
+        },
+        {
+            "password": "nuYX{W!w",
+            "ok": false
+        },
+        {
+            "password": "-,",
+            "ok": false
+        },
+        {
+            "password": "VmH",
+            "ok": false
+        },
+        {
+            "password": "os8FjplK",
+            "ok": false
+        },
+        {
+            "password": "a[~_bAL#Y[3",
+            "ok": true
+        },
+        {
+            "password": "X",
+            "ok": false
+        },
+        {
+            "password": "#jiE+e3:'JmLq",
+            "ok": true
+        },
+        {
+            "password": "gyd\\zQFEWcvP&(",
+            "ok": false
+        },
+        {
+            "password": "GL>]",
+            "ok": false
+        },
+        {
+            "password": "!Q",
+            "ok": false
+        },
+        {
+            "password": "?dAxb8eQd_Y~&&",
+            "ok": true
+        },
+        {
+            "password": "A",
+            "ok": false
+        },
+        {
+            "password": "%1o'KV",
+            "ok": false
+        },
+        {
+            "password": "ku)^Rzf6l`q",
+            "ok": true
+        },
+        {
+            "password": "6KxM0",
+            "ok": false
+        },
+        {
+            "password": "t{Q\"",
+            "ok": false
+        },
+        {
+            "password": "`4uHdW",
+            "ok": false
+        },
+        {
+            "password": "@$VoeF2_G",
+            "ok": true
+        },
+        {
+            "password": "m:v<j.i",
+            "ok": false
+        },
+        {
+            "password": "GU3ONZFm",
+            "ok": false
+        },
+        {
+            "password": "[",
+            "ok": false
+        },
+        {
+            "password": ">DcBL$}W",
+            "ok": false
+        },
+        {
+            "password": "~J>a",
+            "ok": false
+        },
+        {
+            "password": "l\"rRluR",
+            "ok": false
+        },
+        {
+            "password": "H^;M%",
+            "ok": false
+        },
+        {
+            "password": "`gM{+=}$",
+            "ok": false
+        },
+        {
+            "password": "*",
+            "ok": false
+        },
+        {
+            "password": "grX",
+            "ok": false
+        },
+        {
+            "password": ":O;Vsl8@u!u#/",
+            "ok": true
+        },
+        {
+            "password": "%4KB#F={",
+            "ok": false
+        },
+        {
+            "password": "^bShV98$",
+            "ok": true
+        },
+        {
+            "password": "3",
+            "ok": false
+        },
+        {
+            "password": ":&qK\\U)R1",
+            "ok": true
+        },
+        {
+            "password": "ph|$`f}4%Xz",
+            "ok": true
+        },
+        {
+            "password": "]`? ",
+            "ok": false
+        },
+        {
+            "password": "0Q)n",
+            "ok": false
+        },
+        {
+            "password": "CgpXT,^",
+            "ok": false
+        },
+        {
+            "password": "Fb!QGG[*ug>a!",
+            "ok": false
+        },
+        {
+            "password": "f\\www",
+            "ok": false
+        },
+        {
+            "password": "@d|+dA91vS}",
+            "ok": true
+        },
+        {
+            "password": "9PNnp",
+            "ok": false
+        },
+        {
+            "password": "w.^1s7E8Ebx* ",
+            "ok": false
+        },
+        {
+            "password": "K",
+            "ok": false
+        },
+        {
+            "password": "XN",
+            "ok": false
+        },
+        {
+            "password": "s",
+            "ok": false
+        },
+        {
+            "password": "G^qnkl*a%[j",
+            "ok": false
+        },
+        {
+            "password": ":*~k",
+            "ok": false
+        },
+        {
+            "password": "v8Mx>2>F&e<m",
+            "ok": true
+        },
+        {
+            "password": "q0",
+            "ok": false
+        },
+        {
+            "password": "$0",
+            "ok": false
+        },
+        {
+            "password": "<WIN",
+            "ok": false
+        },
+        {
+            "password": "(c#+|GBAPqNL._",
+            "ok": false
+        },
+        {
+            "password": "x",
+            "ok": false
+        },
+        {
+            "password": "|_",
+            "ok": false
+        },
+        {
+            "password": "[R:fd4-XY%)My%",
+            "ok": true
+        },
+        {
+            "password": "#5|5]!X>",
+            "ok": false
+        },
+        {
+            "password": "0M9]\"kwDXF",
+            "ok": true
+        },
+        {
+            "password": "S\\~f@K`FCV50<",
+            "ok": true
+        },
+        {
+            "password": "Ksm*",
+            "ok": false
+        },
+        {
+            "password": "n\"M",
+            "ok": false
+        },
+        {
+            "password": "}",
+            "ok": false
+        },
+        {
+            "password": "]]MN]q",
+            "ok": false
+        },
+        {
+            "password": ")gUB+",
+            "ok": false
+        },
+        {
+            "password": "=^P_l1KUGb!Z",
+            "ok": true
+        },
+        {
+            "password": "Cs#",
+            "ok": false
+        },
+        {
+            "password": ":",
+            "ok": false
+        },
+        {
+            "password": "~/^zkY+8w",
+            "ok": true
+        },
+        {
+            "password": " SSYx",
+            "ok": false
+        },
+        {
+            "password": "[?Wu] \"cb",
+            "ok": false
+        },
+        {
+            "password": "5v",
+            "ok": false
+        },
+        {
+            "password": ";[",
+            "ok": false
+        },
+        {
+            "password": "{#L",
+            "ok": false
+        },
+        {
+            "password": "&! 5q",
+            "ok": false
+        },
+        {
+            "password": "B.{",
+            "ok": false
+        },
+        {
+            "password": "h ]z\"",
+            "ok": false
+        },
+        {
+            "password": "_qFcKlVG'B.D",
+            "ok": false
+        },
+        {
+            "password": "n._",
+            "ok": false
+        },
+        {
+            "password": "1%EUJ-~+N{9@",
+            "ok": false
+        },
+        {
+            "password": "XaV BGB",
+            "ok": false
+        },
+        {
+            "password": "ZG~!.)m>3Gh",
+            "ok": true
+        },
+        {
+            "password": "ba3x,z-qX",
+            "ok": true
+        },
+        {
+            "password": "+{*G",
+            "ok": false
+        },
+        {
+            "password": "V7y&;#KiX~h",
+            "ok": true
+        },
+        {
+            "password": "^}\\\"n,f",
+            "ok": false
+        },
+        {
+            "password": "w1L4w^t/P[Xg",
+            "ok": true
+        },
+        {
+            "password": "ZU&=PWvkfvE__",
+            "ok": false
+        },
+        {
+            "password": "`N~g3O^6y",
+            "ok": true
+        },
+        {
+            "password": "L]f*",
+            "ok": false
+        },
+        {
+            "password": "?7)v",
+            "ok": false
+        },
+        {
+            "password": ";ao\"zYU>",
+            "ok": false
+        },
+        {
+            "password": "!GE\"%# ",
+            "ok": false
+        },
+        {
+            "password": "n<",
+            "ok": false
+        },
+        {
+            "password": "_J[ZeFU",
+            "ok": false
+        },
+        {
+            "password": "}&SuEdnt*yc_9l",
+            "ok": true
+        },
+        {
+            "password": "LI%-Ium",
+            "ok": false
+        },
+        {
+            "password": "S<Tq<,",
+            "ok": false
+        },
+        {
+            "password": "O8K9t=m,{~",
+            "ok": true
+        },
+        {
+            "password": "/1A",
+            "ok": false
+        },
+        {
+            "password": "/pU",
+            "ok": false
+        },
+        {
+            "password": ")",
+            "ok": false
+        },
+        {
+            "password": "q",
+            "ok": false
+        },
+        {
+            "password": "^\"B&",
+            "ok": false
+        },
+        {
+            "password": "YE_+*g1",
+            "ok": false
+        },
+        {
+            "password": "tXMM%y't*",
+            "ok": false
+        },
+        {
+            "password": "!'|w3[",
+            "ok": false
+        },
+        {
+            "password": "$u1ecrBfXB=V{",
+            "ok": true
+        },
+        {
+            "password": "49[m_",
+            "ok": false
+        },
+        {
+            "password": "iB$+\"*Zm",
+            "ok": false
+        },
+        {
+            "password": "rrm+ H",
+            "ok": false
+        },
+        {
+            "password": "Ofz",
+            "ok": false
+        },
+        {
+            "password": "Lc}ulCi2=-",
+            "ok": true
+        },
+        {
+            "password": "J|U>:&T)2z",
+            "ok": true
+        },
+        {
+            "password": "<JL^\"(wz'u?P",
+            "ok": false
+        },
+        {
+            "password": "Jh0j",
+            "ok": false
+        },
+        {
+            "password": "*ju",
+            "ok": false
+        },
+        {
+            "password": "s}\"V",
+            "ok": false
+        },
+        {
+            "password": "mH",
+            "ok": false
+        },
+        {
+            "password": "W~r8\\#k`M&e_]u",
+            "ok": true
+        },
+        {
+            "password": "Msy6",
+            "ok": false
+        },
+        {
+            "password": "0e~gO",
+            "ok": false
+        },
+        {
+            "password": "^Vk99+>Ms2aJ+",
+            "ok": true
+        },
+        {
+            "password": ";DS~N(kuS#@+}",
+            "ok": false
+        },
+        {
+            "password": ";B?Blu'HenH04V",
+            "ok": true
+        },
+        {
+            "password": "Ad",
+            "ok": false
+        },
+        {
+            "password": "[;ul3YqVoL",
+            "ok": true
+        },
+        {
+            "password": "#uDV~ZLwEnws",
+            "ok": false
+        },
+        {
+            "password": "e]qvmA&",
+            "ok": false
+        },
+        {
+            "password": "o\\Nr?",
+            "ok": false
+        },
+        {
+            "password": "A`c",
+            "ok": false
+        },
+        {
+            "password": "YF[vt&0",
+            "ok": false
+        },
+        {
+            "password": "(9h~).OY[H@K(M",
+            "ok": true
+        },
+        {
+            "password": "zsa%UDO",
+            "ok": false
+        },
+        {
+            "password": "\\&m8OZ",
+            "ok": false
+        },
+        {
+            "password": "I`j$Q0z?",
+            "ok": true
+        },
+        {
+            "password": "Zh E~wwsZ:8",
+            "ok": false
+        },
+        {
+            "password": "@0qB4 q|&jx",
+            "ok": false
+        },
+        {
+            "password": "JFIj`!)W",
+            "ok": false
+        },
+        {
+            "password": "vDP+",
+            "ok": false
+        },
+        {
+            "password": "7+Q(m!7.>}",
+            "ok": true
+        },
+        {
+            "password": "!4;r",
+            "ok": false
+        },
+        {
+            "password": ")mYj<4lNuM",
+            "ok": true
+        },
+        {
+            "password": "^v+upJ`",
+            "ok": false
+        },
+        {
+            "password": "F`*t.fP8dC\"z,",
+            "ok": true
+        },
+        {
+            "password": "u|6urvM",
+            "ok": false
+        },
+        {
+            "password": "-\"}",
+            "ok": false
+        },
+        {
+            "password": "{Yoee\"OvIOMH",
+            "ok": false
+        },
+        {
+            "password": "@|PJ<\\ 5",
+            "ok": false
+        },
+        {
+            "password": "O}uZ",
+            "ok": false
+        },
+        {
+            "password": "gs^^+FvJ-A-|E",
+            "ok": false
+        },
+        {
+            "password": "{$ab![1s|=4O",
+            "ok": true
+        },
+        {
+            "password": "?%",
+            "ok": false
+        },
+        {
+            "password": "Xs;U^|cvT9.tS>",
+            "ok": true
+        },
+        {
+            "password": "5dYL@",
+            "ok": false
+        },
+        {
+            "password": "t/.KWL<dg'1SE[",
+            "ok": true
+        },
+        {
+            "password": "kLc)<; o#bLeHv",
+            "ok": false
+        },
+        {
+            "password": "h0",
+            "ok": false
+        },
+        {
+            "password": "wwlX/$9",
+            "ok": false
+        },
+        {
+            "password": "rkba%(eS?",
+            "ok": false
+        },
+        {
+            "password": "@@o",
+            "ok": false
+        },
+        {
+            "password": "{(M`",
+            "ok": false
+        },
+        {
+            "password": "'LEX~",
+            "ok": false
+        },
+        {
+            "password": "'*o2Z(*tV>F",
+            "ok": true
+        },
+        {
+            "password": "C[KW 5,(t",
+            "ok": false
+        },
+        {
+            "password": "AW!t",
+            "ok": false
+        },
+        {
+            "password": "\\na-H#[",
+            "ok": false
+        },
+        {
+            "password": "<\"c2\\Goz",
+            "ok": true
+        },
+        {
+            "password": "^Ez29B,R#",
+            "ok": true
+        },
+        {
+            "password": "8<7b{d+$hBY#K",
+            "ok": true
+        },
+        {
+            "password": "hLKUT[GIB%;b/r",
+            "ok": false
+        },
+        {
+            "password": "<cv",
+            "ok": false
+        },
+        {
+            "password": "=eolR:l_8^~i",
+            "ok": true
+        },
+        {
+            "password": "Pl8/u>",
+            "ok": false
+        },
+        {
+            "password": "}MJKQP#Iq,aVN",
+            "ok": false
+        },
+        {
+            "password": "Zav",
+            "ok": false
+        },
+        {
+            "password": "talnA",
+            "ok": false
+        },
+        {
+            "password": ">vACl%|3<H~c",
+            "ok": true
+        },
+        {
+            "password": "PhBF",
+            "ok": false
+        },
+        {
+            "password": "s",
+            "ok": false
+        },
+        {
+            "password": "V<sk.",
+            "ok": false
+        },
+        {
+            "password": "D)Hg0&UQd`Gk",
+            "ok": true
+        },
+        {
+            "password": "SfxVeK!.p}",
+            "ok": false
+        },
+        {
+            "password": "L~",
+            "ok": false
+        },
+        {
+            "password": "?(uTWt {El",
+            "ok": false
+        },
+        {
+            "password": "#]QoM",
+            "ok": false
+        },
+        {
+            "password": " >Q`5",
+            "ok": false
+        },
+        {
+            "password": "eOee'kw(m~ \"",
+            "ok": false
+        },
+        {
+            "password": "d",
+            "ok": false
+        },
+        {
+            "password": "Llww!@3",
+            "ok": false
+        },
+        {
+            "password": "a9Sj",
+            "ok": false
+        },
+        {
+            "password": "+P",
+            "ok": false
+        },
+        {
+            "password": "u+BH[T'(@b[f",
+            "ok": false
+        },
+        {
+            "password": "V5cFW",
+            "ok": false
+        },
+        {
+            "password": "X\"*T_Am8p",
+            "ok": true
+        },
+        {
+            "password": "QhLB-R0",
+            "ok": false
+        },
+        {
+            "password": "-tGzfWzY",
+            "ok": false
+        },
+        {
+            "password": "b&2hV, uQ-V",
+            "ok": false
+        },
+        {
+            "password": "$s*4L",
+            "ok": false
+        },
+        {
+            "password": "Q'kVyMQvZPJG",
+            "ok": false
+        },
+        {
+            "password": "exd",
+            "ok": false
+        },
+        {
+            "password": "I6bD#",
+            "ok": false
+        },
+        {
+            "password": "9",
+            "ok": false
+        },
+        {
+            "password": "7<=ANq\\G",
+            "ok": true
+        },
+        {
+            "password": "T0fC[r1uM",
+            "ok": true
+        },
+        {
+            "password": "CASswl+i",
+            "ok": false
+        },
+        {
+            "password": " 5S",
+            "ok": false
+        },
+        {
+            "password": "oio",
+            "ok": false
+        },
+        {
+            "password": "O\"4[;6|$S+Y",
+            "ok": false
+        },
+        {
+            "password": "SQ>nWK>diqUq",
+            "ok": false
+        },
+        {
+            "password": "C<Tb",
+            "ok": false
+        },
+        {
+            "password": "23-~Y",
+            "ok": false
+        },
+        {
+            "password": "W(FdH",
+            "ok": false
+        },
+        {
+            "password": "+\\?0pikvD",
+            "ok": true
+        },
+        {
+            "password": "?&^-_,ujE",
+            "ok": false
+        },
+        {
+            "password": "SDZH",
+            "ok": false
+        },
+        {
+            "password": "RCjYT)7",
+            "ok": false
+        },
+        {
+            "password": "JeAB",
+            "ok": false
+        },
+        {
+            "password": "VbA^K9?7*",
+            "ok": true
+        },
+        {
+            "password": "@c_5L8PHv",
+            "ok": true
+        },
+        {
+            "password": "&`59:7&",
+            "ok": false
+        },
+        {
+            "password": ")",
+            "ok": false
+        },
+        {
+            "password": "^'f`a&#[z.~",
+            "ok": false
+        },
+        {
+            "password": "DX[~,fu(",
+            "ok": false
+        },
+        {
+            "password": "/2ZkL}",
+            "ok": false
+        },
+        {
+            "password": "pFj$QoEPn+",
+            "ok": false
+        },
+        {
+            "password": "/\"(k\\GlZAL;/I",
+            "ok": false
+        },
+        {
+            "password": "tt>%>J6[Mp",
+            "ok": true
+        },
+        {
+            "password": "`LS",
+            "ok": false
+        },
+        {
+            "password": "`Gb?^d%",
+            "ok": false
+        },
+        {
+            "password": "\\)",
+            "ok": false
+        },
+        {
+            "password": "<gT",
+            "ok": false
+        },
+        {
+            "password": "0izL^1l*7 Qlym",
+            "ok": false
+        },
+        {
+            "password": "_774",
+            "ok": false
+        },
+        {
+            "password": "4w6",
+            "ok": false
+        },
+        {
+            "password": "!fA<y82#J",
+            "ok": true
+        },
+        {
+            "password": ".U`JNGRSbkuLf",
+            "ok": false
+        },
+        {
+            "password": "x9#F~lMS~",
+            "ok": true
+        },
+        {
+            "password": "`xIrXLP",
+            "ok": false
+        },
+        {
+            "password": "?k&=I",
+            "ok": false
+        },
+        {
+            "password": "^4_AZ",
+            "ok": false
+        },
+        {
+            "password": "Q/}7",
+            "ok": false
+        },
+        {
+            "password": "_*@b~4{/ru",
+            "ok": false
+        },
+        {
+            "password": "sj5!b<f",
+            "ok": false
+        },
+        {
+            "password": "^m4{qz@m^z",
+            "ok": false
+        },
+        {
+            "password": "_(jEMr|DU*/$Ih",
+            "ok": false
+        },
+        {
+            "password": "k}tUc!(flm`^c",
+            "ok": false
+        },
+        {
+            "password": "d\"Em>\"G",
+            "ok": false
+        },
+        {
+            "password": "C5'#oc(6Ohl",
+            "ok": true
+        },
+        {
+            "password": "S=Y4W1e[' MCS",
+            "ok": false
+        },
+        {
+            "password": "== T&mW[_",
+            "ok": false
+        },
+        {
+            "password": "e$_5$!",
+            "ok": false
+        },
+        {
+            "password": "Wc",
+            "ok": false
+        },
+        {
+            "password": "#FQkDRgA]Q{v4a",
+            "ok": true
+        },
+        {
+            "password": "JkE>zzEU9`\"qsG",
+            "ok": true
+        },
+        {
+            "password": "/-kaN",
+            "ok": false
+        },
+        {
+            "password": "s&RhB!SK^Lt?",
+            "ok": false
+        },
+        {
+            "password": "k)j`JXn^Q7BehR",
+            "ok": true
+        },
+        {
+            "password": "\\0mPi^-C[8S-5",
+            "ok": true
+        },
+        {
+            "password": "VWYP\"hE7s,Ebl",
+            "ok": true
+        },
+        {
+            "password": "6\\6T#-V",
+            "ok": false
+        },
+        {
+            "password": "`$Puo",
+            "ok": false
+        },
+        {
+            "password": "|M$z",
+            "ok": false
+        },
+        {
+            "password": "Y;g3mv|A}<Y<",
+            "ok": true
+        },
+        {
+            "password": "TQzsoI*a$C",
+            "ok": false
+        },
+        {
+            "password": "G= ?LzV",
+            "ok": false
+        },
+        {
+            "password": "t/)5c<aZ",
+            "ok": true
+        },
+        {
+            "password": ".^wCoW!",
+            "ok": false
+        },
+        {
+            "password": "A=&WpL.AMQBn!",
+            "ok": false
+        },
+        {
+            "password": "(",
+            "ok": false
+        },
+        {
+            "password": "@&KbdWHX/z",
+            "ok": false
+        },
+        {
+            "password": "{<75_7$Xc",
+            "ok": true
+        },
+        {
+            "password": "LT)hl|",
+            "ok": false
+        },
+        {
+            "password": ":%},e2",
+            "ok": false
+        },
+        {
+            "password": "?=",
+            "ok": false
+        },
+        {
+            "password": "uE>G~!#u",
+            "ok": false
+        },
+        {
+            "password": "@g]",
+            "ok": false
+        },
+        {
+            "password": "H:p@pC}Egp",
+            "ok": false
+        },
+        {
+            "password": "/z8",
+            "ok": false
+        },
+        {
+            "password": "0fzLY@Mq(<(4",
+            "ok": true
+        },
+        {
+            "password": "v[.^V",
+            "ok": false
+        },
+        {
+            "password": "/=QP+5^>^ljQY>",
+            "ok": true
+        },
+        {
+            "password": "~Aqc.!+mv00PUu",
+            "ok": true
+        },
+        {
+            "password": "|h&9",
+            "ok": false
+        },
+        {
+            "password": "j/Na(<G\"L",
+            "ok": false
+        },
+        {
+            "password": "|^",
+            "ok": false
+        },
+        {
+            "password": "<;5Y",
+            "ok": false
+        },
+        {
+            "password": "C4e4.Bjv^o*Ho",
+            "ok": true
+        },
+        {
+            "password": "qxz",
+            "ok": false
+        },
+        {
+            "password": "L7k",
+            "ok": false
+        },
+        {
+            "password": "w",
+            "ok": false
+        },
+        {
+            "password": "`/D3G@In'&$",
+            "ok": true
+        },
+        {
+            "password": "*\\Ea{$sbQ58s",
+            "ok": true
+        },
+        {
+            "password": "LRJG",
+            "ok": false
+        },
+        {
+            "password": "7Js$@_%Pw",
+            "ok": true
+        },
+        {
+            "password": "wA@w/[E",
+            "ok": false
+        },
+        {
+            "password": ":[,j=>):VE/",
+            "ok": false
+        },
+        {
+            "password": "xUd&)",
+            "ok": false
+        },
+        {
+            "password": "{A1,=n-Ti+Rz",
+            "ok": true
+        },
+        {
+            "password": "G&OZI6uS[g",
+            "ok": true
+        },
+        {
+            "password": "[6Y",
+            "ok": false
+        },
+        {
+            "password": "d}UwEXHy|0`r",
+            "ok": true
+        },
+        {
+            "password": "&9y",
+            "ok": false
+        },
+        {
+            "password": "$n2 ;T6?",
+            "ok": false
+        },
+        {
+            "password": "]",
+            "ok": false
+        },
+        {
+            "password": "-h?slBej2oeu",
+            "ok": true
+        },
+        {
+            "password": "ijqR=F9f%>bR;",
+            "ok": true
+        },
+        {
+            "password": "3|*YS\"c?n",
+            "ok": true
+        },
+        {
+            "password": "Wc/CSKCZ?",
+            "ok": false
+        },
+        {
+            "password": "w7A!(E4LJ",
+            "ok": true
+        },
+        {
+            "password": "c! E@y6l |/0",
+            "ok": false
+        },
+        {
+            "password": "I",
+            "ok": false
+        },
+        {
+            "password": "t+",
+            "ok": false
+        },
+        {
+            "password": "qW}hO:",
+            "ok": false
+        },
+        {
+            "password": ".MR}iv[BvL/a+/",
+            "ok": false
+        },
+        {
+            "password": "?#?z/z$U4DG",
+            "ok": true
+        },
+        {
+            "password": "RT",
+            "ok": false
+        },
+        {
+            "password": "G(\\_fLL.ZZ]`5b",
+            "ok": true
+        },
+        {
+            "password": "W_2*&E+dN",
+            "ok": true
+        },
+        {
+            "password": "CAQ%UZC",
+            "ok": false
+        },
+        {
+            "password": "vN/}9/v5",
+            "ok": true
+        },
+        {
+            "password": ")%hWVg,",
+            "ok": false
+        },
+        {
+            "password": "ch M]8NLnCl",
+            "ok": false
+        },
+        {
+            "password": "r<No6@!8<`E6g",
+            "ok": true
+        },
+        {
+            "password": "\\q:",
+            "ok": false
+        },
+        {
+            "password": "yT8Es",
+            "ok": false
+        },
+        {
+            "password": "aH,-r[B%e-PWy",
+            "ok": false
+        },
+        {
+            "password": "56*Lp#o",
+            "ok": false
+        },
+        {
+            "password": ".ZS^r",
+            "ok": false
+        },
+        {
+            "password": "EJ_Q#WEaTO@|",
+            "ok": false
+        },
+        {
+            "password": "';x_nu>xIqX",
+            "ok": false
+        },
+        {
+            "password": "e=\\",
+            "ok": false
+        },
+        {
+            "password": "i,zTLLMsF",
+            "ok": false
+        },
+        {
+            "password": "#3:QS~\"S;",
+            "ok": false
+        },
+        {
+            "password": "sr Aa<",
+            "ok": false
+        },
+        {
+            "password": "`xv]",
+            "ok": false
+        },
+        {
+            "password": "x10uehz",
+            "ok": false
+        },
+        {
+            "password": "8q*qKy]i6",
+            "ok": true
+        },
+        {
+            "password": "YnOUN>mZS0jc3",
+            "ok": true
+        },
+        {
+            "password": "|7x@=m*",
+            "ok": false
+        },
+        {
+            "password": ":j3DX7V",
+            "ok": false
+        },
+        {
+            "password": "]",
+            "ok": false
+        },
+        {
+            "password": "y(st)x'",
+            "ok": false
+        },
+        {
+            "password": "5>d@%.",
+            "ok": false
+        },
+        {
+            "password": ">=Oy",
+            "ok": false
+        },
+        {
+            "password": "S jT81k`9P",
+            "ok": false
+        },
+        {
+            "password": "Ki(q",
+            "ok": false
+        },
+        {
+            "password": "]>!xOpMc)5_",
+            "ok": true
+        },
+        {
+            "password": "_*:t`Q%xUy",
+            "ok": false
+        },
+        {
+            "password": "P;Xe@Xx@",
+            "ok": false
+        },
+        {
+            "password": "sO_IT8",
+            "ok": false
+        },
+        {
+            "password": "^*`e5*",
+            "ok": false
+        },
+        {
+            "password": "u<z?/( W p7~",
+            "ok": false
+        },
+        {
+            "password": "/wD#",
+            "ok": false
+        },
+        {
+            "password": ",-",
+            "ok": false
+        },
+        {
+            "password": "D\"j9XRd2nx ",
+            "ok": false
+        },
+        {
+            "password": "6BD",
+            "ok": false
+        },
+        {
+            "password": "[*:Ys8a^$xl:_",
+            "ok": true
+        },
+        {
+            "password": "e-",
+            "ok": false
+        },
+        {
+            "password": "G1)bt[[h$X~",
+            "ok": true
+        }
+    ],
+    "generated": [
+        {
+            "length": 8,
+            "actual": 8,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 8,
+            "actual": 8,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 8,
+            "actual": 8,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 8,
+            "actual": 8,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 8,
+            "actual": 8,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 8,
+            "actual": 8,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 8,
+            "actual": 8,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 8,
+            "actual": 8,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 8,
+            "actual": 8,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 8,
+            "actual": 8,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 8,
+            "actual": 8,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 8,
+            "actual": 8,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 8,
+            "actual": 8,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 8,
+            "actual": 8,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 8,
+            "actual": 8,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 8,
+            "actual": 8,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 8,
+            "actual": 8,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 8,
+            "actual": 8,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 8,
+            "actual": 8,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 8,
+            "actual": 8,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 8,
+            "actual": 8,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 8,
+            "actual": 8,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 8,
+            "actual": 8,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 8,
+            "actual": 8,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 8,
+            "actual": 8,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 8,
+            "actual": 8,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 8,
+            "actual": 8,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 8,
+            "actual": 8,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 8,
+            "actual": 8,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 8,
+            "actual": 8,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 8,
+            "actual": 8,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 8,
+            "actual": 8,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 8,
+            "actual": 8,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 8,
+            "actual": 8,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 8,
+            "actual": 8,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 8,
+            "actual": 8,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 8,
+            "actual": 8,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 8,
+            "actual": 8,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 8,
+            "actual": 8,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 8,
+            "actual": 8,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 8,
+            "actual": 8,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 8,
+            "actual": 8,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 8,
+            "actual": 8,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 8,
+            "actual": 8,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 8,
+            "actual": 8,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 8,
+            "actual": 8,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 8,
+            "actual": 8,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 8,
+            "actual": 8,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 8,
+            "actual": 8,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 8,
+            "actual": 8,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 12,
+            "actual": 12,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 12,
+            "actual": 12,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 12,
+            "actual": 12,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 12,
+            "actual": 12,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 12,
+            "actual": 12,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 12,
+            "actual": 12,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 12,
+            "actual": 12,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 12,
+            "actual": 12,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 12,
+            "actual": 12,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 12,
+            "actual": 12,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 12,
+            "actual": 12,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 12,
+            "actual": 12,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 12,
+            "actual": 12,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 12,
+            "actual": 12,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 12,
+            "actual": 12,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 12,
+            "actual": 12,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 12,
+            "actual": 12,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 12,
+            "actual": 12,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 12,
+            "actual": 12,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 12,
+            "actual": 12,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 12,
+            "actual": 12,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 12,
+            "actual": 12,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 12,
+            "actual": 12,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 12,
+            "actual": 12,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 12,
+            "actual": 12,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 12,
+            "actual": 12,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 12,
+            "actual": 12,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 12,
+            "actual": 12,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 12,
+            "actual": 12,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 12,
+            "actual": 12,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 12,
+            "actual": 12,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 12,
+            "actual": 12,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 12,
+            "actual": 12,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 12,
+            "actual": 12,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 12,
+            "actual": 12,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 12,
+            "actual": 12,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 12,
+            "actual": 12,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 12,
+            "actual": 12,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 12,
+            "actual": 12,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 12,
+            "actual": 12,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 12,
+            "actual": 12,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 12,
+            "actual": 12,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 12,
+            "actual": 12,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 12,
+            "actual": 12,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 12,
+            "actual": 12,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 12,
+            "actual": 12,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 12,
+            "actual": 12,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 12,
+            "actual": 12,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 12,
+            "actual": 12,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 12,
+            "actual": 12,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 20,
+            "actual": 20,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 20,
+            "actual": 20,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 20,
+            "actual": 20,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 20,
+            "actual": 20,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 20,
+            "actual": 20,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 20,
+            "actual": 20,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 20,
+            "actual": 20,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 20,
+            "actual": 20,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 20,
+            "actual": 20,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 20,
+            "actual": 20,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 20,
+            "actual": 20,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 20,
+            "actual": 20,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 20,
+            "actual": 20,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 20,
+            "actual": 20,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 20,
+            "actual": 20,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 20,
+            "actual": 20,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 20,
+            "actual": 20,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 20,
+            "actual": 20,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 20,
+            "actual": 20,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 20,
+            "actual": 20,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 20,
+            "actual": 20,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 20,
+            "actual": 20,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 20,
+            "actual": 20,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 20,
+            "actual": 20,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 20,
+            "actual": 20,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 20,
+            "actual": 20,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 20,
+            "actual": 20,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 20,
+            "actual": 20,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 20,
+            "actual": 20,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 20,
+            "actual": 20,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 20,
+            "actual": 20,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 20,
+            "actual": 20,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 20,
+            "actual": 20,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 20,
+            "actual": 20,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 20,
+            "actual": 20,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 20,
+            "actual": 20,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 20,
+            "actual": 20,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 20,
+            "actual": 20,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 20,
+            "actual": 20,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 20,
+            "actual": 20,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 20,
+            "actual": 20,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 20,
+            "actual": 20,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 20,
+            "actual": 20,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 20,
+            "actual": 20,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 20,
+            "actual": 20,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 20,
+            "actual": 20,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 20,
+            "actual": 20,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 20,
+            "actual": 20,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 20,
+            "actual": 20,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 20,
+            "actual": 20,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 3,
+            "actual": 8,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 3,
+            "actual": 8,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 3,
+            "actual": 8,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 3,
+            "actual": 8,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 3,
+            "actual": 8,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 3,
+            "actual": 8,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 3,
+            "actual": 8,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 3,
+            "actual": 8,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 3,
+            "actual": 8,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 3,
+            "actual": 8,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 3,
+            "actual": 8,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 3,
+            "actual": 8,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 3,
+            "actual": 8,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 3,
+            "actual": 8,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 3,
+            "actual": 8,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 3,
+            "actual": 8,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 3,
+            "actual": 8,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 3,
+            "actual": 8,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 3,
+            "actual": 8,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 3,
+            "actual": 8,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 3,
+            "actual": 8,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 3,
+            "actual": 8,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 3,
+            "actual": 8,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 3,
+            "actual": 8,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 3,
+            "actual": 8,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 3,
+            "actual": 8,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 3,
+            "actual": 8,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 3,
+            "actual": 8,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 3,
+            "actual": 8,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 3,
+            "actual": 8,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 3,
+            "actual": 8,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 3,
+            "actual": 8,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 3,
+            "actual": 8,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 3,
+            "actual": 8,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 3,
+            "actual": 8,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 3,
+            "actual": 8,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 3,
+            "actual": 8,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 3,
+            "actual": 8,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 3,
+            "actual": 8,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 3,
+            "actual": 8,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 3,
+            "actual": 8,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 3,
+            "actual": 8,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 3,
+            "actual": 8,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 3,
+            "actual": 8,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 3,
+            "actual": 8,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 3,
+            "actual": 8,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 3,
+            "actual": 8,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 3,
+            "actual": 8,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 3,
+            "actual": 8,
+            "ok": true,
+            "lookalike": false
+        },
+        {
+            "length": 3,
+            "actual": 8,
+            "ok": true,
+            "lookalike": false
+        }
+    ],
+    "masked": [
+        {
+            "email": "anita@demo.hms",
+            "masked": "an***@demo.hms"
+        },
+        {
+            "email": "a@x.io",
+            "masked": "a*@x.io"
+        },
+        {
+            "email": "ab@x.io",
+            "masked": "ab*@x.io"
+        },
+        {
+            "email": "abc@x.io",
+            "masked": "ab*@x.io"
+        },
+        {
+            "email": "abcd@example.com",
+            "masked": "ab**@example.com"
+        },
+        {
+            "email": "ही@x.in",
+            "masked": "ही*@x.in"
+        },
+        {
+            "email": "ही​दिवाळी@x.in",
+            "masked": "ही*******@x.in"
+        },
+        {
+            "email": "x@y@z.com",
+            "masked": "x*@y@z.com"
+        },
+        {
+            "email": "",
+            "masked": "your email"
+        },
+        {
+            "email": "noatsign",
+            "masked": "your email"
+        },
+        {
+            "email": "@domain.com",
+            "masked": "*@domain.com"
+        },
+        {
+            "email": "mihir.jungiwala@gmail.com",
+            "masked": "mi*************@gmail.com"
+        },
+        {
+            "email": null,
+            "masked": "your email"
+        }
+    ]
+}

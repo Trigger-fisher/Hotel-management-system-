@@ -1,0 +1,105 @@
+{
+  "about": "Structural defaults every new hotel starts with, taken from what Pallav's own migrations seed and what its code offers when a list is empty. Only structure: shifts, payment modes, plans, contact roles, exit types, ID proof types, expense heads, business units. No real people, phone numbers, e-mails, bank data or Hotel Pallav text. Hotel Pallav's brand names became 'Hotel' and 'Food'.",
+  "businessUnits": {
+    "source": "database/migrations/2026_09_18_100001_create_business_units_table.php (Hotel Pallav -> Hotel, Pallav Food -> Food; codes HP/PF -> HOTEL/FOOD)",
+    "rows": [
+      { "slug": "hotel", "name": "Hotel", "code": "HOTEL", "accent": "#7C3AED", "icon": "bi-building", "sortOrder": 1 },
+      { "slug": "food", "name": "Food", "code": "FOOD", "accent": "#0F766E", "icon": "bi-cup-hot", "sortOrder": 2 }
+    ]
+  },
+  "optionSets": [
+    {
+      "key": "payment_mode", "name": "Payment Modes", "description": "How a guest settles a bill or advance", "icon": "bi-credit-card", "input": "select",
+      "source": "2026_09_18_120001_create_option_sets_table.php",
+      "items": ["Cash", "Card", "Debit", "Bank Transfer", "Cheque", "UPI", "Complimentary"]
+    },
+    {
+      "key": "hotel_plan", "name": "Hotel Plans", "description": "Room packages offered on a bill", "icon": "bi-house-check", "input": "select",
+      "source": "2026_09_18_120001_create_option_sets_table.php",
+      "items": ["EP", "CP", "MAP", "AP"]
+    },
+    {
+      "key": "shift", "name": "Shifts", "description": "Front desk shifts used on handovers", "icon": "bi-clock-history", "input": "select",
+      "source": "2026_09_18_120001_create_option_sets_table.php",
+      "items": ["Morning", "Afternoon", "Evening", "Night"]
+    },
+    {
+      "key": "company_contact_role", "name": "Company Contact Roles", "description": "What a person is to a company, on Company Profiles", "icon": "bi-person-badge", "input": "select",
+      "source": "2026_09_20_150000_turn_company_contacts_into_a_list.php",
+      "items": ["Managing Director", "HR Head", "Assistant HR", "Accountant Head", "Accountant Assistant", "Other"]
+    },
+    {
+      "key": "revenue_depositor_hotel", "name": "Revenue (Hotel)", "description": "Who hands cash in to the Hotel book. Names only.", "icon": "bi-person-vcard", "input": "select",
+      "source": "2026_09_20_230000_split_revenue_depositors_and_add_reason.php + 2026_09_26_130000_name_the_depositor_lists_revenue.php (a names-only list: starts empty, the hotel adds its people)",
+      "items": []
+    },
+    {
+      "key": "revenue_depositor_food", "name": "Revenue (Food)", "description": "Who hands cash in to the Food book. Names only.", "icon": "bi-person-vcard", "input": "select",
+      "source": "2026_09_20_230000_split_revenue_depositors_and_add_reason.php + 2026_09_26_130000_name_the_depositor_lists_revenue.php (names-only, starts empty)",
+      "items": []
+    },
+    {
+      "key": "cash_person_hotel", "name": "Receiver Names (Hotel)", "description": "Who cash is handed to when it leaves the Hotel till. Names only.", "icon": "bi-person-vcard", "input": "select",
+      "source": "2026_09_26_140000_receiver_names_belong_to_a_business.php (names-only, starts empty)",
+      "items": []
+    },
+    {
+      "key": "cash_person_food", "name": "Receiver Names (Food)", "description": "Who cash is handed to when it leaves the Food till. Names only.", "icon": "bi-person-vcard", "input": "select",
+      "source": "2026_09_26_140000_receiver_names_belong_to_a_business.php (names-only, starts empty)",
+      "items": []
+    },
+    {
+      "key": "expense_catalog_hotel", "name": "Miscellaneous (Hotel)", "description": "Categories and their items, with the price of each. What a Miscellaneous expense picks from.", "icon": "bi-basket", "input": "select",
+      "source": "2026_09_21_100000_create_expense_catalog_and_lines.php + 2026_09_26_110000_name_the_expense_catalogs_miscellaneous.php",
+      "items": []
+    },
+    {
+      "key": "expense_catalog_food", "name": "Miscellaneous (Food)", "description": "Categories and their items, with the price of each. What a Miscellaneous expense picks from.", "icon": "bi-basket", "input": "select",
+      "source": "2026_09_21_100000_create_expense_catalog_and_lines.php + 2026_09_26_110000_name_the_expense_catalogs_miscellaneous.php",
+      "items": []
+    }
+  ],
+  "expenseCategories": {
+    "source": "2026_09_21_100000_create_expense_catalog_and_lines.php: the expense heads of Master Data became the first categories of each business, with no items (nothing invented); heads from 2026_09_18_120001_create_option_sets_table.php",
+    "businesses": ["hotel", "food"],
+    "names": ["Kitchen", "Housekeeping", "Maintenance", "Utilities", "Marketing", "Transport", "Office", "Other"]
+  },
+  "idProofTypes": {
+    "source": "database/seeders/DatabaseSeeder.php (IdProofType::updateOrCreate) and app/Support/PayrollMasters.php id_proofs defaults",
+    "names": ["Aadhaar Card", "PAN Card", "Voter ID", "Driving Licence", "Passport"]
+  },
+  "payrollMasterItems": {
+    "source": "app/Support/PayrollMasters.php LISTS defaults; separation_type from 2026_09_18_120001 (five exit types in the database, four in the code); salary_payment_mode from 2026_09_20_180000_make_salary_payment_modes_editable.php. Shared entries (no company).",
+    "lists": [
+      { "list": "gender", "labels": ["Male", "Female", "Other"] },
+      { "list": "separation_type", "labels": ["Resignation", "Termination", "Retirement", "End of Contract", "Absconded"] },
+      { "list": "id_proofs", "labels": ["Aadhaar Card", "PAN Card", "Passport", "Driving Licence", "Voter ID"] },
+      { "list": "salary_payment_mode", "labels": ["Cash", "Bank"] }
+    ]
+  },
+  "payrollCompanies": {
+    "source": "app/Models/PayrollCompany.php FIXED (FixedCompaniesTest): exactly two rows in this order, named after the hotel (the hotel name is passed to the seed run as @hotel_name by create-hotel and by `seed`); the CODES are business logic (HP01 pays the staff-meal charge, PF01 is the food provider) and are the same in every hotel",
+    "rows": [
+      { "code": "HP01", "nameSuffix": "" },
+      { "code": "PF01", "nameSuffix": " Food" }
+    ]
+  },
+  "appSettings": {
+    "source": "MJ decision #19 (GST at check-out): the percent used at check-out is read from these two settings and stored with the stay and the bill (pms_stays and bill_master_bills hotel_gst_percent / food_gst_percent)",
+    "rows": [
+      { "key": "checkout.hotel_gst_percent", "value": "5" },
+      { "key": "checkout.food_gst_percent", "value": "5" }
+    ]
+  },
+  "singletonRows": {
+    "source": "Pallav creates these rows on first use (Site\\Settings::current(), PageContent::current()); here they exist from the start, with only the column defaults",
+    "tables": ["site_settings", "site_page_content"]
+  },
+  "notSeeded": [
+    "revenue_source and expense_head option sets: retired by Pallav (replaced by the reason column and the expense catalogue)",
+    "the Hotel Pallav and Pallav Food payroll companies, their bank details, signatories and letters: real company data",
+    "meal plan rates and food charge rates: Pallav's own prices (Pallav seeds none)",
+    "attendance statuses and deductions: created per payroll company",
+    "accounting years: the hotel opens its first year at setup"
+  ]
+}

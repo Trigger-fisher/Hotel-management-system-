@@ -1,0 +1,45 @@
+/* System Log: Handover's cards, one per entry. The action pill and a thin
+   rail say what kind of event it was without being read. */
+
+.sl-views { flex-wrap: wrap; gap: 8px; }
+.sl-views .pf-place.danger i { color: #DC2626; }
+.sl-views .pf-place.danger.active { border-color: #DC2626; background: #FEF2F2; color: #991B1B; }
+
+.sl-cols { grid-template-columns: 64px minmax(90px, .8fr) minmax(110px, .9fr) minmax(0, 2fr); }
+.sl-cols .sh-val.text i { color: var(--p500); margin-right: 2px; }
+
+.sl-action { display: inline-flex; align-items: center; gap: 4px; white-space: nowrap; }
+.sl-card.tone-created .sl-action { background: #DCFCE7; color: #15803D; }
+.sl-card.tone-deleted .sl-action,
+.sl-card.tone-error .sl-action { background: #FEE2E2; color: #B91C1C; }
+.sl-card.tone-emailed .sl-action { background: var(--p100); color: var(--p800); }
+
+.sl-card.tone-created { border-left: 3px solid #16A34A; }
+.sl-card.tone-updated { border-left: 3px solid var(--p500); }
+.sl-card.tone-deleted { border-left: 3px solid #DC2626; }
+.sl-card.tone-emailed { border-left: 3px solid var(--p700); }
+.sl-card.tone-error { border-left: 3px solid #DC2626; }
+
+.sl-result strong { font-size: 14px; }
+.sl-result.bad strong { color: #B91C1C; }
+
+.sl-summary { font-size: 13.5px; font-weight: 600; color: var(--ink); margin: 0 0 10px; overflow-wrap: anywhere; }
+.sl-card .sh-count-table td:first-child { width: 30%; }
+.sl-card .sh-count-table td { overflow-wrap: anywhere; }
+
+:root[data-theme="dark"] .sl-card.tone-created .sl-action { background: rgba(22, 163, 74, .2); color: #86EFAC; }
+:root[data-theme="dark"] .sl-card.tone-deleted .sl-action,
+:root[data-theme="dark"] .sl-card.tone-error .sl-action { background: rgba(220, 38, 38, .2); color: #FCA5A5; }
+:root[data-theme="dark"] .sl-card.tone-emailed .sl-action { background: rgba(17, 17, 20, .22); color: #D0D0D6; }
+:root[data-theme="dark"] .sl-result.bad strong { color: #FCA5A5; }
+:root[data-theme="dark"] .sl-views .pf-place.danger.active { background: rgba(220, 38, 38, .14); color: #FCA5A5; }
+
+@media (max-width: 1199.98px) {
+    .sl-cols { grid-template-columns: 64px minmax(0, 1fr) minmax(0, 1fr); }
+    .sl-cols .sh-col:last-child { grid-column: 1 / -1; }
+}
+@media (max-width: 767.98px) {
+    .sl-cols { grid-template-columns: 56px minmax(0, 1fr); }
+    .sl-cols .sh-col:nth-child(3), .sl-cols .sh-col:last-child { grid-column: 1 / -1; }
+}
+.sl-arrow { color: var(--muted); font-size: 11px; margin: 0 3px; }

@@ -1,0 +1,5 @@
+/* The web app's own global stylesheet. Tailwind scans the screens where they live. */
+@import "../../web-app/src/app/globals.css";
+
+@source "../../web-app/src";
+@source "../../common/ui-shared";

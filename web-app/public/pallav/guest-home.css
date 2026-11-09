@@ -1,0 +1,87 @@
+/* ==========================================================================================================================================
+   Guest portal: HOME (decision 71, "user-wise"). Owned by the Home page (groups/guest/Home.tsx, home/sections.tsx); loaded on every guest page after
+   guest-glass.css (pageCss.ts). Layout rules unscoped and under .gg-home (the hotel's portal preview gets the structure in its own look); the look and the
+   motion under :root body.hms-guest. The shared pieces (hero, capsule, money card, rows, chips, hotel card) are styled in guest-glass.css.
+
+   The page: one block per stage (Slot, .gh-slot). Desktop (1100px and up): a 2/3 + 1/3 grid, the side column (the contact card, past stays) stays
+   in view while the main one scrolls; with nothing on the side the main column takes the width. Narrower: ONE column in the stage's own order (.gh-o1 ...),
+   so on a phone the first thing under the large title is what this guest needs first.
+   Decision 70's Home blocks (.gg-qa, .gg-kpis, .gg-row, .gh-bill-row, .gg-panel) are gone.
+   ========================================================================================================================================== */
+
+/* ---- Layout (unscoped) ---- */
+.gh-grid { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+.gh-main, .gh-side { display: contents; }
+.gh-slot { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+.gh-slot:empty { display: none; }
+.gh-slot > * { margin-top: 0 !important; margin-bottom: 0 !important; min-width: 0; }
+.gh-o1 { order: 1; } .gh-o2 { order: 2; } .gh-o3 { order: 3; } .gh-o4 { order: 4; } .gh-o5 { order: 5; } .gh-o6 { order: 6; }
+
+@media (min-width: 1600px) { .gh-grid:has(.gh-side > .gh-slot:not(:empty)) { grid-template-columns: minmax(0, 1.5fr) minmax(400px, 1fr) !important; gap: 24px; } }
+@media (min-width: 1100px) {
+    .gh-grid { display: grid; grid-template-columns: minmax(0, 1.7fr) minmax(320px, 1fr); align-items: start; gap: 20px; }
+    .gh-main, .gh-side { display: flex; flex-direction: column; gap: 20px; min-width: 0; }
+    /* the side column scrolls with the page (it holds the money, the hotel and the activity: taller than a screen) */
+    .gh-grid:not(:has(.gh-side > .gh-slot:not(:empty))) { grid-template-columns: minmax(0, 1fr); }
+    .gh-grid:not(:has(.gh-side > .gh-slot:not(:empty))) > .gh-side { display: none; }
+    /* on the desktop the hero's capsule sits in one row under the words */
+    .gg-home .gg-hero { padding: 30px 32px; gap: 22px; }
+}
+
+/* card heads: the title and a quiet "see all" capsule link (a real button, 44px tall on a phone) */
+.gh-head { align-items: center; }
+.gh-head .gg-more { border: 0; background: transparent; font: inherit; font-size: 14px; font-weight: 600; cursor: pointer; margin-right: -8px; }
+
+/* no stay: the empty state in a card, the Call button under it */
+.gh-empty { padding: 30px 22px; text-align: center; }
+.gh-empty .pt-empty { padding: 0; }
+.gh-empty .pt-empty strong { font-size: 19px; font-weight: 800; letter-spacing: -.02em; color: var(--pt-ink); }
+.gh-empty-act { display: flex; justify-content: center; margin-top: 18px; }
+
+/* arriving: the advance already received (ink, nothing owed) */
+.gh-advance { display: flex; align-items: center; gap: 14px; }
+.gh-advance-ico { flex: 0 0 40px; width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; font-size: 17px; color: var(--pt-ink); background: var(--pt-p50); border: 1px solid var(--pt-line); }
+.gh-advance-txt { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.gh-advance-txt strong { font-size: 16px; font-weight: 700; letter-spacing: -.01em; font-variant-numeric: tabular-nums; }
+.gh-advance-txt span { font-size: 13px; color: var(--pt-muted); }
+
+/* check-out day: the key reminder */
+.gh-keynote { margin: 0; }
+.gh-keynote .bi { font-size: 16px; }
+
+/* the lists inside Home's cards: the rows reach the card's edge, as in a phone's settings list */
+.gg-home .gh-recent .gg-list, .gg-home .gh-past .gg-list, .gg-home .gh-after .gg-list, .gg-home .gh-rows .gg-list, .gg-home .gh-contact .gg-list { margin: 0 -8px; }
+.gg-home .gh-after, .gg-home .gh-rows { padding-top: 8px; padding-bottom: 8px; }
+.gg-home .gh-recent .pt-empty, .gg-home .gh-past .pt-empty { padding: 18px 8px; }
+
+@media (max-width: 768px) {
+    .gh-grid, .gh-slot { gap: 12px; }
+    .gh-head .gg-more { min-height: 44px; }
+    .gh-empty { padding: 26px 16px; }
+    .gg-home .gh-recent .gg-list, .gg-home .gh-past .gg-list, .gg-home .gh-after .gg-list, .gg-home .gh-rows .gg-list, .gg-home .gh-contact .gg-list { margin: 0 -6px; }
+    /* recent activity on a phone: one line under each title (the full line is on Payments) */
+    .gg-home .gh-recent .pt-row-sub { overflow-wrap: anywhere; } /* MJ, 26 Oct 2026: every line shown in full on every screen size */
+}
+
+/* ---- The look (guest portal only) ---- */
+:root body.hms-guest .gh-advance-ico { border: 0; background: rgba(var(--gg-ink-rgb), .04); color: var(--gg-ink); box-shadow: inset 0 0 0 1px rgba(var(--gg-ink-rgb), .2), inset 0 1px 0 rgba(var(--gg-ink-rgb), .14); }
+:root body.hms-guest .gh-advance-txt span { color: var(--gg-muted); }
+:root body.hms-guest .gh-empty .pt-empty strong { color: var(--gg-ink); }
+:root body.hms-guest .gh-empty .pt-empty > .bi { display: inline-grid; place-items: center; width: 64px; height: 64px; margin-bottom: 12px; border-radius: 50%; font-size: 26px; color: var(--gg-ink); background: rgba(var(--gg-ink-rgb), .04); box-shadow: inset 0 0 0 1px rgba(var(--gg-ink-rgb), .2), inset 0 1px 0 rgba(var(--gg-ink-rgb), .14); }
+/* the stay's own hero gets the page's brightest rim (it is the first thing to read) */
+:root body.hms-guest .gg-home .gg-hero { --gg-ra: var(--gg-r-hover); --gg-rb: var(--gg-r-hi); }
+@media (max-width: 768px) {
+    :root body.hms-guest.portal-mobile .gg-home .gg-hero-h { font-size: 26px; }
+}
+
+/* ---- Motion: the blocks rise in turn (200ms, steps of 30ms, at most four); off under reduced motion (guest-glass.css section 9) ---- */
+:root body.hms-guest .gg-page.gg-home > .gh-grid:not(.gg-actionbar):not(.app-sticky) { animation: none; }
+:root body.hms-guest .gg-home .gh-slot { animation: gg-enter var(--gg-dur-enter) var(--gg-ease) backwards; }
+:root body.hms-guest .gg-home .gh-o2 { animation-delay: 70ms; }
+:root body.hms-guest .gg-home .gh-o3 { animation-delay: 140ms; }
+:root body.hms-guest .gg-home .gh-o4 { animation-delay: 210ms; }
+:root body.hms-guest .gg-home :is(.gh-o5, .gh-o6) { animation-delay: 280ms; }
+
+@media (forced-colors: active) {
+    :root body.hms-guest .gh-advance-ico, :root body.hms-guest .gh-empty .pt-empty > .bi { border: 1px solid CanvasText; }
+}

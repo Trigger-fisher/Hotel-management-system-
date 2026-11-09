@@ -1,0 +1,11 @@
+# 18 - Stop note (reviewer, 2026-10-06): what to review first when work restarts
+1. Read `docs/design/ui-review/17-PARITY-SCOREBOARD.md` (partial) and `Backend Review/00-RULES-FOR-BUILDERS.md` first; the standards are in `docs/design/ui-review/00..16` and `Backend Review/01..10`.
+2. Start the two apps: dev server (localhost:3000, `?role=hotel|guest|corporate&data=s08`) and the Pallav reference (`%LOCALAPPDATA%\HMS\pallav-ref`, `PHP_CLI_SERVER_WORKERS=4 php artisan serve --host=127.0.0.1 --port=8000`, login superadmin with the seeder default). Check free disk space on C: first (it hit 0 once).
+3. Run the automated scoreboard from scratchpad `board/` (copy it into the repo first): `run.sh day1440`, `night1440`, `day390`, then `compare.py`; fill the scoreboard, send each UI session its worst bands.
+4. UI order of review: shell + dashboard, Bills/Advances (re-gate after the "All N bills" and sidebar-scroll fixes), Reservations, Expenses/Rooms/In House (1.6-1.8%), pop-ups (Settle, Refund, Deposit, Rooms, Stay; modal widths are Pallav's own: Deposit/Entry 720, Handover 860), then Payroll with S08 data, then the unreviewed groups: Administration, Website, Guest and Company portals, login/register, Books.
+5. Missing S08 fixture mappings (customers, CRM, ledger, staff emails, reports, Administration, Website, portals) must be done before those screens can pass; fixtures: `docs/sessions/S08-fixtures`.
+6. Both modes always: no screen accepted with only day checked; night values come from Pallav's `pms-dark.css`.
+7. Backend order: B6b review (4 follow-ups: concurrency tests, idempotency, money log in same unit, named deviation tests), diagnose the 3 failing server tests (GST settings), then the whole Postgres suite once (`npm run test:db`, 125+ tests; findings for Worker A are in the last message: error kinds, pool exhaustion mapping, SET ROLE note).
+8. Open decisions for MJ: money grouping (western as Pallav vs Indian), weather widget, Hotel User sees Reports?, MySQL deletion (MJ's), keep mobile dock/diamond (kept).
+9. Mobile app: the web must be complete first (MJ); then re-gate mobile against Pallav's phone layout (icon rail) plus the kept dock, in both modes.
+10. Never delete the Pallav scratch copy or the fixtures; delete `board/out` and Chrome profiles in Temp after each diff; never push the scratch `.env`.

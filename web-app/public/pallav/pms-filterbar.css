@@ -1,0 +1,204 @@
+/* ===========================================================================
+   The filter bar, the same on every list that narrows itself: a card with
+   the main choice as tabs across the top (each with its count), the rest as
+   dropdown menus below, and on the right how many are showing with a Reset.
+   Tabs can be buttons (the page filters itself) or links (the page reloads);
+   dropdowns are built by pms-filterbar.js from ordinary <select>s.
+   Markup: resources/views/components/filter-bar.blade.php.
+   =========================================================================== */
+
+/* ---------- Filters: one card, status tabs on top, dropdowns below ---------- */
+.bm-fbar {
+    background: var(--surface, #fff); border: 1px solid var(--line); border-radius: var(--r-lg, 18px);
+    box-shadow: var(--sh-xs, 0 1px 2px rgba(0,0,0,.04)); margin: 0 0 18px; position: relative; z-index: 30;
+}
+.bm-fbar-top {
+    display: flex; align-items: center; justify-content: space-between; gap: 10px 16px; flex-wrap: wrap;
+    padding: 6px 12px 0 8px; border-bottom: 1px solid var(--line);
+}
+
+/* Status: tabs with a coloured dot and a count, underlined when chosen */
+.bm-tabs { display: flex; gap: 2px; overflow-x: auto; scrollbar-width: none; }
+.bm-tabs::-webkit-scrollbar { display: none; }
+.bm-tab {
+    position: relative; display: inline-flex; align-items: center; gap: 7px; white-space: nowrap;
+    border: 0; background: transparent; padding: 11px 12px 13px; font-size: 13.5px; font-weight: 650; color: var(--muted);
+    border-radius: 10px 10px 0 0; transition: color var(--dur-base) var(--ease-out), background-color var(--dur-base) var(--ease-out);
+}
+.bm-tab:hover { color: var(--ink); background: var(--p50); }
+.bm-tab::after {
+    content: ''; position: absolute; left: 10px; right: 10px; bottom: -1px; height: 3px; border-radius: 3px 3px 0 0;
+    background: var(--p600); transform: scaleX(0); transition: transform var(--dur-base) var(--ease-out);
+}
+.bm-tab.active { color: var(--ink); }
+.bm-tab.active::after { transform: scaleX(1); }
+.bm-tab-count {
+    min-width: 22px; padding: 1px 7px; border-radius: 20px; font-size: 11.5px; font-weight: 800; text-align: center;
+    background: var(--surface-2, #F4F1FB); color: var(--muted); font-variant-numeric: tabular-nums;
+}
+.bm-tab.active .bm-tab-count { background: var(--p600); color: #fff; }
+.bm-dot { width: 8px; height: 8px; border-radius: 50%; flex: none; }
+.bm-dot.paid { background: #10B981; }
+.bm-dot.due { background: #F59E0B; }
+.bm-dot.settled { background: var(--p500); }
+.bm-dot.muted { background: #9CA3AF; }
+
+.bm-fbar-summary { display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--muted); padding-bottom: 6px; }
+.bm-fbar-summary b { color: var(--ink); font-weight: 800; }
+.bm-reset {
+    display: inline-flex; align-items: center; gap: 5px; border: 1px solid var(--line); background: var(--surface, #fff);
+    font-size: 12.5px; font-weight: 700; color: var(--p700); padding: 5px 11px; border-radius: 20px;
+}
+.bm-reset:hover { background: var(--p50); border-color: var(--p300); }
+
+/* The dropdowns */
+.bm-fbar-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; padding: 12px 14px; }
+.bm-fbar-label { font-size: 11px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin-right: 4px; white-space: nowrap; }
+.bm-fbar-label i { color: var(--p500); margin-right: 4px; }
+
+.bm-dd { position: relative; display: inline-flex; align-items: stretch; }
+.bm-dd-btn {
+    display: inline-flex; align-items: center; gap: 10px; min-width: 180px; max-width: 280px; height: 46px;
+    padding: 0 12px 0 10px; border: 1px solid var(--line2, var(--line)); border-radius: 13px; background: var(--surface, #fff);
+    text-align: left; color: var(--ink); transition: border-color var(--dur-base) var(--ease-out), box-shadow var(--dur-base) var(--ease-out), background-color var(--dur-base) var(--ease-out);
+}
+.bm-dd-btn:hover { border-color: var(--p300); }
+.bm-dd-btn:focus-visible { outline: none; border-color: var(--p500); box-shadow: var(--sh-focus, 0 0 0 .2rem rgba(17, 17, 20, .18)); }
+.bm-dd-icon {
+    width: 28px; height: 28px; border-radius: 8px; flex: none; display: inline-flex; align-items: center; justify-content: center;
+    background: var(--p50); color: var(--p600); font-size: 14px;
+}
+.bm-dd-text { display: flex; flex-direction: column; min-width: 0; flex: 1; line-height: 1.15; }
+.bm-dd-label { font-size: 10px; font-weight: 800; letter-spacing: .07em; text-transform: uppercase; color: var(--muted); }
+.bm-dd-value { font-size: 13.5px; font-weight: 700; color: var(--ink2); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.bm-dd-caret { color: var(--muted); font-size: 12px; transition: transform var(--dur-base) var(--ease-out); }
+.bm-dd.open .bm-dd-caret { transform: rotate(180deg); color: var(--p600); }
+.bm-dd.open .bm-dd-btn { border-color: var(--p500); box-shadow: var(--sh-focus, 0 0 0 .2rem rgba(17, 17, 20, .18)); }
+
+/* Chosen: filled, and a small x to take it off */
+.bm-dd.on .bm-dd-btn { background: var(--p50); border-color: var(--p300); padding-right: 38px; }
+.bm-dd.on .bm-dd-icon { background: var(--p600); color: #fff; }
+.bm-dd.on .bm-dd-value { color: var(--p900); }
+.bm-dd.on .bm-dd-caret { display: none; }
+.bm-dd-x {
+    display: none; position: absolute; right: 8px; top: 50%; transform: translateY(-50%);
+    width: 24px; height: 24px; border-radius: 50%; border: 0; background: var(--p100); color: var(--p800); font-size: 10px;
+    align-items: center; justify-content: center;
+}
+.bm-dd-x:hover { background: var(--p600); color: #fff; }
+.bm-dd.on .bm-dd-x { display: inline-flex; }
+
+.bm-dd-menu {
+    position: absolute; top: calc(100% + 6px); left: 0; z-index: 50; min-width: 100%; width: 280px; max-width: calc(100vw - 32px);
+    background: var(--surface, #fff); border: 1px solid var(--line); border-radius: 14px; padding: 6px;
+    box-shadow: 0 16px 40px rgba(27, 18, 53, .16); animation: bmMenuIn 140ms var(--ease-out);
+}
+@keyframes bmMenuIn { from { opacity: 0; transform: translateY(-4px); } }
+.bm-dd-head { font-size: 10.5px; font-weight: 800; letter-spacing: .07em; text-transform: uppercase; color: var(--muted); padding: 6px 8px 4px; }
+.bm-dd-find { position: relative; margin: 2px 2px 6px; }
+.bm-dd-find i { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: var(--muted); font-size: 12px; }
+.bm-dd-find input { width: 100%; height: 34px; border: 1px solid var(--line); border-radius: 9px; padding: 0 10px 0 30px; font-size: 13px; background: var(--surface-2, #FAFAFB); color: var(--ink); outline: none; }
+.bm-dd-find input:focus { border-color: var(--p500); background: var(--surface, #fff); }
+.bm-dd-list { max-height: 280px; overflow-y: auto; display: flex; flex-direction: column; gap: 1px; }
+.bm-dd-opt {
+    display: flex; align-items: center; gap: 8px; width: 100%; border: 0; background: transparent; text-align: left;
+    padding: 8px 10px; border-radius: 9px; font-size: 13.5px; font-weight: 600; color: var(--ink2);
+}
+.bm-dd-opt:hover, .bm-dd-opt:focus-visible { background: var(--p50); color: var(--ink); outline: none; }
+.bm-dd-check { width: 16px; color: var(--p600); visibility: hidden; }
+.bm-dd-opt.on { color: var(--p900); background: var(--p50); }
+.bm-dd-opt.on .bm-dd-check { visibility: visible; }
+.bm-dd-name { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.bm-dd-count { font-size: 11.5px; font-weight: 700; color: var(--muted); background: var(--surface-2, #F4F1FB); border-radius: 20px; padding: 0 7px; font-variant-numeric: tabular-nums; }
+.bm-dd-opt.none { opacity: .5; }
+
+:root[data-theme="dark"] .bm-dd-menu { box-shadow: 0 16px 40px rgba(0, 0, 0, .5); }
+
+@media (max-width: 767.98px) {
+    .bm-fbar-top { padding: 4px 8px 0 4px; }
+    .bm-fbar-summary { width: 100%; justify-content: space-between; padding: 0 6px 8px; }
+    .bm-fbar-row { padding: 10px; }
+    .bm-fbar-label { width: 100%; }
+    .bm-dd { flex: 1 1 100%; }
+    .bm-dd-btn { max-width: none; width: 100%; }
+    .bm-dd-menu { width: 100%; }
+}
+
+/* Tabs that are links (the page reloads with the choice) look the same */
+a.bm-tab { text-decoration: none; }
+a.bm-tab:hover { text-decoration: none; }
+.bm-tab i { font-size: 13px; }
+.bm-tab.danger.active::after { background: #DC2626; }
+.bm-fbar-row .bm-fbar-dates { display: flex; align-items: flex-end; gap: 8px; flex-wrap: wrap; }
+.bm-fbar-row .bm-fbar-dates .form-control { height: 46px; border-radius: 13px; }
+.bm-fbar-extra { font-size: 12.5px; font-weight: 700; color: var(--p700); text-decoration: none; display: inline-flex; align-items: center; gap: 5px; }
+.bm-fbar-extra:hover { color: var(--p800); text-decoration: underline; }
+.d-contents { display: contents; }
+
+/* A search box inside the bar's lower row */
+.bm-fbar-search { flex: 0 1 380px; width: 380px; max-width: 100%; margin: 0; }
+.bm-fbar-search .form-control { height: 46px; border-radius: 13px; }
+@media (max-width: 767.98px) { .bm-fbar-search { flex: 1 1 100%; width: 100%; } }
+
+/* Payment status tabs keep their tone on the dot and count */
+.bm-tab.tone-paid .bm-tab-count { background: #D1FAE5; color: #065F46; }
+.bm-tab.tone-partial .bm-tab-count, .bm-tab.tone-processing .bm-tab-count { background: #E0E7FF; color: #3730A3; }
+.bm-tab.tone-pending .bm-tab-count, .bm-tab.tone-hold .bm-tab-count { background: #FEF3C7; color: #92400E; }
+.bm-tab.tone-failed .bm-tab-count { background: #FEE2E2; color: #991B1B; }
+.bm-tab.active[class*="tone-"] .bm-tab-count { background: var(--p600); color: #fff; }
+
+/* Status chips turned into tabs (Salary Payments): the tab look wins over
+   the old chip look, in day and night mode */
+.bm-tabs .bm-tab.status-chip,
+.bm-tabs .bm-tab.status-chip.active,
+:root[data-theme="dark"] .bm-tabs .bm-tab.status-chip {
+    background: transparent; border: 0; box-shadow: none; transform: none;
+    font-size: 13.5px; font-weight: 650; padding: 11px 12px 13px; border-radius: 10px 10px 0 0; color: var(--muted);
+}
+.bm-tabs .bm-tab.status-chip:hover { background: var(--p50); color: var(--ink); }
+.bm-tabs .bm-tab.status-chip.active { color: var(--ink); }
+.bm-tabs .bm-tab.status-chip i { color: var(--tone, var(--muted)); }
+.bm-tabs .bm-tab.status-chip.active i { color: var(--tone, var(--p600)); }
+.bm-tabs .bm-tab.status-chip span:not(.bm-tab-count) { background: none; color: inherit; padding: 0; min-width: 0; font-size: inherit; }
+
+/* A visible name before the tabs ("Business") */
+.bm-tabs-wrap { display: flex; align-items: center; gap: 8px; min-width: 0; }
+.bm-tabs-title { font-size: 11px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); padding: 0 6px 2px 8px; white-space: nowrap; }
+
+/* A short choice made in one tap (Expense's kind): every option on screen as a
+   small pill, the chosen one filled. The text matches the business tabs above
+   it; the pill is only as big as its words. Links, so the page and its pager
+   agree. */
+.fb-pills { display: flex; flex-wrap: wrap; gap: 6px; }
+.fb-pill {
+    display: inline-flex; align-items: center; gap: 6px; height: 32px; padding: 0 12px;
+    border: 1px solid var(--line2); border-radius: 999px; background: var(--surface);
+    color: var(--muted); font-size: 13px; font-weight: 650; line-height: 1; white-space: nowrap;
+    text-decoration: none; transition: background-color .15s, border-color .15s, color .15s;
+}
+.fb-pill i { color: var(--p500); font-size: 13px; }
+.fb-pill:hover { color: var(--ink); border-color: var(--p300); background: var(--p50); text-decoration: none; }
+.fb-pill:focus-visible { outline: 2px solid var(--p500); outline-offset: 2px; }
+.fb-pill.active { background: var(--p600); border-color: var(--p600); color: #fff; }
+.fb-pill.active i { color: #fff; }
+@media (max-width: 575.98px) {
+    .fb-pill { height: 30px; padding: 0 10px; font-size: 12.5px; }
+}
+
+/* Phone: a short tab (e.g. "All") is at least 44px wide. flex: none keeps every tab at its own width: a min-width on a flex item replaces its automatic
+   minimum, so without it the tabs shrank to 44px and drew their labels over each other instead of scrolling the strip. */
+@media (max-width: 767.98px) {
+    .bm-tab { flex: none; min-width: 44px; justify-content: center; }
+    /* scroll cue: a soft shadow on the side that has more tabs (it goes when the strip is scrolled to that end) */
+    :root[data-theme="dark"] .bm-tabs { --tab-cue: rgba(228, 228, 231, .8); }
+    .bm-tabs {
+        background:
+            linear-gradient(to right, var(--surface, #fff) 30%, transparent) left center / 32px 100% no-repeat local,
+            linear-gradient(to left, var(--surface, #fff) 30%, transparent) right center / 32px 100% no-repeat local,
+            radial-gradient(farthest-side at 0 50%, var(--tab-cue, rgba(17, 17, 20, .45)), transparent) left center / 20px 100% no-repeat scroll,
+            radial-gradient(farthest-side at 100% 50%, var(--tab-cue, rgba(17, 17, 20, .45)), transparent) right center / 20px 100% no-repeat scroll;
+    }
+}
+
+/* Night mode, phone: the collapsed Narrow down / Search row took the portal's fixed dark ink (hms-overrides .bm-fbar-label), unreadable on the dark card. */
+:root[data-theme="dark"] body.portal-mobile .bm-fbar-row .bm-fbar-label { color: var(--ink); border-color: var(--line2); }

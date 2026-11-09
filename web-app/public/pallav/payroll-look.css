@@ -1,0 +1,123 @@
+/* Payroll, in the Handover look.
+
+   The payroll pages keep their own markup, sorting, searching and paging;
+   this sheet only changes how they read, so they sit in the same family as
+   Handover, Revenue and the Company Ledger:
+     - the page head: date, title, and the search and actions top right,
+     - the stat boxes under it (payroll.partials._kpi),
+     - every list drawn as one card per row, with small labels on top,
+     - the pager on a card of its own.
+   The payroll menu (the rail) is left exactly as it is. */
+
+/* ---------- Page head ---------- */
+.pay-head.page-head { align-items: center; margin-bottom: 16px; }
+.pay-head .ph-text { min-width: 0; flex: 1 1 320px; }
+.pay-head .pms-sub { max-width: 70ch; }
+.pay-head .ph-actions { flex-wrap: wrap; justify-content: flex-end; }
+.pay-head .sh-head-actions .pay-toolbar { margin: 0; flex-wrap: nowrap; }
+.pay-head .sh-head-actions .pay-toolbar .search-field { flex: 0 1 320px; width: 320px; max-width: 100%; }
+.pay-head .ph-actions > .btn, .pay-head .ph-actions > form > .btn { height: 40px; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+
+/* ---------- Stat boxes ---------- */
+.pay-kpis { margin-bottom: 16px; }
+.pay-kpis .kpi-value { white-space: nowrap; }
+.kpi-warn .kpi-value { color: #B45309; }
+.kpi-good .kpi-value { color: #047857; }
+:root[data-theme="dark"] .kpi-warn .kpi-value { color: #FCD34D; }
+:root[data-theme="dark"] .kpi-good .kpi-value { color: #6EE7B7; }
+/* Three boxes fill the row rather than leaving a gap */
+.pay-kpis:has(> .kpi:nth-child(3):last-child) { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.pay-kpis:has(> .kpi:nth-child(2):last-child) { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (max-width: 1100px) { .pay-kpis:has(> .kpi:nth-child(3):last-child) { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) { .pay-kpis, .pay-kpis:has(> .kpi) { grid-template-columns: 1fr; } }
+
+/* ---------- Lists: one card per row, like the Handovers ---------- */
+.pay-page .card:has(> .table-responsive > .table:not(.table-sm):not(.pay-report)) {
+    background: transparent; border: 0; box-shadow: none; overflow: visible;
+}
+.pay-page .card:has(> .table-responsive > .table:not(.table-sm):not(.pay-report)) > .table-responsive { overflow-x: auto; padding: 0 3px 3px; }
+
+/* A card's own heading reads like a Handover day heading above its rows */
+.pay-page .card:has(> .table-responsive > .table:not(.table-sm):not(.pay-report)) > .card-header {
+    background: transparent; border: 0; padding: 0 4px 4px; font-weight: 800; font-size: 13px; color: var(--ink);
+}
+
+.pay-page .table:not(.table-sm):not(.pay-report) { border-collapse: separate; border-spacing: 0 8px; margin-top: -4px; }
+.pay-page .table:not(.table-sm):not(.pay-report) > thead > tr > th {
+    background: transparent !important; border: 0 !important; box-shadow: none;
+    padding: 10px 16px 0; font-size: 10.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--muted);
+}
+.pay-page .table:not(.table-sm):not(.pay-report) > tbody > tr > td {
+    background: var(--surface, #fff); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+    padding: 14px 16px; vertical-align: middle;
+    transition: border-color var(--dur-base) var(--ease-out), background-color var(--dur-base) var(--ease-out);
+}
+.pay-page .table:not(.table-sm):not(.pay-report) > tbody > tr > td:first-child { border-left: 1px solid var(--line); border-radius: var(--r-lg, 18px) 0 0 var(--r-lg, 18px); }
+.pay-page .table:not(.table-sm):not(.pay-report) > tbody > tr > td:last-child { border-right: 1px solid var(--line); border-radius: 0 var(--r-lg, 18px) var(--r-lg, 18px) 0; }
+.pay-page .table:not(.table-sm):not(.pay-report) > tbody > tr > td:only-child { border-radius: var(--r-lg, 18px); }
+.pay-page .table:not(.table-sm):not(.pay-report) > tbody > tr { filter: drop-shadow(0 1px 1px rgba(27, 18, 53, .04)); background: transparent !important; }
+.pay-page .table-hover:not(.table-sm):not(.pay-report) > tbody > tr:hover { filter: drop-shadow(0 4px 10px rgba(27, 18, 53, .08)); }
+.pay-page .table-hover:not(.table-sm):not(.pay-report) > tbody > tr:hover > td { border-color: var(--p300); background: var(--surface, #fff); }
+/* The old hover bar on the first cell belongs to the flat table, not to cards */
+.pay-page .table-hover:not(.table-sm):not(.pay-report) > tbody > tr > td:first-child::before { display: none; }
+.pay-page .table:not(.table-sm):not(.pay-report) > tfoot > tr > td { background: transparent; border: 0; }
+
+/* The pager sits on its own card under the rows */
+.pay-page .card > .pms-pager {
+    background: var(--surface, #fff); border: 1px solid var(--line); border-radius: var(--r-lg, 18px);
+    box-shadow: var(--sh-xs, 0 1px 2px rgba(0,0,0,.04)); margin-top: 6px; position: relative; z-index: 20;
+}
+
+/* Other cards (forms, letters, reports) take the Handover card shape */
+.pay-page .card { border-radius: var(--r-lg, 18px); }
+.pay-page .card > .card-header { border-radius: var(--r-lg, 18px) var(--r-lg, 18px) 0 0; }
+
+@media (max-width: 767.98px) {
+    .pay-head .sh-head-actions { width: 100%; }
+    .pay-head .sh-head-actions .pay-toolbar, .pay-head .sh-head-actions .pay-toolbar .search-field { flex: 1 1 100%; width: 100%; }
+    .pay-head .ph-actions > .btn { flex: 1 1 auto; justify-content: center; }
+    .pay-page .table:not(.table-sm):not(.pay-report) > tbody > tr > td { padding: 12px; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .pay-page .table:not(.table-sm):not(.pay-report) > tbody > tr > td { transition: none; }
+}
+
+/* Dates, amounts and names stay on one line; longer text (a designation, a
+   remark) may take a second line so the actions keep their place */
+.pay-page .table:not(.table-sm):not(.pay-report) > tbody > tr > td[data-sort-value],
+.pay-page .table:not(.table-sm):not(.pay-report) > tbody > tr > td.money,
+.pay-page .table:not(.table-sm):not(.pay-report) > tbody > tr > td:last-child,
+.pay-page .table:not(.table-sm):not(.pay-report) .cell-main { white-space: nowrap; }
+.pay-page .table:not(.table-sm):not(.pay-report) > tbody > tr > td { min-width: 0; }
+
+/* A box's figure takes the colour of how it stands */
+.pay-kpis .kpi.warn .kpi-value { color: #B45309; }
+.pay-kpis .kpi.good .kpi-value { color: #047857; }
+:root[data-theme="dark"] .pay-kpis .kpi.warn .kpi-value { color: #FCD34D; }
+:root[data-theme="dark"] .pay-kpis .kpi.good .kpi-value { color: #6EE7B7; }
+
+/* Rows are cards now, so a running S.No. adds width without telling anything */
+.pay-page .table:not(.table-sm):not(.pay-report) th.col-sno,
+.pay-page .table:not(.table-sm):not(.pay-report) td.sno,
+.pay-page .table:not(.table-sm):not(.pay-report) td.col-sno { display: none; }
+/* The pages sit beside two menus: the cells give up a little padding to fit */
+.pay-page .table:not(.table-sm):not(.pay-report) > thead > tr > th,
+.pay-page .table:not(.table-sm):not(.pay-report) > tbody > tr > td { padding-left: 12px; padding-right: 12px; }
+.pay-page .table:not(.table-sm):not(.pay-report) > tbody > tr > td:first-child,
+.pay-page .table:not(.table-sm):not(.pay-report) > thead > tr > th:first-child { padding-left: 16px; }
+.pay-page .table:not(.table-sm):not(.pay-report) > tbody > tr > td.sno + td,
+.pay-page .table:not(.table-sm):not(.pay-report) > tbody > tr > td.col-sno + td { border-left: 1px solid var(--line); border-radius: var(--r-lg, 18px) 0 0 var(--r-lg, 18px); padding-left: 16px; }
+.pay-page .table-hover:not(.table-sm):not(.pay-report) > tbody > tr:hover > td.sno + td,
+.pay-page .table-hover:not(.table-sm):not(.pay-report) > tbody > tr:hover > td.col-sno + td { border-left-color: var(--p300); }
+
+/* Dashboard boxes are links to the page that acts on them */
+.pay-kpis a.kpi-link { color: inherit; text-decoration: none; transition: border-color var(--dur-base) var(--ease-out), box-shadow var(--dur-base) var(--ease-out), transform var(--dur-base) var(--ease-out); }
+.pay-kpis a.kpi-link:hover { border-color: var(--p300); box-shadow: var(--sh-md, 0 6px 18px rgba(0,0,0,.08)); transform: translateY(-1px); }
+.pay-kpis a.kpi-link:focus-visible { outline: 2px solid var(--p500); outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) { .pay-kpis a.kpi-link { transition: none; } .pay-kpis a.kpi-link:hover { transform: none; } }
+
+/* The same type sizes as a Handover card: 14px values, bold names, small grey subs */
+.pay-page .table:not(.table-sm):not(.pay-report) > tbody > tr > td { font-size: 13.5px; padding-top: 12px; padding-bottom: 12px; }
+.pay-page .table:not(.table-sm):not(.pay-report) .cell-main { font-size: 14px; font-weight: 700; }
+.pay-page .table:not(.table-sm):not(.pay-report) .cell-sub { font-size: 11.5px; }
+.pay-page .table:not(.table-sm):not(.pay-report) .btn-sm { font-size: 12.5px; padding: 3px 10px; }

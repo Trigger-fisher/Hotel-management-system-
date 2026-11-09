@@ -1,0 +1,16 @@
+services:
+  compressor:
+    build: .
+    env_file: .env
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8080:8080"   # only nginx on the same machine reaches it
+    # Resource limits (uncomment and tune for the VPS; compression is CPU heavy):
+    # deploy:
+    #   resources:
+    #     limits:
+    #       cpus: "2.0"
+    #       memory: 3g
+    # read_only: true
+    # tmpfs:
+    #   - /tmp:size=1g

@@ -1,0 +1,72 @@
+# Create hotel site: HMS starts this when a hotel picks a website design (repository_dispatch, event create-hotel-site; see website-templates/docs/BACKEND.md).
+# It copies templates/<template> into sites/<hotel>, commits it, optionally asks the host to deploy, and reports building / live / failed to HMS (signed).
+# Secrets: SITE_BUILD_SECRET (the same value as HMS's SITE_BUILD_SECRET); optional SITES_DEPLOY_HOOK_URL (a deploy hook of the host).
+# Optional repository variable: SITES_URL_PATTERN, like https://{hotel}.yourhms.in, so the live report carries the site address.
+name: Create hotel site
+
+on:
+  repository_dispatch:
+    types: [create-hotel-site]
+
+# one build per hotel at a time; two hotels may build together
+concurrency:
+  group: hotel-site-${{ github.event.client_payload.hotel }}
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  create:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    # the payload goes in through env, never pasted into a script, so a hotel or template name can not run commands
+    env:
+      HOTEL: ${{ github.event.client_payload.hotel }}
+      TEMPLATE: ${{ github.event.client_payload.template }}
+      CALLBACK_URL: ${{ github.event.client_payload.callback_url }}
+      DEPLOY_HOOK_URL: ${{ secrets.SITES_DEPLOY_HOOK_URL }}
+      SITE_URL_PATTERN: ${{ vars.SITES_URL_PATTERN }}
+      RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      # the signing secret is given only to the three report steps (never to checkout, setup-node or the copy)
+      - name: Report building
+        env:
+          SITE_BUILD_SECRET: ${{ secrets.SITE_BUILD_SECRET }}
+        run: node website-templates/tools/report-build.mjs --status building --run-url "$RUN_URL"
+
+      - name: Copy the template into the hotel's folder
+        run: node website-templates/tools/create-site.mjs --hotel "$HOTEL" --template "$TEMPLATE"
+
+      - name: Commit and push
+        run: |
+          git config user.name "hms-site-builds"
+          git config user.email "hms-site-builds@users.noreply.github.com"
+          git add -f "website-templates/sites/$HOTEL"
+          if git diff --cached --quiet; then
+            echo "The site folder is already up to date."
+          else
+            git commit -m "Site $HOTEL: $TEMPLATE"
+            git pull --rebase origin "${GITHUB_REF_NAME}"
+            git push origin "HEAD:${GITHUB_REF_NAME}"
+          fi
+
+      - name: Ask the host to deploy
+        if: env.DEPLOY_HOOK_URL != ''
+        run: curl --fail --silent --show-error --max-time 30 -X POST "$DEPLOY_HOOK_URL" > /dev/null
+
+      - name: Report live
+        env:
+          SITE_BUILD_SECRET: ${{ secrets.SITE_BUILD_SECRET }}
+        run: node website-templates/tools/report-build.mjs --status live --message "The site is built from $TEMPLATE." --run-url "$RUN_URL"
+
+      - name: Report failed
+        if: failure()
+        env:
+          SITE_BUILD_SECRET: ${{ secrets.SITE_BUILD_SECRET }}
+        run: node website-templates/tools/report-build.mjs --status failed --message "The build job failed. Open the log page for the reason." --run-url "$RUN_URL"

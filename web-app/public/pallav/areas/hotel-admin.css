@@ -1,0 +1,23 @@
+/* Hotel Admin pages. New rules for this area go here, never into hms-overrides.css. */
+
+/* Website > Rates on phones: a plan card inside a room card is narrow, so the code and its state sit in one line on top and the facts take the full width;
+   the plan's name gets its own line and is never cut */
+@media (max-width: 767.98px) {
+    .wr-rates-head .ha-co-name small { overflow: visible; white-space: normal; text-overflow: clip; }
+    .wr-plan > .dc-card > .dc-sum { grid-template-columns: minmax(0, 1fr) 16px; gap: 8px 12px; }
+    .wr-plan > .dc-card .dc-lead { grid-column: 1; grid-row: 1; flex-direction: row; justify-content: flex-start; align-items: center; gap: 8px; text-align: left; }
+    .wr-plan > .dc-card .dc-facts { grid-column: 1 / -1; grid-row: 2; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px 12px; }
+    .wr-plan > .dc-card .dc-fact:first-child { grid-column: 1 / -1; }
+    .wr-plan > .dc-card .dc-amt { grid-column: 1 / -1; grid-row: 3; }
+    .wr-plan > .dc-card .dc-caret { grid-column: 2; grid-row: 1; align-self: center; }
+}
+
+/* Hotel set-up: what the platform team set up reads in full, also on a phone */
+.ha-setup-services li small { overflow: visible; white-space: normal; text-overflow: clip; }
+
+/* Hotel settings: a text box is as tall as its text, so the last line of an address shows without scrolling; never shorter than its rows */
+.st-field textarea.st-fit { field-sizing: content; min-height: calc(2lh + 18px); }
+.st-field textarea.st-fit[rows="3"] { min-height: calc(3lh + 18px); }
+.st-field textarea.st-fit[rows="4"] { min-height: calc(4lh + 18px); }
+.st-field textarea.st-fit[rows="5"] { min-height: calc(5lh + 18px); }
+.st-field textarea.st-fit[rows="6"] { min-height: calc(6lh + 18px); }

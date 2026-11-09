@@ -1,0 +1,9 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.env
+.tessdata/
+samples-local/
+scripts/.evaluate-state.json
+models/

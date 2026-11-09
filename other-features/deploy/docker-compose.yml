@@ -1,0 +1,271 @@
+# HMS other-features on ONE Hostinger KVM 4 VPS (4 vCPU, 16 GB RAM, Ubuntu 24.04).
+# WRITTEN ON A PC WITHOUT DOCKER: this file has NEVER been run. tests/test_deploy_pack.py checks its shape, paths and names only.
+#
+# Each service is built from its own folder's Dockerfile (build contexts point at the sibling folders; nothing is imported or copied).
+# Only nginx publishes ports (80, 443). Every other service sits on a private Docker network with no published port.
+# Secrets and settings come from deploy/.env (copy .env.example, chmod 600). Each service gets ONLY its own names.
+# Memory limits add up to 14.25 GB, leaving about 1.75 GB for Ubuntu and Docker (plus the 4 GB swap file from the README).
+
+name: hms-services
+
+x-logging: &logging
+  driver: json-file
+  options:
+    max-size: "10m"   # the services log ids, step names and numbers only; no guest values
+    max-file: "3"
+
+x-hardening: &hardening
+  security_opt: ["no-new-privileges:true"]
+  logging: *logging
+
+services:
+  nginx:
+    <<: *hardening
+    image: nginx:1.27-alpine
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      HMS_DOMAIN: ${HMS_DOMAIN:?set HMS_DOMAIN in .env}
+    volumes:
+      - ./nginx/templates:/etc/nginx/templates:ro          # envsubst fills ${HMS_DOMAIN} at start
+      - letsencrypt:/etc/letsencrypt:ro
+      - certbot-webroot:/var/www/certbot:ro
+    depends_on:
+      compressor: {condition: service_started}
+      antivirus: {condition: service_started}
+      pdf-to-image: {condition: service_started}
+      reader: {condition: service_started}
+      quality-gate: {condition: service_started}
+    healthcheck:
+      test: ["CMD", "wget", "-q", "-O", "/dev/null", "http://127.0.0.1/nginx-health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    deploy:
+      resources:
+        limits: {cpus: "0.50", memory: 256m}
+    networks: [services]
+
+  compressor:
+    <<: *hardening
+    build: ../compressor
+    image: hms/compressor:${HMS_TAG:-current}
+    restart: unless-stopped
+    environment:
+      COMPRESSOR_KEY: ${COMPRESSOR_KEY:?set COMPRESSOR_KEY in .env}
+      COMPRESSOR_ALLOWED_HOSTS: ${COMPRESSOR_ALLOWED_HOSTS:?set COMPRESSOR_ALLOWED_HOSTS in .env}
+      COMPRESSOR_MAX_CONCURRENCY: ${COMPRESSOR_MAX_CONCURRENCY:-1}
+      COMPRESSOR_QUEUE_SIZE: ${COMPRESSOR_QUEUE_SIZE:-4}
+      COMPRESSOR_MAX_UPLOAD_MB: ${COMPRESSOR_MAX_UPLOAD_MB:-100}
+      COMPRESSOR_MAX_MEGAPIXELS: ${COMPRESSOR_MAX_MEGAPIXELS:-100}
+      COMPRESSOR_MAX_PDF_PAGES: ${COMPRESSOR_MAX_PDF_PAGES:-300}
+      COMPRESSOR_JOB_TIMEOUT_S: ${COMPRESSOR_JOB_TIMEOUT_S:-300}
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request,sys; sys.exit(0 if urllib.request.urlopen('http://127.0.0.1:8080/health', timeout=4).status==200 else 1)"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 20s
+    tmpfs: ["/tmp:size=1g"]
+    deploy:
+      resources:
+        limits: {cpus: "1.50", memory: 1g}
+    networks: [services]
+
+  antivirus:
+    <<: *hardening
+    build: ../antivirus
+    image: hms/antivirus:${HMS_TAG:-current}
+    restart: unless-stopped
+    environment:
+      SCANNER_KEY: ${SCANNER_KEY:?set SCANNER_KEY in .env}
+      SCANNER_CLAMD: "unix:/var/run/clamav/clamd.ctl"   # clamd runs inside this container (supervisord)
+      SCANNER_ALLOWED_HOSTS: ${SCANNER_ALLOWED_HOSTS:?set SCANNER_ALLOWED_HOSTS in .env}
+      SCANNER_QUARANTINE_ACTION: ${SCANNER_QUARANTINE_ACTION:-report}
+      SCANNER_STRIP_URI: ${SCANNER_STRIP_URI:-false}
+      SCANNER_MAX_CONCURRENCY: ${SCANNER_MAX_CONCURRENCY:-2}
+      SCANNER_QUEUE_SIZE: ${SCANNER_QUEUE_SIZE:-4}
+      SCANNER_MAX_UPLOAD_MB: ${SCANNER_MAX_UPLOAD_MB:-100}
+      SCANNER_MAX_MEGAPIXELS: ${SCANNER_MAX_MEGAPIXELS:-100}
+      SCANNER_MAX_PDF_PAGES: ${SCANNER_MAX_PDF_PAGES:-300}
+      SCANNER_JOB_TIMEOUT_S: ${SCANNER_JOB_TIMEOUT_S:-300}
+      SCANNER_CLAMD_TIMEOUT_S: ${SCANNER_CLAMD_TIMEOUT_S:-60}
+      SCANNER_YARA: ${SCANNER_YARA:-reject}
+    volumes:
+      - clamav-db:/var/lib/clamav            # official + Sanesecurity signatures (re-downloadable, never backed up)
+      - fangfrisch-db:/var/lib/fangfrisch
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request,json,sys; sys.exit(0 if json.load(urllib.request.urlopen('http://127.0.0.1:8081/health', timeout=4))['status']=='ok' else 1)"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 300s                     # first start downloads the signatures
+    deploy:
+      resources:
+        limits: {cpus: "1.00", memory: 3g}   # clamd holds about 1.2-1.5 GB and briefly doubles while reloading
+    networks: [services]
+
+  pdf-to-image:
+    <<: *hardening
+    build: ../pdf-to-image
+    image: hms/pdf-to-image:${HMS_TAG:-current}
+    restart: unless-stopped
+    environment:
+      CONVERTER_KEY: ${CONVERTER_KEY:?set CONVERTER_KEY in .env}
+      CONVERTER_MAX_CONCURRENCY: ${CONVERTER_MAX_CONCURRENCY:-1}
+      CONVERTER_QUEUE_SIZE: ${CONVERTER_QUEUE_SIZE:-4}
+      CONVERTER_MAX_UPLOAD_MB: ${CONVERTER_MAX_UPLOAD_MB:-100}
+      CONVERTER_MAX_PAGES: ${CONVERTER_MAX_PAGES:-500}
+      CONVERTER_MAX_MEGAPIXELS_PER_PAGE: ${CONVERTER_MAX_MEGAPIXELS_PER_PAGE:-100}
+      CONVERTER_MAX_TOTAL_MEGAPIXELS: ${CONVERTER_MAX_TOTAL_MEGAPIXELS:-2000}
+      CONVERTER_JOB_TIMEOUT_S: ${CONVERTER_JOB_TIMEOUT_S:-300}
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request,sys; sys.exit(0 if urllib.request.urlopen('http://127.0.0.1:8082/health', timeout=4).status==200 else 1)"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 20s
+    tmpfs: ["/tmp:size=2g"]                   # page images wait here until streamed out
+    deploy:
+      resources:
+        limits: {cpus: "1.50", memory: 1g}
+    networks: [services]
+
+  reader:
+    <<: *hardening
+    build: ../reader
+    image: hms/reader:${HMS_TAG:-current}
+    restart: unless-stopped
+    environment:
+      READER_KEY: ${READER_KEY:?set READER_KEY in .env}
+      READER_ALLOWED_HOSTS: ${READER_ALLOWED_HOSTS:?set READER_ALLOWED_HOSTS in .env}
+      READER_MAX_CONCURRENCY: ${READER_MAX_CONCURRENCY:-1}   # the card cutter needs about 1.4-1.5 GB per job while cutting
+      READER_QUEUE_SIZE: ${READER_QUEUE_SIZE:-4}
+      READER_MAX_UPLOAD_MB: ${READER_MAX_UPLOAD_MB:-50}
+      READER_MAX_MEGAPIXELS: ${READER_MAX_MEGAPIXELS:-100}
+      READER_MAX_PAGES: ${READER_MAX_PAGES:-100}
+      READER_JOB_TIMEOUT_S: ${READER_JOB_TIMEOUT_S:-300}
+      READER_FAST_BUDGET_S: ${READER_FAST_BUDGET_S:-20}
+      READER_THOROUGH_BUDGET_S: ${READER_THOROUGH_BUDGET_S:-90}
+      READER_USE_PADDLE: ${READER_USE_PADDLE:-true}
+      # READER_CARDCUT_MODEL and READER_FACE_MODELS_DIR are set by the image (models fetched and SHA-256 checked at build).
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request,sys; sys.exit(0 if urllib.request.urlopen('http://127.0.0.1:8083/health', timeout=4).status==200 else 1)"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 60s
+    tmpfs: ["/tmp:size=512m"]
+    deploy:
+      resources:
+        limits: {cpus: "2.00", memory: 3g}
+    networks: [services]
+
+  quality-gate:
+    <<: *hardening
+    build: ../quality-gate
+    image: hms/quality-gate:${HMS_TAG:-current}
+    restart: unless-stopped
+    environment:
+      GATE_KEY: ${GATE_KEY:?set GATE_KEY in .env}
+      GATE_DEFAULT_PROFILE: ${GATE_DEFAULT_PROFILE:-generic}
+      GATE_MAX_CONCURRENCY: ${GATE_MAX_CONCURRENCY:-2}
+      GATE_QUEUE_SIZE: ${GATE_QUEUE_SIZE:-4}
+      GATE_MAX_UPLOAD_MB: ${GATE_MAX_UPLOAD_MB:-50}
+      GATE_MAX_MEGAPIXELS: ${GATE_MAX_MEGAPIXELS:-100}
+      GATE_JOB_TIMEOUT_S: ${GATE_JOB_TIMEOUT_S:-120}
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request,sys; sys.exit(0 if urllib.request.urlopen('http://127.0.0.1:8084/health', timeout=4).status==200 else 1)"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 20s
+    tmpfs: ["/tmp:size=256m"]
+    deploy:
+      resources:
+        limits: {cpus: "1.00", memory: 512m}
+    networks: [services]
+
+  intake-worker:
+    <<: *hardening
+    build: ../intake-worker
+    image: hms/intake-worker:${HMS_TAG:-current}
+    restart: unless-stopped
+    user: "10001:10001"
+    read_only: true
+    cap_drop: ["ALL"]
+    tmpfs: ["/tmp:size=64m,mode=1777"]
+    environment:
+      INTAKE_DATABASE_URL: ${INTAKE_DATABASE_URL:?set INTAKE_DATABASE_URL in .env}
+      INTAKE_MASTER_KEY: ${INTAKE_MASTER_KEY:?set INTAKE_MASTER_KEY in .env}
+      INTAKE_CLAMD: "tcp:clamd:3310"          # the clamd service below, on the private intake network
+      INTAKE_ALLOWED_HOSTS: ${INTAKE_ALLOWED_HOSTS:?set INTAKE_ALLOWED_HOSTS in .env}
+      INTAKE_THREADS: ${INTAKE_THREADS:-2}      # each thread may run the card cutter (about 1.4 GB while cutting)
+      AUTO_ENHANCE: ${AUTO_ENHANCE:-true}
+      INTAKE_SIGNATURES_DIR: "/var/lib/clamav"  # clamd's signature volume below, read only: feeds age for the heartbeat
+      # CARDCUT_ARCH, CARDCUT_MODEL and FACE_MODELS_DIR are set by the image (models fetched and SHA-256 checked at build).
+    volumes:
+      - clamd-db:/var/lib/clamav:ro
+    depends_on:
+      clamd: {condition: service_healthy}
+    healthcheck:
+      # The worker has no port; its real liveness is the heartbeat row in the database (HMS alerts after 2 minutes).
+      test: ["CMD", "python", "-c", "print('worker image ok')"]
+      interval: 60s
+      timeout: 5s
+      retries: 3
+    deploy:
+      resources:
+        limits: {cpus: "2.00", memory: 3584m}
+    networks: [intake]
+
+  clamd:
+    <<: *hardening
+    # The worker's own clamd image: official clamav/clamav:1.4 (GPL-2.0, run as a separate program), freshclam twice a day,
+    # and the Sanesecurity feeds through fangfrisch (checked daily, SHA-256 checked). See ../intake-worker/clamd.
+    build: ../intake-worker/clamd
+    image: hms/clamd:${HMS_TAG:-current}
+    restart: unless-stopped
+    environment:
+      # No doubled memory during a signature reload (scans wait a few seconds instead). NOT VERIFIED that this image version
+      # reads CLAMD_CONF_* names: on install day run "docker compose exec clamd grep -i ConcurrentDatabaseReload /etc/clamav/clamd.conf".
+      CLAMD_CONF_ConcurrentDatabaseReload: "no"
+    volumes:
+      - clamd-db:/var/lib/clamav               # official + Sanesecurity signatures (re-downloadable, never backed up)
+      - clamd-fangfrisch:/var/lib/fangfrisch   # when each Sanesecurity file was last checked
+    healthcheck:
+      test: ["CMD", "clamdcheck.sh"]
+      interval: 60s
+      timeout: 10s
+      retries: 3
+      start_period: 300s
+    deploy:
+      resources:
+        limits: {cpus: "0.50", memory: 2g}
+    networks: [intake]
+
+  # Run on demand only (profile "tools"): docker compose --profile tools run --rm certbot ...
+  certbot:
+    image: certbot/certbot:v2.11.0
+    profiles: ["tools"]
+    volumes:
+      - letsencrypt:/etc/letsencrypt
+      - certbot-webroot:/var/www/certbot
+    logging: *logging
+
+networks:
+  services:     # nginx + the five HTTP services; no port published except nginx's 80/443
+    driver: bridge
+  intake:       # the worker and its clamd only; nginx and the HTTP services cannot reach it
+    driver: bridge
+
+volumes:
+  letsencrypt:
+  certbot-webroot:
+  clamav-db:
+  fangfrisch-db:
+  clamd-db:
+  clamd-fangfrisch:

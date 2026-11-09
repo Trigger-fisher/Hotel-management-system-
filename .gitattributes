@@ -1,0 +1,2 @@
+# SQL is always LF so migration checksums and the seed generators' --check never see CRLF/LF drift (core.autocrlf=true on Windows)
+*.sql text eol=lf

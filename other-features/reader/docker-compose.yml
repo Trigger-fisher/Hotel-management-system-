@@ -1,0 +1,19 @@
+services:
+  reader:
+    build: .
+    env_file: .env
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8083:8083"   # only nginx on the same machine reaches it
+    # Resource limits (OCR is CPU heavy; PaddleOCR models add about 1 GB of memory; the card cutter for multi=true adds
+    # about 1.4 GB per worker process while a sheet is cut, so keep READER_MAX_CONCURRENCY low on a small server):
+    # deploy:
+    #   resources:
+    #     limits:
+    #       cpus: "3.0"
+    #       memory: 4g
+    # Optional: keep downloaded PaddleOCR models between restarts
+    # volumes:
+    #   - paddle-models:/home/app/.paddleocr
+# volumes:
+#   paddle-models:

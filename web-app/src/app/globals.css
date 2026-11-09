@@ -1,0 +1,1455 @@
+@import "tailwindcss";
+@import "./ui-kit.css";
+
+/* Token values come from ui-shared/tokens.ts via src/lib/theme.ts (injected in layout.tsx). */
+@theme inline {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, "SFMono-Regular", "Cascadia Mono", Consolas, monospace;
+
+  --color-bg: var(--hms-bg);
+  --color-surface: var(--hms-surface);
+  --color-surface-muted: var(--hms-surface-muted);
+  --color-ink: var(--r-ink);
+  --color-ink-2: var(--r-ink-2);
+  --color-ink-muted: var(--r-ink-muted);
+  --color-line: var(--r-hairline);
+  --color-line-strong: var(--hms-border-strong);
+  --color-input: var(--r-input);
+  --color-primary: var(--hms-primary);
+  --color-primary-hover: var(--hms-primary-hover);
+  --color-primary-pressed: var(--hms-primary-pressed);
+  --color-on-primary: var(--hms-on-primary);
+  --color-link: var(--r-link);
+  --color-page-base: var(--r-page-base);
+  --color-card: var(--r-card);
+  --color-card-border: var(--r-card-border);
+  --color-inset: var(--r-inset);
+  --color-hairline: var(--r-hairline);
+  --color-input-hover: var(--r-input-hover);
+  --color-input-focus: var(--r-input-focus);
+  --color-field-icon: var(--r-field-icon);
+  --color-reveal-hover: var(--r-reveal-hover);
+  --color-reveal-hover-ink: var(--r-reveal-hover-ink);
+  --color-link-hover: var(--r-link-hover);
+  --color-pill: var(--r-pill);
+  --color-pill-ink: var(--r-pill-ink);
+  --color-status: var(--r-status);
+  --color-status-ink: var(--r-status-ink);
+  --color-sec: var(--r-sec);
+  --color-sec-ink: var(--r-sec-ink);
+  --color-sec-border: var(--r-sec-border);
+  --color-sec-hover: var(--r-sec-hover);
+  --color-sec-hover-border: var(--r-sec-hover-border);
+  --color-sec-hover-ink: var(--r-sec-hover-ink);
+  --color-note-info-bg: var(--r-note-info-bg);
+  --color-note-info-border: var(--r-note-info-border);
+  --color-note-info-fg: var(--r-note-info-fg);
+  --color-note-warning-bg: var(--r-note-warning-bg);
+  --color-note-warning-border: var(--r-note-warning-border);
+  --color-note-warning-fg: var(--r-note-warning-fg);
+  --color-aside: var(--r-aside);
+  --color-aside-ink: var(--r-aside-ink);
+  --color-aside-icon: var(--r-aside-icon);
+  --color-rule-met: var(--r-rule-met);
+  --color-rule-unmet: var(--r-rule-unmet);
+  --color-rule-bad: var(--r-rule-bad);
+  --color-check-border: var(--r-check-border);
+  --color-check-fill: var(--r-check-fill);
+  --color-codes: var(--r-codes);
+  --color-codes-ink: var(--r-codes-ink);
+  --color-chip-bg: var(--r-chip-bg);
+  --color-chip-border: var(--r-chip-border);
+  --color-chip-tile: var(--r-chip-tile);
+  --color-chip-tile-ink: var(--r-chip-tile-ink);
+  --color-app: var(--r-app);
+  --color-appbar: var(--r-appbar);
+  --color-appbar-border: var(--r-appbar-border);
+  --color-role-card: var(--r-role-card);
+  --color-role-card-border: var(--r-role-card-border);
+  --color-dashed: var(--r-dashed);
+  --color-dialog: var(--r-dialog);
+  --color-dialog-border: var(--r-dialog-border);
+  --color-scrim: var(--r-scrim);
+  --color-gold: var(--hms-gold);
+  --color-graphite-50: var(--hms-graphite-50);
+  --color-graphite-100: var(--hms-graphite-100);
+  --color-graphite-200: var(--hms-graphite-200);
+  --color-graphite-300: var(--hms-graphite-300);
+  --color-graphite-400: var(--hms-graphite-400);
+  --color-graphite-500: var(--hms-graphite-500);
+  --color-graphite-600: var(--hms-graphite-600);
+  --color-graphite-700: var(--hms-graphite-700);
+  --color-graphite-800: var(--hms-graphite-800);
+  --color-graphite-900: var(--hms-graphite-900);
+  --color-graphite-950: var(--hms-graphite-950);
+  --color-tagline: var(--hms-auth-tagline);
+  --color-copyright: var(--hms-auth-copyright);
+  --color-note-success-bg: var(--r-note-success-bg);
+  --color-note-success-border: var(--r-note-success-border);
+  --color-note-success-fg: var(--r-note-success-fg);
+  --color-note-error-bg: var(--r-note-error-bg);
+  --color-note-error-border: var(--r-note-error-border);
+  --color-note-error-fg: var(--r-note-error-fg);
+  --color-on-brand: var(--hms-on-brand);
+  --color-on-brand-muted: var(--hms-on-brand-muted);
+  --color-success-fg: var(--hms-success-fg);
+  --color-success-bg: var(--hms-success-bg);
+  --color-success-border: var(--hms-success-border);
+  --color-warning-fg: var(--hms-warning-fg);
+  --color-warning-bg: var(--hms-warning-bg);
+  --color-warning-border: var(--hms-warning-border);
+  --color-danger-fg: var(--hms-danger-fg);
+  --color-danger-bg: var(--hms-danger-bg);
+  --color-danger-border: var(--hms-danger-border);
+  --color-info-fg: var(--hms-info-fg);
+  --color-info-bg: var(--hms-info-bg);
+  --color-info-border: var(--hms-info-border);
+
+  --radius-input: var(--hms-radius-sm);
+  --radius-field: var(--hms-auth-input-radius);
+  --radius-cta: var(--hms-auth-btn-radius);
+  --radius-tile: var(--hms-auth-tile-radius);
+  --radius-button: var(--hms-radius-md);
+  --radius-panel: var(--hms-radius-lg);
+  --radius-card: var(--hms-radius-xl);
+
+  --shadow-soft: var(--hms-shadow-sm);
+  --shadow-raised: var(--hms-shadow-md);
+  --shadow-card: var(--hms-shadow-lg);
+  --shadow-auth-card: var(--r-card-shadow);
+  --shadow-cta: var(--r-cta-shadow);
+  --shadow-cta-hover: var(--r-cta-shadow-hover);
+  --shadow-tile: var(--hms-auth-tile-shadow);
+  --shadow-focus: var(--r-focus-ring);
+
+  --text-caption: var(--hms-text-caption);
+  --text-caption--line-height: var(--hms-leading-caption);
+  --text-small: var(--hms-text-small);
+  --text-small--line-height: var(--hms-leading-small);
+  --text-body: var(--hms-text-body);
+  --text-body--line-height: var(--hms-leading-body);
+  --text-body-lg: var(--hms-text-bodyLg);
+  --text-body-lg--line-height: var(--hms-leading-bodyLg);
+  --text-heading: var(--hms-text-heading);
+  --text-heading--line-height: var(--hms-leading-heading);
+  --text-title: var(--hms-text-title);
+  --text-title--line-height: var(--hms-leading-title);
+  --text-display: var(--hms-text-display);
+  --text-display--line-height: var(--hms-leading-display);
+
+  --ease-hms: var(--hms-ease-out);
+}
+
+html {
+  /* Always day, whatever the device says (MJ, 5 Nov 2026); night only when the signed-in person turns it on (<html data-theme="dark">). */
+  color-scheme: light;
+}
+html[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+body {
+  background: var(--hms-auth-bg-base);
+  color: var(--hms-text);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* One focus style everywhere: 2px primary + soft ring. */
+:focus-visible {
+  outline: 2px solid var(--r-input-focus);
+  outline-offset: 2px;
+}
+
+.hms-input {
+  transition: border-color var(--hms-dur-fast) var(--hms-ease-out), box-shadow var(--hms-dur-fast) var(--hms-ease-out);
+}
+
+.hms-input:focus {
+  /* Transparent outline stays visible in Windows High Contrast, where box-shadow is dropped. */
+  outline: 2px solid transparent;
+  outline-offset: 0;
+  border-color: var(--hms-primary);
+  box-shadow: 0 0 0 1px var(--hms-primary), 0 0 0 4px var(--hms-focus-ring);
+}
+
+.hms-input[aria-invalid="true"] {
+  border-color: var(--hms-danger-fg);
+}
+
+.hms-input[aria-invalid="true"]:focus {
+  box-shadow: 0 0 0 1px var(--hms-danger-fg), 0 0 0 4px var(--hms-focus-ring);
+}
+
+.hms-press {
+  transition: transform var(--hms-dur-fast) var(--hms-ease-out), background-color var(--hms-dur-fast) var(--hms-ease-out);
+}
+
+.hms-press:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+@keyframes hms-spin {
+  to { transform: rotate(360deg); }
+}
+
+.hms-spinner {
+  animation: hms-spin 0.8s linear infinite;
+}
+
+@keyframes hms-fade-in {
+  from { opacity: 0; }
+}
+
+.hms-fade-in {
+  animation: hms-fade-in var(--hms-dur-fast) var(--hms-ease-out);
+}
+
+/* ---- Pallav auth page (spec 09 §1-§3) ---- */
+.hms-auth-page {
+  background: var(--hms-auth-bg), var(--hms-auth-bg-base);
+}
+
+.hms-ring {
+  position: absolute;
+  border-radius: 9999px;
+  border: 1px solid var(--hms-auth-ring-border);
+}
+
+.hms-ring-1 {
+  width: var(--hms-auth-ring-1-size);
+  height: var(--hms-auth-ring-1-size);
+  right: var(--hms-auth-ring-1-right);
+  top: var(--hms-auth-ring-1-top);
+  background: var(--hms-auth-ring-1);
+}
+
+.hms-ring-2 {
+  width: var(--hms-auth-ring-2-size);
+  height: var(--hms-auth-ring-2-size);
+  left: var(--hms-auth-ring-2-left);
+  bottom: var(--hms-auth-ring-2-bottom);
+  background: var(--hms-auth-ring-2);
+}
+
+.hms-brand-glass {
+  background: var(--hms-auth-tile-fill);
+  border: 1px solid var(--hms-auth-tile-border);
+}
+
+/* The brand logo (components/BrandLogo.tsx): --lh is the height of the artwork; each file is scaled and shifted so only its drawing shows
+   (the day file draws in 55% of its 1785x893 box, the night file in 55% of its 2170x727 box). The night file shows when the person chose night. */
+.hms-brand-logo { --lh: 40px; position: relative; display: block; overflow: hidden; height: var(--lh); width: calc(var(--lh) * 3.6); max-width: 100%; }
+.hms-brand-logo-lg { --lh: 56px; }
+.hms-brand-logo img { position: absolute; display: block; max-width: none; }
+.hms-brand-logo .hms-logo-day { height: calc(var(--lh) * 1.815); width: calc(var(--lh) * 3.628); top: calc(var(--lh) * -0.325); left: calc(var(--lh) * -0.385); }
+.hms-brand-logo .hms-logo-night { height: calc(var(--lh) * 1.818); width: calc(var(--lh) * 5.427); top: calc(var(--lh) * -0.4); left: calc(var(--lh) * -0.95); display: none; }
+html[data-theme="dark"] {
+  .hms-brand-logo { width: calc(var(--lh) * 4.8); }
+  .hms-brand-logo .hms-logo-day { display: none; }
+  .hms-brand-logo .hms-logo-night { display: block; }
+}
+@media (max-width: 480px) {
+  .hms-brand-logo-lg { --lh: 44px; }
+}
+
+/* The card frame. Content inside changes per step; the frame morphs (see view transitions). */
+.hms-auth-card {
+  background: var(--r-card);
+  border: 1px solid var(--r-card-border);
+  border-radius: var(--hms-auth-card-radius);
+  box-shadow: var(--r-card-shadow);
+  padding: var(--hms-auth-card-pad);
+}
+
+@media (max-width: 480px) {
+  .hms-auth-card {
+    border-radius: var(--hms-auth-card-radius-phone);
+    padding: var(--hms-auth-card-pad-phone);
+  }
+}
+
+/* First load only: the column rises 8px and fades in (380 ms). Step changes use view transitions. */
+@keyframes hms-rise {
+  from { opacity: 0; transform: translateY(8px); }
+}
+
+.hms-rise {
+  animation: hms-rise var(--hms-dur-slow) var(--hms-ease-out) both;
+}
+
+/* Faint jaali-style lattice on the brand panel (decoration only). */
+.hms-brand-pattern {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='56' viewBox='0 0 56 56'%3E%3Cg fill='none' stroke='%23ffffff' stroke-width='1'%3E%3Cpath d='M28 4 52 28 28 52 4 28Z'/%3E%3Ccircle cx='28' cy='28' r='9'/%3E%3C/g%3E%3C/svg%3E");
+  opacity: 0.07;
+}
+
+/* ---- Brand banner beside the sign-in card (components/auth/AuthBanner.tsx, MJ 2026-10-18 option 1) ----
+   Phone (< 768): a short header above the card, logo and headline only. 768-1023: a narrower left column. 1024+: about 40 % on the left.
+   White on #3A3A42 is 8.7:1 (AA); the night graphite is darker so the panel does not glare beside the dark page. */
+.hms-auth-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+}
+
+.hms-auth-banner {
+  --hms-auth-banner-bg: #3A3A42;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 18px 16px 20px;
+  background: var(--hms-auth-banner-bg);
+  color: #fff;
+}
+
+html[data-theme="dark"] {
+  .hms-auth-banner { --hms-auth-banner-bg: #1B1B20; }
+}
+
+/* The invitation form also opens over the console's Bootstrap sheet: no browser or Bootstrap margins inside the banner. */
+:where(.hms-auth-banner) p,
+:where(.hms-auth-banner) ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.hms-auth-banner-headline {
+  font-size: 20px;
+  line-height: 1.25;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+.hms-auth-banner-line {
+  display: none;
+  margin-top: 10px;
+  font-size: 15px;
+  line-height: 1.55;
+  color: rgb(255 255 255 / 0.88);
+  text-wrap: pretty;
+}
+
+.hms-auth-banner-pills {
+  display: none;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.hms-auth-banner-pills li {
+  padding: 6px 12px;
+  border: 1px solid rgb(255 255 255 / 0.3);
+  border-radius: 9999px;
+  background: rgb(255 255 255 / 0.12);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.hms-auth-main {
+  position: relative;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  min-width: 0;
+}
+
+@media (min-width: 768px) {
+  .hms-auth-layout { flex-direction: row; }
+  .hms-auth-banner {
+    position: sticky;
+    top: 0;
+    flex: none;
+    width: 34%;
+    max-width: 340px;
+    height: 100dvh;
+    justify-content: space-between;
+    gap: 32px;
+    padding: 40px 32px;
+  }
+  .hms-auth-banner-headline { font-size: 28px; }
+  .hms-auth-banner-line { display: block; }
+  .hms-auth-banner-pills { display: flex; }
+}
+
+@media (min-width: 1024px) {
+  .hms-auth-banner {
+    width: 40%;
+    max-width: 640px;
+    padding: 56px clamp(40px, 5vw, 72px);
+  }
+  .hms-auth-banner-headline { font-size: 40px; line-height: 1.15; }
+  .hms-auth-banner-line { font-size: 17px; max-width: 30em; }
+}
+
+/* ---- Step transitions (React <ViewTransition>) ---- */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+}
+
+@keyframes hms-step-out {
+  to { opacity: 0; }
+}
+
+@keyframes hms-step-in-forward {
+  from { opacity: 0; transform: translateX(8px); }
+}
+
+@keyframes hms-step-in-back {
+  from { opacity: 0; transform: translateX(-8px); }
+}
+
+::view-transition-old(.hms-step-out) {
+  animation: hms-step-out var(--hms-dur-fast) var(--hms-ease-out) both;
+}
+
+::view-transition-new(.hms-step-in-forward) {
+  animation: hms-step-in-forward var(--hms-dur-base) var(--hms-ease-out) both;
+}
+
+::view-transition-new(.hms-step-in-back) {
+  animation: hms-step-in-back var(--hms-dur-base) var(--hms-ease-out) both;
+}
+
+/* Auth card between steps: the box eases to the new height while the old content fades out
+   and the new content slides in (forward from the right, back from the left). */
+::view-transition-group(.hms-step-forward),
+::view-transition-group(.hms-step-back) {
+  animation-duration: var(--hms-dur-base);
+  animation-timing-function: var(--hms-ease-out);
+  overflow: clip;
+  border-radius: var(--hms-auth-card-radius);
+}
+
+::view-transition-image-pair(.hms-step-forward),
+::view-transition-image-pair(.hms-step-back) {
+  isolation: auto;
+}
+
+::view-transition-old(.hms-step-forward),
+::view-transition-old(.hms-step-back) {
+  animation: hms-step-out var(--hms-dur-fast) var(--hms-ease-out) both;
+  height: auto;
+  object-fit: none;
+  object-position: top;
+}
+
+::view-transition-new(.hms-step-forward) {
+  animation: hms-step-in-forward var(--hms-dur-base) var(--hms-ease-out) both;
+  height: auto;
+  object-fit: none;
+  object-position: top;
+}
+
+::view-transition-new(.hms-step-back) {
+  animation: hms-step-in-back var(--hms-dur-base) var(--hms-ease-out) both;
+  height: auto;
+  object-fit: none;
+  object-position: top;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-new(.hms-step-in-forward),
+  ::view-transition-new(.hms-step-in-back),
+  ::view-transition-new(.hms-step-forward),
+  ::view-transition-new(.hms-step-back) {
+    animation-name: hms-fade-in;
+  }
+  ::view-transition-group(.hms-step-forward),
+  ::view-transition-group(.hms-step-back) {
+    animation-duration: 0s;
+  }
+  .hms-spinner {
+    animation: none;
+  }
+  .hms-press:active:not(:disabled) {
+    transform: none;
+  }
+  .hms-fade-in {
+    animation: none;
+  }
+  .hms-rise {
+    animation-name: hms-fade-in;
+  }
+}
+
+/* ------------------------------------------------------------------------------------------------------------------------------------------
+   The dashboard outline on a reload (components/ui/AppShellSkeleton.tsx). The inline script in app/layout.tsx sets <html data-shell="app"> before the first
+   paint when this browser had a dashboard open (dashboards/shell/shellFlag.ts), and <html data-sk-collapsed> when the rail was collapsed: the page then paints
+   this outline (ink: grey page, near-black rail, no colour; MJ 26 Oct 2026) instead of the sign-in placeholder, with the real shell's own widths (public/pallav/layout.css), so nothing moves when the shell arrives.
+   Colours are Pallav's (layout.css, pms-dark.css), written here because those sheets are not loaded yet at that moment. */
+.hms-sk-app { display: none; }
+html[data-shell="app"] .hms-sk-app, .hms-sk-always { display: flex; }
+html[data-shell="app"] .hms-sk-auth { display: none; }
+html[data-shell="app"] body { background: #f4f4f6; }
+.hms-sk-app {
+  --sk-page: #f4f4f6; --sk-top: #fff; --sk-line: #e6e6ea; --sk-block: #ececef; --sk-card: #fff; --sk-rail-w: 244px;
+  position: fixed; inset: 0; z-index: 1; min-height: 100dvh; background: var(--sk-page); color-scheme: light; overflow: hidden;
+}
+html[data-sk-collapsed] .hms-sk-app { --sk-rail-w: 68px; }
+.hms-sk-rail { width: var(--sk-rail-w); flex: none; background: #111114; padding: 18px 14px; display: flex; flex-direction: column; gap: 3px; }
+.hms-sk-logo { display: block; height: 32px; width: 60%; border-radius: 10px; background: rgba(255, 255, 255, .16); margin: 0 6px 22px; }
+.hms-sk-nav { display: block; height: 38px; border-radius: 11px; background: rgba(255, 255, 255, .08); }
+.hms-sk-nav:first-of-type { background: rgba(255, 255, 255, .17); }
+html[data-sk-collapsed] .hms-sk-rail { padding-left: 10px; padding-right: 10px; }
+html[data-sk-collapsed] .hms-sk-logo { width: 32px; margin: 0 auto 22px; }
+.hms-sk-main { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.hms-sk-top { height: 69px; background: var(--sk-top); border-bottom: 1px solid var(--sk-line); padding: 14px 26px; display: flex; align-items: center; justify-content: space-between; }
+.hms-sk-title { width: 180px; height: 20px; border-radius: 8px; background: var(--sk-block); }
+.hms-sk-chip { width: 220px; height: 36px; border-radius: 12px; background: var(--sk-block); }
+.hms-sk-content { padding: 24px; display: flex; flex-direction: column; gap: 18px; }
+.hms-sk-tiles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.hms-sk-tiles span { height: 96px; border-radius: 16px; background: var(--sk-card); border: 1px solid var(--sk-line); }
+.hms-sk-rows { display: flex; flex-direction: column; gap: 10px; }
+.hms-sk-rows span { height: 50px; border-radius: 16px; background: var(--sk-card); border: 1px solid var(--sk-line); }
+.hms-sk-app .hms-sk-tiles span, .hms-sk-app .hms-sk-rows span, .hms-sk-title, .hms-sk-chip, .hms-sk-nav, .hms-sk-logo { animation: hms-sk-pulse 1.6s ease-in-out infinite; }
+@keyframes hms-sk-pulse { 0%, 100% { opacity: 1; } 50% { opacity: .62; } }
+@media (prefers-reduced-motion: reduce) { .hms-sk-app * { animation: none !important; } }
+@media (max-width: 760px) { .hms-sk-rail { display: none; } .hms-sk-tiles { grid-template-columns: repeat(2, 1fr); } .hms-sk-top { padding: 12px 16px; } .hms-sk-content { padding: 16px; } }
+/* Night (Pallav's pms-dark.css page and card colours): the inline script copies the remembered theme to <html data-theme> before the first paint. */
+/* The outline with the snapshot's words (layout.tsx body script): white labels on the rail, the page title and the person's name in the top bar; no pulse. */
+.hms-sk-words .hms-sk-logo, .hms-sk-words .hms-sk-nav, .hms-sk-words .hms-sk-title, .hms-sk-words .hms-sk-chip { animation: none; background: transparent; width: auto; height: auto; font-family: var(--font-inter), system-ui, sans-serif; }
+.hms-sk-words .hms-sk-rail { overflow: hidden; }
+.hms-sk-words .hms-sk-rail > span { flex: none; line-height: 1.35; }
+.hms-sk-words .hms-sk-logo { color: #fff; font-size: 17px; font-weight: 800; letter-spacing: -.01em; margin: 6px 6px 20px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.hms-sk-words .hms-sk-group { display: block; font-size: 10.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: rgba(255,255,255,.55); margin: 12px 12px 4px; }
+.hms-sk-words .hms-sk-nav { display: block; color: rgba(255,255,255,.86); font-size: 13.5px; font-weight: 600; padding: 9px 12px 9px 40px; border-radius: 11px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.hms-sk-words .hms-sk-nav.hms-sk-on { background: rgba(255,255,255,.17); color: #fff; }
+.hms-sk-words .hms-sk-title { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.hms-sk-words .hms-sk-eyebrow { font-size: 10.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #8a8a93; }
+.hms-sk-words .hms-sk-h1 { font-size: 17px; font-weight: 800; color: #18181b; letter-spacing: -.01em; }
+.hms-sk-words .hms-sk-chip { font-size: 13px; font-weight: 700; color: #18181b; padding: 8px 14px; border: 1px solid var(--sk-line); border-radius: 12px; background: var(--sk-top); }
+html[data-sk-collapsed] .hms-sk-words .hms-sk-group, html[data-sk-collapsed] .hms-sk-words .hms-sk-nav { display: none; }
+html[data-theme="dark"] .hms-sk-words .hms-sk-h1, html[data-theme="dark"] .hms-sk-words .hms-sk-chip { color: #ededf0; }
+html[data-theme="dark"] .hms-sk-app { --sk-page: #0b0b0d; --sk-top: #141417; --sk-line: #26262b; --sk-block: #1e1e22; --sk-card: #141417; color-scheme: dark; }
+html[data-theme="dark"][data-shell="app"] body { background: #0b0b0d; }
+
+/* ------------------------------------------------------------------------------------------------------------------------------------------
+   The link from the sign-in card to the public website (components/auth/AuthShell.tsx). It sits on the graphite page beside the copyright line. */
+.hms-site-link {
+  color: var(--hms-on-brand);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: rgb(255 255 255 / 0.45);
+  text-underline-offset: 3px;
+}
+.hms-site-link:hover,
+.hms-site-link:focus-visible { text-decoration-color: var(--hms-on-brand); }
+.hms-site-link:focus-visible { outline: 2px solid var(--hms-on-brand); outline-offset: 3px; border-radius: 4px; }
+
+/* ------------------------------------------------------------------------------------------------------------------------------------------
+   The public website (components/site/SiteHome.tsx; MJ 25 Oct 2026, the product page 2 Nov 2026). Ink and white by day, near-black by night (the device decides).
+   Everything is scoped to .hp and defined here, because a signed-out visitor loads no dashboard stylesheet. Calm motion only. */
+.hp {
+  --hp-bg: #fafafb; --hp-surface: #ffffff; --hp-tint: #f2f2f4; --hp-ink: #111114; --hp-ink2: #3a3a42; --hp-muted: #5d606b; --hp-line: #e1e1e6;
+  --hp-btn: #111114; --hp-btn-ink: #ffffff; --hp-free: #15803d; --hp-free-bg: #dcfce7; --hp-busy: #b91c1c; --hp-busy-bg: #fee2e2; --hp-clean: #b45309; --hp-clean-bg: #fef3c7;
+  --hp-shadow: 0 1px 2px rgb(17 17 20 / .06), 0 14px 40px -12px rgb(17 17 20 / .18);
+  background: var(--hp-bg); color: var(--hp-ink); font-family: var(--font-inter), system-ui, sans-serif; -webkit-font-smoothing: antialiased; line-height: 1.6;
+  min-height: 100dvh; overflow-x: clip;
+}
+html[data-theme="dark"] {
+  .hp {
+    --hp-bg: #0d0d10; --hp-surface: #141417; --hp-tint: #101013; --hp-ink: #ececef; --hp-ink2: #c4c4cc; --hp-muted: #9a9aa4; --hp-line: #26262b;
+    --hp-btn: #ececef; --hp-btn-ink: #111114; --hp-free: #86efac; --hp-free-bg: rgb(21 128 61 / .22); --hp-busy: #fca5a5; --hp-busy-bg: rgb(185 28 28 / .22); --hp-clean: #fcd34d; --hp-clean-bg: rgb(217 119 6 / .2);
+    --hp-shadow: 0 1px 2px rgb(0 0 0 / .4), 0 18px 48px -14px rgb(0 0 0 / .7); color-scheme: dark;
+  }
+}
+.hp *, .hp *::before, .hp *::after { box-sizing: border-box; }
+/* :where keeps this at one class's weight, so a button's own colour (.hp-btn-solid, .hp-btn-invert) wins; as ".hp a" it blanked the Book a demo buttons */
+.hp :where(a) { color: inherit; text-decoration: none; }
+.hp :focus-visible { outline: 2px solid var(--hp-ink); outline-offset: 3px; border-radius: 6px; }
+/* the same one-class weight: a class's own spacing (.hp-compare-h, .hp-foot-note) wins over this reset */
+.hp :where(h1, h2, h3, p, ul, ol) { margin: 0; padding: 0; }
+.hp-wrap { width: 100%; max-width: 1160px; margin: 0 auto; padding-inline: max(20px, env(safe-area-inset-left, 0px)) max(20px, env(safe-area-inset-right, 0px)); }
+.hp-top { position: sticky; top: 0; z-index: 20; background: color-mix(in srgb, var(--hp-bg) 86%, transparent); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid var(--hp-line); }
+.hp-top-row { display: flex; align-items: center; gap: 24px; min-height: 64px; }
+.hp-brand { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; }
+.hp-mark { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 10px; background: var(--hp-btn); color: var(--hp-btn-ink); font-weight: 800; font-size: 15px; }
+.hp-brand-name { font-weight: 800; font-size: 17px; letter-spacing: -.02em; white-space: nowrap; }
+.hp-brand .hms-brand-logo { --lh: 36px; }
+.hp-nav { display: flex; gap: 6px; margin-left: 12px; }
+.hp-nav a { padding: 8px 12px; border-radius: 8px; font-size: 14px; font-weight: 500; color: var(--hp-ink2); transition: background-color .15s, color .15s; }
+.hp-nav a:hover { background: var(--hp-tint); color: var(--hp-ink); }
+.hp-actions { display: flex; align-items: center; gap: 8px; margin-left: auto; }
+.hp-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 0 18px; border-radius: 11px; font-size: 14px; font-weight: 600; white-space: nowrap; border: 1px solid transparent; transition: transform .15s, background-color .15s, border-color .15s; }
+.hp-btn:hover { transform: translateY(-1px); }
+.hp-btn-lg { min-height: 50px; padding: 0 24px; font-size: 15px; }
+.hp-btn-solid { background: var(--hp-btn); color: var(--hp-btn-ink); }
+.hp-btn-ghost { color: var(--hp-ink); }
+.hp-btn-ghost:hover { background: var(--hp-tint); }
+.hp-btn-line { border-color: var(--hp-line); background: var(--hp-surface); color: var(--hp-ink); }
+.hp-btn-line:hover { border-color: var(--hp-muted); }
+.hp-arrow { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.hp-eyebrow { font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--hp-muted); margin-bottom: 14px; }
+.hp-h1 { font-size: clamp(38px, 6vw, 66px); line-height: 1.04; letter-spacing: -.035em; font-weight: 800; text-wrap: balance; }
+.hp-h2 { font-size: clamp(28px, 4vw, 42px); line-height: 1.12; letter-spacing: -.028em; font-weight: 800; text-wrap: balance; max-width: 22ch; }
+.hp-lead { font-size: clamp(16px, 1.6vw, 19px); color: var(--hp-ink2); max-width: 54ch; margin-top: 20px; }
+.hp-hero { padding: clamp(40px, 7vw, 92px) 0 clamp(40px, 6vw, 72px); }
+.hp-hero-grid { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: clamp(32px, 5vw, 72px); align-items: center; }
+.hp-cta-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+.hp-center { justify-content: center; }
+.hp-note { margin-top: 18px; font-size: 14px; color: var(--hp-muted); }
+/* the product preview: a sample room board and a bill, drawn with boxes */
+.hp-preview { position: relative; padding-bottom: 46px; }
+.hp-win { background: var(--hp-surface); border: 1px solid var(--hp-line); border-radius: 18px; box-shadow: var(--hp-shadow); overflow: hidden; }
+.hp-win-bar { display: flex; align-items: center; gap: 6px; padding: 12px 16px; border-bottom: 1px solid var(--hp-line); }
+.hp-win-bar span { width: 10px; height: 10px; border-radius: 50%; background: var(--hp-line); }
+.hp-win-bar b { margin-left: 10px; font-size: 13px; font-weight: 600; color: var(--hp-ink2); }
+.hp-board { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; padding: 16px; }
+.hp-room { display: grid; gap: 1px; padding: 10px 6px; border-radius: 10px; text-align: center; font-size: 11px; }
+.hp-room b { font-size: 15px; font-weight: 700; }
+.hp-room-free { background: var(--hp-free-bg); color: var(--hp-free); }
+.hp-room-busy { background: var(--hp-busy-bg); color: var(--hp-busy); }
+.hp-room-clean { background: var(--hp-clean-bg); color: var(--hp-clean); }
+.hp-legend { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 14px; padding: 0 16px 16px; font-size: 12px; color: var(--hp-muted); }
+.hp-legend i { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: -8px; }
+.hp-bill { position: absolute; right: -8px; bottom: 0; width: min(270px, 78%); background: var(--hp-surface); border: 1px solid var(--hp-line); border-radius: 14px; box-shadow: var(--hp-shadow); padding: 14px 16px; font-size: 13px; }
+.hp-bill-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+.hp-bill-head span { font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 999px; background: var(--hp-free-bg); color: var(--hp-free); }
+.hp-bill-row, .hp-bill-total { display: flex; justify-content: space-between; color: var(--hp-ink2); padding: 2px 0; font-variant-numeric: tabular-nums; }
+.hp-bill-total { margin-top: 6px; padding-top: 8px; border-top: 1px solid var(--hp-line); color: var(--hp-ink); }
+.hp-proof { border-block: 1px solid var(--hp-line); background: var(--hp-surface); }
+.hp-proof-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.hp-proof-grid > div { display: grid; padding: 22px 16px; border-left: 1px solid var(--hp-line); }
+.hp-proof-grid > div:first-child { border-left: 0; padding-left: 0; }
+.hp-proof-grid b { font-size: 17px; font-weight: 700; letter-spacing: -.01em; }
+.hp-proof-grid span { font-size: 13px; color: var(--hp-muted); }
+.hp-section { padding: clamp(56px, 8vw, 104px) 0; }
+.hp-tint { background: var(--hp-tint); border-block: 1px solid var(--hp-line); }
+.hp-cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 40px; }
+.hp-cards-3 { margin-top: 36px; }
+.hp-card { background: var(--hp-surface); border: 1px solid var(--hp-line); border-radius: 16px; padding: 24px; transition: border-color .15s, box-shadow .15s, transform .15s; }
+.hp-card:hover { border-color: var(--hp-muted); box-shadow: var(--hp-shadow); transform: translateY(-2px); }
+.hp-card h3 { font-size: 17px; font-weight: 700; letter-spacing: -.01em; margin-top: 16px; }
+.hp-cards-3 .hp-card h3 { margin-top: 0; }
+.hp-card p { font-size: 15px; color: var(--hp-ink2); margin-top: 8px; }
+.hp-chip { display: grid; place-items: center; width: 42px; height: 42px; border-radius: 12px; background: var(--hp-btn); color: var(--hp-btn-ink); }
+.hp-icon { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.hp-steps { list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; margin-top: 40px; }
+.hp-step-no { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; border: 1.5px solid var(--hp-ink); font-weight: 700; font-variant-numeric: tabular-nums; }
+.hp-steps h3 { font-size: 18px; font-weight: 700; margin-top: 18px; }
+.hp-steps p { font-size: 15px; color: var(--hp-ink2); margin-top: 6px; max-width: 34ch; }
+.hp-split { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(32px, 6vw, 80px); align-items: start; }
+.hp-checks { list-style: none; display: grid; gap: 22px; }
+.hp-checks li { display: grid; grid-template-columns: 28px 1fr; gap: 14px; }
+.hp-tick { width: 26px; height: 26px; padding: 4px; border-radius: 50%; background: var(--hp-btn); fill: none; stroke: var(--hp-btn-ink); stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+.hp-checks b { font-size: 16px; font-weight: 700; }
+.hp-checks p { font-size: 15px; color: var(--hp-ink2); margin-top: 2px; }
+.hp-final { padding: clamp(40px, 6vw, 72px) 0; }
+.hp-final-box { background: var(--hp-btn); color: var(--hp-btn-ink); border-radius: 24px; padding: clamp(36px, 6vw, 72px) 24px; text-align: center; max-width: 1120px; }
+.hp-final-box h2 { font-size: clamp(28px, 4.4vw, 44px); line-height: 1.1; letter-spacing: -.03em; font-weight: 800; text-wrap: balance; max-width: 20ch; margin-inline: auto; }
+.hp-final-box p { margin: 16px auto 0; max-width: 46ch; opacity: .8; }
+.hp-final-box .hp-cta-row { margin-top: 28px; }
+.hp-btn-invert { background: var(--hp-btn-ink); color: var(--hp-btn); }
+.hp-btn-outline-invert { border-color: color-mix(in srgb, var(--hp-btn-ink) 40%, transparent); color: var(--hp-btn-ink); }
+.hp-btn-outline-invert:hover { border-color: var(--hp-btn-ink); }
+.hp-foot { border-top: 1px solid var(--hp-line); padding: 48px 0 28px; font-size: 14px; color: var(--hp-muted); background: var(--hp-surface); }
+.hp-foot a:hover { color: var(--hp-ink); }
+.hp-foot-grid { display: grid; grid-template-columns: minmax(0, 1.6fr) repeat(4, minmax(0, 1fr)); gap: 32px; }
+.hp-foot-grid nav, .hp-foot-brand { display: grid; align-content: start; gap: 10px; }
+.hp-foot-brand p { margin: 0; }
+.hp-foot-brand .hp-brand { color: var(--hp-ink); }
+.hp-foot-h { font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--hp-ink); }
+.hp-foot-note { margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--hp-line); font-size: 13px; }
+/* the section links: the bar on a desktop, one scrolling row on a phone */
+.hp-nav a[aria-current="page"] { color: var(--hp-ink); background: var(--hp-tint); }
+.hp-nav-sm { display: none; border-top: 1px solid var(--hp-line); }
+.hp-nav-sm .hp-wrap { display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none; padding-block: 6px; }
+.hp-nav-sm .hp-wrap::-webkit-scrollbar { display: none; }
+.hp-nav-sm a { flex: none; padding: 8px 12px; min-height: 40px; display: inline-flex; align-items: center; border-radius: 8px; font-size: 14px; font-weight: 500; color: var(--hp-ink2); }
+.hp-nav-sm a[aria-current="page"] { color: var(--hp-ink); background: var(--hp-tint); }
+/* a page's opening (every page but the home page) */
+.hp-intro { padding: clamp(48px, 7vw, 96px) 0 clamp(36px, 5vw, 64px); }
+.hp-h1-page { font-size: clamp(34px, 5vw, 56px); max-width: 20ch; }
+.hp-section-sm { padding: clamp(44px, 6vw, 80px) 0; }
+.hp-more { margin-top: 28px; font-weight: 600; }
+.hp-more a, .hp-link { text-decoration: underline; text-underline-offset: 3px; }
+.hp-jump { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 32px; }
+.hp-jump a { padding: 8px 14px; min-height: 40px; display: inline-flex; align-items: center; border-radius: 999px; border: 1px solid var(--hp-line); background: var(--hp-surface); font-size: 14px; font-weight: 500; }
+.hp-jump a:hover { border-color: var(--hp-muted); }
+/* features: a group's heading beside its list */
+.hp-fgroup { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.6fr); gap: clamp(28px, 5vw, 72px); align-items: start; }
+.hp-fgroup-head h2 { margin-top: 16px; font-size: clamp(24px, 3vw, 32px); font-weight: 800; letter-spacing: -.025em; line-height: 1.15; }
+.hp-fgroup-head p { margin-top: 10px; color: var(--hp-ink2); max-width: 36ch; }
+.hp-fgroup-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 32px; }
+.hp-fgroup-list h3 { font-size: 16px; font-weight: 700; }
+.hp-fgroup-list p { margin-top: 6px; font-size: 15px; color: var(--hp-ink2); }
+/* integrations */
+.hp-int { display: grid; gap: 44px; }
+.hp-int-group h2 { font-size: 13px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--hp-muted); }
+.hp-cards-int { margin-top: 16px; }
+.hp-cards-int .hp-card h3 { margin-top: 12px; }
+.hp-badge { display: inline-flex; align-items: center; gap: 6px; padding: 3px 10px; border-radius: 999px; font-size: 12px; font-weight: 700; background: var(--hp-tint); color: var(--hp-muted); box-shadow: inset 0 0 0 1px var(--hp-line); }
+.hp-badge-live { background: var(--hp-free-bg); color: var(--hp-free); box-shadow: none; }
+/* pricing */
+.hp-plans { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; max-width: 900px; }
+.hp-plan { display: grid; gap: 12px; align-content: start; padding: 32px; border-radius: 20px; background: var(--hp-surface); border: 1px solid var(--hp-line); }
+.hp-plan-featured { border-color: var(--hp-ink); box-shadow: var(--hp-shadow); }
+.hp-plan h2 { font-size: 28px; font-weight: 800; letter-spacing: -.02em; }
+.hp-plan-for { font-size: 13px; font-weight: 600; color: var(--hp-muted); }
+.hp-plan-price { font-size: 18px; font-weight: 700; }
+.hp-plan p:not([class]) { color: var(--hp-ink2); }
+.hp-plan .hp-btn { margin-top: 8px; justify-self: start; }
+.hp-compare-h { margin-top: clamp(48px, 7vw, 88px); }
+.hp-compare { margin-top: 24px; overflow-x: auto; border: 1px solid var(--hp-line); border-radius: 16px; background: var(--hp-surface); max-width: 900px; }
+.hp-compare table { width: 100%; border-collapse: collapse; font-size: 15px; }
+.hp-compare th, .hp-compare td { padding: 14px 20px; border-bottom: 1px solid var(--hp-line); text-align: left; }
+.hp-compare tr:last-child th, .hp-compare tr:last-child td { border-bottom: 0; }
+.hp-compare thead th { font-size: 13px; font-weight: 700; color: var(--hp-muted); text-transform: uppercase; letter-spacing: .08em; }
+.hp-compare tbody th { font-weight: 500; }
+.hp-compare td { width: 120px; text-align: center; }
+.hp-compare thead th + th { text-align: center; }
+.hp-dash { color: var(--hp-muted); }
+.hp-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.hp-included { margin-top: 40px; max-width: 900px; }
+.hp-included h3 { font-size: 18px; font-weight: 700; }
+/* about */
+.hp-about { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; }
+.hp-about h2 { font-size: 20px; font-weight: 700; }
+.hp-about p { margin-top: 10px; color: var(--hp-ink2); }
+/* contact: the form beside what happens next */
+.hp-contact { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: clamp(28px, 5vw, 64px); align-items: start; }
+.hp-contact-side { display: grid; gap: 16px; }
+.hp-contact-side h2 { font-size: 18px; font-weight: 700; }
+.hp-contact-side h2 + p { margin-top: -8px; }
+.hp-next { list-style: none; display: grid; gap: 14px; margin-bottom: 16px; }
+.hp-next li { display: grid; grid-template-columns: 32px 1fr; gap: 12px; align-items: center; color: var(--hp-ink2); }
+.hp-next .hp-step-no { width: 32px; height: 32px; font-size: 14px; }
+.hp-form { display: grid; gap: 18px; padding: clamp(22px, 3vw, 32px); border-radius: 20px; background: var(--hp-surface); border: 1px solid var(--hp-line); }
+.hp-form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.hp-fld { display: grid; gap: 6px; font-size: 14px; }
+.hp-fld-wide { grid-column: 1 / -1; }
+.hp-fld > span { font-weight: 600; display: flex; gap: 8px; align-items: baseline; }
+.hp-fld i { font-style: normal; font-weight: 400; font-size: 12px; color: var(--hp-muted); }
+.hp-fld input, .hp-fld textarea { width: 100%; min-height: 46px; padding: 10px 14px; border-radius: 10px; border: 1px solid var(--hp-line); background: var(--hp-bg); color: var(--hp-ink); font: inherit; font-size: 16px; }
+.hp-fld textarea { resize: vertical; }
+.hp-fld input:focus, .hp-fld textarea:focus { outline: none; border-color: var(--hp-ink); box-shadow: 0 0 0 3px color-mix(in srgb, var(--hp-ink) 14%, transparent); }
+.hp-fld input[aria-invalid="true"] { border-color: var(--hp-busy); }
+.hp-fld em { font-style: normal; font-size: 13px; color: var(--hp-busy); }
+.hp-fld small { font-size: 12.5px; color: var(--hp-muted); }
+.hp-trap { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
+.hp-form .hp-btn { justify-self: start; }
+.hp-form .hp-btn:disabled { opacity: .6; cursor: progress; transform: none; }
+.hp-form-error { padding: 12px 14px; border-radius: 10px; background: var(--hp-busy-bg); color: var(--hp-busy); font-size: 14px; font-weight: 500; }
+.hp-form-note { font-size: 13px; color: var(--hp-muted); }
+.hp-form-note a { text-decoration: underline; }
+.hp-form-done h2 { font-size: 22px; font-weight: 800; letter-spacing: -.02em; }
+.hp-form-done p { color: var(--hp-ink2); }
+/* legal pages: one readable column */
+.hp-legal-wrap { max-width: 760px; }
+.hp-legal-intro { margin-top: 24px; font-size: 17px; color: var(--hp-ink2); }
+.hp-legal section { margin-top: 36px; }
+.hp-legal h2 { font-size: 20px; font-weight: 700; letter-spacing: -.01em; }
+.hp-legal section p, .hp-legal section li { margin-top: 10px; color: var(--hp-ink2); font-size: 16px; }
+.hp-legal section ul { padding-left: 22px; }
+.hp-legal-mail { margin-top: 32px; font-weight: 600; }
+.hp-legal-mail a { text-decoration: underline; }
+.hp-skip { position: absolute; left: 12px; top: -64px; z-index: 30; padding: 10px 16px; border-radius: 10px; background: var(--hp-btn); color: var(--hp-btn-ink) !important; font-weight: 600; font-size: 14px; }
+.hp-skip:focus { top: 12px; }
+html:has(.hp) { scroll-padding-top: 80px; }
+@media (prefers-reduced-motion: no-preference) { html:has(.hp) { scroll-behavior: smooth; } }
+/* the product tour: copy beside a drawn sample, alternating sides */
+.hp-win-bar em { margin-left: auto; font-style: normal; font-size: 11px; font-weight: 600; color: var(--hp-muted); padding: 2px 8px; border-radius: 999px; background: var(--hp-tint); }
+.hp-tour { display: grid; gap: clamp(48px, 7vw, 96px); margin-top: 48px; }
+.hp-tour-row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: clamp(28px, 5vw, 72px); align-items: center; }
+.hp-tour-row.hp-flip .hp-tour-copy { order: 2; }
+.hp-tour-copy h3 { font-size: clamp(22px, 2.6vw, 30px); line-height: 1.18; letter-spacing: -.022em; font-weight: 800; text-wrap: balance; }
+.hp-tour-copy > p { margin-top: 14px; color: var(--hp-ink2); font-size: 16px; max-width: 48ch; }
+.hp-points { list-style: none; display: grid; gap: 10px; margin-top: 22px; }
+.hp-points li { display: flex; align-items: center; gap: 10px; font-size: 15px; font-weight: 500; }
+.hp-tick-sm { flex: none; width: 22px; height: 22px; padding: 3px; }
+.hp-panel { padding: 16px 18px 18px; display: grid; gap: 4px; font-size: 14px; }
+.hp-panel-h { display: flex; align-items: center; gap: 8px; margin: 10px 0 2px; font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--hp-muted); }
+.hp-panel-h:first-child { margin-top: 0; }
+.hp-panel-h i { font-style: normal; padding: 1px 8px; border-radius: 999px; background: var(--hp-tint); color: var(--hp-ink); letter-spacing: 0; }
+.hp-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--hp-line); }
+.hp-row:last-child { border-bottom: 0; }
+.hp-row b { display: block; font-weight: 600; }
+.hp-row span { font-size: 12.5px; color: var(--hp-muted); }
+.hp-row u { text-decoration: none; flex: none; font-size: 12px; font-weight: 600; padding: 6px 12px; border-radius: 8px; background: var(--hp-btn); color: var(--hp-btn-ink); }
+.hp-row u.hp-out { background: transparent; color: var(--hp-ink); box-shadow: inset 0 0 0 1px var(--hp-line); }
+.hp-field-l { font-size: 12px; font-weight: 600; color: var(--hp-muted); }
+.hp-field { display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 11px 14px; border-radius: 10px; border: 1px solid var(--hp-ink); font-weight: 600; letter-spacing: .04em; font-variant-numeric: tabular-nums; }
+.hp-field span { font-size: 12px; letter-spacing: 0; color: var(--hp-free); }
+.hp-found { margin: 12px 0; padding: 14px 16px; border-radius: 12px; background: var(--hp-free-bg); }
+.hp-found-h { font-size: 12px; font-weight: 700; color: var(--hp-free); margin-bottom: 8px; }
+.hp-found dl { display: grid; grid-template-columns: 70px 1fr; gap: 4px 12px; margin: 0; font-size: 13.5px; }
+.hp-found dt { color: var(--hp-muted); }
+.hp-found dd { margin: 0; color: var(--hp-ink); font-weight: 500; }
+.hp-match { margin-top: 12px; font-size: 13px; font-weight: 600; color: var(--hp-free); }
+/* questions: plain disclosure, no script */
+.hp-faq-wrap { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.4fr); gap: clamp(28px, 6vw, 80px); align-items: start; }
+.hp-faq { display: grid; border-top: 1px solid var(--hp-line); }
+.hp-faq details { border-bottom: 1px solid var(--hp-line); }
+.hp-faq summary { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 44px; padding: 18px 0; cursor: pointer; list-style: none; font-size: 17px; font-weight: 600; letter-spacing: -.01em; }
+.hp-faq summary::-webkit-details-marker { display: none; }
+.hp-faq summary::after { content: "+"; flex: none; display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; border: 1px solid var(--hp-line); font-size: 18px; font-weight: 400; transition: transform .2s; }
+.hp-faq details[open] summary::after { content: "−"; }
+.hp-faq details p { padding: 0 44px 20px 0; color: var(--hp-ink2); font-size: 15.5px; max-width: 62ch; }
+@media (max-width: 960px) {
+  .hp-tour-row, .hp-faq-wrap, .hp-fgroup, .hp-contact, .hp-about { grid-template-columns: minmax(0, 1fr); }
+  .hp-nav-sm { display: block; }
+  .hp-foot-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .hp-foot-brand { grid-column: 1 / -1; }
+  .hp-tour-row.hp-flip .hp-tour-copy { order: 0; }
+  .hp-nav { display: none; }
+  .hp-hero-grid, .hp-split { grid-template-columns: minmax(0, 1fr); }
+  .hp-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .hp-cards-3 { grid-template-columns: minmax(0, 1fr); }
+  .hp-steps { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+}
+@media (max-width: 640px) {
+  .hp-hide-sm { display: none; }
+  .hp-cards, .hp-fgroup-list, .hp-plans, .hp-form-grid { grid-template-columns: minmax(0, 1fr); }
+  .hp-compare th, .hp-compare td { padding: 12px 14px; }
+  .hp-compare td { width: 72px; }
+  .hp-form .hp-btn { justify-self: stretch; }
+  .hp-proof-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .hp-proof-grid > div:nth-child(3) { border-left: 0; padding-left: 0; }
+  .hp-proof-grid > div:nth-child(n+3) { border-top: 1px solid var(--hp-line); }
+  .hp-bill { right: 0; }
+  .hp-board { gap: 6px; padding: 12px; }
+  .hp-btn-lg { width: 100%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hp-btn, .hp-card, .hp-nav a { transition: none; }
+  .hp-btn:hover, .hp-card:hover { transform: none; }
+}
+
+/* ------------------------------------------------------------------------------------------------------------------------------------------
+   "Full Transparent" sign-in (decision 69, MJ 26 Oct 2026): White & Grey by day, near-black by night (the device decides, as before).
+   components/auth/AuthShell.tsx (and the invitation form, groups/platform/Onboarding.tsx) put .hms-glass on the sign-in frame. This block re-points the
+   variables the sign-in kit already reads (--r-*, --d-*, a few --hms-auth-*) and adds the glass surfaces and the motion, ONLY inside that frame:
+   the website at "/" (.hp) and every dashboard keep their own look. ONE seamless page (no coloured left panel, no rings, no pattern): the banner words
+   sit straight on the page. Monochrome: ink and white only; red for errors, coral for warnings.
+   Surfaces are see-through and drawn by a thin 1px luminous rim (bright top-left and bottom-right, faint on the sides) with an inner top highlight. */
+@property --hms-sweep {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+.hms-glass {
+  --g-ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --g-font: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", var(--font-inter), Inter, ui-sans-serif, system-ui, sans-serif;
+  --g-page: #ececef;
+  --g-bloom: #f8f8fa;
+  --g-bloom-2: rgba(255, 255, 255, 0.6);
+  --g-vignette: rgba(0, 0, 0, 0.05);
+  --g-ink: #111113;
+  --g-ink-2: rgba(17, 17, 19, 0.78);
+  --g-muted: rgba(17, 17, 19, 0.64);
+  --g-soft: rgba(17, 17, 19, 0.06);
+  --g-fill: rgba(255, 255, 255, 0.8);
+  --g-fill-h: rgba(255, 255, 255, 0.94);
+  --g-field: rgba(255, 255, 255, 0.72);
+  --g-field-h: rgba(255, 255, 255, 0.9);
+  --g-field-base: #f6f6f8;
+  --g-rim-hi: rgba(0, 0, 0, 0.32);
+  --g-rim-lo: rgba(0, 0, 0, 0.09);
+  --g-rim-hi2: rgba(0, 0, 0, 0.25);
+  --g-rim-hover: rgba(0, 0, 0, 0.5);
+  --g-in-hi: rgba(0, 0, 0, 0.42);
+  --g-in-lo: rgba(0, 0, 0, 0.2);
+  --g-in-hi2: rgba(0, 0, 0, 0.34);
+  --g-in-hover: rgba(0, 0, 0, 0.55);
+  --g-focus: #111113;
+  --g-focus-mid: rgba(17, 17, 19, 0.55);
+  --g-focus-halo: rgba(17, 17, 19, 0.1);
+  --g-glow: rgba(255, 255, 255, 0.95);
+  --g-hl: inset 0 1px 0 rgba(255, 255, 255, 0.95), inset 1px 0 0 rgba(255, 255, 255, 0.55);
+  --g-drop: 0 1px 2px rgba(0, 0, 0, 0.05), 0 14px 30px -18px rgba(0, 0, 0, 0.24);
+  --g-drop-card: 0 2px 4px rgba(0, 0, 0, 0.04), 0 34px 70px -34px rgba(0, 0, 0, 0.32);
+  --g-sweep: rgba(17, 17, 19, 0.62);
+  --g-sheen: rgba(255, 255, 255, 0.3);
+  --g-underline: rgba(17, 17, 19, 0.32);
+  --g-bad: #b42318;
+  --g-bad-rim: rgba(180, 35, 24, 0.55);
+  --g-bad-lo: rgba(180, 35, 24, 0.22);
+  --g-bad-bg: rgba(180, 35, 24, 0.06);
+  --g-warn: #a8410d;
+  --g-warn-rim: rgba(168, 65, 13, 0.36);
+  --g-warn-bg: rgba(168, 65, 13, 0.06);
+  --g-neutral-bg: rgba(255, 255, 255, 0.62);
+  --g-neutral-rim: rgba(0, 0, 0, 0.14);
+  --g-blur: blur(12px) saturate(1.4);
+
+  /* The sign-in kit's own variables, pointed at the glass look. */
+  --hms-auth-bg-base: var(--g-page);
+  --hms-auth-bg: radial-gradient(1200px 900px at 55% 22%, var(--g-bloom), transparent 70%), var(--g-page);
+  --hms-on-brand: var(--g-ink);
+  --hms-graphite-800: var(--g-page);
+  --hms-auth-copyright: var(--g-muted);
+  --hms-auth-tile-fill: var(--g-fill);
+  --hms-auth-tile-border: var(--g-neutral-rim);
+  --hms-auth-tile-shadow: var(--g-hl), var(--g-drop);
+  --hms-auth-tile-radius: 15px;
+  --hms-auth-input-radius: 999px;
+  --hms-auth-btn-radius: 999px;
+  --hms-auth-card-radius: 30px;
+  --hms-auth-card-radius-phone: 26px;
+  --r-page-base: var(--g-page);
+  --r-card: var(--g-fill);
+  --r-card-border: transparent;
+  --r-card-shadow: var(--g-hl), var(--g-drop-card);
+  --r-inset: var(--g-field);
+  --r-hairline: rgba(0, 0, 0, 0.09);
+  --r-ink: var(--g-ink);
+  --r-ink-2: var(--g-ink-2);
+  --r-ink-muted: var(--g-muted);
+  --r-input: var(--g-in-lo);
+  --r-input-hover: var(--g-in-hover);
+  --r-input-focus: var(--g-focus);
+  --r-focus-ring: 0 0 0 1px var(--g-focus), 0 0 0 5px var(--g-focus-halo), 0 0 22px var(--g-glow);
+  --r-field-icon: var(--g-muted);
+  --r-reveal-hover: var(--g-soft);
+  --r-reveal-hover-ink: var(--g-ink);
+  --r-link: var(--g-ink);
+  --r-link-hover: var(--g-ink-2);
+  --r-pill: var(--g-soft);
+  --r-pill-ink: var(--g-ink);
+  --r-status: var(--g-soft);
+  --r-status-ink: var(--g-ink);
+  --r-sec: var(--g-fill);
+  --r-sec-ink: var(--g-ink);
+  --r-sec-border: var(--g-neutral-rim);
+  --r-sec-hover: var(--g-fill-h);
+  --r-sec-hover-border: var(--g-rim-hover);
+  --r-sec-hover-ink: var(--g-ink);
+  --r-note-success-bg: var(--g-neutral-bg);
+  --r-note-success-border: var(--g-neutral-rim);
+  --r-note-success-fg: var(--g-ink);
+  --r-note-info-bg: var(--g-neutral-bg);
+  --r-note-info-border: var(--g-neutral-rim);
+  --r-note-info-fg: var(--g-ink);
+  --r-note-error-bg: var(--g-bad-bg);
+  --r-note-error-border: var(--g-bad-rim);
+  --r-note-error-fg: var(--g-bad);
+  --r-note-warning-bg: var(--g-warn-bg);
+  --r-note-warning-border: var(--g-warn-rim);
+  --r-note-warning-fg: var(--g-warn);
+  --r-aside: var(--g-soft);
+  --r-aside-ink: var(--g-ink-2);
+  --r-aside-icon: var(--g-muted);
+  --r-rule-met: var(--g-ink);
+  --r-rule-unmet: var(--g-muted);
+  --r-rule-bad: var(--g-bad);
+  --r-check-border: var(--g-in-hi);
+  --r-check-fill: var(--g-ink);
+  --r-codes: var(--g-soft);
+  --r-codes-ink: var(--g-ink);
+  --r-chip-bg: var(--g-field);
+  --r-chip-border: var(--g-neutral-rim);
+  --r-chip-tile: var(--g-soft);
+  --r-chip-tile-ink: var(--g-ink);
+  --d-r-btn: 999px;
+  --d-focus: var(--g-focus);
+  --d-ink: var(--g-ink);
+  --d-accent: var(--g-ink);
+  --d-accent-soft: var(--g-soft);
+  --d-ghost-hover: var(--g-soft);
+  --d-on-primary: #ffffff;
+  --d-primary-fill: linear-gradient(180deg, #2c2c30 0%, #111113 100%);
+  --d-primary-fill-hover: linear-gradient(180deg, #3a3a3f 0%, #1b1b1e 100%);
+  --d-primary-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.16), 0 1px 2px rgba(0, 0, 0, 0.18), 0 12px 26px -14px rgba(0, 0, 0, 0.55);
+  --d-primary-shadow-hover: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 2px 4px rgba(0, 0, 0, 0.18), 0 18px 34px -16px rgba(0, 0, 0, 0.6);
+  --d-sec-bg: var(--g-fill);
+  --d-sec-fg: var(--g-ink);
+  --d-sec-border: var(--g-neutral-rim);
+  --d-sec-hover-bg: var(--g-fill-h);
+  --d-sec-hover-border: var(--g-rim-hover);
+  --d-sec-hover-fg: var(--g-ink);
+
+  color: var(--g-ink);
+  font-family: var(--g-font);
+  letter-spacing: -0.003em;
+}
+html[data-theme="dark"] {
+  .hms-glass {
+    --g-page: #0a0a0b;
+    --g-bloom: #161618;
+    --g-bloom-2: rgba(255, 255, 255, 0.035);
+    --g-vignette: rgba(0, 0, 0, 0.55);
+    --g-ink: #ffffff;
+    --g-ink-2: rgba(255, 255, 255, 0.8);
+    --g-muted: rgba(255, 255, 255, 0.62);
+    --g-soft: rgba(255, 255, 255, 0.07);
+    --g-fill: rgba(255, 255, 255, 0.035);
+    --g-fill-h: rgba(255, 255, 255, 0.07);
+    --g-field: rgba(255, 255, 255, 0.04);
+    --g-field-h: rgba(255, 255, 255, 0.07);
+    --g-field-base: #131315;
+    --g-rim-hi: rgba(255, 255, 255, 0.6);
+    --g-rim-lo: rgba(255, 255, 255, 0.09);
+    --g-rim-hi2: rgba(255, 255, 255, 0.45);
+    --g-rim-hover: rgba(255, 255, 255, 0.88);
+    --g-in-hi: rgba(255, 255, 255, 0.5);
+    --g-in-lo: rgba(255, 255, 255, 0.18);
+    --g-in-hi2: rgba(255, 255, 255, 0.4);
+    --g-in-hover: rgba(255, 255, 255, 0.6);
+    --g-focus: #ffffff;
+    --g-focus-mid: rgba(255, 255, 255, 0.6);
+    --g-focus-halo: rgba(255, 255, 255, 0.14);
+    --g-glow: rgba(255, 255, 255, 0.1);
+    --g-hl: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    --g-drop: 0 2px 4px rgba(0, 0, 0, 0.45), 0 20px 44px -20px rgba(0, 0, 0, 0.9);
+    --g-drop-card: 0 2px 4px rgba(0, 0, 0, 0.45), 0 40px 80px -36px rgba(0, 0, 0, 0.95);
+    --g-sweep: rgba(255, 255, 255, 0.95);
+    --g-sheen: rgba(17, 17, 19, 0.12);
+    --g-underline: rgba(255, 255, 255, 0.36);
+    --g-bad: #ff6961;
+    --g-bad-rim: rgba(255, 105, 97, 0.6);
+    --g-bad-lo: rgba(255, 105, 97, 0.22);
+    --g-bad-bg: rgba(255, 105, 97, 0.08);
+    --g-warn: #fdba8c;
+    --g-warn-rim: rgba(253, 186, 140, 0.45);
+    --g-warn-bg: rgba(253, 186, 140, 0.07);
+    --g-neutral-bg: rgba(255, 255, 255, 0.05);
+    --g-neutral-rim: rgba(255, 255, 255, 0.16);
+    --r-hairline: rgba(255, 255, 255, 0.08);
+    --d-on-primary: #111113;
+    --d-primary-fill: linear-gradient(180deg, #ffffff 0%, #e6e6ea 100%);
+    --d-primary-fill-hover: linear-gradient(180deg, #ffffff 0%, #f2f2f5 100%);
+    --d-primary-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.5), 0 12px 28px -14px rgba(255, 255, 255, 0.28);
+    --d-primary-shadow-hover: inset 0 -1px 0 rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.5), 0 16px 34px -14px rgba(255, 255, 255, 0.36);
+  }
+}
+/* No coloured fill behind the page when it bounces (overscroll) or before the frame paints. */
+body:has(.hms-glass) { background: #ececef; }
+html[data-theme="dark"] {
+  body:has(.hms-glass) { background: #0a0a0b; }
+}
+
+/* ONE page: the soft bloom drifts very slowly; a faint vignette on top. No rings, no pattern, no coloured panel. */
+.hms-glass .hms-auth-page { background: var(--g-page); }
+.hms-glass .hms-auth-page::before {
+  content: "";
+  position: absolute;
+  inset: -15%;
+  background:
+    radial-gradient(1100px 820px at 52% 26%, var(--g-bloom), transparent 70%),
+    radial-gradient(760px 600px at 18% 78%, var(--g-bloom-2), transparent 70%);
+  animation: hms-glass-drift 44s ease-in-out infinite alternate;
+}
+.hms-glass .hms-auth-page::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(140% 120% at 50% 40%, transparent 60%, var(--g-vignette) 100%);
+}
+.hms-glass .hms-ring,
+.hms-glass .hms-brand-pattern { display: none; }
+@keyframes hms-glass-drift {
+  to { transform: translate3d(3.5%, 2.5%, 0) scale(1.06); }
+}
+
+/* The banner: the same page under it, ink words. */
+.hms-glass .hms-auth-banner { background: transparent; color: var(--g-ink); }
+.hms-glass .hms-auth-banner-headline { font-weight: 700; letter-spacing: -0.035em; line-height: 1.1; }
+.hms-glass .hms-auth-banner-line { color: var(--g-muted); font-weight: 500; letter-spacing: -0.01em; }
+.hms-glass .hms-brand-glass {
+  border-color: var(--g-neutral-rim);
+  -webkit-backdrop-filter: var(--g-blur);
+  backdrop-filter: var(--g-blur);
+}
+@media (min-width: 1024px) {
+  .hms-glass .hms-auth-banner-headline { font-size: 46px; line-height: 1.06; max-width: 11em; }
+  .hms-glass .hms-auth-banner-line { font-size: 17px; line-height: 1.5; max-width: 26em; }
+}
+
+/* Chips: glass capsules with the luminous rim; they lift on hover. */
+.hms-glass .hms-auth-banner-pills li {
+  position: relative;
+  isolation: isolate;
+  padding: 8px 15px;
+  border: 0;
+  background: var(--g-fill);
+  -webkit-backdrop-filter: var(--g-blur);
+  backdrop-filter: var(--g-blur);
+  box-shadow: var(--g-hl), var(--g-drop);
+  color: var(--g-ink);
+  letter-spacing: -0.01em;
+  transition: transform 260ms var(--g-ease), background-color 260ms var(--g-ease), box-shadow 260ms var(--g-ease);
+}
+.hms-glass .hms-auth-banner-pills li::before,
+.hms-glass .hms-auth-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  pointer-events: none;
+  background: linear-gradient(135deg, var(--g-rim-hi) 0%, var(--g-rim-lo) 30%, var(--g-rim-lo) 70%, var(--g-rim-hi2) 100%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  transition: opacity 260ms var(--g-ease);
+}
+@media (hover: hover) {
+  .hms-glass .hms-auth-banner-pills li:hover { transform: translateY(-2px); background: var(--g-fill-h); }
+  .hms-glass .hms-auth-banner-pills li:hover::before {
+    background: linear-gradient(135deg, var(--g-rim-hover) 0%, var(--g-rim-lo) 30%, var(--g-rim-lo) 70%, var(--g-rim-hover) 100%);
+  }
+}
+
+/* The card: see-through, a 1px luminous rim, a soft drop. A slow light travels once around the rim on arrival, and keeps travelling slowly on hover. */
+.hms-glass .hms-auth-card {
+  position: relative;
+  isolation: isolate;
+  -webkit-backdrop-filter: var(--g-blur);
+  backdrop-filter: var(--g-blur);
+}
+.hms-glass .hms-auth-card::before { inset: -1px; }
+.hms-glass .hms-auth-card:focus-within::before {
+  background: linear-gradient(135deg, var(--g-rim-hover) 0%, var(--g-rim-lo) 30%, var(--g-rim-lo) 70%, var(--g-rim-hover) 100%);
+}
+.hms-glass .hms-auth-card::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  pointer-events: none;
+  opacity: 0;
+  background: conic-gradient(from var(--hms-sweep), transparent 0turn, transparent 0.74turn, var(--g-sweep) 0.88turn, transparent 1turn);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+}
+
+/* Fields: glass capsules with the same rim (a gradient border); on focus the rim brightens to ink and a soft glow opens. */
+.hms-glass .hms-field {
+  --f-a: var(--g-in-hi);
+  --f-m: var(--g-in-lo);
+  --f-b: var(--g-in-hi2);
+  --f-fill: var(--g-field);
+  border-color: transparent;
+  /* The solid base under the see-through fill keeps the rim gradient to the 1px border only (without it the gradient shows across the whole field). */
+  background:
+    linear-gradient(var(--f-fill), var(--f-fill)) padding-box,
+    linear-gradient(var(--g-field-base), var(--g-field-base)) padding-box,
+    linear-gradient(135deg, var(--f-a) 0%, var(--f-m) 35%, var(--f-m) 65%, var(--f-b) 100%) border-box;
+  box-shadow: var(--g-hl);
+}
+.hms-glass .hms-field.h-\[42px\] { height: 46px; }
+.hms-glass .hms-field.pl-9 { padding-left: 42px; }
+.hms-glass .hms-field.pl-3\.5 { padding-left: 18px; }
+.hms-glass .hms-field.pr-3\.5 { padding-right: 18px; }
+.hms-glass .hms-field.pr-10 { padding-right: 48px; }
+.hms-glass .hms-field-icon { left: 17px; }
+.hms-glass .hms-reveal { margin-right: 2px; }
+.hms-glass .hms-reveal-face { border-radius: 999px; }
+.hms-glass .hms-field:hover {
+  --f-m: var(--g-in-hi2);
+  --f-fill: var(--g-field-h);
+  border-color: transparent;
+}
+.hms-glass .hms-field:focus,
+.hms-glass .hms-field:focus-visible {
+  --f-a: var(--g-focus);
+  --f-m: var(--g-focus-mid);
+  --f-b: var(--g-focus);
+  --f-fill: var(--g-field-h);
+  border-color: transparent;
+  box-shadow: var(--g-hl), var(--r-focus-ring);
+}
+.hms-glass .hms-field[aria-invalid="true"],
+.hms-glass .hms-field[aria-invalid="true"]:hover {
+  --f-a: var(--g-bad-rim);
+  --f-m: var(--g-bad-lo);
+  --f-b: var(--g-bad-rim);
+  border-color: transparent;
+}
+.hms-glass .hms-field[aria-invalid="true"]:focus {
+  --f-a: var(--g-bad);
+  --f-m: var(--g-bad-rim);
+  --f-b: var(--g-bad);
+  border-color: transparent;
+  box-shadow: var(--g-hl), 0 0 0 1px var(--g-bad), 0 0 0 5px var(--g-bad-lo);
+}
+
+/* The collaboration lockup (MJ 26 Oct 2026): "E EasyHotelSolutions × ∞ ELPHINIX" in a glass pill, then "Engineered by Elphinix · Rise beyond limits".
+   Elphinix's infinity mark keeps its own brand colours (teal, blue, graphite, pink): the one exception to the monochrome page, because it is their logo.
+   It draws itself once on arrival; on hover the pill lifts and its rim brightens in the theme's ink (MJ: no blue on hover). */
+.hms-collab { display: flex; flex-direction: column; align-items: center; gap: 6px; margin-top: 20px; text-align: center; }
+.hms-collab p { margin: 0; }
+.hms-collab-pill {
+  --elx-1: #0f9f8c; --elx-2: #1f7fe6; --elx-3: #6a4ff0; --elx-4: #c43aa6;
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  justify-content: center;
+  gap: 9px;
+  padding: 6px 15px;
+  border-radius: 999px;
+  background: var(--g-fill, #fff);
+  -webkit-backdrop-filter: var(--g-blur);
+  backdrop-filter: var(--g-blur);
+  box-shadow: var(--g-hl), var(--g-drop);
+  color: var(--g-ink, #111113);
+  font-size: 12px;
+  line-height: 1.2;
+  transition: transform 300ms var(--g-ease), box-shadow 300ms var(--g-ease);
+}
+.hms-collab-pill::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  pointer-events: none;
+  background: linear-gradient(135deg, var(--g-rim-hi) 0%, var(--g-rim-lo) 30%, var(--g-rim-lo) 70%, var(--g-rim-hi2) 100%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+}
+.hms-collab-pill::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  pointer-events: none;
+  opacity: 0;
+  background: linear-gradient(135deg, var(--g-rim-hover) 0%, var(--g-rim-lo) 30%, var(--g-rim-lo) 70%, var(--g-rim-hover) 100%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  transition: opacity 400ms var(--g-ease);
+}
+.hms-collab-by {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  white-space: nowrap;
+  font-size: 8.5px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--g-muted);
+}
+/* A hairline between "Engineered by" and the mark. */
+.hms-collab-by::after { content: ""; width: 1px; height: 12px; background: var(--r-hairline); }
+.hms-collab-mark { width: 25px; height: 12.5px; overflow: visible; }
+.hms-collab-mark path {
+  fill: none;
+  stroke: url(#hms-elx-ink);
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-dasharray: 100;
+  stroke-dashoffset: 0;
+}
+.hms-collab-mark path + path { stroke-width: 1.2; opacity: 0.75; }
+.hms-elx-s1 { stop-color: var(--elx-1); }
+.hms-elx-s2 { stop-color: var(--elx-2); }
+.hms-elx-s3 { stop-color: var(--elx-3); }
+.hms-elx-s4 { stop-color: var(--elx-4); }
+.hms-collab-name {
+  font-family: inherit;
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.26em;
+  margin-right: -0.26em;
+  text-transform: uppercase;
+}
+/* "RISE BEYOND LIMITS" under the pill, with a fine line on each side. */
+.hms-collab-line {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  text-transform: uppercase;
+  color: var(--g-muted, #5c5c63);
+}
+.hms-collab-line::before,
+.hms-collab-line::after { content: ""; width: 18px; height: 1px; background: var(--r-hairline); }
+.hms-collab-tag { font-family: inherit; font-weight: 500; font-size: 10px; letter-spacing: 0.28em; margin-right: -0.28em; }
+html[data-theme="dark"] {
+  .hms-collab-pill { --elx-1: #2ee6c9; --elx-2: #3ba8ff; --elx-3: #8b6cff; --elx-4: #f062d6; }
+}
+@media (hover: hover) {
+  /* Hover: the theme's own light, no brand blue: the rim brightens to ink (white by night), a soft neutral glow, the pill lifts. */
+  .hms-collab-pill:hover { transform: translateY(-1px); background: var(--g-fill-h); box-shadow: var(--g-hl), var(--g-drop), 0 0 0 3px var(--g-focus-halo), 0 10px 24px -14px var(--g-sweep); }
+  .hms-collab-pill:hover::after { opacity: 1; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .hms-collab { animation: hms-glass-rise 700ms var(--g-ease) 500ms both; }
+  .hms-collab-mark path { stroke-dashoffset: 100; animation: hms-elx-draw 1800ms var(--g-ease) 900ms forwards; }
+  .hms-collab-mark path + path { animation-delay: 1150ms; }
+  .hms-collab-pill:hover .hms-collab-mark path { animation: hms-elx-draw 1400ms var(--g-ease) both; }
+}
+@keyframes hms-elx-draw {
+  from { stroke-dashoffset: 100; }
+  to { stroke-dashoffset: 0; }
+}
+@media (prefers-reduced-transparency: reduce) {
+  .hms-collab-pill { -webkit-backdrop-filter: none; backdrop-filter: none; background: var(--g-neutral-bg); }
+}
+@media (forced-colors: active) {
+  .hms-collab-pill { border: 1px solid CanvasText; }
+  .hms-collab-mark path { stroke: CanvasText; }
+}
+@media (max-width: 360px) {
+  .hms-collab-pill { gap: 7px; padding: 6px 13px; }
+  .hms-collab-by { gap: 7px; letter-spacing: 0.12em; }
+  .hms-collab-name { letter-spacing: 0.22em; margin-right: -0.22em; }
+  .hms-collab-line::before,
+  .hms-collab-line::after { width: 14px; }
+}
+
+/* Phones: the short header above the card is centred (MJ 26 Oct 2026). */
+@media (max-width: 767px) {
+  .hms-glass .hms-auth-banner { align-items: center; text-align: center; }
+  .hms-glass .hms-auth-banner > div:first-of-type { justify-content: center; }
+}
+
+/* Text selection in ink, not the system blue. */
+.hms-glass ::selection { background: var(--g-focus-halo); color: var(--g-ink); }
+.hms-glass .hms-field::selection { background: var(--g-focus-mid); color: var(--g-page); }
+
+/* Notes and the small boxes: glass, never tinted or green. */
+.hms-glass .hms-note {
+  -webkit-backdrop-filter: var(--g-blur);
+  backdrop-filter: var(--g-blur);
+}
+
+/* Links (MJ 26 Oct 2026: no underline): bold ink, set apart from the grey text by weight; the underline appears only on hover and keyboard focus. */
+.hms-glass .hms-link { font-weight: 700; }
+.hms-glass .hms-link-face {
+  text-decoration-line: underline;
+  text-decoration-color: transparent;
+  text-underline-offset: 3px;
+  transition: text-decoration-color 200ms var(--g-ease);
+}
+.hms-glass .hms-link:hover .hms-link-face,
+.hms-glass .hms-link:focus-visible .hms-link-face { text-decoration-color: currentColor; }
+.hms-glass .hms-site-link { color: var(--g-ink); font-weight: 700; text-decoration-color: transparent; }
+.hms-glass .hms-site-link:hover,
+.hms-glass .hms-site-link:focus-visible { text-decoration-color: currentColor; }
+.hms-glass .hms-site-link:focus-visible { outline-color: var(--g-focus); }
+
+/* ---- Motion (calm, CSS only). Off under reduced motion. ---- */
+@keyframes hms-glass-float {
+  from { opacity: 0; transform: translateY(16px) scale(0.975); }
+}
+@keyframes hms-glass-rise {
+  from { opacity: 0; transform: translateY(10px); }
+}
+@keyframes hms-glass-sweep {
+  0% { --hms-sweep: 0deg; opacity: 0; }
+  14% { opacity: 1; }
+  82% { opacity: 1; }
+  100% { --hms-sweep: 360deg; opacity: 0; }
+}
+@keyframes hms-glass-orbit {
+  from { --hms-sweep: 0deg; }
+  to { --hms-sweep: 360deg; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .hms-glass .hms-rise { animation: hms-glass-float 760ms var(--g-ease) both; }
+  .hms-glass .hms-auth-banner > div,
+  .hms-glass .hms-auth-banner-pills li { animation: hms-glass-rise 700ms var(--g-ease) both; }
+  .hms-glass .hms-auth-banner > div:nth-of-type(1) { animation-delay: 60ms; }
+  .hms-glass .hms-auth-banner > div:nth-of-type(2) { animation-delay: 160ms; }
+  .hms-glass .hms-auth-banner-pills li:nth-child(1) { animation-delay: 300ms; }
+  .hms-glass .hms-auth-banner-pills li:nth-child(2) { animation-delay: 360ms; }
+  .hms-glass .hms-auth-banner-pills li:nth-child(3) { animation-delay: 420ms; }
+  .hms-glass .hms-auth-banner-pills li:nth-child(4) { animation-delay: 480ms; }
+  .hms-glass .hms-auth-banner-pills li:nth-child(5) { animation-delay: 540ms; }
+  .hms-glass .hms-auth-banner-pills li:nth-child(n + 6) { animation-delay: 600ms; }
+  .hms-glass .hms-auth-card::after { animation: hms-glass-sweep 2600ms cubic-bezier(0.45, 0, 0.2, 1) 420ms 1 both; }
+  .hms-glass .hms-field { transition: box-shadow 240ms var(--g-ease), background-color 240ms var(--g-ease); }
+}
+@media (prefers-reduced-motion: no-preference) and (hover: hover) {
+  .hms-glass .hms-auth-card:hover::after { opacity: 0.7; animation: hms-glass-orbit 9s linear infinite; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hms-glass .hms-rise,
+  .hms-glass .hms-auth-banner > div,
+  .hms-glass .hms-auth-page::before { animation: none; }
+  .hms-glass .hms-auth-banner-pills li { transition: none; }
+  .hms-glass .hms-auth-banner-pills li:hover { transform: none; }
+}
+
+/* ---- Comfort settings ---- */
+@media (prefers-reduced-transparency: reduce) {
+  .hms-glass { --g-fill: #ffffff; --g-fill-h: #ffffff; --g-field: #ffffff; --g-field-h: #ffffff; --g-neutral-bg: #ffffff; }
+  .hms-glass .hms-auth-card,
+  .hms-glass .hms-auth-banner-pills li,
+  .hms-glass .hms-brand-glass,
+  .hms-glass .hms-note { -webkit-backdrop-filter: none; backdrop-filter: none; }
+}
+@media (prefers-reduced-transparency: reduce) {
+  html[data-theme="dark"] .hms-glass { --g-fill: #161618; --g-fill-h: #1c1c1f; --g-field: #111113; --g-field-h: #161618; --g-neutral-bg: #161618; }
+}
+@media (prefers-contrast: more) {
+  .hms-glass {
+    --g-muted: rgba(17, 17, 19, 0.82);
+    --g-rim-hi: rgba(0, 0, 0, 0.75);
+    --g-rim-lo: rgba(0, 0, 0, 0.5);
+    --g-rim-hi2: rgba(0, 0, 0, 0.7);
+    --g-in-hi: rgba(0, 0, 0, 0.8);
+    --g-in-lo: rgba(0, 0, 0, 0.6);
+    --g-in-hi2: rgba(0, 0, 0, 0.75);
+    --g-neutral-rim: rgba(0, 0, 0, 0.6);
+    --g-underline: currentColor;
+  }
+}
+@media (prefers-contrast: more) {
+  html[data-theme="dark"] .hms-glass {
+    --g-muted: rgba(255, 255, 255, 0.85);
+    --g-rim-hi: rgba(255, 255, 255, 0.9);
+    --g-rim-lo: rgba(255, 255, 255, 0.55);
+    --g-rim-hi2: rgba(255, 255, 255, 0.85);
+    --g-in-hi: rgba(255, 255, 255, 0.9);
+    --g-in-lo: rgba(255, 255, 255, 0.6);
+    --g-in-hi2: rgba(255, 255, 255, 0.85);
+    --g-neutral-rim: rgba(255, 255, 255, 0.6);
+  }
+}
+/* Windows High Contrast: real borders instead of the painted rims. */
+@media (forced-colors: active) {
+  .hms-glass .hms-auth-card { border: 1px solid CanvasText; }
+  .hms-glass .hms-auth-card::before,
+  .hms-glass .hms-auth-card::after,
+  .hms-glass .hms-auth-banner-pills li::before,
+  .hms-glass .hms-auth-page::before,
+  .hms-glass .hms-auth-page::after { display: none; }
+  .hms-glass .hms-auth-banner-pills li { border: 1px solid CanvasText; }
+  .hms-glass .hms-field,
+  .hms-glass .hms-field:hover,
+  .hms-glass .hms-field:focus { background: Field; border-color: FieldText; }
+}
+
+/* Languages (MJ, 3 Nov 2026): Hindi and Gujarati use the fonts the device already has (no font host, the content-security rule stays): Nirmala UI on Windows,
+   Noto Sans Devanagari / Gujarati on Android and Linux, Kohinoor Devanagari and Gujarati Sangam MN on Apple. Latin letters and digits keep the app font first.
+   A taller line keeps the marks above and below the letters from being clipped. The text direction stays left to right. */
+html:lang(hi) :is(body, button, input, select, textarea) {
+  font-family: var(--font-sans), "Nirmala UI", "Noto Sans Devanagari", "Kohinoor Devanagari", "Mangal", sans-serif;
+}
+html:lang(gu) :is(body, button, input, select, textarea) {
+  font-family: var(--font-sans), "Nirmala UI", "Noto Sans Gujarati", "Gujarati Sangam MN", "Shruti", sans-serif;
+}
+html:lang(hi) body, html:lang(gu) body { line-height: 1.7; }
+html:lang(hi) :is(h1, h2, h3, h4, button, label, th, td), html:lang(gu) :is(h1, h2, h3, h4, button, label, th, td) { line-height: 1.5; }
+
+/* The one language switch: inside the header's user menu ("menu") and alone in the corner of the sign-in card ("page"). */
+.lang-switch { display: flex; align-items: center; gap: 8px; }
+.lang-switch-label { font-size: 12px; opacity: 0.7; }
+.lang-switch-choices { display: inline-flex; gap: 2px; padding: 2px; border: 1px solid currentColor; border-radius: 8px; border-color: color-mix(in srgb, currentColor 25%, transparent); }
+.lang-switch-btn { border: 0; background: transparent; color: inherit; font: inherit; font-size: 12px; line-height: 1.4; padding: 3px 8px; border-radius: 6px; cursor: pointer; }
+.lang-switch-btn:hover { background: color-mix(in srgb, currentColor 10%, transparent); }
+.lang-switch-btn.is-on { background: color-mix(in srgb, currentColor 18%, transparent); font-weight: 600; }
+.lang-switch-btn:focus-visible { outline: 2px solid currentColor; outline-offset: 1px; }
+.lang-switch-menu { justify-content: space-between; padding: 8px 16px; }
+.lang-switch-page { justify-content: flex-end; margin: 0 0 12px; }
+/* ==== Sign-in redesign ==== */
+/* The language choice above the sign-in card is the first thing a Hindi or Gujarati reader needs: 44 px targets, readable label (MJ, 5 Nov 2026). */
+.lang-switch-page .lang-switch-label { font-size: 13px; opacity: 1; color: var(--g-muted, currentColor); }
+.lang-switch-page .lang-switch-choices { gap: 4px; padding: 3px; }
+.lang-switch-page .lang-switch-btn { min-height: 44px; min-width: 44px; padding: 0 12px; font-size: 14px; line-height: 1; display: inline-flex; align-items: center; justify-content: center; }

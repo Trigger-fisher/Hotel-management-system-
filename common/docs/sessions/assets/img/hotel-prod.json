@@ -1,0 +1,50 @@
+[
+ {
+  "name": "Dashboard-F5",
+  "whiteFrames": 0,
+  "noShell": 0,
+  "lostAfter": 0,
+  "firstShellMs": 28,
+  "frames": 81
+ },
+ {
+  "name": "Dashboard-hard",
+  "whiteFrames": 2,
+  "noShell": 2,
+  "lostAfter": 0,
+  "firstShellMs": 372,
+  "frames": 12
+ },
+ {
+  "name": "Bills-F5",
+  "whiteFrames": 0,
+  "noShell": 0,
+  "lostAfter": 0,
+  "firstShellMs": 30,
+  "frames": 79
+ },
+ {
+  "name": "Bills-hard",
+  "whiteFrames": 2,
+  "noShell": 2,
+  "lostAfter": 0,
+  "firstShellMs": 393,
+  "frames": 10
+ },
+ {
+  "name": "InHouse-F5",
+  "whiteFrames": 0,
+  "noShell": 0,
+  "lostAfter": 0,
+  "firstShellMs": 9,
+  "frames": 73
+ },
+ {
+  "name": "InHouse-hard",
+  "whiteFrames": 1,
+  "noShell": 1,
+  "lostAfter": 0,
+  "firstShellMs": 100,
+  "frames": 96
+ }
+]

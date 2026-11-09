@@ -1,0 +1,143 @@
+/* ===========================================================================
+   Hotel Pallav - signed-out pages (sign in, code, forgot and change password)
+   The whole page is the theme's deep graphite, with the brand and one card in
+   the middle. The graphite stays in both themes; the card follows the theme.
+   =========================================================================== */
+
+body.guest-page { background: #111114; }
+body.guest-page .content { padding: 0; }
+
+.auth-page {
+    position: relative; overflow: hidden; isolation: isolate;
+    min-height: 100vh; min-height: 100dvh;
+    display: flex; align-items: center; justify-content: center; padding: 40px 16px;
+    background:
+        radial-gradient(900px 600px at 15% 0%, rgba(17, 17, 20, .45), transparent 60%),
+        radial-gradient(800px 600px at 100% 100%, rgba(17, 17, 20, .55), transparent 60%),
+        linear-gradient(160deg, #111114 0%, #1B1B20 50%, #3A3A42 100%);
+}
+/* Two soft rings, just enough texture that the graphite is not a flat slab */
+.auth-page::before, .auth-page::after {
+    content: ""; position: absolute; z-index: -1; border-radius: 50%; pointer-events: none;
+    border: 1px solid rgba(255, 255, 255, .08);
+}
+.auth-page::before { width: 720px; height: 720px; right: -260px; top: -300px; background: radial-gradient(circle, rgba(180, 180, 188, .14), transparent 65%); }
+.auth-page::after { width: 560px; height: 560px; left: -220px; bottom: -280px; background: radial-gradient(circle, rgba(201, 162, 39, .08), transparent 65%); }
+
+.auth-wrap { width: 100%; max-width: 420px; display: flex; flex-direction: column; align-items: center; }
+
+/* ------------------------------------------------------------ brand on top */
+
+.auth-brand { display: flex; align-items: center; gap: 12px; margin-bottom: 22px; color: #fff; }
+.auth-mark {
+    width: 46px; height: 46px; border-radius: 14px; flex: none;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(255, 255, 255, .14); border: 1px solid rgba(255, 255, 255, .24);
+    font-weight: 800; font-size: 15px; letter-spacing: -0.01em;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, .35);
+}
+.auth-name { font-weight: 800; font-size: 18px; letter-spacing: -0.02em; line-height: 1.15; }
+.auth-name span { display: block; margin-top: 3px; font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #D0D0D6; }
+
+.auth-copy { margin-top: 22px; font-size: 12px; color: rgba(255, 255, 255, .55); }
+
+/* ------------------------------------------------------------------ card */
+
+.auth-box {
+    width: 100%;
+    background: var(--surface, #fff); border: 1px solid rgba(255, 255, 255, .6); border-radius: var(--r-xl, 24px);
+    box-shadow: 0 30px 70px -20px rgba(0, 0, 0, .6), 0 8px 24px rgba(0, 0, 0, .25);
+    padding: 34px 32px 26px;
+    animation: authIn var(--dur-large, 380ms) var(--ease-out, ease-out);
+}
+@keyframes authIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+.auth-step {
+    display: inline-block; margin-bottom: 10px; padding: 3px 9px; border-radius: 999px;
+    background: var(--p50); color: var(--p700); font-size: 10.5px; font-weight: 800; letter-spacing: .07em; text-transform: uppercase;
+}
+.auth-title { font-size: 25px; font-weight: 800; letter-spacing: -0.03em; line-height: 1.2; margin: 0; color: var(--ink); }
+.auth-lead { color: var(--muted); font-size: 13.5px; line-height: 1.55; margin: 6px 0 22px; }
+.auth-lead strong { color: var(--ink2); font-weight: 700; }
+
+.auth-field .form-label { margin-bottom: 6px; }
+.auth-field .form-control { height: 42px; border-radius: 11px; font-size: 14px; }
+.auth-field .form-control.otp-input { height: 56px; }
+.auth-label-row { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+.auth-hint { font-size: 12px; color: var(--muted); margin-top: 6px; }
+
+.auth-submit {
+    width: 100%; height: 44px; margin-top: 6px; border-radius: 12px; font-size: 14.5px;
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    box-shadow: 0 8px 20px -8px rgba(17, 17, 20, .55);
+}
+.auth-submit i { transition: transform var(--dur-micro, 140ms) var(--ease-out, ease-out); }
+.auth-submit:hover i.bi-arrow-right { transform: translateX(3px); }
+
+.auth-link { font-size: 12.5px; font-weight: 600; color: var(--p700); text-decoration: none; }
+.auth-link:hover { color: var(--p800); text-decoration: underline; }
+.auth-link.btn { padding: 4px 8px; display: inline-flex; align-items: center; gap: 6px; border: 0; }
+.auth-link.btn:disabled { color: var(--muted); opacity: 1; text-decoration: none; }
+
+.auth-resend { text-align: center; margin-top: 10px; }
+
+.auth-note {
+    display: flex; gap: 9px; align-items: flex-start; font-size: 13px; line-height: 1.45;
+    border-radius: 11px; padding: 10px 12px; margin-bottom: 16px; border: 1px solid transparent;
+}
+.auth-note i { font-size: 15px; line-height: 1.2; flex: none; }
+.auth-note.ok { background: #F0FDF4; border-color: #BBF7D0; color: #166534; }
+.auth-note.err { background: #FEF2F2; border-color: #FECACA; color: #991B1B; }
+
+.auth-aside {
+    display: flex; gap: 9px; align-items: flex-start; margin-top: 16px; padding: 10px 12px;
+    border-radius: 11px; background: var(--p50); color: var(--ink2); font-size: 12.5px; line-height: 1.5;
+}
+.auth-aside i { color: var(--p500); font-size: 14px; line-height: 1.3; flex: none; }
+
+/* The username being reset, shown back rather than asked for again */
+.auth-who {
+    display: flex; align-items: center; gap: 10px; height: 42px; padding: 0 12px 0 6px;
+    border: 1px solid var(--line2); border-radius: 11px; background: var(--surface-2, #FAFAFB);
+}
+.auth-who-icon {
+    width: 30px; height: 30px; border-radius: 8px; flex: none; display: flex; align-items: center; justify-content: center;
+    background: var(--p100); color: var(--p700); font-size: 14px;
+}
+.auth-who-name { flex: 1 1 auto; min-width: 0; font-weight: 700; font-size: 14px; color: var(--ink); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+.auth-fine { font-size: 12px; color: var(--muted); text-align: center; margin: 12px 0 0; line-height: 1.5; }
+
+.auth-foot {
+    margin-top: 22px; padding-top: 16px; border-top: 1px solid var(--line);
+    font-size: 12.5px; color: var(--muted); line-height: 1.5;
+    display: flex; flex-wrap: wrap; gap: 6px; align-items: center; justify-content: center; text-align: center;
+}
+
+/* -------------------------------------------------------------- dark mode */
+
+:root[data-theme="dark"] body.guest-page { background: #0F0F12; }
+:root[data-theme="dark"] .auth-page {
+    background:
+        radial-gradient(900px 600px at 15% 0%, rgba(17, 17, 20, .35), transparent 60%),
+        radial-gradient(800px 600px at 100% 100%, rgba(17, 17, 20, .45), transparent 60%),
+        linear-gradient(160deg, #0F0F12 0%, #16161A 55%, #1E1E24 100%);
+}
+:root[data-theme="dark"] .auth-box { border-color: var(--line2); }
+:root[data-theme="dark"] .auth-note.ok { background: rgba(21, 128, 61, .16); border-color: rgba(21, 128, 61, .35); color: #86EFAC; }
+:root[data-theme="dark"] .auth-note.err { background: rgba(185, 28, 28, .16); border-color: rgba(185, 28, 28, .35); color: #FCA5A5; }
+:root[data-theme="dark"] .auth-submit { box-shadow: none; }
+
+/* ------------------------------------------------------------- small screens */
+
+@media (max-width: 480px) {
+    .auth-page { padding: 28px 16px; align-items: flex-start; }
+    .auth-box { padding: 26px 20px 20px; border-radius: 18px; }
+    .auth-title { font-size: 22px; }
+    .auth-brand { margin-bottom: 18px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .auth-box { animation: none; }
+    .auth-submit i { transition: none; }
+}

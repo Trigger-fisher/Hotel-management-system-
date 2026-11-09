@@ -1,0 +1,412 @@
+[
+    {
+        "id": 1,
+        "role_id": 1,
+        "permission": "dashboard.view"
+    },
+    {
+        "id": 2,
+        "role_id": 1,
+        "permission": "revenue.view"
+    },
+    {
+        "id": 3,
+        "role_id": 1,
+        "permission": "revenue.export"
+    },
+    {
+        "id": 4,
+        "role_id": 1,
+        "permission": "expense.view"
+    },
+    {
+        "id": 5,
+        "role_id": 1,
+        "permission": "expense.export"
+    },
+    {
+        "id": 6,
+        "role_id": 1,
+        "permission": "handover.view"
+    },
+    {
+        "id": 7,
+        "role_id": 1,
+        "permission": "handover.export"
+    },
+    {
+        "id": 8,
+        "role_id": 1,
+        "permission": "bills.view"
+    },
+    {
+        "id": 9,
+        "role_id": 1,
+        "permission": "bills.export"
+    },
+    {
+        "id": 10,
+        "role_id": 1,
+        "permission": "companies.view"
+    },
+    {
+        "id": 11,
+        "role_id": 1,
+        "permission": "payroll.view"
+    },
+    {
+        "id": 12,
+        "role_id": 1,
+        "permission": "payroll.export"
+    },
+    {
+        "id": 13,
+        "role_id": 1,
+        "permission": "reports.view"
+    },
+    {
+        "id": 14,
+        "role_id": 1,
+        "permission": "reports.export"
+    },
+    {
+        "id": 15,
+        "role_id": 2,
+        "permission": "revenue.create"
+    },
+    {
+        "id": 16,
+        "role_id": 2,
+        "permission": "revenue.edit"
+    },
+    {
+        "id": 17,
+        "role_id": 2,
+        "permission": "expense.create"
+    },
+    {
+        "id": 18,
+        "role_id": 2,
+        "permission": "expense.edit"
+    },
+    {
+        "id": 19,
+        "role_id": 2,
+        "permission": "handover.create"
+    },
+    {
+        "id": 20,
+        "role_id": 2,
+        "permission": "handover.edit"
+    },
+    {
+        "id": 21,
+        "role_id": 2,
+        "permission": "bills.create"
+    },
+    {
+        "id": 22,
+        "role_id": 2,
+        "permission": "bills.edit"
+    },
+    {
+        "id": 23,
+        "role_id": 2,
+        "permission": "companies.create"
+    },
+    {
+        "id": 24,
+        "role_id": 2,
+        "permission": "companies.edit"
+    },
+    {
+        "id": 25,
+        "role_id": 2,
+        "permission": "payroll.create"
+    },
+    {
+        "id": 26,
+        "role_id": 2,
+        "permission": "payroll.edit"
+    },
+    {
+        "id": 27,
+        "role_id": 3,
+        "permission": "revenue.delete"
+    },
+    {
+        "id": 28,
+        "role_id": 3,
+        "permission": "expense.delete"
+    },
+    {
+        "id": 29,
+        "role_id": 3,
+        "permission": "handover.delete"
+    },
+    {
+        "id": 30,
+        "role_id": 3,
+        "permission": "bills.delete"
+    },
+    {
+        "id": 31,
+        "role_id": 3,
+        "permission": "companies.delete"
+    },
+    {
+        "id": 32,
+        "role_id": 3,
+        "permission": "payroll.delete"
+    },
+    {
+        "id": 33,
+        "role_id": 3,
+        "permission": "users.view"
+    },
+    {
+        "id": 34,
+        "role_id": 3,
+        "permission": "users.create"
+    },
+    {
+        "id": 35,
+        "role_id": 3,
+        "permission": "users.edit"
+    },
+    {
+        "id": 36,
+        "role_id": 3,
+        "permission": "users.delete"
+    },
+    {
+        "id": 37,
+        "role_id": 3,
+        "permission": "users.password"
+    },
+    {
+        "id": 38,
+        "role_id": 3,
+        "permission": "users.activity"
+    },
+    {
+        "id": 39,
+        "role_id": 3,
+        "permission": "access.view"
+    },
+    {
+        "id": 40,
+        "role_id": 3,
+        "permission": "system.backdate"
+    },
+    {
+        "id": 41,
+        "role_id": 4,
+        "permission": "access.edit"
+    },
+    {
+        "id": 42,
+        "role_id": 4,
+        "permission": "masters.view"
+    },
+    {
+        "id": 43,
+        "role_id": 4,
+        "permission": "masters.edit"
+    },
+    {
+        "id": 44,
+        "role_id": 4,
+        "permission": "system.force"
+    },
+    {
+        "id": 45,
+        "role_id": 4,
+        "permission": "users.set-password"
+    },
+    {
+        "id": 46,
+        "role_id": 4,
+        "permission": "website.view"
+    },
+    {
+        "id": 47,
+        "role_id": 4,
+        "permission": "website.enquiries.view"
+    },
+    {
+        "id": 48,
+        "role_id": 4,
+        "permission": "website.enquiries.edit"
+    },
+    {
+        "id": 49,
+        "role_id": 4,
+        "permission": "website.enquiries.delete"
+    },
+    {
+        "id": 50,
+        "role_id": 4,
+        "permission": "website.rooms.view"
+    },
+    {
+        "id": 51,
+        "role_id": 4,
+        "permission": "website.rooms.create"
+    },
+    {
+        "id": 52,
+        "role_id": 4,
+        "permission": "website.rooms.edit"
+    },
+    {
+        "id": 53,
+        "role_id": 4,
+        "permission": "website.rooms.delete"
+    },
+    {
+        "id": 54,
+        "role_id": 4,
+        "permission": "website.rates.view"
+    },
+    {
+        "id": 55,
+        "role_id": 4,
+        "permission": "website.rates.edit"
+    },
+    {
+        "id": 56,
+        "role_id": 4,
+        "permission": "website.rates.delete"
+    },
+    {
+        "id": 57,
+        "role_id": 4,
+        "permission": "website.calendar.view"
+    },
+    {
+        "id": 58,
+        "role_id": 4,
+        "permission": "website.calendar.edit"
+    },
+    {
+        "id": 59,
+        "role_id": 4,
+        "permission": "website.gallery.view"
+    },
+    {
+        "id": 60,
+        "role_id": 4,
+        "permission": "website.gallery.create"
+    },
+    {
+        "id": 61,
+        "role_id": 4,
+        "permission": "website.gallery.edit"
+    },
+    {
+        "id": 62,
+        "role_id": 4,
+        "permission": "website.gallery.delete"
+    },
+    {
+        "id": 63,
+        "role_id": 4,
+        "permission": "website.content.view"
+    },
+    {
+        "id": 64,
+        "role_id": 4,
+        "permission": "website.content.create"
+    },
+    {
+        "id": 65,
+        "role_id": 4,
+        "permission": "website.content.edit"
+    },
+    {
+        "id": 66,
+        "role_id": 4,
+        "permission": "website.content.delete"
+    },
+    {
+        "id": 67,
+        "role_id": 4,
+        "permission": "website.settings.view"
+    },
+    {
+        "id": 68,
+        "role_id": 4,
+        "permission": "website.settings.edit"
+    },
+    {
+        "id": 69,
+        "role_id": 4,
+        "permission": "website.secrets"
+    },
+    {
+        "id": 70,
+        "role_id": 4,
+        "permission": "pms.view"
+    },
+    {
+        "id": 71,
+        "role_id": 4,
+        "permission": "pms.board.view"
+    },
+    {
+        "id": 72,
+        "role_id": 4,
+        "permission": "pms.reservations.view"
+    },
+    {
+        "id": 73,
+        "role_id": 4,
+        "permission": "pms.reservations.create"
+    },
+    {
+        "id": 74,
+        "role_id": 4,
+        "permission": "pms.reservations.edit"
+    },
+    {
+        "id": 75,
+        "role_id": 4,
+        "permission": "pms.stays.view"
+    },
+    {
+        "id": 76,
+        "role_id": 4,
+        "permission": "pms.stays.create"
+    },
+    {
+        "id": 77,
+        "role_id": 4,
+        "permission": "pms.stays.edit"
+    },
+    {
+        "id": 78,
+        "role_id": 4,
+        "permission": "pms.stays.delete"
+    },
+    {
+        "id": 79,
+        "role_id": 4,
+        "permission": "pms.rooms.view"
+    },
+    {
+        "id": 80,
+        "role_id": 4,
+        "permission": "pms.rooms.create"
+    },
+    {
+        "id": 81,
+        "role_id": 4,
+        "permission": "pms.rooms.edit"
+    },
+    {
+        "id": 82,
+        "role_id": 4,
+        "permission": "pms.rooms.delete"
+    }
+]

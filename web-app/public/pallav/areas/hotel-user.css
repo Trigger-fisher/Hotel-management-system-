@@ -1,0 +1,78 @@
+/* Hotel User pages. New rules for this area go here, never into hms-overrides.css. */
+/* Dining orders: staff and guest parts, the order taker, the guest cancel countdown */
+.hu-parts { margin-bottom: 16px; }
+.hu-parts button { min-height: 44px; display: inline-flex; align-items: center; gap: 8px; }
+.hu-part-n { display: inline-grid; place-items: center; min-width: 24px; height: 24px; padding: 0 8px; margin-left: 8px; border-radius: 12px; background: var(--gold-soft); color: var(--gold-ink); font-size: var(--fs-xs); font-weight: var(--fw-bold); font-variant-numeric: tabular-nums; }
+.hu-take { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; margin-bottom: 16px; padding: 16px; border: 1px solid var(--gold-line); border-radius: 12px; background: var(--gold-soft); }
+.hu-take-text { display: grid; gap: 4px; min-width: 0; flex: 1 1 240px; }
+.hu-take-text b { font-size: var(--fs-md); color: var(--ink); }
+.hu-take-text small { font-size: var(--fs-sm); color: var(--ink2); }
+.hu-take .btn { min-height: 48px; padding-inline: 24px; }
+.hu-pos { margin: 0 0 16px; padding: 16px; }
+.hu-pos-head { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 16px; }
+.hu-pos-title { margin: 0; font-size: var(--fs-lg); font-weight: var(--fw-semibold); color: var(--ink); }
+.hu-pos-body { display: grid; grid-template-columns: minmax(0, 1fr); gap: 24px; align-items: start; }
+.hu-pos-main { display: grid; gap: 24px; min-width: 0; }
+.hu-pos-step { display: grid; gap: 16px; min-width: 0; }
+.hu-pos-q { display: flex; align-items: center; gap: 8px; margin: 0; font-size: var(--fs-base); font-weight: var(--fw-semibold); color: var(--ink); }
+.hu-pos-n { display: inline-grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; background: var(--ink); color: var(--surface); font-size: var(--fs-xs); font-weight: var(--fw-bold); }
+.hu-pos-chips { display: grid; grid-template-columns: repeat(auto-fill, minmax(56px, 1fr)); gap: 8px; }
+.hu-pos-chip, .hu-pos-room, .hu-pos-cat { min-height: 44px; border: 1px solid var(--line2); border-radius: 12px; background: var(--surface); color: var(--ink); font-weight: var(--fw-semibold); cursor: pointer; }
+.hu-pos-chip { font-size: var(--fs-md); font-variant-numeric: tabular-nums; }
+.hu-pos-rooms { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 148px), 1fr)); gap: 8px; }
+.hu-pos-room { display: grid; justify-items: start; gap: 2px; padding: 8px 16px; text-align: left; }
+.hu-pos-room b { font-size: var(--fs-md); font-variant-numeric: tabular-nums; }
+.hu-pos-room small { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: var(--fs-xs); font-weight: var(--fw-regular); color: var(--muted); }
+.hu-pos-chip.is-on, .hu-pos-room.is-on, .hu-pos-cat.is-on { border-color: var(--gold-line); background: var(--gold-soft); box-shadow: inset 0 0 0 1px var(--gold-line); color: var(--gold-ink); }
+.hu-pos-room.is-on small { color: var(--ink2); }
+.hu-pos-cats { display: flex; flex-wrap: wrap; gap: 8px; }
+.hu-pos-cat { padding: 0 16px; font-size: var(--fs-sm); }
+.hu-pos-menu { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); gap: 8px; }
+.hu-pos-menu li { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 64px; padding: 8px 16px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); }
+.hu-pos-menu li.is-on { border-color: var(--gold-line); background: var(--gold-soft); }
+.hu-pos-item { display: grid; gap: 2px; min-width: 0; }
+.hu-pos-item b { font-weight: var(--fw-semibold); color: var(--ink); overflow-wrap: anywhere; }
+.hu-pos-item small { font-size: var(--fs-sm); color: var(--muted); font-variant-numeric: tabular-nums; }
+.hu-pos-step-btns { display: inline-flex; align-items: center; gap: 4px; flex: none; }
+.hu-pos-sb { display: inline-grid; place-items: center; width: 44px; height: 44px; border: 1px solid var(--line2); border-radius: 12px; background: var(--surface); color: var(--ink); cursor: pointer; }
+.hu-pos-sb:disabled { opacity: .4; cursor: default; }
+.hu-pos-n-out { min-width: 32px; text-align: center; font-weight: var(--fw-bold); font-variant-numeric: tabular-nums; color: var(--ink); }
+.hu-pos-bar { display: grid; gap: 16px; padding: 16px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface-2); }
+.hu-pos-sum { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; }
+.hu-pos-sum b { color: var(--ink); }
+.hu-pos-sum span { font-size: var(--fs-xl); font-weight: var(--fw-bold); font-variant-numeric: tabular-nums; color: var(--ink); }
+.hu-pos-picked { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+.hu-pos-picked li { display: grid; grid-template-columns: 32px minmax(0, 1fr) auto; gap: 8px; align-items: baseline; font-size: var(--fs-sm); color: var(--ink); }
+.hu-pos-bar .btn { min-height: 48px; width: 100%; }
+.hu-countdown { display: inline-flex; align-items: center; gap: 8px; align-self: start; padding: 4px 12px; border-radius: 999px; background: var(--gold-soft); color: var(--gold-ink); font-size: var(--fs-sm); font-weight: var(--fw-semibold); font-variant-numeric: tabular-nums; }
+@media (min-width: 992px) { .hu-pos-body { grid-template-columns: minmax(0, 1fr) 320px; } .hu-pos-bar { position: sticky; top: 16px; } }
+@media (max-width: 991px) { .hu-pos-bar { position: sticky; bottom: 8px; z-index: 2; box-shadow: var(--sh-md, var(--sh-sm)); } .hu-pos-picked { display: none; } }
+/* Check-in: the ID first */
+.ci-id { display: grid; justify-items: center; gap: 16px; padding: 32px 16px; text-align: center; }
+.ci-id-ic { display: grid; place-items: center; width: 64px; height: 64px; border-radius: 50%; background: var(--gold-soft); color: var(--gold-ink); font-size: 28px; }
+.ci-id.is-rejected .ci-id-ic { background: var(--bad-bg); color: var(--bad); }
+.ci-id-title { margin: 0; font-size: var(--fs-lg); font-weight: var(--fw-semibold); color: var(--ink); }
+.ci-id-text, .ci-id-retake { margin: 0; max-width: 480px; font-size: var(--fs-base); color: var(--ink2); }
+.ci-id-retake { padding: 8px 16px; border: 1px solid var(--bad); border-radius: 12px; color: var(--bad); font-weight: var(--fw-semibold); }
+.ci-id-acts { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+.ci-id-acts .btn { min-height: 48px; padding-inline: 24px; }
+.ci-id-skip { min-height: 44px; padding: 0 16px; border: 0; background: none; color: var(--ink2); font-size: var(--fs-sm); text-decoration: underline; cursor: pointer; }
+.ci-id-reading { display: grid; gap: 16px; width: min(100%, 360px); justify-items: stretch; text-align: left; }
+.ci-id-reading .btn { justify-self: center; min-height: 48px; padding-inline: 24px; }
+.ci-id.is-over { outline: 2px dashed var(--gold); outline-offset: -8px; }
+.ci-id-hint { margin: 0; max-width: 480px; font-size: var(--fs-sm); color: var(--muted); }
+.ci-id-secs { margin-left: 8px; font-weight: var(--fw-regular); color: var(--muted); font-variant-numeric: tabular-nums; }
+.ci-id-files { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; width: min(100%, 420px); text-align: left; }
+.ci-id-files li { display: flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 0 0 16px; border: 1px solid var(--line); border-radius: 12px; color: var(--ink2); }
+.ci-id-file { flex: 1 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: var(--fs-base); color: var(--ink); }
+.ci-id-x { display: grid; place-items: center; flex: none; width: 44px; height: 44px; border: 0; border-radius: 12px; background: none; color: var(--ink2); cursor: pointer; }
+.ci-id-x:hover { color: var(--bad); }
+.ci-id-stages { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; font-size: var(--fs-base); color: var(--muted); }
+.ci-id-stages li.is-now { color: var(--ink); font-weight: var(--fw-semibold); }
+.ci-id-stages li.is-done { color: var(--ink2); }
+.ci-id-stages .bi { margin-right: 8px; }
+.ci-id-stages li.is-now .bi { display: inline-block; animation: ci-id-spin 1s linear infinite; }
+@keyframes ci-id-spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .ci-id-stages li.is-now .bi { animation: none; } }
+.ci-unread { color: var(--ink2); font-weight: var(--fw-semibold); }
+.form-control.is-unread { border-color: var(--warn); box-shadow: inset 0 0 0 1px var(--warn); }

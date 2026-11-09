@@ -1,0 +1,13 @@
+.venv
+__pycache__
+*.pyc
+.pytest_cache
+.env
+.tessdata
+samples-local
+models
+scripts
+!scripts/get_model.py
+!scripts/get_face_models.py
+tests
+.git

@@ -1,0 +1,723 @@
+[
+    {
+        "id": 1,
+        "feature": "login",
+        "table_name": "activity_logs",
+        "hits": 16,
+        "last_seen_at": "2026-10-05 21:05:05"
+    },
+    {
+        "id": 2,
+        "feature": "login",
+        "table_name": "pragma_table_xinfo",
+        "hits": 16,
+        "last_seen_at": "2026-10-05 21:05:05"
+    },
+    {
+        "id": 3,
+        "feature": "dashboard",
+        "table_name": "hotel_cash_deposits",
+        "hits": 17,
+        "last_seen_at": "2026-10-05 21:05:07"
+    },
+    {
+        "id": 4,
+        "feature": "dashboard",
+        "table_name": "hotel_cash_withdrawals",
+        "hits": 17,
+        "last_seen_at": "2026-10-05 21:05:07"
+    },
+    {
+        "id": 5,
+        "feature": "dashboard",
+        "table_name": "hotel_misc_expenses",
+        "hits": 17,
+        "last_seen_at": "2026-10-05 21:05:07"
+    },
+    {
+        "id": 6,
+        "feature": "dashboard",
+        "table_name": "food_cash_deposits",
+        "hits": 17,
+        "last_seen_at": "2026-10-05 21:05:07"
+    },
+    {
+        "id": 7,
+        "feature": "dashboard",
+        "table_name": "food_cash_withdrawals",
+        "hits": 17,
+        "last_seen_at": "2026-10-05 21:05:07"
+    },
+    {
+        "id": 8,
+        "feature": "dashboard",
+        "table_name": "food_misc_expenses",
+        "hits": 17,
+        "last_seen_at": "2026-10-05 21:05:07"
+    },
+    {
+        "id": 9,
+        "feature": "dashboard",
+        "table_name": "staff_advances",
+        "hits": 17,
+        "last_seen_at": "2026-10-05 21:05:07"
+    },
+    {
+        "id": 10,
+        "feature": "dashboard",
+        "table_name": "shift_handovers",
+        "hits": 17,
+        "last_seen_at": "2026-10-05 21:05:07"
+    },
+    {
+        "id": 11,
+        "feature": "dashboard",
+        "table_name": "salary_processings",
+        "hits": 17,
+        "last_seen_at": "2026-10-05 21:05:07"
+    },
+    {
+        "id": 12,
+        "feature": "dashboard",
+        "table_name": "employees",
+        "hits": 17,
+        "last_seen_at": "2026-10-05 21:05:07"
+    },
+    {
+        "id": 13,
+        "feature": "dashboard",
+        "table_name": "accounting_years",
+        "hits": 17,
+        "last_seen_at": "2026-10-05 21:05:07"
+    },
+    {
+        "id": 25,
+        "feature": "revenue",
+        "table_name": "hotel_cash_deposits",
+        "hits": 4,
+        "last_seen_at": "2026-10-05 21:02:25"
+    },
+    {
+        "id": 26,
+        "feature": "revenue",
+        "table_name": "accounting_years",
+        "hits": 4,
+        "last_seen_at": "2026-10-05 21:02:25"
+    },
+    {
+        "id": 27,
+        "feature": "revenue",
+        "table_name": "food_cash_deposits",
+        "hits": 4,
+        "last_seen_at": "2026-10-05 21:02:25"
+    },
+    {
+        "id": 28,
+        "feature": "expense",
+        "table_name": "hotel_cash_withdrawals",
+        "hits": 2,
+        "last_seen_at": "2026-10-05 20:34:48"
+    },
+    {
+        "id": 29,
+        "feature": "expense",
+        "table_name": "accounting_years",
+        "hits": 2,
+        "last_seen_at": "2026-10-05 20:34:48"
+    },
+    {
+        "id": 30,
+        "feature": "expense",
+        "table_name": "food_cash_withdrawals",
+        "hits": 2,
+        "last_seen_at": "2026-10-05 20:34:48"
+    },
+    {
+        "id": 31,
+        "feature": "expense",
+        "table_name": "hotel_misc_expenses",
+        "hits": 2,
+        "last_seen_at": "2026-10-05 20:34:48"
+    },
+    {
+        "id": 32,
+        "feature": "expense",
+        "table_name": "expense_lines",
+        "hits": 2,
+        "last_seen_at": "2026-10-05 20:34:48"
+    },
+    {
+        "id": 33,
+        "feature": "expense",
+        "table_name": "food_misc_expenses",
+        "hits": 2,
+        "last_seen_at": "2026-10-05 20:34:48"
+    },
+    {
+        "id": 34,
+        "feature": "expense",
+        "table_name": "staff_advances",
+        "hits": 2,
+        "last_seen_at": "2026-10-05 20:34:48"
+    },
+    {
+        "id": 35,
+        "feature": "expense",
+        "table_name": "employees",
+        "hits": 2,
+        "last_seen_at": "2026-10-05 20:34:48"
+    },
+    {
+        "id": 36,
+        "feature": "expense",
+        "table_name": "expense_items",
+        "hits": 2,
+        "last_seen_at": "2026-10-05 20:34:48"
+    },
+    {
+        "id": 37,
+        "feature": "expense",
+        "table_name": "payroll_companies",
+        "hits": 2,
+        "last_seen_at": "2026-10-05 20:34:48"
+    },
+    {
+        "id": 38,
+        "feature": "expense",
+        "table_name": "expense_categories",
+        "hits": 2,
+        "last_seen_at": "2026-10-05 20:34:48"
+    },
+    {
+        "id": 76,
+        "feature": "bill-master",
+        "table_name": "accounting_years",
+        "hits": 9,
+        "last_seen_at": "2026-10-05 21:02:20"
+    },
+    {
+        "id": 77,
+        "feature": "bill-master",
+        "table_name": "bill_master_bills",
+        "hits": 7,
+        "last_seen_at": "2026-10-05 21:02:20"
+    },
+    {
+        "id": 78,
+        "feature": "bill-master",
+        "table_name": "company_profiles",
+        "hits": 9,
+        "last_seen_at": "2026-10-05 21:02:20"
+    },
+    {
+        "id": 79,
+        "feature": "bill-master",
+        "table_name": "bill_master_advances",
+        "hits": 9,
+        "last_seen_at": "2026-10-05 21:02:20"
+    },
+    {
+        "id": 80,
+        "feature": "bill-master",
+        "table_name": "meal_plan_rates",
+        "hits": 7,
+        "last_seen_at": "2026-10-05 21:02:20"
+    },
+    {
+        "id": 81,
+        "feature": "masters",
+        "table_name": "expense_categories",
+        "hits": 1,
+        "last_seen_at": "2026-10-05 18:56:07"
+    },
+    {
+        "id": 82,
+        "feature": "masters",
+        "table_name": "accounting_years",
+        "hits": 1,
+        "last_seen_at": "2026-10-05 18:56:07"
+    },
+    {
+        "id": 83,
+        "feature": "payroll.index",
+        "table_name": "payroll_companies",
+        "hits": 43,
+        "last_seen_at": "2026-10-05 21:02:31"
+    },
+    {
+        "id": 84,
+        "feature": "payroll.index",
+        "table_name": "employees",
+        "hits": 40,
+        "last_seen_at": "2026-10-05 21:02:31"
+    },
+    {
+        "id": 85,
+        "feature": "payroll.index",
+        "table_name": "salary_processings",
+        "hits": 40,
+        "last_seen_at": "2026-10-05 21:02:31"
+    },
+    {
+        "id": 86,
+        "feature": "payroll.index",
+        "table_name": "accounting_years",
+        "hits": 40,
+        "last_seen_at": "2026-10-05 21:02:31"
+    },
+    {
+        "id": 87,
+        "feature": "users",
+        "table_name": "hotel_cash_deposits",
+        "hits": 1,
+        "last_seen_at": "2026-10-05 18:56:16"
+    },
+    {
+        "id": 88,
+        "feature": "users",
+        "table_name": "food_cash_deposits",
+        "hits": 1,
+        "last_seen_at": "2026-10-05 18:56:16"
+    },
+    {
+        "id": 89,
+        "feature": "users",
+        "table_name": "hotel_cash_withdrawals",
+        "hits": 1,
+        "last_seen_at": "2026-10-05 18:56:16"
+    },
+    {
+        "id": 90,
+        "feature": "users",
+        "table_name": "food_cash_withdrawals",
+        "hits": 1,
+        "last_seen_at": "2026-10-05 18:56:16"
+    },
+    {
+        "id": 91,
+        "feature": "users",
+        "table_name": "hotel_misc_expenses",
+        "hits": 1,
+        "last_seen_at": "2026-10-05 18:56:16"
+    },
+    {
+        "id": 92,
+        "feature": "users",
+        "table_name": "food_misc_expenses",
+        "hits": 1,
+        "last_seen_at": "2026-10-05 18:56:16"
+    },
+    {
+        "id": 93,
+        "feature": "users",
+        "table_name": "staff_advances",
+        "hits": 1,
+        "last_seen_at": "2026-10-05 18:56:16"
+    },
+    {
+        "id": 94,
+        "feature": "users",
+        "table_name": "shift_handovers",
+        "hits": 1,
+        "last_seen_at": "2026-10-05 18:56:16"
+    },
+    {
+        "id": 95,
+        "feature": "users",
+        "table_name": "accounting_years",
+        "hits": 1,
+        "last_seen_at": "2026-10-05 18:56:16"
+    },
+    {
+        "id": 142,
+        "feature": "payroll.dashboard",
+        "table_name": "payroll_companies",
+        "hits": 4,
+        "last_seen_at": "2026-10-05 20:37:51"
+    },
+    {
+        "id": 143,
+        "feature": "payroll.dashboard",
+        "table_name": "employees",
+        "hits": 4,
+        "last_seen_at": "2026-10-05 20:37:51"
+    },
+    {
+        "id": 144,
+        "feature": "payroll.dashboard",
+        "table_name": "payroll_advances",
+        "hits": 4,
+        "last_seen_at": "2026-10-05 20:37:51"
+    },
+    {
+        "id": 145,
+        "feature": "payroll.dashboard",
+        "table_name": "salary_processings",
+        "hits": 4,
+        "last_seen_at": "2026-10-05 20:37:51"
+    },
+    {
+        "id": 146,
+        "feature": "payroll.dashboard",
+        "table_name": "attendance_months",
+        "hits": 4,
+        "last_seen_at": "2026-10-05 20:37:51"
+    },
+    {
+        "id": 147,
+        "feature": "payroll.dashboard",
+        "table_name": "attendance_statuses",
+        "hits": 4,
+        "last_seen_at": "2026-10-05 20:37:51"
+    },
+    {
+        "id": 148,
+        "feature": "payroll.dashboard",
+        "table_name": "deductions",
+        "hits": 4,
+        "last_seen_at": "2026-10-05 20:37:51"
+    },
+    {
+        "id": 149,
+        "feature": "payroll.dashboard",
+        "table_name": "joining_letters",
+        "hits": 4,
+        "last_seen_at": "2026-10-05 20:37:51"
+    },
+    {
+        "id": 150,
+        "feature": "payroll.dashboard",
+        "table_name": "experience_letters",
+        "hits": 4,
+        "last_seen_at": "2026-10-05 20:37:51"
+    },
+    {
+        "id": 151,
+        "feature": "payroll.dashboard",
+        "table_name": "employee_separations",
+        "hits": 4,
+        "last_seen_at": "2026-10-05 20:37:51"
+    },
+    {
+        "id": 152,
+        "feature": "payroll.dashboard",
+        "table_name": "bonus_incentives",
+        "hits": 4,
+        "last_seen_at": "2026-10-05 20:37:51"
+    },
+    {
+        "id": 153,
+        "feature": "payroll.dashboard",
+        "table_name": "accounting_years",
+        "hits": 4,
+        "last_seen_at": "2026-10-05 20:37:51"
+    },
+    {
+        "id": 166,
+        "feature": "payroll.staff",
+        "table_name": "payroll_companies",
+        "hits": 1,
+        "last_seen_at": "2026-10-05 20:32:22"
+    },
+    {
+        "id": 167,
+        "feature": "payroll.staff",
+        "table_name": "employees",
+        "hits": 1,
+        "last_seen_at": "2026-10-05 20:32:22"
+    },
+    {
+        "id": 168,
+        "feature": "payroll.staff",
+        "table_name": "employee_deductions",
+        "hits": 1,
+        "last_seen_at": "2026-10-05 20:32:22"
+    },
+    {
+        "id": 169,
+        "feature": "payroll.staff",
+        "table_name": "deductions",
+        "hits": 1,
+        "last_seen_at": "2026-10-05 20:32:22"
+    },
+    {
+        "id": 170,
+        "feature": "payroll.staff",
+        "table_name": "joining_letters",
+        "hits": 1,
+        "last_seen_at": "2026-10-05 20:32:22"
+    },
+    {
+        "id": 171,
+        "feature": "payroll.staff",
+        "table_name": "employee_separations",
+        "hits": 1,
+        "last_seen_at": "2026-10-05 20:32:22"
+    },
+    {
+        "id": 172,
+        "feature": "payroll.staff",
+        "table_name": "payroll_master_items",
+        "hits": 1,
+        "last_seen_at": "2026-10-05 20:32:22"
+    },
+    {
+        "id": 173,
+        "feature": "payroll.staff",
+        "table_name": "accounting_years",
+        "hits": 1,
+        "last_seen_at": "2026-10-05 20:32:22"
+    },
+    {
+        "id": 200,
+        "feature": "payroll.company",
+        "table_name": "payroll_companies",
+        "hits": 2,
+        "last_seen_at": "2026-10-05 20:37:57"
+    },
+    {
+        "id": 201,
+        "feature": "payroll.company",
+        "table_name": "employees",
+        "hits": 2,
+        "last_seen_at": "2026-10-05 20:37:57"
+    },
+    {
+        "id": 202,
+        "feature": "payroll.company",
+        "table_name": "salary_processings",
+        "hits": 2,
+        "last_seen_at": "2026-10-05 20:37:57"
+    },
+    {
+        "id": 203,
+        "feature": "payroll.company",
+        "table_name": "accounting_years",
+        "hits": 2,
+        "last_seen_at": "2026-10-05 20:37:57"
+    },
+    {
+        "id": 218,
+        "feature": "pms",
+        "table_name": "pms_rooms",
+        "hits": 8,
+        "last_seen_at": "2026-10-05 21:05:21"
+    },
+    {
+        "id": 219,
+        "feature": "pms",
+        "table_name": "pms_reservations",
+        "hits": 6,
+        "last_seen_at": "2026-10-05 21:05:14"
+    },
+    {
+        "id": 220,
+        "feature": "pms",
+        "table_name": "pms_stays",
+        "hits": 7,
+        "last_seen_at": "2026-10-05 21:05:21"
+    },
+    {
+        "id": 221,
+        "feature": "pms",
+        "table_name": "accounting_years",
+        "hits": 9,
+        "last_seen_at": "2026-10-05 21:05:21"
+    },
+    {
+        "id": 234,
+        "feature": "pms",
+        "table_name": "site_rooms",
+        "hits": 5,
+        "last_seen_at": "2026-10-05 21:05:21"
+    },
+    {
+        "id": 283,
+        "feature": "shift-handover",
+        "table_name": "accounting_years",
+        "hits": 1,
+        "last_seen_at": "2026-10-05 20:34:55"
+    },
+    {
+        "id": 284,
+        "feature": "shift-handover",
+        "table_name": "shift_handovers",
+        "hits": 1,
+        "last_seen_at": "2026-10-05 20:34:55"
+    },
+    {
+        "id": 285,
+        "feature": "shift-handover",
+        "table_name": "employees",
+        "hits": 1,
+        "last_seen_at": "2026-10-05 20:34:55"
+    },
+    {
+        "id": 286,
+        "feature": "shift-handover",
+        "table_name": "payroll_companies",
+        "hits": 1,
+        "last_seen_at": "2026-10-05 20:34:55"
+    },
+    {
+        "id": 319,
+        "feature": "company",
+        "table_name": "company_profiles",
+        "hits": 4,
+        "last_seen_at": "2026-10-05 20:42:39"
+    },
+    {
+        "id": 320,
+        "feature": "company",
+        "table_name": "accounting_years",
+        "hits": 4,
+        "last_seen_at": "2026-10-05 20:42:39"
+    },
+    {
+        "id": 321,
+        "feature": "customer",
+        "table_name": "customers",
+        "hits": 2,
+        "last_seen_at": "2026-10-05 20:42:24"
+    },
+    {
+        "id": 322,
+        "feature": "customer",
+        "table_name": "accounting_years",
+        "hits": 4,
+        "last_seen_at": "2026-10-05 20:42:31"
+    },
+    {
+        "id": 323,
+        "feature": "customer",
+        "table_name": "crm_leads",
+        "hits": 2,
+        "last_seen_at": "2026-10-05 20:42:31"
+    },
+    {
+        "id": 325,
+        "feature": "company",
+        "table_name": "bill_master_bills",
+        "hits": 2,
+        "last_seen_at": "2026-10-05 20:42:39"
+    },
+    {
+        "id": 326,
+        "feature": "company",
+        "table_name": "bill_master_advances",
+        "hits": 2,
+        "last_seen_at": "2026-10-05 20:42:39"
+    },
+    {
+        "id": 329,
+        "feature": "reports",
+        "table_name": "bill_master_bills",
+        "hits": 2,
+        "last_seen_at": "2026-10-05 20:42:47"
+    },
+    {
+        "id": 330,
+        "feature": "reports",
+        "table_name": "company_profiles",
+        "hits": 2,
+        "last_seen_at": "2026-10-05 20:42:47"
+    },
+    {
+        "id": 331,
+        "feature": "reports",
+        "table_name": "bill_master_advances",
+        "hits": 2,
+        "last_seen_at": "2026-10-05 20:42:47"
+    },
+    {
+        "id": 332,
+        "feature": "reports",
+        "table_name": "hotel_cash_deposits",
+        "hits": 2,
+        "last_seen_at": "2026-10-05 20:42:47"
+    },
+    {
+        "id": 333,
+        "feature": "reports",
+        "table_name": "food_cash_deposits",
+        "hits": 2,
+        "last_seen_at": "2026-10-05 20:42:47"
+    },
+    {
+        "id": 334,
+        "feature": "reports",
+        "table_name": "hotel_cash_withdrawals",
+        "hits": 2,
+        "last_seen_at": "2026-10-05 20:42:47"
+    },
+    {
+        "id": 335,
+        "feature": "reports",
+        "table_name": "food_cash_withdrawals",
+        "hits": 2,
+        "last_seen_at": "2026-10-05 20:42:47"
+    },
+    {
+        "id": 336,
+        "feature": "reports",
+        "table_name": "hotel_misc_expenses",
+        "hits": 2,
+        "last_seen_at": "2026-10-05 20:42:47"
+    },
+    {
+        "id": 337,
+        "feature": "reports",
+        "table_name": "food_misc_expenses",
+        "hits": 2,
+        "last_seen_at": "2026-10-05 20:42:47"
+    },
+    {
+        "id": 338,
+        "feature": "reports",
+        "table_name": "staff_advances",
+        "hits": 2,
+        "last_seen_at": "2026-10-05 20:42:47"
+    },
+    {
+        "id": 339,
+        "feature": "reports",
+        "table_name": "employees",
+        "hits": 2,
+        "last_seen_at": "2026-10-05 20:42:47"
+    },
+    {
+        "id": 340,
+        "feature": "reports",
+        "table_name": "meal_plan_rates",
+        "hits": 2,
+        "last_seen_at": "2026-10-05 20:42:47"
+    },
+    {
+        "id": 341,
+        "feature": "reports",
+        "table_name": "accounting_years",
+        "hits": 2,
+        "last_seen_at": "2026-10-05 20:42:47"
+    },
+    {
+        "id": 613,
+        "feature": "pms",
+        "table_name": "company_profiles",
+        "hits": 1,
+        "last_seen_at": "2026-10-05 21:05:14"
+    },
+    {
+        "id": 614,
+        "feature": "pms",
+        "table_name": "bill_master_advances",
+        "hits": 1,
+        "last_seen_at": "2026-10-05 21:05:14"
+    },
+    {
+        "id": 619,
+        "feature": "pms",
+        "table_name": "pms_charges",
+        "hits": 1,
+        "last_seen_at": "2026-10-05 21:05:21"
+    }
+]

@@ -1,0 +1,39 @@
+# Builds the Windows installer of the desktop app. Started by hand from the Actions tab; the installer is attached to the run.
+name: Desktop app (Windows)
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - uses: dtolnay/rust-toolchain@stable
+
+      # The desktop app builds the web app's screens and uses the React that Next.js ships, so web-app needs its packages too. No install scripts: nothing there is compiled here.
+      - name: Install the web app's packages
+        working-directory: web-app
+        run: npm ci --ignore-scripts
+
+      - name: Install the desktop app's packages
+        working-directory: desktop-app
+        run: npm ci
+
+      - name: Build the installer
+        working-directory: desktop-app
+        run: npx tauri build --bundles nsis
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: easy-hotel-solutions-windows
+          path: desktop-app/src-tauri/target/release/bundle/nsis/*.exe
+          if-no-files-found: error

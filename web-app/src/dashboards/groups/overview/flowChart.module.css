@@ -1,0 +1,25 @@
+/* The cash-flow chart of the dashboard: Pallav's own tokens (--line, --muted) and the two bar colours. */
+.flowChart {
+  flex: 1;
+  min-height: 260px;
+  padding: 14px 18px 12px;
+}
+.flowSvg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.flowGrid {
+  stroke: var(--line);
+  stroke-width: 1;
+}
+.flowAxis {
+  fill: var(--muted);
+  font-size: var(--fs-2xs);
+}
+.flowIn {
+  fill: var(--accent-solid);
+}
+.flowOut {
+  fill: color-mix(in srgb, var(--accent-solid) 45%, white);
+}

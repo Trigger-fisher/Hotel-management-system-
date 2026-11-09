@@ -1,0 +1,11 @@
+[
+    {
+        "id": 1,
+        "payroll_company_id": 2,
+        "monthly_amount": 3000,
+        "effective_from": "2026-04-01 00:00:00",
+        "created_by": null,
+        "created_at": "2026-10-05 18:52:27",
+        "updated_at": "2026-10-05 18:52:27"
+    }
+]

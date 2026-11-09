@@ -1,0 +1,12 @@
+# .venv in this folder: dataset building, pseudo-labels, evaluation, tests (Python 3.12)
+numpy==2.5.4
+onnxruntime==1.31.1
+opencv-python-headless==5.0.0.93
+pillow==13.0.0
+psutil==7.2.2
+pyclipper==1.4.0
+PyYAML==6.0.3
+pytest==9.2.0
+rapidocr-onnxruntime==1.4.4
+shapely==2.2.0
+zxing-cpp==3.1.1

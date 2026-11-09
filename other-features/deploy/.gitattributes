@@ -1,0 +1,5 @@
+# Files that run on Linux must keep LF line endings even when checked out on Windows (core.autocrlf=true there).
+*.sh text eol=lf
+*.yml text eol=lf
+*.template text eol=lf
+.env.example text eol=lf

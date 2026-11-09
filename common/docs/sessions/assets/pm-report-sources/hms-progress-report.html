@@ -1,0 +1,191 @@
+<title>HMS Progress Report</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+/* Layout: headline (whole project) with four layer bars, what needs MJ, people, the 12-task completion plan, every module, latest news. */
+:root{
+  --bg:#F4F6F8;--surface:#FFFFFF;--surface2:#EBEFF3;--ink:#16202B;--muted:#5B6877;--line:#D9E0E7;
+  --accent:#0E7490;--done:#15803D;--warn:#B45309;--bad:#B91C1C;--todo:#8A97A6;
+  --font-body:'IBM Plex Sans',system-ui,'Segoe UI',sans-serif;--font-num:'IBM Plex Mono',ui-monospace,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0E1419;--surface:#161E26;--surface2:#1F2933;--ink:#E6ECF2;--muted:#9AA8B6;--line:#2A3541;
+  --accent:#4FC3DC;--done:#4ADE80;--warn:#FBBF24;--bad:#F87171;--todo:#7C8B9A;color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0E1419;--surface:#161E26;--surface2:#1F2933;--ink:#E6ECF2;--muted:#9AA8B6;--line:#2A3541;
+  --accent:#4FC3DC;--done:#4ADE80;--warn:#FBBF24;--bad:#F87171;--todo:#7C8B9A;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--font-body);font-size:14px;line-height:1.5;margin:0;padding-inline:16px;padding-block:20px 56px}
+.wrap{max-width:1080px;margin:0 auto;display:flex;flex-direction:column;gap:22px}
+h1{font-size:22px;margin:0;font-weight:600}
+h2{font-size:15px;margin:0 0 10px;font-weight:600}
+p{margin:0}
+.muted{color:var(--muted)}
+.num{font-family:var(--font-num);font-variant-numeric:tabular-nums}
+.head{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 16px;align-items:baseline}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px}
+.hero{display:flex;flex-wrap:wrap;gap:16px 28px;align-items:center}
+.hero .big{font-family:var(--font-num);font-size:48px;font-weight:600;line-height:1}
+.hero .side{flex:1 1 280px;min-width:0}
+.bar{height:10px;border-radius:99px;background:var(--surface2);overflow:hidden;margin-top:8px}
+.bar>i{display:block;height:100%;background:var(--accent);border-radius:99px}
+.bar.ok>i{background:var(--done)}
+.layers{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.layers .top{display:flex;justify-content:space-between;align-items:baseline}
+.layers .v{font-family:var(--font-num);font-size:22px;font-weight:600}
+.tablewrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse}
+th{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:0}
+.pill{display:inline-block;font-size:11px;font-weight:600;padding:2px 9px;border-radius:99px;white-space:nowrap}
+.pill.D{background:color-mix(in srgb,var(--done) 16%,transparent);color:var(--done)}
+.pill.P{background:color-mix(in srgb,var(--warn) 18%,transparent);color:var(--warn)}
+.pill.N{background:color-mix(in srgb,var(--bad) 14%,transparent);color:var(--bad)}
+.need{border-left:4px solid var(--warn)}
+.need ol{margin:6px 0 0;padding-left:20px}
+.need li{margin-bottom:6px}
+ul{margin:0;padding-left:18px}
+li{margin-bottom:6px}
+code{font-family:var(--font-num);font-size:12.5px;background:var(--surface2);padding:1px 6px;border-radius:5px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+<body><div class="wrap">
+  <div class="head"><h1>HMS Progress Report</h1><p class="muted" id="asof"></p></div>
+
+  <section class="card hero" aria-label="Whole project">
+    <div class="big" id="projPct">0%</div>
+    <div class="side"><h2>Whole project</h2><p class="muted" id="projNote"></p><div class="bar"><i id="projBar" style="width:0%"></i></div></div>
+  </section>
+
+  <section aria-labelledby="hl"><h2 id="hl">The four layers (official audit)</h2><div class="layers" id="layers"></div></section>
+
+  <section class="card need" aria-labelledby="hn"><h2 id="hn">What needs MJ</h2><ol id="need"></ol></section>
+
+  <section class="card" aria-labelledby="hw"><h2 id="hw">Everyone, at a glance</h2><div class="tablewrap"><table><thead><tr><th>Who</th><th>Done</th><th>State</th></tr></thead><tbody id="people"></tbody></table></div></section>
+
+  <section class="card" aria-labelledby="hp"><h2 id="hp">Completion plan: <span id="planPct"></span></h2><div class="tablewrap"><table><thead><tr><th>#</th><th>Task</th><th>Owner</th><th>Done</th><th>State</th></tr></thead><tbody id="plan"></tbody></table></div></section>
+
+  <section aria-labelledby="hm"><h2 id="hm">Every module</h2><p class="muted" style="margin-bottom:8px">D = done, P = partly, N = not done. Wiring counts only when the screen was tested live on the real server.</p>
+    <div class="card tablewrap"><table><thead><tr><th>Module</th><th>Database</th><th>Server</th><th>Screens</th><th>Wiring</th></tr></thead><tbody id="modules"></tbody></table></div></section>
+
+  <section class="card" aria-labelledby="ht"><h2 id="ht">Latest news</h2><ul id="latest"></ul></section>
+  <section class="card" aria-labelledby="hlr"><h2 id="hlr">Later, or needs keys or a decision</h2><ul id="later"></ul></section>
+</div>
+<script>
+/* All numbers live in DATA. Update it and republish; nothing else changes. */
+var DATA={
+ asof:'11 Oct 2026, 01:22 PM',
+ official:{layers:[91.7,93.3,98.2,68.3]},
+ auditNote:'Official audit re-run by d7 at 31 modules (docs/sessions/audits/AUDIT-2026-10-11c.md, clean export of main 0027926): Database 91.7, Server 93.3, Screens 98.2, Wiring 68.3, project 87.9. It was 90.0 earlier today and 92 this morning. It fell because of the new deployment modules and stricter scoring: the SQL-in-parts export is not in the repository yet (Database N), the Pathik worker has never run on a live site (Wiring N), the Neon and Vercel path has only a simulated rehearsal (partly done), and the new paged payroll screens have no live record yet. All gates were green on that commit: type check, lint, 132 root tests, 1,719 server tests, build, no demo text, Shared Component check 0.',
+ need:[
+  'Vercel: add PATHIK_WORKER_TOKEN, choose Node 24.x, turn Deployment Protection off for Production, and tell us Hobby or Pro (Hobby needs an outside mail timer).',
+  'Neon: recreate the project near India (Mumbai or Singapore), Postgres 18, then run Backend setup commands from your computer; add the photo bucket settings (MEDIA_DRIVER s3 and five S3 values).',
+  'Pathik: save the sign-in page of pathik.guru into worker\\pathik\\portal-samples (Ctrl+S, Webpage complete); give a test login when you want the first real run, which you watch.',
+  'Live Test Hotel Z delete: the 90-day wait blocks it. Say yes in Backend\'s window to shorten it for that one test hotel and delete it from the bin, or skip the test.',
+  'Pathik: please ask the Pathik team for an API or written permission.',
+  'Permanent-delete test: allowed by you. Backend created the throwaway Live Test Hotel Z for it; Frontend 1 runs the test.',
+  'Answer for Backend (in its window): may the test login perf.backend get the hotel super admin role in the throwaway PERF hotel? Without it check-in and check-out stay unmeasured for speed.',
+  'Pathik: a real test login for pathik.guru when you have one, and please ask the Pathik team for an API or written permission. Phase 2 (the browser worker) starts after Phase 1.',
+  'Keys, when you have them: mail server (SMTP), Razorpay, Google. Each is built and ready, and stays a stub until the keys exist. SMTP and a domain with https are also what the last production check (https and real mail) needs.',
+  'Hosting choice (your own server or a Vercel-style host) and where off-machine backups go. Both runbooks are written (docs/deploy/DEPLOY-VPS.md, docs/deploy/DEPLOY-HOSTED.md).',
+  'Decisions you can still overrule: printed ID and bank numbers follow Pallav; invitation link lasts 7 days; archived hotels kept 90 days; one extra agent per session.'
+ ],
+ people:[
+  ['Frontend 1',85,'Shared Component page live; check:shared total 115 (goal zero). Authentication UI 90% on mock data (5d63caa), waiting for the reset-link route names from Backend to connect. Pathik screens handed to the Pathik UI session. Open: smoke test of the demo build, volume test on the PERF hotel, hotel admin and hotel user tours, permanent-delete test, full UI gallery.'],
+  ['Frontend 2',97,'Mock/contract split is on main (16 commits): production JavaScript 4.10 MB down to 3.12 MB, demo passwords and sample people gone from the bundle. Neutral names (Your hotel) replace Hotel Sunrise, Sunrise Foods and Hotel Pearl (bdfffea). Payroll payments paging and staff lookup done. Next: admin system log through the api, then paging screens for Slips, Advances, Bonus and Resignations when Backend sends the shapes.'],
+  ['Backend',97,'Reads and writes fast (every write under 300 ms at 10 users, 0 deadlocks, no duplicate numbers). Pathik backend pushed: tables, encrypted vault, 10 routes, check-in and check-out hooks, worker routes with token, lease and back-off, summary worker fields (8a8fd1c, 60baee9, 63fb2bb). Server tests pass. Next: Pathik capture fields, forgot-password link on the server, payroll paging for four lists, Live Test Hotel Z delete after your approval.'],
+  ['Pathik Backend (new session)',10,'Browser worker in worker/pathik: package set up, types written; your saved Pathik pages read next, then fake portal, adapter, loop, reconcile, tests.'],
+  ['Pathik UI (new session)',70,'Pathik screens: listing, settings, worker status line, test connection, status chips, hidden unless the hotel has Pathik (39b0476, e3d90a7). Real-mode test 40%; check-in fields wait for Backend.'],
+  ['MJ',0,'Things to allow or provide: see What needs MJ.']
+ ],
+ plan:[
+  ['1','Approvals A, B, D executed','Backend',100,'Done'],
+  ['2','Set up your hotel on the real server','Frontend 1, Backend',90,'Migration applied; live retest with the checklist'],
+  ['3','Website enquiry mails and guest menu','Backend, Frontend 2',95,'Server and screens pushed; live test of the menu next'],
+  ['4','Guest and Corporate portals live-tested','Frontend 1',100,'Done: guest, corporate and group console tours clean'],
+  ['5','Remaining live UI tests and the permanent-delete test','Frontend 1',85,'Allowed; Live Test Hotel Z created for it'],
+  ['6','Group Hotel Admin console, server','Backend',100,'Done'],
+  ['7','Group Hotel Admin console, screens and connection','Frontend 1, Frontend 2',100,'Done, tested live'],
+  ['8','Keyboard focus order, empty states, accessibility','Frontend 2',100,'Done'],
+  ['9','A named test for each Pallav deviation','Backend',100,'Done'],
+  ['10','Clean up the old mobile code and refresh docs','All',100,'Done'],
+  ['11','One full review and one full test run, then one fix round','All',70,'Backend and Frontend 2 phases done; Frontend 1 tours in progress'],
+  ['12','Push everything to main','All',40,'Pushed per task; 93 files of in-progress UI work are uncommitted'],
+  ['13','FULL-SCOPE CHECK (docs/plans/FULL-CHECK-PLAN.md)','All',70,'Backend all phases, Frontend 2 all phases'],
+  ['14','PRODUCTION READY (docs/plans/PLAN-PRODUCTION-READY.md)','All',97,'Backend 100%, Frontend 2 100%: mock split done, neutral names done, admin system log through the api (2398a71); left: smoke test of the demo build'],
+  ['15','SHARED COMPONENT, colour and typography tokens, check:shared (docs/plans/PLAN-COMPONENT-LIBRARY.md)','Frontend 1, Frontend 2, d7',97,'Strict original rule restored; true count 116 fell to 2 after the new Table, ListTabs, RemoveButton and TextAction pieces; the last 2 are in the dev pages; commit not pushed yet'],
+  ['16','SPEED (docs/plans/PLAN-SPEED.md)','All',55,'Backend reads and writes done (writes under 300 ms at 10 users); payroll paging done on mock; check-in/out unmeasured; Frontend volume measurements next'],
+  ['17','PATHIK guest register, full scope (docs/pathik/PLAN-PATHIK.md; own report: claude.ai/artifact/AXChxqXo4JAYJhdDawRfyn)','Backend, Pathik UI',87,'Built and tested on the fake portal; real-mode screens tested live; first real run on pathik.guru needs your test login and go; privacy review in progress'],
+  ['18','AUTHENTICATION UI AND FORGOT-PASSWORD LINK (your handwritten list)','Frontend 1, Backend',60,'Pages 90% on mock data (5d63caa); server link flow (Backend) still to do']
+ ],
+ modules:[
+  ['Billing: bills','D','D','D','D'],['Billing: advances','D','D','D','D'],['Front Office','D','D','D','D'],
+  ['Cash: revenue','D','D','D','D'],['Cash: expenses','D','D','D','D'],['Cash: shift handover','D','D','D','D'],
+  ['Companies, CRM, Ledger','D','D','D','D'],['Payroll core','D','D','D','P'],['Payroll pay','D','D','D','P'],
+  ['Payroll master and log','D','D','D','D'],['Reports','D','D','D','D'],['Dashboard, search, preferences','D','D','P','P'],
+  ['Admin: master data and expense catalogue','D','D','D','D'],['Admin: users, roles, profile','D','D','D','P'],
+  ['Books and Recycle bin','D','D','D','P'],['Razorpay, system health, backup','P','P','D','P'],
+  ['Website part 1','D','D','D','D'],['Website part 2 and photo store','D','D','D','D'],
+  ['Website enquiry mails','D','D','D','P'],['Guest portal and room-service menu','D','D','D','D'],['Corporate portal','D','D','D','D'],
+  ['Sign-in and auth','D','D','D','D'],['PDF documents','D','D','D','P'],['Platform Admin console','D','D','D','D'],
+  ['Super Admin console','D','D','D','P'],['Group Hotel Admin console','D','D','D','D'],['Set up your hotel','D','D','D','P'],
+  ['Pathik guest register','D','D','D','P'],['Forgot-password reset link','D','D','D','P'],['Vercel and Neon deployment path','P','P','-','P'],['SQL-in-parts export for Neon','N','-','-','-'],['Pathik worker on the live site','D','D','D','N']
+ ],
+ latest:[
+  'Deployment: MJ site is www.easyhotelsolutions.in on Vercel with a Neon database (US East 1 for now, to be recreated near India). d7 rehearsed the whole deploy on a throwaway PostgreSQL 18: setup, migrate, seed, create-hotel, create-user, production build, start-up check 15 of 15, smoke 15 of 15 and the emailed-code sign-in all passed. Silent risks found: no photo bucket, owner login in DATABASE_URL, mail worker setting.',
+  'Official audit re-run: 87.9 percent at 31 modules (database 91.7, server 93.3, screens 98.2, wiring 68.3). Lower than 90.0 because new deployment modules count and are not proven on real projects yet.',
+  'Performance: Daily Report fixed (135-270 ms down to 38-49 ms at 20,000 bills), payroll paging live-tested (4,800 slips, page change 150 ms), search is 320 to 440 ms at 10,000 bills and is being tuned.',
+  'Official audit re-run at 29 modules: database 96.4, server 94.8, screens 98.2, wiring 70.7, project 90.0 (it was 92 this morning). The drop is honest: three new modules count and none is fully wired yet; two older modules are scored more strictly. Listed in AUDIT-2026-10-11b.md.',
+  'Shared Component check: the original strict rule is back; the true count was 116 and is now 2 after the new Table, ListTabs, RemoveButton and TextAction pieces replaced 23 buttons and 76 tables (not pushed yet).',
+  'Pathik UI tested live on Hotel Demo: settings save, test connection, check-in with member, row, copy details, note, retry, mark submitted, details save, ID photo, delete credentials, and the storage test all pass.',
+  'Pathik decisions today: one entry per room carrying ALL members (children included, no age limit); one-time entry (no edit when the room changes); a member without a mobile uses the main guest mobile; each member needs a name of 10 or more characters, an ID type, an ID number of 8 or more and a 10-digit mobile for Pathik to accept it.',
+  'check:shared total is now 115 (was 158 an hour ago, 682 at the start). System Log, Force Log and System Health now go through the api so demo rows leave the production bundle (2398a71).',
+  'Pathik full scope about 42%: backend, worker routes and screens pushed; MJ decided one entry per room and one-time entry; saved portal pages read next; no real portal run until MJ says go.',
+  'Authentication: forgot password now sends a 15-minute link, with a change-password page that suggests a strong password (mock first, server link flow next).',
+  'Mock split finished: production JavaScript 4.10 MB to 3.12 MB; demo passwords and sample people no longer ship; neutral names replace Hotel Sunrise and similar.',
+  'Write speed (Backend, 4bcf16a): at 10 users every write is inside 300 ms; attendance save 340 to 122 ms after the month lock was shortened; 0 deadlocks, no duplicate bill, advance or receipt numbers after about 4,600 bills and 4,200 advances; 646 replays correct. Server tests 1,649, 0 failures.',
+  'Payroll paging (Frontend 2, cc05ec7): Salary Payments asks the server one page at a time with status, search and order; joining-letter picker uses a lean staff lookup of 50 names. Size savings are estimates until Frontend 1 confirms them on the PERF hotel.',
+  'Pathik (Gujarat Police guest register): plan written from your screenshots (docs/pathik/PLAN-PATHIK.md). Our own Pathik page and encrypted, deletable login first; browser worker after, visible for testing and hidden normally. No guest data is stored. Not built: disguising it as a person.',
+  'Shared Component enforcement: the check script counted 682 violations across all sessions and now counts 168 (Frontend 2 six folders about 330 to 10). Hand-written markup in Frontend 2 folders went from 344 to 131; what is left does not fit a component yet. Tokens added: --ok, --bad, --warn, --info with backgrounds, --accent-solid, type classes',
+  'Backend closed the production proof (ee38f9a): a clean build of the latest code has 0 warnings, /dev/* returns 404, and every console signed in with its emailed code, read, wrote and signed out on the production build against the real database. Dev passwords were reset and a local-only tool reads sign-in codes for smoke tests.',
+  'Shared Component page is live at /dev/shared-component (dev and demo builds only). Phone gallery: https://claude.ai/artifact/TkFK4uDdBLUawyzRJ5WnGT . Full UI gallery part 2: https://claude.ai/artifact/USFnKKV8mpNR4VPJ4goSvb . Platform and Super Admin gallery: https://claude.ai/artifact/1jqyXcbMbiwMYKxvU7JQam',
+  'First production speed numbers (Frontend 1, small data): sign-in page ready in 386 ms median, 240 KB of JavaScript, page change between sidebar entries 34 to 51 ms, dashboard ready 453 ms. Volume test next: a throwaway hotel with thousands of records.',
+  'Rule: main must always build. Each session may run one extra agent on separate files. The shared folder had unfinished screen edits that did not build; Frontend 1 commits only slices that compile.',
+  'Official audit (Frontend 2): whole project 92% (database 96, server 96, screens 98, wiring 79); it was 79% this morning.',
+  'Your approvals A, B and D ran: four migrations applied on the dev database, leftovers removed, portal seed run. Guest, corporate and Group console tours on the real server came out clean.',
+  'Test logins on the demo: platform, superadmin, groupadmin, mihir, anita, staff, guest, corporate. Password Demo@Pass2026, code 123456.'
+ ],
+ later:[
+  'Real mail test, Razorpay payments, Google features, backup to Google Drive: need your keys.',
+  'Public website, hosting (your own server or a Vercel-style host) and a domain with https, masking ID and bank numbers during a platform visit, data-retention decision with a lawyer: your decisions.',
+  'Pixel match with live Hotel Pallav: needs the Pallav PHP copy running on this PC.'
+ ]
+};(function(){
+ function $(i){return document.getElementById(i)}
+ function sc(v){return v==='D'?1:v==='P'?.5:0}
+ var L=[['Database',1],['Server',2],['Screens',3],['Wiring',4]],pct=[];
+ L.forEach(function(l){var s=0;DATA.modules.forEach(function(m){s+=sc(m[l[1]])});pct.push(Math.round(100*s/DATA.modules.length))});
+ if(DATA.official){pct=DATA.official.layers.slice()}
+ var proj=Math.round(pct.reduce(function(a,b){return a+b},0)/4);
+ $('asof').textContent='Last updated: '+DATA.asof+' (IST)';
+ $('projPct').textContent=proj+'%';$('projBar').style.width=proj+'%';
+ $('projNote').textContent=(100-proj)+'% pending. Average of the four layers over '+DATA.modules.length+' modules. '+DATA.auditNote;
+ $('layers').innerHTML=L.map(function(l,i){return '<div class="card"><div class="top"><b>'+l[0]+'</b><span class="v">'+pct[i]+'%</span></div><div class="bar'+(pct[i]>=90?' ok':'')+'"><i style="width:'+pct[i]+'%"></i></div></div>'}).join('');
+ $('need').innerHTML=DATA.need.map(function(x){return '<li>'+x+'</li>'}).join('');
+ $('people').innerHTML=DATA.people.map(function(p){return '<tr><td><b>'+p[0]+'</b></td><td class="num">'+p[1]+'%</td><td>'+p[2]+'</td></tr>'}).join('');
+ var tp=0;DATA.plan.forEach(function(t){tp+=t[3]});tp=Math.round(tp/DATA.plan.length);$('planPct').textContent='about '+tp+'% of '+DATA.plan.length+' tasks';
+ $('plan').innerHTML=DATA.plan.map(function(t){var c=t[3]>=100?'D':t[3]>0?'P':'N';return '<tr><td class="num">'+t[0]+'</td><td>'+t[1]+'</td><td>'+t[2]+'</td><td class="num">'+t[3]+'%</td><td><span class="pill '+c+'">'+t[4]+'</span></td></tr>'}).join('');
+ $('modules').innerHTML=DATA.modules.map(function(m){return '<tr><td>'+m[0]+'</td>'+[1,2,3,4].map(function(i){return '<td><span class="pill '+m[i]+'">'+m[i]+'</span></td>'}).join('')+'</tr>'}).join('');
+ $('latest').innerHTML=DATA.latest.map(function(x){return '<li>'+x+'</li>'}).join('');
+ $('later').innerHTML=DATA.later.map(function(x){return '<li>'+x+'</li>'}).join('');
+})();
+</script>
+
+
+
+
+
+
+
+
+

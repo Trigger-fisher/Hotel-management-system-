@@ -1,0 +1,8 @@
+# Web UI 1: Pallav parity status (2026-10-06, stopped on the Lead's order)
+
+1. DONE (tsc and eslint clean on my files): auth input 42/14, button 44/14.5, border #D9CEF6; Pallav shadow scale in ui-shared/tokens.ts; Bootstrap Icons drawn by `Icon` (names from ui-shared/icons/bootstrap.ts, old line set only as fallback); Pallav shell (floating rail, Playfair brand from the hotel name, flat section lists, user card with online dot and collapse button, 276px second panel with purple head, header card with title tile, greeting and clock, user menu); Pallav KPI tile (`KpiCard`, `KpiRow`, `KpiGrid` now draws it, 4/2/1 columns).
+2. IN HAND, finished so nothing is half-broken: the dashboard screen is rebuilt as Pallav's (overview/DashboardScreen.tsx, FlowChart.tsx, overview.module.css). Not yet looked at in a browser, and no paired shot sent.
+3. NOT DONE: PageHeader restyle (purple intro sentence, sr-only title), Pallav wording in ui-shared overview copy ("The Handover first...", "All Handovers"), header extras (weather, accounting-year button, force-mode button), the module screens (Revenue/Expense, Payroll, Handover, Bills, Ledger, Board), Pallav phone arrangement, night values check.
+4. Open type errors that are not mine: admin/Profile.tsx (Lead's new admin profile contract, 2 errors) and backend (src/server). Admin Profile work is queued.
+5. Also queued: B7 PDF routes on web (open PDF_ROUTES in a new tab), MJ's new notes (less animation, day/night switch, smart search bar in the top bar).
+Pallav reference: %LOCALAPPDATA%\HMS\pallav-ref (source), docs/design/ui-review/pallav-ref (shots). My shot scripts are in the session scratchpad, not the project.

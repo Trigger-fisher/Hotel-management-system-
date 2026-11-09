@@ -1,0 +1,50 @@
+[
+    {
+        "id": 1,
+        "date": "2026-10-05 00:00:00",
+        "time": "19:00:00",
+        "user_id": 1,
+        "full_name": "Super Admin",
+        "withdrawer": "Bank Deposit Run",
+        "amount": 2480,
+        "amount_in_words": "Two Thousand Four Hundred Eighty Rupees Only",
+        "created_at": "2026-10-05 18:52:22",
+        "updated_at": "2026-10-05 18:52:22",
+        "entry_no": 1,
+        "instruction": null,
+        "deleted_at": null,
+        "deleted_by": null
+    },
+    {
+        "id": 2,
+        "date": "2026-10-03 00:00:00",
+        "time": "19:00:00",
+        "user_id": 1,
+        "full_name": "Super Admin",
+        "withdrawer": "Bank Deposit Run",
+        "amount": 3283,
+        "amount_in_words": "Three Thousand Two Hundred Eighty Three Rupees Only",
+        "created_at": "2026-10-05 18:52:22",
+        "updated_at": "2026-10-05 18:52:22",
+        "entry_no": 2,
+        "instruction": null,
+        "deleted_at": null,
+        "deleted_by": null
+    },
+    {
+        "id": 3,
+        "date": "2026-10-01 00:00:00",
+        "time": "19:00:00",
+        "user_id": 1,
+        "full_name": "Super Admin",
+        "withdrawer": "Bank Deposit Run",
+        "amount": 2129,
+        "amount_in_words": "Two Thousand One Hundred Twenty Nine Rupees Only",
+        "created_at": "2026-10-05 18:52:22",
+        "updated_at": "2026-10-05 18:52:22",
+        "entry_no": 3,
+        "instruction": null,
+        "deleted_at": null,
+        "deleted_by": null
+    }
+]
